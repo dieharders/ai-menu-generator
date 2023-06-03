@@ -11,7 +11,7 @@ import styles from "./App.module.scss";
 export default function App() {
   const { mains, sides, drinks } = companies;
   const isOrderMenuVariant = false;
-  /* This should be a shortlink */
+  /* This should be a bit.ly shortlink */
   const {origin } = window.document.location;
   const queryParameters = new URLSearchParams(window.location.search);
   const companyId = queryParameters.get("id") || '0';
