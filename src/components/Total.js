@@ -29,7 +29,7 @@ export default function Total({hasOrderInput}) {
     <div className={styles.total}>
       {!hasOrderInput && (
         <>
-          {link && <a href={downloadLink} download="menu.png">Download</a>}
+          {downloadLink && <a href={downloadLink} download="menu.png">Download</a>}
           <button onClick={captureHTML} type="submit">Export Image</button>
         </>
       )}
