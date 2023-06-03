@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Context } from "../Context";
 import data from "../data";
+import styles from "./Total.module.scss";
 
 export default function Total() {
   const [items] = useContext(Context);
@@ -13,9 +14,9 @@ export default function Total() {
   }, 0);
 
   return (
-    <div className="total">
-      <span className="total-title">Total:</span>
-      <span className="total-price">${totalPrice}</span>
+    <div className={styles.total}>
+      <span className={styles.totalTitle}>Total:</span>
+      <span className={styles.totalPrice}>${totalPrice}</span>
     </div>
   );
 }

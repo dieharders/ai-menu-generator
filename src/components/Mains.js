@@ -1,24 +1,24 @@
-import React from "react";
 import Input from "./Input";
+import styles from "../App.module.scss";
 
 export default function Mains({ meals, hasOrderInput }) {
   return (
-    <section className="mains">
+    <section className={styles.mains}>
       {meals.map((meal, index) => (
-        <article className="menu-item" key={index}>
-          <h3 className="mains-name">{meal.name}</h3>
-          <strong className="mains-price">${meal.price}</strong>
+        <article className={styles.menuItem} key={index}>
+          <h3 className={styles.mainsName}>{meal.name}</h3>
+          <strong>${meal.price}</strong>
           {hasOrderInput && (
             <Input type="mains" name={meal.name} index={index} />
           )}
-          <div className="mains-image-container">
+          <div className={styles.mainsImageContainer}>
             <img
-              className="mains-image"
+              className={styles.mainsImage}
               src={meal.image}
               alt={`${meal.category} - ${meal.name}`}
             />
           </div>
-          <p className="mains-description">{meal.description}</p>
+          <p className={styles.mainsDescription}>{meal.description}</p>
         </article>
       ))}
     </section>

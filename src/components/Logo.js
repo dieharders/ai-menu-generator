@@ -1,9 +1,9 @@
-import React from "react";
+import styles from "../App.module.scss";
 
 export default function Logo() {
   return (
     <svg
-      className="logo"
+      className={styles.logo}
       clipRule="evenodd"
       fillRule="evenodd"
       strokeLinejoin="round"

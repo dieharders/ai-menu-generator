@@ -1,20 +1,20 @@
-import React from "react";
 import Input from "./Input";
+import styles from "../App.module.scss";
 
 export default function Extras({ type, items, hasOrderInput }) {
   return (
-    <section className="extras">
-      <h2 className="extras-heading">{type}</h2>
+    <section className={styles.extras}>
+      <h2 className={styles.extrasHeading}>{type}</h2>
       {items.map((item, index) => (
-        <article className="menu-item" key={index}>
-          <div className="extras-name">{item.name}</div>
-          <strong className="extras-price">${item.price}</strong>
+        <article className={styles.menuItem} key={index}>
+          <div className={styles.extrasName}>{item.name}</div>
+          <strong>${item.price}</strong>
           {hasOrderInput && (
             <Input type={type} name={item.name} index={index} />
           )}
-          <div className="extras-image-container">
+          <div className={styles.extrasImageContainer}>
             <img
-              className="extras-image"
+              className={styles.extrasImage}
               src={item.image}
               alt={`${item.category} - ${item.name}`}
             />

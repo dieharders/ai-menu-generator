@@ -45,6 +45,16 @@ input {
   text-align: center;
 }
 
+.topBanner {
+  display: flex;
+  width: 100%;
+  height: 10rem;
+  margin: auto;
+  padding: 0;
+  grid-column: 1 / 3;
+  margin: 0 auto 2rem;
+}
+
 .menu {
   padding: 2rem 2.25rem 1rem;
   margin: 0 auto;
@@ -62,7 +72,7 @@ input {
   }
 }
 
-.menu-item {
+.menuItem {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -72,13 +82,12 @@ input {
 
 .logo {
   width: 280px;
-  margin: 0 auto 2rem;
+  margin: auto;
   display: block;
-  grid-column: 1 / 3;
 }
 
 @media (min-width: 660px) {
-  .logo {
+  .topBanner {
     margin-bottom: 0;
   }
 }
@@ -87,12 +96,12 @@ input {
   grid-column: 1 / 2;
 }
 
-.mains-name {
+.mainsName {
   margin: 0;
   flex-grow: 1;
 }
 
-.mains-image-container {
+.mainsImageContainer {
   position: relative;
   display: block;
   width: 100%;
@@ -105,14 +114,14 @@ input {
   overflow: hidden;
 }
 
-.mains-image {
+.mainsImage {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.mains-description {
+.mainsDescription {
   flex: 1 1 100%;
   margin: 0.75rem 0 0;
   color: var(--secondary);
@@ -136,20 +145,20 @@ input {
   }
 }
 
-.extras .menu-item {
+.extras .menuItem {
   margin-bottom: 0.75rem;
 }
 
-.extras-heading {
+.extrasHeading {
   margin: 0 0 1.5rem;
   border-bottom: 1px solid var(--secondary);
 }
 
-.extras-name {
+.extrasName {
   flex-grow: 1;
 }
 
-.extras-image-container {
+.extrasImageContainer {
   position: relative;
   display: block;
   width: 100%;
@@ -162,45 +171,16 @@ input {
   overflow: hidden;
 }
 
-.extras-image {
+.extrasImage {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.input-order-number {
+.inputOrderNumber {
   margin: auto;
   width: 3rem;
   font-size: medium;
   border-style: hidden;
-}
-
-.total {
-  grid-column: 1 / 3;
-  margin-top: 2.5rem;
-  padding: 0.75rem 0 1.25rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  position: sticky;
-  bottom: 0;
-  color: var(--secondary);
-  background-color: var(--light);
-  border-top: 1px solid var(--secondary);
-  box-shadow: 0 -0.5rem 0.75rem 0.5rem var(--light);
-}
-
-@media (min-width: 660px) {
-  .total {
-    margin-top: 0;
-  }
-}
-
-.total-title {
-  margin: 0;
-}
-
-.total-price {
-  font-size: 1.5rem;
 }
