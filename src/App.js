@@ -10,6 +10,7 @@ import styles from "./App.module.scss";
 
 export default function App() {
   const { mains, sides, drinks } = companies;
+  const isOrderMenuVariant = false;
   /* This should be a shortlink */
   const {origin } = window.document.location;
   const queryParameters = new URLSearchParams(window.location.search);
@@ -26,12 +27,12 @@ export default function App() {
           </div>
           <Logo />
         </div>
-        <Mains meals={mains} />
+        <Mains meals={mains} hasOrderInput={isOrderMenuVariant} />
         <aside className={styles.aside}>
-          <Extras type="Sides" items={sides} />
-          <Extras type="Drinks" items={drinks} />
+          <Extras type="Sides" items={sides} hasOrderInput={isOrderMenuVariant} />
+          <Extras type="Drinks" items={drinks} hasOrderInput={isOrderMenuVariant} />
         </aside>
-        <Total />
+        <Total hasOrderInput={isOrderMenuVariant} />
       </div>
     </Provider>
   );
