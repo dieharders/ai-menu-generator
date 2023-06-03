@@ -21,7 +21,7 @@ export default function App() {
     <Provider>
       <div className={styles.menu}>
         <div className={styles.topBanner}>
-          <div>
+          <div className={styles.links}>
             <QRLink link={link}/>
             <WebLinks link={link} />
           </div>
