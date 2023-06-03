@@ -10,13 +10,21 @@ import styles from "./App.module.scss";
 
 export default function App() {
   const { mains, sides, drinks } = companies;
+  /* This should be a shortlink */
+  const {origin } = window.document.location;
+  const queryParameters = new URLSearchParams(window.location.search);
+  const companyId = queryParameters.get("id") || '0';
+  const link = `${origin}/?id=${companyId}`;
+
   return (
     <Provider>
       <div className={styles.menu}>
         <div className={styles.topBanner}>
-          <QRLink />
+          <div>
+            <QRLink link={link}/>
+            <WebLinks link={link} />
+          </div>
           <Logo />
-          <WebLinks />
         </div>
         <Mains meals={mains} />
         <aside className={styles.aside}>

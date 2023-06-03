@@ -1,5 +1,15 @@
 .container {
     display: block;
-    width: 10rem;
-    height: 100%;
+    position: relative;
+}
+
+.linkText {
+    display: block;
+    position: relative;
+    width: min-content;
+    height: 3rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 1rem;
+    overflow: hidden;
 }

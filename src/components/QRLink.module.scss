@@ -1,5 +1,14 @@
 .container {
     display: block;
+    position: relative;
     width: 10rem;
+    margin: auto;
+    padding: 0;
+}
+
+.code {
+    display: block;
+    position: relative;
     height: 100%;
+    margin: auto;
 }
