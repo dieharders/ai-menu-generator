@@ -5,6 +5,9 @@ import html2canvas from 'html2canvas';
 import styles from "./Total.module.scss";
 
 export default function Total({hasOrderInput}) {
+  const queryParameters = new URLSearchParams(window.location.search);
+  const isDev = queryParameters.get("dev");
+
   const [items] = useContext(Context);
   const [downloadLink, setDownloadLink] = useState('');
 
@@ -16,7 +19,6 @@ export default function Total({hasOrderInput}) {
   }, 0);
 
   // Take a screenshot of page
-  // @TODO doesnt output images. Externally hosted images are not rendered. Save images locally.
   const captureHTML = () => {
     const screenshotTarget = document.body;
     html2canvas(screenshotTarget).then((canvas) => {
@@ -27,7 +29,7 @@ export default function Total({hasOrderInput}) {
 
   return (
     <div className={styles.total}>
-      {!hasOrderInput && (
+      {isDev && (
         <>
           {downloadLink && <a href={downloadLink} download="menu.png">Download</a>}
           <button onClick={captureHTML} type="submit">Export Image</button>
