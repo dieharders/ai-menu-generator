@@ -1,0 +1,23 @@
+.container {
+    display: block;
+    width: 100%;
+}
+
+.exportButton {
+    display: inline-block;
+    margin: auto;
+    margin-left: 0;
+    padding: 0;
+    width: 50%;
+}
+
+.downloadLink {
+    display: inline-block;
+    margin: auto;
+    padding: 0;
+    width: 50%;
+    text-align: center;
+    background-color: grey;
+    color: wheat;
+    border-radius: 0.25rem;
+}
