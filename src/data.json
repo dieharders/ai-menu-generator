@@ -7,42 +7,42 @@
       "description": "Crisp romaine lettuce tossed with our homemade Caesar dressing, croutons, and shredded parmesan cheese.",
       "price": "19",
       "category": "food",
-      "image": "https://www.fifteenspatulas.com/wp-content/uploads/2011/10/Caesar-Salad-Fifteen-Spatulas-1-640x959.jpg"
+      "image": "caesar-salad.jpg"
     },
     {
       "name": "Surf & Turf",
       "description": "A grilled, queen-cut ribeye served with shrimp and scallop alfredo.",
       "price": "17",
       "category": "food",
-      "image": "https://cdn.shopify.com/s/files/1/0564/3904/6331/products/steak-mushroom-alfredo-1505_800x533.jpg?v=1663213441"
+      "image": "steak-mushroom-alfredo.jpg"
     },
     {
       "name": "Creamy Sage",
       "description": "Chicken breast sautéed with fresh sage and prosciutto. Served atop creamy asiago linguini.",
       "price": "21",
       "category": "food",
-      "image": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpublic-assets.meredithcorp.io%2F1501941a2830da68eebf315075d56bae%2F16661097931704x3-PASSANO_ALR1122_InSeason_3188.jpg&q=60&c=sc&orient=true&poi=auto&h=512"
+      "image": "chicken-linguini.webp"
     },
     {
       "name": "From the Sea",
       "description": "Fresh haddock, gulf shrimp, and sea scallops dipped in beer batter and fried to a golden brown.",
       "price": "23",
       "category": "food",
-      "image": "https://images.getrecipekit.com/20220302183502-beer-20battered-20halibut-20img-202.jpg?class=16x9"
+      "image": "beer-battered-halibut.webp"
     },
     {
       "name": "BB's Tenderloin",
       "description": "Tenderloin tips, sautéed with bacon and mushrooms and finished with a bourbon-BBQ sauce.",
       "price": "18",
       "category": "food",
-      "image": "https://beautyandthebutchermiami.com/wp-content/uploads/2023/04/BB-A-Perfect-Way-to-Prepare-Beef-Tenderloin-Roast-scaled.jpg"
+      "image": "beef-tenderloin.jpg"
     },
     {
       "name": "Chicken Marsala",
       "description": "Boneless chicken breast sautéed with mushrooms and finished in a marsala and cream reduction.",
       "price": "22",
       "category": "food",
-      "image": "https://thecozycook.com/wp-content/uploads/2022/12/Chicken-Marsala-1.jpg"
+      "image": "chicken-marsala.jpg"
     }
   ],
   "sides": [
@@ -50,37 +50,37 @@
       "name": "Fries",
       "price": "5",
       "category": "food",
-      "image": "https://static.toiimg.com/thumb/54659021.cms?imgsize=275086&width=509&height=340"
+      "image": "fries.gif"
     },
     {
       "name": "Onion Rings",
       "price": "4",
       "category": "food",
-      "image": "https://www.fastfoodmenuprices.com/wp-content/uploads/2020/09/Burger-King-Onion-Rings-Recipe-500x500.jpg"
+      "image": "onion-rings.jpg"
     },
     {
       "name": "Hash Browns",
       "price": "3",
       "category": "food",
-      "image": "https://s7d2.scene7.com/is/image/lambweston/B03_LW-Triangle-Hash-Brown-Patties-Parchment?$ProductImage$"
+      "image": "hash-browns.jpg"
     },
     {
       "name": "Chicken Nuggets",
       "price": "4",
       "category": "food",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/6/64/Chicken_Nuggets.jpg"
+      "image": "chicken-nuggets.jpg"
     },
     {
       "name": "Salad",
       "price": "6",
       "category": "food",
-      "image": "https://static01.nyt.com/images/2022/07/15/dining/MC-Chopped-Salad-15SALADREX/merlin_209652387_1b5eee4c-9da5-443c-90e0-db20ee51a246-master768.jpg?w=1280&q=75"
+      "image": "side-salad.jpg"
     },
     {
       "name": "Coleslaw",
       "price": "5",
       "category": "food",
-      "image": "https://i0.wp.com/www.onceuponachef.com/images/2022/05/coleslaw-1.jpg?resize=1200%2C1002&ssl=1"
+      "image": "coleslaw.webp"
     }
   ],
   "drinks": [
@@ -88,37 +88,37 @@
       "name": "Soft Drink",
       "price": "4",
       "category": "drink",
-      "image": "https://www.laprimacatering.com/images/Product/large/8050.jpg"
+      "image": "soda-can-assorted.jpg"
     },
     {
       "name": "Orange Juice",
       "price": "5",
       "category": "drink",
-      "image": "https://parade.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1240/MTkwNTgwODY0NjExMTk4MDc3/is-orange-juice-good-for-you-jpg.webp"
+      "image": "orange-juice.webp"
     },
     {
       "name": "Iced Tea",
       "price": "4",
       "category": "drink",
-      "image": "https://www.allrecipes.com/thmb/abkth-9cDYs5lE4HMA7gh2KLjvI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/109190-smooth-sweet-tea-DDMFS-4x3-9e849a386d414cb2b852099f02b6782d.jpg"
+      "image": "iced-tea.webp"
     },
     {
       "name": "Coffee",
       "price": "6",
       "category": "drink",
-      "image": "https://media.cnn.com/api/v1/images/stellar/prod/150929101049-black-coffee-stock.jpg?q=x_3,y_1231,h_1684,w_2993,c_crop/h_720,w_1280/f_webp"
+      "image": "coffee.webp"
     },
     {
       "name": "Smoothie",
       "price": "4.99",
       "category": "drink",
-      "image": "https://assets.bonappetit.com/photos/5b0572772d4ccc29ce72d721/1:1/w_2240,c_limit/blueberry-lime-and-cashew-smoothies.jpg"
+      "image": "smoothie.webp"
     },
     {
       "name": "Margarita",
       "price": "13",
       "category": "alcohol",
-      "image": "https://www.liquor.com/thmb/oOjeySCjmSowYnfVKHgRUoIHbvo=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__liquor__2017__07__05150949__Frozen-Margarita-720x720-recipe-59566ae60c504508906963b1de69ad25.jpg"
+      "image": "frozen-margarita.webp"
     }
   ]
 }

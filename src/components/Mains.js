@@ -14,7 +14,7 @@ export default function Mains({ meals, hasOrderInput }) {
           <div className={styles.mainsImageContainer}>
             <img
               className={styles.mainsImage}
-              src={meal.image}
+              src={process.env.PUBLIC_URL + '/images/' + meal.image}
               alt={`${meal.category} - ${meal.name}`}
             />
           </div>

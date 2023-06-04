@@ -14,7 +14,7 @@ export default function App() {
   /* This should be a bit.ly shortlink */
   const {origin } = window.document.location;
   const queryParameters = new URLSearchParams(window.location.search);
-  const companyId = queryParameters.get("id") || '0';
+  const companyId = queryParameters.get("id") || '-1';
   const link = `${origin}/?id=${companyId}`;
 
   return (

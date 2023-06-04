@@ -15,7 +15,7 @@ export default function Extras({ type, items, hasOrderInput }) {
           <div className={styles.extrasImageContainer}>
             <img
               className={styles.extrasImage}
-              src={item.image}
+              src={process.env.PUBLIC_URL + '/images/' + item.image}
               alt={`${item.category} - ${item.name}`}
             />
           </div>
