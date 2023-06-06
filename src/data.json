@@ -1,124 +1,258 @@
-{
-  "companyId": "0",
-  "companyName": "The Moonrise Dinner",
-  "mains": [
-    {
-      "name": "The Caesar",
-      "description": "Crisp romaine lettuce tossed with our homemade Caesar dressing, croutons, and shredded parmesan cheese.",
-      "price": "19",
-      "category": "food",
-      "image": "caesar-salad.jpg"
+[
+  {
+    "companyId": "0",
+    "companyName": "The Moonrise Dinner",
+    "logo": "",
+    "mains": {
+      "Entrees": [
+        {
+          "name": "The Caesar",
+          "description": "Crisp romaine lettuce tossed with our homemade Caesar dressing, croutons, and shredded parmesan cheese.",
+          "price": "19",
+          "category": "food",
+          "image": "caesar-salad.jpg"
+        },
+        {
+          "name": "Surf & Turf",
+          "description": "A grilled, queen-cut ribeye served with shrimp and scallop alfredo.",
+          "price": "17",
+          "category": "food",
+          "image": "steak-mushroom-alfredo.jpg"
+        },
+        {
+          "name": "Creamy Sage",
+          "description": "Chicken breast sautéed with fresh sage and prosciutto. Served atop creamy asiago linguini.",
+          "price": "21",
+          "category": "food",
+          "image": "chicken-linguini.webp"
+        },
+        {
+          "name": "From the Sea",
+          "description": "Fresh haddock, gulf shrimp, and sea scallops dipped in beer batter and fried to a golden brown.",
+          "price": "23",
+          "category": "food",
+          "image": "beer-battered-halibut.webp"
+        },
+        {
+          "name": "BB's Tenderloin",
+          "description": "Tenderloin tips, sautéed with bacon and mushrooms and finished with a bourbon-BBQ sauce.",
+          "price": "18",
+          "category": "food",
+          "image": "beef-tenderloin.jpg"
+        },
+        {
+          "name": "Chicken Marsala",
+          "description": "Boneless chicken breast sautéed with mushrooms and finished in a marsala and cream reduction.",
+          "price": "22",
+          "category": "food",
+          "image": "chicken-marsala.jpg"
+        }
+      ]
     },
-    {
-      "name": "Surf & Turf",
-      "description": "A grilled, queen-cut ribeye served with shrimp and scallop alfredo.",
-      "price": "17",
-      "category": "food",
-      "image": "steak-mushroom-alfredo.jpg"
+    "sides": {
+      "Sides": [
+        {
+          "name": "Fries",
+          "price": "5",
+          "category": "food",
+          "image": "fries.gif"
+        },
+        {
+          "name": "Onion Rings",
+          "price": "4",
+          "category": "food",
+          "image": "onion-rings.jpg"
+        },
+        {
+          "name": "Hash Browns",
+          "price": "3",
+          "category": "food",
+          "image": "hash-browns.jpg"
+        },
+        {
+          "name": "Chicken Nuggets",
+          "price": "4",
+          "category": "food",
+          "image": "chicken-nuggets.jpg"
+        },
+        {
+          "name": "Salad",
+          "price": "6",
+          "category": "food",
+          "image": "side-salad.jpg"
+        },
+        {
+          "name": "Coleslaw",
+          "price": "5",
+          "category": "food",
+          "image": "coleslaw.webp"
+        }
+      ]
     },
-    {
-      "name": "Creamy Sage",
-      "description": "Chicken breast sautéed with fresh sage and prosciutto. Served atop creamy asiago linguini.",
-      "price": "21",
-      "category": "food",
-      "image": "chicken-linguini.webp"
-    },
-    {
-      "name": "From the Sea",
-      "description": "Fresh haddock, gulf shrimp, and sea scallops dipped in beer batter and fried to a golden brown.",
-      "price": "23",
-      "category": "food",
-      "image": "beer-battered-halibut.webp"
-    },
-    {
-      "name": "BB's Tenderloin",
-      "description": "Tenderloin tips, sautéed with bacon and mushrooms and finished with a bourbon-BBQ sauce.",
-      "price": "18",
-      "category": "food",
-      "image": "beef-tenderloin.jpg"
-    },
-    {
-      "name": "Chicken Marsala",
-      "description": "Boneless chicken breast sautéed with mushrooms and finished in a marsala and cream reduction.",
-      "price": "22",
-      "category": "food",
-      "image": "chicken-marsala.jpg"
+    "drinks": {
+      "Drinks": [
+        {
+          "name": "Soft Drink",
+          "price": "4",
+          "category": "drink",
+          "image": "soda-can-assorted.jpg"
+        },
+        {
+          "name": "Orange Juice",
+          "price": "5",
+          "category": "drink",
+          "image": "orange-juice.webp"
+        },
+        {
+          "name": "Iced Tea",
+          "price": "4",
+          "category": "drink",
+          "image": "iced-tea.webp"
+        },
+        {
+          "name": "Coffee",
+          "price": "6",
+          "category": "drink",
+          "image": "coffee.webp"
+        },
+        {
+          "name": "Smoothie",
+          "price": "4.99",
+          "category": "drink",
+          "image": "smoothie.webp"
+        },
+        {
+          "name": "Margarita",
+          "price": "13",
+          "category": "alcohol",
+          "image": "frozen-margarita.webp"
+        }
+      ]
     }
-  ],
-  "sides": [
-    {
-      "name": "Fries",
-      "price": "5",
-      "category": "food",
-      "image": "fries.gif"
+  },
+  {
+    "companyId": "1",
+    "companyName": "Wolfhound Bar",
+    "logo": "wolfhoundbar.png",
+    "mains": {
+      "Beer": [
+        {
+          "name": "Racer 5",
+          "price": "9",
+          "category": "beer",
+          "image": "",
+          "description": "This hoppy American IPA is a full-bodied beer."
+        },
+        {
+          "name": "Drakes 1500",
+          "price": "8",
+          "category": "beer",
+          "image": "",
+          "description": "California- American Pale Ale- GABF Silver Medal 2008."
+        },
+        {
+          "name": "DUCHESSE DE BOURGOGNE",
+          "price": "10",
+          "category": "beer",
+          "image": "",
+          "description": "A traditional top-fermented reddish-brown ale from Belgium 9oz."
+        },
+        {
+          "name": "Schilling Cider",
+          "price": "9",
+          "category": "beer",
+          "image": "",
+          "description": "Washington- Cider, Balanced, Dry & Sweet - 5.2% ABV."
+        },
+        {
+          "name": "Scrimshaw Pilsner",
+          "price": "7",
+          "category": "beer",
+          "image": "",
+          "description": "California- German Pilsner- 4.5% ABV."
+        },
+        {
+          "name": "ANCHOR STEAM",
+          "price": "9",
+          "category": "beer",
+          "image": "",
+          "description": "California- California Common/Steam Beer- 4.9% ABV."
+        },
+        {
+          "name": "BURNING RAM CLUB CANYON Kölsch",
+          "price": "8",
+          "category": "beer",
+          "image": "",
+          "description": "Moraga's finest Burning Ram Canyon Club Brewery Kölsch."
+        },
+        {
+          "name": "ORIGINAL PATTERN",
+          "price": "9",
+          "category": "beer",
+          "image": "",
+          "description": "Pineapple, pine, Cashmere, Centennial, Simcoe hops - 6.5%"
+        },
+        {
+          "name": "LOST COAST BLONDE ALE",
+          "price": "5",
+          "category": "beer",
+          "image": "",
+          "description": "USA- American-Style Blonde Ale- 4.7% Eureka, California"
+        }
+      ]
     },
-    {
-      "name": "Onion Rings",
-      "price": "4",
-      "category": "food",
-      "image": "onion-rings.jpg"
-    },
-    {
-      "name": "Hash Browns",
-      "price": "3",
-      "category": "food",
-      "image": "hash-browns.jpg"
-    },
-    {
-      "name": "Chicken Nuggets",
-      "price": "4",
-      "category": "food",
-      "image": "chicken-nuggets.jpg"
-    },
-    {
-      "name": "Salad",
-      "price": "6",
-      "category": "food",
-      "image": "side-salad.jpg"
-    },
-    {
-      "name": "Coleslaw",
-      "price": "5",
-      "category": "food",
-      "image": "coleslaw.webp"
+    "sides": {
+      "Cocktails": [
+        {
+          "name": "Wolfhound 75",
+          "price": "11",
+          "category": "cocktails",
+          "image": "",
+          "description": "Plymouth Gin, Elderflower liqueur, Fresh squeezed grapefruit juice, topped with prosecco."
+        },
+        {
+          "name": "The Liberal",
+          "price": "11",
+          "category": "cocktails",
+          "image": "",
+          "description": "Bourbon, China China, Sweet Vermouth, Bitters"
+        },
+        {
+          "name": "Fire in the Hound",
+          "price": "11",
+          "category": "cocktails",
+          "image": "",
+          "description": "Mezcal, aperol, yellow chartreuse, lime, grapefruit bitters."
+        },
+        {
+          "name": "Smoky Hound",
+          "price": "11",
+          "category": "cocktails",
+          "image": "",
+          "description": "Mezcal, cherry heering, Chile ancho liqueur, lime."
+        },
+        {
+          "name": "Paper Plane",
+          "price": "11",
+          "category": "cocktails",
+          "image": "",
+          "description": "Bourbon, aperol, Amaro nonino, lemon juice."
+        },
+        {
+          "name": "Our Margarita",
+          "price": "11",
+          "category": "cocktails",
+          "image": "",
+          "description": "Tequila, pint e mes, lime, Simple syrup, orange bitters."
+        },
+        {
+          "name": "Hemmingway",
+          "price": "11",
+          "category": "cocktails",
+          "image": "",
+          "description": "White rum, elderflower liqueur, lime, fresh grapefruit juice"
+        }
+      ]
     }
-  ],
-  "drinks": [
-    {
-      "name": "Soft Drink",
-      "price": "4",
-      "category": "drink",
-      "image": "soda-can-assorted.jpg"
-    },
-    {
-      "name": "Orange Juice",
-      "price": "5",
-      "category": "drink",
-      "image": "orange-juice.webp"
-    },
-    {
-      "name": "Iced Tea",
-      "price": "4",
-      "category": "drink",
-      "image": "iced-tea.webp"
-    },
-    {
-      "name": "Coffee",
-      "price": "6",
-      "category": "drink",
-      "image": "coffee.webp"
-    },
-    {
-      "name": "Smoothie",
-      "price": "4.99",
-      "category": "drink",
-      "image": "smoothie.webp"
-    },
-    {
-      "name": "Margarita",
-      "price": "13",
-      "category": "alcohol",
-      "image": "frozen-margarita.webp"
-    }
-  ]
-}
+  }
+]

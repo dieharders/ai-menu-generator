@@ -1,10 +1,11 @@
 import Input from "./Input";
 import styles from "../App.module.scss";
 
-export default function Mains({ meals, hasOrderInput }) {
+export default function Mains({ items, sectionName, hasOrderInput }) {
+  // @TODO add section name for component
   return (
     <section className={styles.mains}>
-      {meals.map((meal, index) => (
+      {items.map((meal, index) => (
         <article className={styles.menuItem} key={index}>
           <h3 className={styles.mainsName}>{meal.name}</h3>
           <strong>${meal.price}</strong>

@@ -1,16 +1,16 @@
 import Input from "./Input";
 import styles from "../App.module.scss";
 
-export default function Extras({ type, items, hasOrderInput }) {
+export default function Extras({ sectionName, items, hasOrderInput }) {
   return (
     <section className={styles.extras}>
-      <h2 className={styles.extrasHeading}>{type}</h2>
+      <h2 className={styles.extrasHeading}>{sectionName}</h2>
       {items.map((item, index) => (
         <article className={styles.menuItem} key={index}>
           <div className={styles.extrasName}>{item.name}</div>
           <strong>${item.price}</strong>
           {hasOrderInput && (
-            <Input type={type} name={item.name} index={index} />
+            <Input type={sectionName} name={item.name} index={index} />
           )}
           <div className={styles.extrasImageContainer}>
             <img
