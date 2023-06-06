@@ -12,7 +12,7 @@ import styles from "./App.module.scss";
 export default function App() {
   const { mains, sides, drinks } = companies;
   const isOrderMenuVariant = false;
-  // const {origin } = window.document.location;
+  // const {origin} = window.document.location;
   const origin = 'https://image-menu.vercel.app';
   const queryParameters = new URLSearchParams(window.location.search);
   const companyId = queryParameters.get("id");

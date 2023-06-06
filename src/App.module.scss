@@ -48,11 +48,12 @@ input {
 .topBanner {
   display: flex;
   width: 100%;
-  height: 10rem;
+  height: auto;
   margin: auto;
   padding: 0;
   grid-column: 1 / 3;
   margin: 0 auto 2rem;
+  flex-wrap: wrap;
 }
 
 .links {
@@ -87,6 +88,8 @@ input {
 @media (min-width: 660px) {
   .topBanner {
     margin-bottom: 0;
+    flex-wrap: nowrap;
+    height: 10rem;
   }
 }
 

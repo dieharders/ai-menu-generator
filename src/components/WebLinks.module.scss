@@ -7,9 +7,16 @@
     display: block;
     position: relative;
     max-height: 3rem;
-    max-width: 24rem;
+    // max-width: 24rem;
     color: var(--primary);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.75rem;
+    text-align: center;
     // overflow: hidden;
 }
+
+@media (min-width: 660px) {
+    .linkText {
+        font-size: 1rem;
+    }
+  }
