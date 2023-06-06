@@ -1,4 +1,5 @@
 :root {
+  // Default colors
   --primary: #312951;
   --secondary: #473d72;
   --light: #fafafd;
@@ -58,6 +59,12 @@ input {
 
 .links {
   flex-grow: 2;
+}
+
+@media (min-width: 660px) {
+  .links {
+    flex-grow: 0.25;
+  }
 }
 
 .menu {

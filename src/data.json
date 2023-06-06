@@ -3,6 +3,11 @@
     "companyId": "0",
     "companyName": "The Moonrise Dinner",
     "logo": "",
+    "colors": {
+      "primary": "#312951",
+      "secondary": "#473d72",
+      "light": "#fafafd"
+    },
     "mains": {
       "Entrees": [
         {
@@ -134,69 +139,74 @@
     "companyId": "1",
     "companyName": "Wolfhound Bar",
     "logo": "wolfhoundbar.png",
+    "colors": {
+      "primary": "blueviolet",
+      "secondary": "black",
+      "light": "#ffffdf"
+    },
     "mains": {
       "Beer": [
         {
           "name": "Racer 5",
           "price": "9",
           "category": "beer",
-          "image": "",
+          "image": "beer-racer-5.png",
           "description": "This hoppy American IPA is a full-bodied beer."
         },
         {
           "name": "Drakes 1500",
           "price": "8",
           "category": "beer",
-          "image": "",
+          "image": "beer-1500.png",
           "description": "California- American Pale Ale- GABF Silver Medal 2008."
         },
         {
           "name": "DUCHESSE DE BOURGOGNE",
           "price": "10",
           "category": "beer",
-          "image": "",
+          "image": "beer-duchesse-de-bourgogne.jpeg",
           "description": "A traditional top-fermented reddish-brown ale from Belgium 9oz."
         },
         {
           "name": "Schilling Cider",
           "price": "9",
           "category": "beer",
-          "image": "",
+          "image": "beer-semi-sweet.png",
           "description": "Washington- Cider, Balanced, Dry & Sweet - 5.2% ABV."
         },
         {
           "name": "Scrimshaw Pilsner",
           "price": "7",
           "category": "beer",
-          "image": "",
+          "image": "beer-scrimshaw.jpeg",
           "description": "California- German Pilsner- 4.5% ABV."
         },
         {
           "name": "ANCHOR STEAM",
           "price": "9",
           "category": "beer",
-          "image": "",
+          "image": "beer-anchor-steam.jpeg",
           "description": "California- California Common/Steam Beer- 4.9% ABV."
         },
         {
           "name": "BURNING RAM CLUB CANYON Kölsch",
           "price": "8",
           "category": "beer",
-          "image": "",
+          "image": "beer-burning-ram-kolsch.jpg",
           "description": "Moraga's finest Burning Ram Canyon Club Brewery Kölsch."
         },
         {
           "name": "ORIGINAL PATTERN",
           "price": "9",
           "category": "beer",
-          "image": "",
+          "image": "beer-original-pattern.jpg",
           "description": "Pineapple, pine, Cashmere, Centennial, Simcoe hops - 6.5%"
         },
         {
           "name": "LOST COAST BLONDE ALE",
           "price": "5",
           "category": "beer",
-          "image": "",
+          "image": "beer-lost-coast.jpg",
           "description": "USA- American-Style Blonde Ale- 4.7% Eureka, California"
         }
       ]
@@ -207,49 +217,49 @@
           "name": "Wolfhound 75",
           "price": "11",
           "category": "cocktails",
-          "image": "",
+          "image": "cocktail-wolfhound-75.png",
           "description": "Plymouth Gin, Elderflower liqueur, Fresh squeezed grapefruit juice, topped with prosecco."
         },
         {
           "name": "The Liberal",
           "price": "11",
           "category": "cocktails",
-          "image": "",
+          "image": "cocktail-the-liberal.png",
           "description": "Bourbon, China China, Sweet Vermouth, Bitters"
         },
         {
           "name": "Fire in the Hound",
           "price": "11",
           "category": "cocktails",
-          "image": "",
+          "image": "cocktail-fire-in-the-hound.png",
           "description": "Mezcal, aperol, yellow chartreuse, lime, grapefruit bitters."
         },
         {
           "name": "Smoky Hound",
           "price": "11",
           "category": "cocktails",
-          "image": "",
+          "image": "cocktail-smoky-hound.png",
           "description": "Mezcal, cherry heering, Chile ancho liqueur, lime."
         },
         {
           "name": "Paper Plane",
           "price": "11",
           "category": "cocktails",
-          "image": "",
+          "image": "cocktail-paper-plane.png",
           "description": "Bourbon, aperol, Amaro nonino, lemon juice."
         },
         {
           "name": "Our Margarita",
           "price": "11",
           "category": "cocktails",
-          "image": "",
-          "description": "Tequila, pint e mes, lime, Simple syrup, orange bitters."
+          "image": "cocktail-our-margarita.png",
+          "description": "Tequila, punt e mes, lime, Simple syrup, orange bitters."
         },
         {
           "name": "Hemmingway",
           "price": "11",
           "category": "cocktails",
-          "image": "",
+          "image": "cocktail-hemmingway.png",
           "description": "White rum, elderflower liqueur, lime, fresh grapefruit juice"
         }
       ]

@@ -1,7 +1,18 @@
 .logo {
+    display: block;
     height: 100%;
     margin: auto;
-    margin-right: 0;
-    display: block;
-    flex-grow: 2;
 }
+
+.imageIcon {
+    display: block;
+    width: 100%;
+    max-width: 10rem;
+}
+
+@media (min-width: 660px) {
+    .logo {
+        margin: auto;
+        margin-right: 0;
+    }
+  }

@@ -1,7 +1,7 @@
 import styles from "./Logo.module.scss";
 
-export default function Logo() {
-  return (
+export default function Logo({ src }) {
+  const svgIcon = (
     <svg
       className={styles.logo}
       clipRule="evenodd"
@@ -108,4 +108,8 @@ export default function Logo() {
       />
     </svg>
   );
+
+  const imageIcon = <div className={styles.logo}><img src={`logos/${src}`} className={styles.imageIcon} /></div>;
+
+  return src ? imageIcon : svgIcon;
 }

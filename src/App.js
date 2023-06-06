@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Logo from "./components/Logo";
 import Mains from "./components/Mains";
 import Extras from "./components/Extras";
@@ -33,7 +34,7 @@ export default function App() {
           <QRLink link={link}/>
           <WebLinks link={link} />
         </div>
-        <Logo />
+        <Logo src={company?.logo}/>
       </div>
       {renderMenuItems(company?.mains, Mains)}
       <aside className={styles.aside}>
@@ -43,6 +44,18 @@ export default function App() {
       <Total hasOrderInput={isOrderMenuVariant} />
     </div>
   );
+
+  useEffect(() => {
+    if (!company?.colors) return;
+
+    // Get color scheme from company data
+    const { primary, secondary, light } = company.colors;
+    // Set the color scheme
+    const rootEl = document.documentElement;
+    rootEl.style.setProperty('--primary', primary);
+    rootEl.style.setProperty('--secondary', secondary);
+    rootEl.style.setProperty('--light', light);
+  }, [company]);
 
   return (
     <Provider>
