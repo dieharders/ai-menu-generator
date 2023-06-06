@@ -29,12 +29,13 @@ export default function App() {
 
   const renderMenu = (
     <div className={styles.menu}>
+      <h2 className={styles.name}>{company?.companyName}</h2>
       <div className={styles.topBanner}>
         <div className={styles.links}>
           <QRLink link={link}/>
           <WebLinks link={link} />
         </div>
-        <Logo src={company?.logo}/>
+        <Logo src={company?.logo} />
       </div>
       {renderMenuItems(company?.mains, Mains)}
       <aside className={styles.aside}>
