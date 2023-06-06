@@ -5,9 +5,7 @@ import data from "../data";
 import styles from "./Total.module.scss";
 
 export default function Total({hasOrderInput}) {
-  const queryParameters = new URLSearchParams(window.location.search);
-  const isDev = queryParameters.get("dev");
-
+  const isDevEnv = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
   const [items] = useContext(Context);
 
   const totalPrice = Object.keys(items).reduce((acc, curr) => {
@@ -19,7 +17,7 @@ export default function Total({hasOrderInput}) {
 
   return (
     <div className={styles.total}>
-      {isDev && <CaptureScreenshot />}
+      {isDevEnv && <CaptureScreenshot />}
       {hasOrderInput && <span className={styles.totalTitle}>Total:</span>}
       {hasOrderInput && <span className={styles.totalPrice}>${totalPrice}</span>}
     </div>

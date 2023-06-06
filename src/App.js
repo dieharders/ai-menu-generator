@@ -12,10 +12,10 @@ import styles from "./App.module.scss";
 export default function App() {
   const { mains, sides, drinks } = companies;
   const isOrderMenuVariant = false;
-  /* This should be a bit.ly shortlink */
-  const {origin } = window.document.location;
+  // const {origin } = window.document.location;
+  const origin = 'https://image-menu.vercel.app';
   const queryParameters = new URLSearchParams(window.location.search);
-  const companyId = queryParameters.get("id") || '-1';
+  const companyId = queryParameters.get("id");
   const link = `${origin}/?id=${companyId}`;
 
   const renderMenu = (
@@ -38,7 +38,7 @@ export default function App() {
 
   return (
     <Provider>
-      {companyId === '-1' ? <Home /> : renderMenu}
+      {companyId ? renderMenu : <Home />}
     </Provider>
   );
 }

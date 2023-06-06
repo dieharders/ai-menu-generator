@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     if (!submittedValue) return;
     const {origin} = window.document.location;
-    const devUrl = `${origin}/?id=${submittedValue}&dev=true`;
+    const devUrl = `${origin}/?id=${submittedValue}`;
     window.location.href = devUrl;
   }, [submittedValue])
   
