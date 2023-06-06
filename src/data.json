@@ -140,8 +140,8 @@
     "companyName": "Wolfhound Bar",
     "logo": "wolfhoundbar.png",
     "colors": {
-      "primary": "blueviolet",
-      "secondary": "black",
+      "primary": "#575733",
+      "secondary": "#591b93",
       "light": "#ffffdf"
     },
     "mains": {
