@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { Provider } from "./Context";
 import Home from "./components/Home";
-import WebMenu from "./components/WebMenu";
+import MenuPageForWeb from "./components/MenuPageForWeb";
 import companies from "./data.json";
+import styles from "./App.module.scss";
 
 export default function App() {
   const queryParameters = new URLSearchParams(window.location.search);
   const companyId = queryParameters.get("id");
-  const company = companies.find(item => item.companyId === companyId);
+  const company = companies?.find(item => item.companyId === companyId);
 
   useEffect(() => {
     if (!company?.color) return;
@@ -36,8 +37,8 @@ export default function App() {
   }, [company]);
 
   return (
-    <Provider>
-      {companyId ? <WebMenu data={company} /> : <Home />}
+    <Provider className={styles}>
+      {companyId ? <MenuPageForWeb data={company} /> : <Home />}
     </Provider>
   );
 }

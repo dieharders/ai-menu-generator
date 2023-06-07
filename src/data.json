@@ -4,7 +4,7 @@
     "companyName": "The Moonrise Dinner",
     "logo": "",
     "color": 252,
-    "mains": {
+    "menu": {
       "Entrees": [
         {
           "name": "The Caesar",
@@ -48,9 +48,7 @@
           "category": "food",
           "image": "chicken-marsala.jpg"
         }
-      ]
-    },
-    "sides": {
+      ],
       "Sides": [
         {
           "name": "Fries",
@@ -88,9 +86,7 @@
           "category": "food",
           "image": "coleslaw.webp"
         }
-      ]
-    },
-    "drinks": {
+      ],
       "Drinks": [
         {
           "name": "Soft Drink",
@@ -136,7 +132,7 @@
     "companyName": "Wolfhound Bar",
     "logo": "wolfhoundbar.png",
     "color": 60,
-    "mains": {
+    "menu": {
       "Beer": [
         {
           "name": "Racer 5",
@@ -201,9 +197,7 @@
           "image": "beer-lost-coast.jpg",
           "description": "USA- American-Style Blonde Ale- 4.7% Eureka, California"
         }
-      ]
-    },
-    "sides": {
+      ],
       "Cocktails": [
         {
           "name": "Wolfhound 75",

@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.name {
+    color: var(--secondary);
+    margin: 0;
+}
+
+.imageContainer {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 16rem;
+    margin: auto;
+    margin-top: 1rem;
+    border-style: hidden;
+    border-radius: 0.5rem;
+    background-color: grey;
+    overflow: hidden;
+}
+
+.photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    color: grey;
+}
+  
+.description {
+    color: black;
+    flex: 1 1 100%;
+    margin: 0.75rem 0 0;
+}
+
+.heading {
+    color: var(--primary);
+    margin: 0 0 1.5rem;
+    border-bottom: 1px solid var(--secondary);
+}
