@@ -47,11 +47,25 @@ export default function App() {
   );
 
   useEffect(() => {
-    if (!company?.colors) return;
+    if (!company?.color) return;
 
     // Get color scheme from company data
-    const { primary, secondary, light } = company.colors;
+    const hue = company?.color;
+
+    const primary_sat = '33%';
+    const primary_lit = '24%';
+
+    const secondary_sat = '30%';
+    const secondary_lit = '34%';
+
+    const light_sat = '43%';
+    const light_lit = '99%';
+
     // Set the color scheme
+    const primary = `hsl(${hue}, ${primary_sat}, ${primary_lit})`;
+    const secondary = `hsl(${hue}, ${secondary_sat}, ${secondary_lit})`;
+    const light = `hsl(${hue}, ${light_sat}, ${light_lit})`;
+
     const rootEl = document.documentElement;
     rootEl.style.setProperty('--primary', primary);
     rootEl.style.setProperty('--secondary', secondary);
