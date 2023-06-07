@@ -4,7 +4,9 @@ import styles from "./MenuSection.module.scss";
 const MenuSection = ({ items, sectionName, hasOrderInput }) => {
   return (
     <section>
+      {/* Section heading */}
       <h2 className={styles.heading}>{sectionName}</h2>
+      {/* Sections */}
       <div className={styles.itemsContainer}>
         {items?.map((meal, index) => (
           <article className={styles.container} key={index}>
@@ -24,7 +26,7 @@ const MenuSection = ({ items, sectionName, hasOrderInput }) => {
             <div className={styles.imageContainer}>
               <img
                 className={styles.photo}
-                src={process.env.PUBLIC_URL + '/images/' + meal.image}
+                src={`${process.env.PUBLIC_URL}/images/${meal.image}`}
                 alt={`${meal.category} - ${meal.name}`}
               />
             </div>

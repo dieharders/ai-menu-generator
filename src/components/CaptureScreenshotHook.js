@@ -1,17 +1,10 @@
 import { useState, useEffect } from "react";
 import html2canvas from 'html2canvas';
-import styles from "./CaptureScreenshot.module.scss";
 
-const CaptureScreenshot = () => {
+const useCaptureScreenshot = () => {
     const [downloadLink, setDownloadLink] = useState('');
     const [hasClicked, setHasClicked] = useState(false);
-
-    const renderButton = (
-        <div className={styles.container}>
-            <button onClick={() => setHasClicked(true)} type="submit" className={styles.exportButton} >Export Image</button>
-            {downloadLink && <a href={downloadLink} download="menu.png" className={styles.downloadLink} >Download</a>}
-        </div>
-    );
+    const onClickCallback = () => setHasClicked(true);
 
     useEffect(() => {
         if (!hasClicked) return;
@@ -26,7 +19,10 @@ const CaptureScreenshot = () => {
     }, [hasClicked])
     
 
-    return !hasClicked ? renderButton : null;
+    return {
+        downloadLink,
+        onClickCallback
+    };
 }
 
-export default CaptureScreenshot;
+export default useCaptureScreenshot;
