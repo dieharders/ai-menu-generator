@@ -3,7 +3,7 @@ import styles from './QRLink.module.scss';
 
 const QRCode = ({link}) => {
     const options = {
-        size: '100%', // 140px
+        size: '100%',
     };
 
     return <div className={styles.container}>
