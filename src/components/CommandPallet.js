@@ -29,14 +29,14 @@ const CommandPallet = () => {
                         <img src={`${process.env.PUBLIC_URL}/icons/window.svg`} className={styles.icon} />
                         <p className={styles.title}>Web Version</p>
                     </a>
-                    <button onClick={onClickCallback} type="submit" className={styles.iconContainer}>
+                    {/* <button onClick={onClickCallback} type="submit" className={styles.iconContainer}>
                         <img src={`${process.env.PUBLIC_URL}/icons/camera.svg`} className={styles.icon} />
                         <p className={styles.title}>Capture Image</p>
                     </button>
                     {downloadLink && <a href={downloadLink} download="menu.png" className={styles.iconContainer}>
                         <img src={`${process.env.PUBLIC_URL}/icons/image.svg`} className={styles.icon} />
                         <p className={styles.title}>Save Image</p>
-                    </a>}
+                    </a>} */}
                 </>
             )}
             <div className={styles.iconContainer}>
