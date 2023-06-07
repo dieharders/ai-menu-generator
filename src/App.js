@@ -23,7 +23,7 @@ export default function App() {
     const secondary_lit = '34%';
 
     const light_sat = '43%';
-    const light_lit = '99%';
+    const light_lit = '96%';
 
     // Set the color scheme
     const primary = `hsl(${hue}, ${primary_sat}, ${primary_lit})`;
