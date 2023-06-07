@@ -1,22 +1,18 @@
 .container {
-    display: block;
+    display: flex;
     position: relative;
 }
 
 .linkText {
     display: block;
     position: relative;
-    max-height: 3rem;
-    // max-width: 24rem;
+    margin: 1rem;
+    padding: 1rem;
     color: var(--primary);
     text-decoration: none;
-    font-size: 0.75rem;
+    font-size: 1.5rem;
     text-align: center;
-    // overflow: hidden;
+    align-self: center;
+    background-color: rgba(246, 246, 246, 0.7);
+    border-radius: 0.5rem;
 }
-
-@media (min-width: 660px) {
-    .linkText {
-        font-size: 1rem;
-    }
-  }

@@ -1,6 +1,7 @@
 .logo {
     display: block;
-    height: 100%;
+    margin: auto;
+    flex-grow: 3;
     margin: auto;
 }
 
@@ -8,11 +9,6 @@
     display: block;
     width: 100%;
     max-width: 10rem;
+    margin: auto;
+    margin-top: 0;
 }
-
-@media (min-width: 660px) {
-    .logo {
-        margin: auto;
-        margin-right: 0;
-    }
-  }
