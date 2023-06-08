@@ -11,8 +11,7 @@
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
     "qrcode.react": "^3.1.0",
-    "puppeteer": "^20.5.0",
-    "html2canvas": "^1.4.1"
+    "puppeteer": "^20.5.0"
   },
   "devDependencies": {
     "sass": "^1.62.1",

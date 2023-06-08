@@ -35,6 +35,7 @@ puppeteer
     return { menus, browser };
   })
   .then(async ({ menus, browser }) => {
+    // @TODO Fix tool not working for array of menus
     menus.forEach(async (menu) => {
         const id = menu.companyId;
         const name = menu.companyName;
