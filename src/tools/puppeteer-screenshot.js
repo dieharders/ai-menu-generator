@@ -1,5 +1,8 @@
+'use strict';  
+
 const puppeteer = require('puppeteer');
 const fs = require('fs/promises');
+// const http = require('http');
 const hostname = 'http://localhost:3000'; //'https://image-menu.vercel.app';
 const viewWidth = 1280;
 const viewHeight = 2000;
@@ -21,7 +24,26 @@ const readMyFile = async (filePath) => {
 };
 
 // @TODO Start a server here before invoking puppeteer so we dont have to start one seperatly.
+// const server = http.createServer((req, res) => res.end('Hi'))
+//   .listen(3000, async () => {
+//     const browser = await puppeteer.launch({ headless: true });
+//     const page = await browser.newPage();
 
+//     try {
+//         await page.goto(hostname);
+//     } catch (err) {
+//         console.log(err);
+//     }
+
+//     console.log('Done');
+//     browser.close();
+//     server.close();
+//   });
+
+/**
+ * Use puppeteer to start a headless Chrome and take screenshots of our menus.
+ * More info: https://screenshotone.com/blog/how-to-take-a-screenshot-with-puppeteer/
+ */
 puppeteer
   .launch({
     defaultViewport: {
@@ -35,8 +57,7 @@ puppeteer
     return { menus, browser };
   })
   .then(async ({ menus, browser }) => {
-    // @TODO Fix tool not working for array of menus
-    menus.forEach(async (menu) => {
+    const screenshots = menus.map(async (menu) => {
         const id = menu.companyId;
         const name = menu.companyName;
         const target = `${hostname}/?id=${id}&print=true`;
@@ -50,28 +71,9 @@ puppeteer
         });
         // wait 2 seconds just to make sure everything loaded
         await new Promise(r => setTimeout(r, 2000));
-        await page.screenshot({ path: screenShotPath, fullPage: true, captureBeyondViewport: false });
-        await browser.close();
+        return page.screenshot({ path: screenShotPath, fullPage: true, captureBeyondViewport: false });
     });
+    // Wait for all screenshots to be taken then shutdown
+    await Promise.all(screenshots);
+    await browser.close();
   });
-
-  /*
-const http = require('http');
-
-const server = http.createServer((req, res) => res.end('Hi'))
-    .listen(1337, async () => {
-        const browser = await puppeteer.launch({ headless: true });
-        const page = await browser.newPage();
-
-
-        try {
-            await page.goto('localhost:1337');
-        } catch (err) {
-            console.log(err);
-        }
-
-        console.log('Done');
-        browser.close();
-        server.close();
-    });
-*/
