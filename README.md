@@ -33,7 +33,13 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Deploy to Hosting via Vercel
 
-TBD...
+When pushing to `/main` branch Vercel will automatically deploy website.
+
+### Screenshot Tool using Puppeteer
+
+Run `npm start` to start the app on localhost:3000.
+Run `node puppeteer-screenshot` from the `src/tools` dir.
+This will go through each company, open a headless browser and export a screenshot to `src/tools/screenshots`.
 
 ### Made with:
 
