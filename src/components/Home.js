@@ -24,8 +24,8 @@ const Home = () => {
   
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
           value={inputValue}
@@ -33,7 +33,7 @@ const Home = () => {
           placeholder="Enter a company id"
           className={styles.inputText}
         />
-        <button type="submit">Submit</button>
+        <button type="submit" className={styles.button}>Submit</button>
       </form>
     </div>
   );
