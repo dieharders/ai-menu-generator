@@ -1,13 +1,11 @@
 import MenuSection from "./MenuSection";
 import Total from "./Total";
-import CommandPallet from "./CommandPallet";
 import Banner from "./Banner";
 import Footer from "./Footer";
 import styles from "./MenuPage.module.scss";
 
 const MenuPageForPrint = ({ data }) => {
     const queryParameters = new URLSearchParams(window.location.search);
-    const isPrint = queryParameters.get("print");
     const isOrderMenuVariant = queryParameters.get("order"); // Whether this should track orders
 
     const renderMenuItems = (items) => {
@@ -20,7 +18,7 @@ const MenuPageForPrint = ({ data }) => {
 
     return (
       <div className={styles.page}>
-        <Banner title={data?.companyName} logo={data?.logo}/>
+        <Banner title={data?.companyName} />
         {renderMenuItems(data?.menu)}
         <Footer data={data} />
         <Total hasOrderInput={isOrderMenuVariant} />

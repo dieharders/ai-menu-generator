@@ -1,7 +1,8 @@
 :root {
   // Default colors
-  --primary: #312951;
-  --secondary: #473d72;
+  --primary: #9900FF;
+  --secondary: #560090;
+  --background: #140021;
   --light: #fafafd;
 }
 
@@ -22,15 +23,15 @@ html {
 
 body {
   color: var(--primary);
-  background-color: var(--primary);
+  background-color: var(--background);
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
     sans-serif, Apple Color Emoji, Segoe UI Emoji;
 }
 
-@media (min-width: 900px) {
-  body {
-    padding: 1rem;
-  }
-}
+// @media (min-width: 900px) {
+//   body {
+//     padding: 1rem;
+//   }
+// }

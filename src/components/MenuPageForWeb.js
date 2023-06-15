@@ -2,7 +2,6 @@ import MenuSection from "./MenuSection";
 import Total from "./Total";
 import CommandPallet from "./CommandPallet";
 import Banner from "./Banner";
-import Footer from "./Footer";
 import styles from "./MenuPage.module.scss";
 
 const MenuPageForWeb = ({ data }) => {
@@ -20,7 +19,7 @@ const MenuPageForWeb = ({ data }) => {
 
     return (
       <div className={styles.page}>
-        <Banner title={data?.companyName} logo={data?.logo}/>
+        <Banner title={data?.companyName} />
         <CommandPallet />
         {renderMenuItems(data?.menu)}
         <Total hasOrderInput={isOrderMenuVariant} />

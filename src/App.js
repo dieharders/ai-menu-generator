@@ -3,6 +3,7 @@ import { Provider } from "./Context";
 import Home from "./components/Home";
 import MenuPageForWeb from "./components/MenuPageForWeb";
 import MenuPageForPrint from './components/MenuPageForPrint';
+import Background from "./components/BackgroundSVG";
 import companies from "./data.json";
 import styles from "./App.module.scss";
 
@@ -40,9 +41,12 @@ export default function App() {
 
   return (
     <Provider className={styles}>
-      {companyId && isPrint && <MenuPageForPrint data={company} />}
-      {companyId && !isPrint && <MenuPageForWeb data={company} />}
-      {!companyId && <Home />}
+      <Background>
+        {companyId && isPrint && <MenuPageForPrint data={company} />}
+        {companyId && !isPrint && <MenuPageForWeb data={company} />}
+        {!companyId && <Home />}
+      </Background>
+
     </Provider>
   );
 }
