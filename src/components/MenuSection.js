@@ -26,7 +26,7 @@ const MenuSection = ({ items, sectionName, hasOrderInput }) => {
             <div className={styles.imageContainer}>
               <img
                 className={styles.photo}
-                src={`${process.env.PUBLIC_URL}/images/${meal.image}`}
+                src={require(`../assets/images/${meal.image}`)}
                 alt={`${meal.category} - ${meal.name}`}
               />
             </div>
