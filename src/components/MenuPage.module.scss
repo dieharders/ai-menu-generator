@@ -17,6 +17,7 @@
         width: 100%;
         max-width: 100%;
         padding: 2.5rem;
+        padding-top: calc(2.5rem + 14rem); // remove if we pull banner out of page
         box-shadow: none;
     }
 }
