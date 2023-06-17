@@ -10,7 +10,7 @@ import Background from "./components/BackgroundSVG";
 export default function App() {
   const queryParameters = new URLSearchParams(window.location.search);
   const companyId = queryParameters.get("id");
-  const isPrint = queryParameters.get("print");
+  const isPrint = queryParameters.get("print") === 'true';
   const company = companies?.find(item => item.companyId === companyId);
 
   useEffect(() => {

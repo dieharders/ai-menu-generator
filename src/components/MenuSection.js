@@ -2,6 +2,8 @@ import Input from "./Input";
 import styles from "./MenuSection.module.scss";
 
 const MenuSection = ({ items, sectionName, hasOrderInput }) => {
+  const hasOrder = hasOrderInput === 'true';
+
   return (
     <section>
       {/* Section heading */}
@@ -18,7 +20,7 @@ const MenuSection = ({ items, sectionName, hasOrderInput }) => {
               {/* Price */}
               <strong className={styles.price}>${meal.price}</strong>
               {/* Buy/Remove order buttons */}
-              {hasOrderInput && (
+              {hasOrder && (
                 <Input type={sectionName} name={meal.name} index={index} />
               )}
             </div>

@@ -4,6 +4,7 @@ import data from "../data";
 import styles from "./Total.module.scss";
 
 export default function Total({hasOrderInput}) {
+  const isOrder = hasOrderInput === 'true';
   const [items] = useContext(Context);
 
   const totalPrice = Object.keys(items).reduce((acc, curr) => {
@@ -15,8 +16,8 @@ export default function Total({hasOrderInput}) {
 
   return (
     <div className={styles.total}>
-      {hasOrderInput && <span className={styles.totalTitle}>Total:</span>}
-      {hasOrderInput && <span className={styles.totalPrice}>${totalPrice}</span>}
+      {isOrder && <span className={styles.totalTitle}>Total:</span>}
+      {isOrder && <span className={styles.totalPrice}>${totalPrice}</span>}
     </div>
   );
 }
