@@ -6,7 +6,6 @@ import styles from "./MenuPage.module.scss";
 
 const MenuPageForWeb = ({ data }) => {
     const queryParameters = new URLSearchParams(window.location.search);
-    const isPrint = queryParameters.get("print");
     const isOrderMenuVariant = queryParameters.get("order"); // Whether this should track orders
 
     const renderMenuItems = (items) => {

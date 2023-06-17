@@ -3,9 +3,9 @@ import { Provider } from "./Context";
 import Home from "./components/Home";
 import MenuPageForWeb from "./components/MenuPageForWeb";
 import MenuPageForPrint from './components/MenuPageForPrint';
-import Background from "./components/BackgroundSVG";
 import companies from "./data.json";
 import styles from "./App.module.scss";
+import Background from "./components/BackgroundSVG";
 
 export default function App() {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -41,12 +41,10 @@ export default function App() {
 
   return (
     <Provider className={styles}>
-      <Background>
-        {companyId && isPrint && <MenuPageForPrint data={company} />}
-        {companyId && !isPrint && <MenuPageForWeb data={company} />}
-        {!companyId && <Home />}
-      </Background>
-
+      <Background />
+      {companyId && isPrint && <MenuPageForPrint data={company} />}
+      {companyId && !isPrint && <MenuPageForWeb data={company} />}
+      {!companyId && <Home />}
     </Provider>
   );
 }
