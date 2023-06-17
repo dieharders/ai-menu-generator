@@ -30,7 +30,7 @@ const Home = () => {
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          placeholder="Enter a company id"
+          placeholder="Company ID"
           className={styles.inputText}
         />
         <button type="submit" className={styles.button}>Submit</button>
