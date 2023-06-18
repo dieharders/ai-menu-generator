@@ -1,7 +1,7 @@
 [
   {
     "companyId": "0",
-    "companyName": "The Moonrise Dinner",
+    "companyName": "The Moonrise Diner",
     "website": "",
     "color": 252,
     "bannerImage": "image.png",
@@ -133,7 +133,7 @@
     "companyName": "Wolfhound Bar",
     "website": "https://thewolfhoundbar.com/",
     "color": 60,
-    "bannerImage": "image.png",
+    "bannerImage": "https://cdn.bhdw.net/im/sunrise-art-wallpaper-81329_w635.webp",
     "menu": {
       "Beer": [
         {

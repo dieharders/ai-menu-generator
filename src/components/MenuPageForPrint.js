@@ -12,7 +12,7 @@ const MenuPageForPrint = ({ data }) => {
 
     return (
       <div className={styles.page}>
-        <Banner title={data?.companyName} />
+        <Banner title={data?.companyName} backgroundURL={data?.bannerImage} />
         {renderSections(data?.menu, renderSection)}
         <Footer data={data} />
         <Total hasOrderInput={false} />
