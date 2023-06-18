@@ -11,10 +11,10 @@ const CommandPallet = ({ website }) => {
 
     return (
         <div className={styles.container}>
-            <a href={`${window.location.origin}/?id=${id}&order=${!isOrder}`} className={styles.iconContainer}>
+            {/* <a href={`${window.location.origin}/?id=${id}&order=${!isOrder}`} className={styles.iconContainer}>
                 <img src={iconPriceTag} className={styles.icon} />
                 <p className={styles.title}>Order</p>
-            </a>
+            </a> */}
             <a href={`${window.location.origin}/?id=${id}&print=true`} className={styles.iconContainer}>
                 <img src={iconPrinter} className={styles.icon} />
                 <p className={styles.title}>Print Version</p>
