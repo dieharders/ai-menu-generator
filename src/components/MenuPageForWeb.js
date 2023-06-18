@@ -1,26 +1,22 @@
-import MenuSection from "./MenuSection";
+import MenuSection from "./MenuSectionForWeb";
 import Total from "./Total";
 import CommandPallet from "./CommandPallet";
 import Banner from "./Banner";
-import styles from "./MenuPage.module.scss";
+import { renderSections } from "../helpers/render";
+import styles from "./MenuPageForWeb.module.scss";
 
 const MenuPageForWeb = ({ data }) => {
     const queryParameters = new URLSearchParams(window.location.search);
     const isOrderMenuVariant = queryParameters.get("order"); // Whether this should track orders
-
-    const renderMenuItems = (items) => {
-        if (!items) return;
-        const sections = Object.entries(items)?.map(([key, val]) => {
-          return <MenuSection key={key} items={val} sectionName={key} hasOrderInput={isOrderMenuVariant} />;
-        });
-        return <>{sections}</>;
+    const renderSection = ({key, val}) => {
+      return <MenuSection key={key} items={val} sectionName={key} hasOrderInput={isOrderMenuVariant} />;
     };
 
     return (
       <div className={styles.page}>
         <Banner title={data?.companyName} />
         <CommandPallet />
-        {renderMenuItems(data?.menu)}
+        {renderSections(data?.menu, renderSection)}
         <Total hasOrderInput={isOrderMenuVariant} />
       </div>
     );

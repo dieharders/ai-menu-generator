@@ -1,22 +1,19 @@
-import MenuSection from "./MenuSection";
+import MenuSection from "./MenuSectionForPrint";
 import Total from "./Total";
 import Banner from "./Banner";
 import Footer from "./Footer";
-import styles from "./MenuPage.module.scss";
+import { renderSections } from "../helpers/render";
+import styles from "./MenuPageForPrint.module.scss";
 
 const MenuPageForPrint = ({ data }) => {
-    const renderMenuItems = (items) => {
-        if (!items) return;
-        const sections = Object.entries(items)?.map(([key, val]) => {
-          return <MenuSection key={key} items={val} sectionName={key} hasOrderInput={false} />;
-        });
-        return <>{sections}</>;
+    const renderSection = ({key, val}) => {
+      return <MenuSection key={key} items={val} sectionName={key} />;
     };
 
     return (
       <div className={styles.page}>
         <Banner title={data?.companyName} />
-        {renderMenuItems(data?.menu)}
+        {renderSections(data?.menu, renderSection)}
         <Footer data={data} />
         <Total hasOrderInput={false} />
       </div>

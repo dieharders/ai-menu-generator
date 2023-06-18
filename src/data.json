@@ -3,6 +3,7 @@
     "companyId": "0",
     "companyName": "The Moonrise Dinner",
     "color": 252,
+    "bannerImage": "image.png",
     "menu": {
       "Entrees": [
         {
@@ -130,6 +131,7 @@
     "companyId": "1",
     "companyName": "Wolfhound Bar",
     "color": 60,
+    "bannerImage": "image.png",
     "menu": {
       "Beer": [
         {

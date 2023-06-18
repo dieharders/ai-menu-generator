@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    margin: auto;
 }
 
 .linkText {
@@ -9,6 +10,7 @@
     position: relative;
     margin: auto;
     margin-left: 1rem;
+    margin-right: 1rem;
     padding: 1rem;
     color: var(--primary);
     text-decoration: none;
@@ -22,8 +24,9 @@
     display: block;
     position: relative;
     color: var(--light);
+    font-size: 1.5rem;
     padding: 0;
     margin: auto;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
     text-align: center;
 }

@@ -1,9 +1,6 @@
-import Input from "./Input";
-import styles from "./MenuSection.module.scss";
+import styles from "./MenuSectionForPrint.module.scss";
 
-const MenuSection = ({ items, sectionName, hasOrderInput }) => {
-  const hasOrder = hasOrderInput === 'true';
-
+const MenuSectionForPrint = ({ items, sectionName }) => {
   return (
     <section>
       {/* Section heading */}
@@ -19,10 +16,6 @@ const MenuSection = ({ items, sectionName, hasOrderInput }) => {
               <p className={styles.description}>{meal.description}</p>
               {/* Price */}
               <strong className={styles.price}>${meal.price}</strong>
-              {/* Buy/Remove order buttons */}
-              {hasOrder && (
-                <Input type={sectionName} name={meal.name} index={index} />
-              )}
             </div>
             {/* Photo */}
             <div className={styles.imageContainer}>
@@ -40,4 +33,4 @@ const MenuSection = ({ items, sectionName, hasOrderInput }) => {
   );
 }
 
-export default MenuSection;
+export default MenuSectionForPrint;

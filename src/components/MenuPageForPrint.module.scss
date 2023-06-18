@@ -1,0 +1,11 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 4rem;
+    margin: auto;
+    margin-top: 4rem;
+    max-width: 75rem;
+    background-color: var(--light);
+    box-shadow: 0 0 2rem 2.25rem rgba(0, 0, 0, 0.7);
+}
