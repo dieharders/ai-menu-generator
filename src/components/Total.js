@@ -9,7 +9,7 @@ export default function Total({hasOrderInput}) {
 
   const totalPrice = Object.keys(items).reduce((acc, curr) => {
     const [group, item] = curr.split("-");
-    const amount = items[curr] * data[group][item].price;
+    const amount = items?.[curr] * data?.[group]?.[item]?.price;
     const result = acc + amount;
     return Number(result.toFixed(2));
   }, 0);

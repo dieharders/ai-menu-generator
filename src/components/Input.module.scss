@@ -1,17 +1,14 @@
 .order {
-    margin: auto;
-    width: 3rem;
+    display: inline-block;
     font-size: medium;
     border-style: hidden;
-}
-
-input.order {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 3rem;
+    height: 2rem;
     padding: 0.25rem;
-    margin: 0 0.75rem;
+    margin: auto;
+    margin-top: 1rem;
     background-color: transparent;
     border: 0.1rem solid var(--secondary);
-    border-radius: 50%;
+    border-radius: 0.25rem;
     text-align: center;
 }

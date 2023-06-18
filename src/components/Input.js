@@ -7,6 +7,9 @@ export default function Input({ type, name, index }) {
 
   return (
     <input
+      placeholder="0"
+      min="0"
+      max="99"
       className={styles.order}
       type="number"
       onChange={({ target }) => updateItem(type, index, target.value)}

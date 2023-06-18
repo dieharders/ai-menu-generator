@@ -20,6 +20,8 @@
     width: 75%;
     padding: 1rem;
     padding-left: 0;
+    margin: auto;
+    margin-left: 0;
 }
 
 .heading {
@@ -45,9 +47,10 @@
 }
 
 .price {
-    display: block;
+    display: inline-block;
     position: relative;
     margin-top: 1rem;
+    margin-right: 1rem
 }
 
 .imageContainer {
@@ -72,4 +75,17 @@
     object-fit: cover;
     background-color: grey;
     border-radius: 0.5rem;
+}
+
+// Extra Small screen
+@media (max-width: 360px) {
+    .container {
+        flex-direction: column;
+    }
+    .imageContainer {
+        margin: auto;
+    }
+    .textContainer {
+        margin: auto;
+    }
 }
