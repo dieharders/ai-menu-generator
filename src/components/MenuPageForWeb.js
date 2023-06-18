@@ -15,7 +15,7 @@ const MenuPageForWeb = ({ data }) => {
     return (
       <div className={styles.page}>
         <Banner title={data?.companyName} />
-        <CommandPallet />
+        <CommandPallet website={data?.website} />
         {renderSections(data?.menu, renderSection)}
         <Total hasOrderInput={isOrderMenuVariant} />
       </div>

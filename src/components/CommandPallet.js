@@ -3,7 +3,7 @@ import iconPrinter from '../assets/icons/icon-printer.svg';
 import iconContract from '../assets/icons/icon-contract.svg';
 import styles from "./CommandPallet.module.scss";
 
-const CommandPallet = () => {
+const CommandPallet = ({ website }) => {
     const queryParameters = new URLSearchParams(window.location.search);
     const isOrder = queryParameters.get("order");
     const id = queryParameters.get("id");
@@ -18,10 +18,12 @@ const CommandPallet = () => {
                 <img src={iconPrinter} className={styles.icon} />
                 <p className={styles.title}>Print Version</p>
             </a>
-            <div className={styles.iconContainer}>
+            {website && <div className={styles.iconContainer}>
                 <img src={iconContract} className={styles.icon} />
-                <p className={styles.title}>Website</p>
-            </div>
+                <a href={website} url={website} className={styles.link}>
+                    <p className={styles.title}>Website</p>
+                </a>
+            </div>}
         </div>
     )
 };
