@@ -82,3 +82,10 @@
     background-color: grey;
     border-radius: 0.5rem;
 }
+
+    // Small screen
+@media (max-width: 900px) {
+    .container {
+        justify-content: center;
+    }
+}

@@ -5,7 +5,8 @@ import styles from "./CommandPallet.module.scss";
 
 const CommandPallet = ({ website }) => {
     const queryParameters = new URLSearchParams(window.location.search);
-    const isOrder = queryParameters.get("order");
+    const queryOrder = queryParameters.get("order");
+    const isOrder = queryOrder === "true" ? true : false;
     const id = queryParameters.get("id");
 
     return (

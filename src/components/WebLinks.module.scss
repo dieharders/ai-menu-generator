@@ -24,9 +24,15 @@
     display: block;
     position: relative;
     color: var(--light);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     padding: 0;
     margin: auto;
     margin-bottom: 1rem;
+    text-align: center;
+}
+
+.companyTitle {
+    font-size: 1.5rem;
+    color: var(--light);
     text-align: center;
 }

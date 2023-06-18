@@ -3,7 +3,7 @@ import WebLinks from "./WebLinks";
 import styles from "./Footer.module.scss";
 
 const Footer = ({data}) => {
-    const origin = 'https://image-menu.vercel.app';
+    const origin = 'https://idish.app';
     const link = `${origin}/?id=${data?.companyId}`;
 
     return (
