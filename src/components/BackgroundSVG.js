@@ -1,9 +1,7 @@
 import styles from './BackgroundSVG.module.scss';
 
-const BackgroundSVG = ({children}) => {
-    return <div className={styles.background}>
-        {children}
-    </div>;
+const BackgroundSVG = () => {
+    return <div className={styles.background}></div>;
 };
 
 export default BackgroundSVG;

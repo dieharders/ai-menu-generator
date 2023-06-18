@@ -9,7 +9,6 @@
     padding: 0;
     background: #191A1C;
     z-index: -1;
-    // background-repeat: repeat; // is this it??
 }
 
 .background::after {
@@ -20,10 +19,11 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background-image: url(../assets/icons/logo-box.svg);
-    background-size: 7.5rem 3.75rem;
+    background-image: url(../assets/icons/logo-pizza-black.png);
+    background-size: 8rem 8rem;
     background-position: round;
     z-index: -3;
+    filter: opacity(0.1);
 }
 
 .background::before {
@@ -31,13 +31,14 @@
     position: absolute;
     content: '';
     margin: 0;
-    margin-left: -3.75rem;
-    margin-top: -1.75rem;
+    margin-left: -4rem;
+    margin-top: -4rem;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    background-image: url(../assets/icons/logo-box.svg);
-    background-size: 7.5rem 3.75rem;
+    background-image: url(../assets/icons/logo-pizza-black.png);
+    background-size: 8rem 8rem;
     z-index: -2;
+    filter: opacity(0.15);
 }
