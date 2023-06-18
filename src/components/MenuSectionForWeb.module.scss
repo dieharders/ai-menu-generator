@@ -24,6 +24,7 @@
 
 .heading {
     color: var(--primary);
+    font-size: 2rem;
     margin: auto;
     margin-top: 1.5rem;
     margin-bottom: 3rem;
@@ -33,12 +34,14 @@
 .name {
     color: var(--secondary);
     margin: 0;
+    word-wrap: break-word;
 }
 
 .description {
     color: black;
     flex: 1 1 100%;
     margin: 0.75rem 0 0;
+    word-wrap: break-word;
 }
 
 .price {
@@ -52,6 +55,8 @@
     display: block;
     width: 10rem;
     height: 10rem;
+    min-width: 10rem;
+    min-height: 10rem;
     margin: auto;
     margin-right: 0;
     padding: 0.5rem;
