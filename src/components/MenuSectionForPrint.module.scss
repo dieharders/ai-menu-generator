@@ -8,7 +8,7 @@
 
 // Select all .container except last one
 .itemsContainer > :not(:last-child) {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .container {
@@ -17,6 +17,7 @@
     align-items: center;
     justify-content: space-between;
     width: 30rem;
+    height: 14rem;
     padding: 0;
     // To render as a card
     // border-radius: 1rem;
@@ -25,19 +26,23 @@
 }
 
 .textContainer {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
     height: 100%;
-    width: 75%;
-    padding: 1rem;
-    padding-left: 0;
+    width: 100%;
+    padding: 0;
+    padding-right: 1rem;
+    margin: auto;
+    justify-content: center;
+    
 }
 
 .heading {
     color: var(--primary);
     font-size: 2rem;
     margin: auto;
-    margin-top: 1.5rem;
+    margin-top: 3rem;
     margin-bottom: 3rem;
     border-bottom: 0.1rem solid var(--secondary);
 }
@@ -45,30 +50,35 @@
 .name {
     color: var(--secondary);
     margin: 0;
+    font-size: 1.5rem;
+    word-break: break-all;
 }
 
 .description {
     color: black;
-    flex: 1 1 100%;
-    margin: 0.75rem 0 0;
+    // flex: 1;
+    margin: 0;
+    margin-top: 0.75rem;
+    word-break: break-all;
 }
 
 .price {
     display: block;
     position: relative;
     margin-top: 1rem;
+    font-size: 1.25rem;
+    word-break: break-all;
 }
 
 .imageContainer {
     position: relative;
     display: block;
-    width: 14rem;
-    height: 14rem;
+    height: 100%;
     min-width: 14rem;
     min-height: 14rem;
     margin: auto;
     margin-right: 0;
-    padding: 0.5rem;
+    padding: 0;
     border-style: hidden;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -83,7 +93,7 @@
     border-radius: 0.5rem;
 }
 
-    // Small screen
+// Small screen
 @media (max-width: 900px) {
     .container {
         justify-content: center;
