@@ -33,12 +33,12 @@ const CommandPallet = ({ website }) => {
                 <img src={iconPrinter} className={styles.icon} />
                 <p className={styles.title}>Print Version</p>
             </a>
-            {website && <div className={styles.iconContainer}>
-                <img src={iconContract} className={styles.icon} />
-                <a href={website} url={website} className={styles.link}>
+            {website && (
+                <a href={website} className={[styles.iconContainer, styles.link].join(' ')}>
+                    <img src={iconContract} className={styles.icon} />
                     <p className={styles.title}>Website</p>
                 </a>
-            </div>}
+            )}
         </div>
     )
 };
