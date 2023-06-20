@@ -9,6 +9,10 @@
     padding: 0;
     background: #191A1C;
     z-index: -1;
+    // puts initial image off-screen
+    background-position-x: 100vw;
+    background-position-y: 100vh;
+    background-repeat: no-repeat;
 }
 
 .background::after {
@@ -19,11 +23,11 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background-image: url(../assets/icons/logo-pizza-black.png);
+    background-image: inherit;
+    // background-image: url(../assets/icons/logo-pizza.svg);
     background-size: 8rem 8rem;
     background-position: round;
     z-index: -3;
-    filter: opacity(0.1);
 }
 
 .background::before {
@@ -37,8 +41,9 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background-image: url(../assets/icons/logo-pizza-black.png);
+    background-image: inherit;
+    // background-image: url(../assets/icons/logo-pizza.svg);
     background-size: 8rem 8rem;
     z-index: -2;
-    filter: opacity(0.15);
+    filter: brightness(0.87);
 }
