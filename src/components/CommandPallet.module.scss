@@ -2,7 +2,6 @@
     position: relative;
     display: flex;
     width: 100%;
-    height: 6rem;
     margin: auto;
     margin-top: 1.5rem;
 }
@@ -11,6 +10,7 @@
     position: relative;
     display: inline-block;
     margin: auto;
+    padding: 0;
     background-color: rgba(0,0,0,0);
     border-style: none;
     cursor: pointer;
@@ -32,8 +32,16 @@
     color: black;
     text-align: center;
     font-size: 1rem;
+    margin-bottom: 0;
 }
 
 .link {
     text-decoration: none;
+}
+
+// Small screen
+@media (max-width: 900px) {
+    .container {
+        margin-top: auto;
+    }
 }

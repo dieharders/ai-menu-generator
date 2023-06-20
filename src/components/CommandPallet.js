@@ -1,21 +1,35 @@
-import iconPriceTag from '../assets/icons/icon-price-tag.svg';
+import { useEffect, useState } from 'react';
+// import iconPriceTag from '../assets/icons/icon-price-tag.svg';
 import iconPrinter from '../assets/icons/icon-printer.svg';
 import iconContract from '../assets/icons/icon-contract.svg';
 import styles from "./CommandPallet.module.scss";
 
 const CommandPallet = ({ website }) => {
-    const queryParameters = new URLSearchParams(window.location.search);
-    const queryOrder = queryParameters.get("order");
-    const isOrder = queryOrder === "true" ? true : false;
-    const id = queryParameters.get("id");
+    const printParams = new URLSearchParams(window.location.search);
+    const [printUrl, setPrintUrl] = useState();
+    // const orderParams = new URLSearchParams(window.location.search);
+    // const [orderUrl, setOrderUrl] = useState();
+
+    useEffect(() => {
+        printParams.set("print", true);
+        const query = printParams.toString();
+        setPrintUrl(`${window.location.origin}/?${query}`);
+    }, []);
+
+    // useEffect(() => {
+    //     const orderValue = orderParams.get("order");
+    //     orderParams.set("order", !orderValue);
+    //     const query = orderParams.toString();
+    //     setOrderUrl(`${window.location.origin}/?${query}`);
+    // }, []);
 
     return (
         <div className={styles.container}>
-            {/* <a href={`${window.location.origin}/?id=${id}&order=${!isOrder}`} className={styles.iconContainer}>
+            {/* <a href={orderUrl} className={styles.iconContainer}>
                 <img src={iconPriceTag} className={styles.icon} />
                 <p className={styles.title}>Order</p>
             </a> */}
-            <a href={`${window.location.origin}/?id=${id}&print=true`} className={styles.iconContainer}>
+            <a href={printUrl} className={styles.iconContainer}>
                 <img src={iconPrinter} className={styles.icon} />
                 <p className={styles.title}>Print Version</p>
             </a>
