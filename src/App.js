@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Provider } from "./Context";
 import Home from "./components/Home";
 import MenuPageForWeb from "./components/MenuPageForWeb";
@@ -14,8 +14,15 @@ export default function App() {
   const language = queryParameters.get("lang") || "en";
   const isPrint = queryParameters.get("print") === 'true';
   const company = companies?.find(item => item.companyId === companyId);
-  const data = translate(company, language);
+  const [data, setData] = useState(null);
+  const selectedLang = useRef(null);
 
+  useEffect(() => {
+    if (data || selectedLang.current === language || !company) return;
+    setData(translate(company, language));
+    selectedLang.current = language;
+  }, [])
+  
   useEffect(() => {
     if (!company?.color) return;
 

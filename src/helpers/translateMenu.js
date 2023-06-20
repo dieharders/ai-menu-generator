@@ -2,6 +2,12 @@ const translateMenu = (companyData, lang) => {
     const menu = companyData?.menu;
     const englishMenu = menu?.en;
     const targetLanguage = menu?.[lang];
+
+    if (!targetLanguage) {
+        console.error('No target language available!');
+        return companyData;
+    }
+
     try {
         let newMenu = {};
         Object.entries(targetLanguage)?.forEach(([sectionTitle, section], index) => {
@@ -16,7 +22,7 @@ const translateMenu = (companyData, lang) => {
         const parsedData = { ...companyData, menu: newMenu };
         return parsedData;
     } catch(err) {
-        console.log('Error translating!', err);
+        console.error('Error translating!', err);
     };
 };
 
