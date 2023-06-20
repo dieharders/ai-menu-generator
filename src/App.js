@@ -4,14 +4,17 @@ import Home from "./components/Home";
 import MenuPageForWeb from "./components/MenuPageForWeb";
 import MenuPageForPrint from './components/MenuPageForPrint';
 import companies from "./data.json";
-import styles from "./App.module.scss";
 import Background from "./components/BackgroundSVG";
+import translate from "./helpers/translateMenu";
+import styles from "./App.module.scss";
 
 export default function App() {
   const queryParameters = new URLSearchParams(window.location.search);
   const companyId = queryParameters.get("id");
+  const language = queryParameters.get("lang") || "en";
   const isPrint = queryParameters.get("print") === 'true';
   const company = companies?.find(item => item.companyId === companyId);
+  const data = translate(company, language);
 
   useEffect(() => {
     if (!company?.color) return;
@@ -42,8 +45,8 @@ export default function App() {
   return (
     <Provider className={styles}>
       <Background />
-      {companyId && isPrint && <MenuPageForPrint data={company} />}
-      {companyId && !isPrint && <MenuPageForWeb data={company} />}
+      {companyId && isPrint && <MenuPageForPrint data={data} />}
+      {companyId && !isPrint && <MenuPageForWeb data={data} />}
       {!companyId && <Home />}
     </Provider>
   );

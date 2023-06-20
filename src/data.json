@@ -135,122 +135,404 @@
     "color": 60,
     "bannerImage": "wolfhoundbar.png",
     "menu": {
-      "Beer": [
-        {
-          "name": "Racer 5",
-          "price": "9",
-          "category": "beer",
-          "image": "beer-racer-5.png",
-          "description": "This hoppy American IPA is a full-bodied beer."
-        },
-        {
-          "name": "Drakes 1500",
-          "price": "8",
-          "category": "beer",
-          "image": "beer-1500.png",
-          "description": "California- American Pale Ale- GABF Silver Medal 2008."
-        },
-        {
-          "name": "DUCHESSE DE BOURGOGNE",
-          "price": "10",
-          "category": "beer",
-          "image": "beer-duchesse-de-bourgogne.jpeg",
-          "description": "A traditional top-fermented reddish-brown ale from Belgium 9oz."
-        },
-        {
-          "name": "Schilling Cider",
-          "price": "9",
-          "category": "beer",
-          "image": "beer-semi-sweet.png",
-          "description": "Washington- Cider, Balanced, Dry & Sweet - 5.2% ABV."
-        },
-        {
-          "name": "Scrimshaw Pilsner",
-          "price": "7",
-          "category": "beer",
-          "image": "beer-scrimshaw.jpeg",
-          "description": "California- German Pilsner- 4.5% ABV."
-        },
-        {
-          "name": "ANCHOR STEAM",
-          "price": "9",
-          "category": "beer",
-          "image": "beer-anchor-steam.jpeg",
-          "description": "California- California Common/Steam Beer- 4.9% ABV."
-        },
-        {
-          "name": "BURNING RAM CLUB CANYON Kölsch",
-          "price": "8",
-          "category": "beer",
-          "image": "beer-burning-ram-kolsch.jpg",
-          "description": "Moraga's finest Burning Ram Canyon Club Brewery Kölsch."
-        },
-        {
-          "name": "ORIGINAL PATTERN",
-          "price": "9",
-          "category": "beer",
-          "image": "beer-original-pattern.jpg",
-          "description": "Pineapple, pine, Cashmere, Centennial, Simcoe hops - 6.5%"
-        },
-        {
-          "name": "LOST COAST BLONDE ALE",
-          "price": "5",
-          "category": "beer",
-          "image": "beer-lost-coast.jpg",
-          "description": "USA- American-Style Blonde Ale- 4.7% Eureka, California"
-        }
-      ],
-      "Cocktails": [
-        {
-          "name": "Wolfhound 75",
-          "price": "11",
-          "category": "cocktails",
-          "image": "cocktail-wolfhound-75.png",
-          "description": "Plymouth Gin, Elderflower liqueur, Fresh squeezed grapefruit juice, topped with prosecco."
-        },
-        {
-          "name": "The Liberal",
-          "price": "11",
-          "category": "cocktails",
-          "image": "cocktail-the-liberal.png",
-          "description": "Bourbon, China China, Sweet Vermouth, Bitters"
-        },
-        {
-          "name": "Fire in the Hound",
-          "price": "11",
-          "category": "cocktails",
-          "image": "cocktail-fire-in-the-hound.png",
-          "description": "Mezcal, aperol, yellow chartreuse, lime, grapefruit bitters."
-        },
-        {
-          "name": "Smoky Hound",
-          "price": "11",
-          "category": "cocktails",
-          "image": "cocktail-smoky-hound.png",
-          "description": "Mezcal, cherry heering, Chile ancho liqueur, lime."
-        },
-        {
-          "name": "Paper Plane",
-          "price": "11",
-          "category": "cocktails",
-          "image": "cocktail-paper-plane.png",
-          "description": "Bourbon, aperol, Amaro nonino, lemon juice."
-        },
-        {
-          "name": "Our Margarita",
-          "price": "11",
-          "category": "cocktails",
-          "image": "cocktail-our-margarita.png",
-          "description": "Tequila, punt e mes, lime, Simple syrup, orange bitters."
-        },
-        {
-          "name": "Hemmingway",
-          "price": "11",
-          "category": "cocktails",
-          "image": "cocktail-hemmingway.png",
-          "description": "White rum, elderflower liqueur, lime, fresh grapefruit juice"
-        }
-      ]
+      "en": {
+        "Beer": [
+          {
+            "name": "Racer 5",
+            "price": "9",
+            "category": "beer",
+            "image": "beer-racer-5.png",
+            "description": "This hoppy American IPA is a full-bodied beer."
+          },
+          {
+            "name": "Drakes 1500",
+            "price": "8",
+            "category": "beer",
+            "image": "beer-1500.png",
+            "description": "California- American Pale Ale- GABF Silver Medal 2008."
+          },
+          {
+            "name": "DUCHESSE DE BOURGOGNE",
+            "price": "10",
+            "category": "beer",
+            "image": "beer-duchesse-de-bourgogne.jpeg",
+            "description": "A traditional top-fermented reddish-brown ale from Belgium 9oz."
+          },
+          {
+            "name": "Schilling Cider",
+            "price": "9",
+            "category": "beer",
+            "image": "beer-semi-sweet.png",
+            "description": "Washington- Cider, Balanced, Dry & Sweet - 5.2% ABV."
+          },
+          {
+            "name": "Scrimshaw Pilsner",
+            "price": "7",
+            "category": "beer",
+            "image": "beer-scrimshaw.jpeg",
+            "description": "California- German Pilsner- 4.5% ABV."
+          },
+          {
+            "name": "ANCHOR STEAM",
+            "price": "9",
+            "category": "beer",
+            "image": "beer-anchor-steam.jpeg",
+            "description": "California- California Common/Steam Beer- 4.9% ABV."
+          },
+          {
+            "name": "BURNING RAM CLUB CANYON Kölsch",
+            "price": "8",
+            "category": "beer",
+            "image": "beer-burning-ram-kolsch.jpg",
+            "description": "Moraga's finest Burning Ram Canyon Club Brewery Kölsch."
+          },
+          {
+            "name": "ORIGINAL PATTERN",
+            "price": "9",
+            "category": "beer",
+            "image": "beer-original-pattern.jpg",
+            "description": "Pineapple, pine, Cashmere, Centennial, Simcoe hops - 6.5%"
+          },
+          {
+            "name": "LOST COAST BLONDE ALE",
+            "price": "5",
+            "category": "beer",
+            "image": "beer-lost-coast.jpg",
+            "description": "USA- American-Style Blonde Ale- 4.7% Eureka, California"
+          }
+        ],
+        "Cocktails": [
+          {
+            "name": "Wolfhound 75",
+            "price": "11",
+            "category": "cocktails",
+            "image": "cocktail-wolfhound-75.png",
+            "description": "Plymouth Gin, Elderflower liqueur, Fresh squeezed grapefruit juice, topped with prosecco."
+          },
+          {
+            "name": "The Liberal",
+            "price": "11",
+            "category": "cocktails",
+            "image": "cocktail-the-liberal.png",
+            "description": "Bourbon, China China, Sweet Vermouth, Bitters"
+          },
+          {
+            "name": "Fire in the Hound",
+            "price": "11",
+            "category": "cocktails",
+            "image": "cocktail-fire-in-the-hound.png",
+            "description": "Mezcal, aperol, yellow chartreuse, lime, grapefruit bitters."
+          },
+          {
+            "name": "Smoky Hound",
+            "price": "11",
+            "category": "cocktails",
+            "image": "cocktail-smoky-hound.png",
+            "description": "Mezcal, cherry heering, Chile ancho liqueur, lime."
+          },
+          {
+            "name": "Paper Plane",
+            "price": "11",
+            "category": "cocktails",
+            "image": "cocktail-paper-plane.png",
+            "description": "Bourbon, aperol, Amaro nonino, lemon juice."
+          },
+          {
+            "name": "Our Margarita",
+            "price": "11",
+            "category": "cocktails",
+            "image": "cocktail-our-margarita.png",
+            "description": "Tequila, punt e mes, lime, Simple syrup, orange bitters."
+          },
+          {
+            "name": "Hemmingway",
+            "price": "11",
+            "category": "cocktails",
+            "image": "cocktail-hemmingway.png",
+            "description": "White rum, elderflower liqueur, lime, fresh grapefruit juice"
+          }
+        ]
+      },
+      "fr": {
+        "Bières": [
+          {
+            "name": "Racer 5",
+            "description": "Cette IPA américaine houblonnée est une bière corsée."
+          },
+          {
+            "name": "Drakes 1500",
+            "description": "California- American Pale Ale- Médaille d'argent GABF 2008."
+          },
+          {
+            "name": "DUCHESSE DE BOURGOGNE",
+            "description": "Une traditionnelle bière ambrée à fermentation haute de Belgique - 9 oz."
+          },
+          {
+            "name": "Schilling Cider",
+            "description": "Washington- Cidre équilibré, sec et doux - 5,2% d'ABV."
+          },
+          {
+            "name": "Scrimshaw Pilsner",
+            "description": "California- Pilsner allemand - 4,5% d'ABV."
+          },
+          {
+            "name": "ANCHOR STEAM",
+            "description": "California- California Common/Steam Beer - 4,9% d'ABV."
+          },
+          {
+            "name": "BURNING RAM CLUB CANYON Kölsch",
+            "description": "La meilleure Kölsch de la brasserie Burning Ram Canyon de Moraga."
+          },
+          {
+            "name": "ORIGINAL PATTERN",
+            "description": "Ananas, pin, houblons de Cashmere, Centennial et Simcoe - 6,5% d'ABV."
+          },
+          {
+            "name": "LOST COAST BLONDE ALE",
+            "description": "USA- Bière blonde de style américain - 4,7% Eureka, Californie."
+          }
+        ],
+        "Cocktails": [
+          {
+            "name": "Wolfhound 75",
+            "description": "Gin Plymouth, liqueur de fleur de sureau, jus de pamplemousse fraîchement pressé, surmonté de prosecco."
+          },
+          {
+            "name": "The Liberal",
+            "description": "Bourbon, China China, Sweet Vermouth, Bitters"
+          },
+          {
+            "name": "Fire in the Hound",
+            "description": "Mezcal, aperol, yellow chartreuse, lime, grapefruit bitters."
+          },
+          {
+            "name": "Smoky Hound",
+            "description": "Mezcal, cherry heering, Chile ancho liqueur, lime."
+          },
+          {
+            "name": "Paper Plane",
+            "description": "Bourbon, aperol, Amaro nonino, lemon juice."
+          },
+          {
+            "name": "Our Margarita",
+            "description": "Tequila, pint e mes, lime, Simple syrup, orange bitters."
+          },
+          {
+            "name": "Hemmingway",
+            "description": "White rum, elderflower liqueur, lime, fresh grapefruit juice"
+          }
+        ]
+      },
+      "de": {
+        "Biere": [
+          {
+            "name": "Racer 5",
+            "description": "Dieses hopfige American IPA ist ein vollmundiges Bier."
+          },
+          {
+            "name": "Drakes 1500",
+            "description": "Kalifornien- American Pale Ale- GABF Silbermedaille 2008."
+          },
+          {
+            "name": "DUCHESSE DE BOURGOGNE",
+            "description": "Ein traditionelles obergäriges rotbraunes Ale aus Belgien - 9 oz."
+          },
+          {
+            "name": "Schilling Cider",
+            "description": "Washington- Cider, ausgewogen, trocken & süß - 5.2% Alkoholgehalt."
+          },
+          {
+            "name": "Scrimshaw Pilsner",
+            "description": "Kalifornien- Deutsches Pilsner- 4.5% Alkoholgehalt."
+          },
+          {
+            "name": "ANCHOR STEAM",
+            "description": "Kalifornien- California Common/Steam Beer- 4.9% Alkoholgehalt."
+          },
+          {
+            "name": "BURNING RAM CLUB CANYON Kölsch",
+            "description": "Die beste Kölsch von der Burning Ram Canyon Brauerei in Moraga."
+          },
+          {
+            "name": "ORIGINAL PATTERN",
+            "description": "Ananas, Kiefer, Cashmere, Centennial, Simcoe Hopfen - 6.5% Alkoholgehalt."
+          },
+          {
+            "name": "LOST COAST BLONDE ALE",
+            "description": "USA- Amerikanisches Blond Ale- 4.7% Eureka, Kalifornien"
+          }
+        ],
+        "Cocktails": [
+          {
+            "name": "Wolfhound 75",
+            "description": "Plymouth Gin, Holunderblütenlikör, frisch gepresster Grapefruitsaft, mit Prosecco verfeinert."
+          },
+          {
+            "name": "The Liberal",
+            "description": "Bourbon, China China, süßer Wermut, Bitter"
+          },
+          {
+            "name": "Fire in the Hound",
+            "description": "Mezcal, Aperol, gelber Chartreuse, Limette, Grapefruit-Bitter."
+          },
+          {
+            "name": "Smoky Hound",
+            "description": "Mezcal, Cherry Heering, Chile Ancho Likör, Limette."
+          },
+          {
+            "name": "Paper Plane",
+            "description": "Bourbon, Aperol, Amaro Nonino, Zitronensaft."
+          },
+          {
+            "name": "Our Margarita",
+            "description": "Tequila, Punt e Mes, Limette, einfacher Sirup, Orangenbitter."
+          },
+          {
+            "name": "Hemmingway",
+            "description": "Weißer Rum, Holunderblütenlikör, Limette, frischer Grapefruitsaft"
+          }
+        ]
+      },
+      "es": {
+        "Cervezas": [
+          {
+            "name": "Racer 5",
+            "description": "Esta IPA americana lupulada es una cerveza de cuerpo completo."
+          },
+          {
+            "name": "Drakes 1500",
+            "description": "California- American Pale Ale- Medalla de Plata GABF 2008."
+          },
+          {
+            "name": "DUCHESSE DE BOURGOGNE",
+            "description": "Una tradicional cerveza de fermentación alta de color rojizo-marrón de Bélgica 9 oz."
+          },
+          {
+            "name": "Schilling Cider",
+            "description": "Washington- Sidra equilibrada, seca y dulce - 5.2% ABV."
+          },
+          {
+            "name": "Scrimshaw Pilsner",
+            "description": "California- Pilsner alemán - 4.5% ABV."
+          },
+          {
+            "name": "ANCHOR STEAM",
+            "description": "California- California Common/Steam Beer - 4.9% ABV."
+          },
+          {
+            "name": "BURNING RAM CLUB CANYON Kölsch",
+            "description": "La mejor Kölsch de la cervecería Burning Ram Canyon de Moraga."
+          },
+          {
+            "name": "ORIGINAL PATTERN",
+            "description": "Piña, pino, lúpulos Cashmere, Centennial y Simcoe - 6.5% ABV."
+          },
+          {
+            "name": "LOST COAST BLONDE ALE",
+            "description": "USA- American-Style Blonde Ale- 4.7% Eureka, California"
+          }
+        ],
+        "Cócteles": [
+          {
+            "name": "Wolfhound 75",
+            "description": "Gin Plymouth, licor de flor de saúco, zumo de pomelo recién exprimido, coronado con prosecco."
+          },
+          {
+            "name": "The Liberal",
+            "description": "Bourbon, China China, Vermut dulce, Bíteres"
+          },
+          {
+            "name": "Fire in the Hound",
+            "description": "Mezcal, aperol, chartreuse amarillo, lima, bíteres de pomelo."
+          },
+          {
+            "name": "Smoky Hound",
+            "description": "Mezcal, cherry heering, licor de ancho chile, lima."
+          },
+          {
+            "name": "Paper Plane",
+            "description": "Bourbon, aperol, Amaro nonino, jugo de limón."
+          },
+          {
+            "name": "Our Margarita",
+            "description": "Tequila, punt e mes, lima, jarabe simple, bíteres de naranja."
+          },
+          {
+            "name": "Hemmingway",
+            "description": "Ron blanco, licor de flor de saúco, lima, zumo de pomelo fresco."
+          }
+        ]
+      },
+      "ru": {
+        "Пиво": [
+          {
+            "name": "Racer 5",
+            "description": "Этот хмельной американский IPA - плотное пиво."
+          },
+          {
+            "name": "Drakes 1500",
+            "description": "Калифорния - Американское пэйл эль - серебряная медаль GABF 2008 года."
+          },
+          {
+            "name": "DUCHESSE DE BOURGOGNE",
+            "description": "Традиционное верховое рыже-коричневое пиво из Бельгии объемом 9 унций."
+          },
+          {
+            "name": "Schilling Cider",
+            "description": "Вашингтон - Сидр, сбалансированный, сухой и сладкий - 5.2% ABV."
+          },
+          {
+            "name": "Scrimshaw Pilsner",
+            "description": "Калифорния - Немецкий пилснер - 4.5% ABV."
+          },
+          {
+            "name": "ANCHOR STEAM",
+            "description": "Калифорния - Калифорнийское коммон/стим-пиво - 4.9% ABV."
+          },
+          {
+            "name": "BURNING RAM CLUB CANYON Kölsch",
+            "description": "Лучший Кельш из пивоварни Burning Ram Canyon в Морага."
+          },
+          {
+            "name": "ORIGINAL PATTERN",
+            "description": "Ананас, хвоя, хмели Cashmere, Centennial, Simcoe - 6.5% ABV."
+          },
+          {
+            "name": "LOST COAST BLONDE ALE",
+            "description": "США - Американский блонд эль - 4.7% ABV, Эврика, Калифорния"
+          }
+        ],
+        "Коктейли": [
+          {
+            "name": "Wolfhound 75",
+            "description": "Plymouth Gin, ликер из бузины, свежевыжатый грейпфрутовый сок, украшенный просекко."
+          },
+          {
+            "name": "The Liberal",
+            "description": "Бурбон, Китай-Китай, сладкий вермут, биттер."
+          },
+          {
+            "name": "Fire in the Hound",
+            "description": "Мескаль, апероль, желтый шартрез, лайм, грейпфрутовый биттер."
+          },
+          {
+            "name": "Smoky Hound",
+            "description": "Мескаль, вишневый ликер, ликер из анчо-чили, лайм."
+          },
+          {
+            "name": "Paper Plane",
+            "description": "Бурбон, апероль, Амаро нонино, лимонный сок."
+          },
+          {
+            "name": "Our Margarita",
+            "description": "Текила, пунт э мес, лайм, простой сироп, апельсиновый биттер."
+          },
+          {
+            "name": "Hemmingway",
+            "description": "Белый ром, ликер из бузины, лайм, свежевыжатый грейпфрутовый сок"
+          }
+        ]
+      }
     }
   }
 ]

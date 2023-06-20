@@ -1,0 +1,15 @@
+.container {
+    display: block;
+    position: sticky;
+    top: 0;
+    width: max-content;
+    height: max-content;
+    border-radius: 0.5rem;
+    margin: auto;
+    margin-bottom: 1rem;
+    margin-left: 0;
+    padding: 0.5rem;
+    color: var(--light);
+    background-color: var(--background);
+    z-index: 1000;
+}
