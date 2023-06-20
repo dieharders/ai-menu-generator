@@ -1,7 +1,7 @@
 .container {
     display: block;
-    position: sticky;
     width: max-content;
+    min-width: 12rem;
     height: max-content;
     border-radius: 0.5rem;
     margin: auto;
@@ -9,5 +9,19 @@
     padding: 0.5rem;
     color: var(--light);
     background-color: var(--secondary);
-    z-index: 100;
+}
+
+.langLabel {
+    display: inline-block;
+    position: relative;
+    margin-right: 0.5rem;
+}
+
+.selection {
+    display: inline-block;
+    position: relative;
+    width: 50%;
+    margin: auto;
+    margin-right: 0;
+    padding: 0.15rem;
 }

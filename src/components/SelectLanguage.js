@@ -15,8 +15,8 @@ const SelectLanguage = ({ onAction }) => {
 
     return (
         <form onChange={onAction || onLangSelection} className={styles.container}>
-            <label>Language: </label>
-            <select id="languages" name="languages" defaultValue={language}>
+            <label className={styles.langLabel}>Language: </label>
+            <select id="languages" name="languages" defaultValue={language} className={styles.selection}>
                 <option value="en">English</option>
                 <option value="de">German</option>
                 <option value="fr">French</option>
