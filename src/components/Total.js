@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import { Context } from "../Context";
 import data from "../data";
+import SelectLanguage from "./SelectLanguage";
 import styles from "./Total.module.scss";
 
 export default function Total({hasOrderInput}) {
+  const queryParameters = new URLSearchParams(window.location.search);
+  const isPrint = queryParameters.get("print");
   const isOrder = hasOrderInput === 'true';
   const [items] = useContext(Context);
 
@@ -16,6 +19,7 @@ export default function Total({hasOrderInput}) {
 
   return (
     <div className={styles.total}>
+      {!isPrint && <SelectLanguage />}
       {isOrder && <span className={styles.totalTitle}>Total:</span>}
       {isOrder && <span className={styles.totalPrice}>${totalPrice}</span>}
     </div>
