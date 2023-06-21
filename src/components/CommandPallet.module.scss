@@ -3,7 +3,7 @@
     display: flex;
     width: 100%;
     margin: auto;
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
 }
 
 .iconContainer {
@@ -37,11 +37,4 @@
 
 .link {
     text-decoration: none;
-}
-
-// Small screen
-@media (max-width: 900px) {
-    .container {
-        margin-top: auto;
-    }
 }

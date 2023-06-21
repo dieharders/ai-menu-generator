@@ -13,12 +13,17 @@ const MenuPageForWeb = ({ data }) => {
     };
 
     return (
-      <div className={styles.page}>
-        <Banner title={data?.companyName} backgroundURL={data?.bannerImage} />
-        <CommandPallet website={data?.website} />
-        {renderSections(data?.menu, renderSection)}
-        <Total hasOrderInput={isOrderMenuVariant} />
-      </div>
+      <>
+        <div className={styles.bannerPage}>
+          <Banner title={data?.companyName} backgroundURL={data?.bannerImage}>
+            <CommandPallet website={data?.website} />
+          </Banner>
+        </div>
+        <div className={styles.page}>
+          {renderSections(data?.menu, renderSection)}
+          <Total hasOrderInput={isOrderMenuVariant} />
+        </div>
+      </>
     );
 }
 

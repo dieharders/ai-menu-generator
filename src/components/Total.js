@@ -21,7 +21,7 @@ export default function Total({hasOrderInput}) {
   return (
     <div className={styles.total}>
       {!isPrint && <SelectLanguage />}
-      <div className={styles.searchContainer}><SearchBar /></div>
+      {!isPrint && <div className={styles.searchContainer}><SearchBar /></div>}
       {isOrder && <span className={styles.totalTitle}>Total:</span>}
       {isOrder && <span className={styles.totalPrice}>${totalPrice}</span>}
     </div>

@@ -11,12 +11,16 @@ const MenuPageForPrint = ({ data }) => {
     };
 
     return (
-      <div className={styles.page}>
-        <Banner title={data?.companyName} backgroundURL={data?.bannerImage} />
-        {renderSections(data?.menu, renderSection)}
-        <Footer data={data} />
-        <Total hasOrderInput={false} />
-      </div>
+      <>
+        <div className={styles.bannerPage}>
+          <Banner title={data?.companyName} backgroundURL={data?.bannerImage} />
+        </div>
+        <div className={styles.page}>
+          {renderSections(data?.menu, renderSection)}
+          <Footer data={data} />
+          <Total hasOrderInput={false} />
+        </div>
+      </>
     );
 }
 
