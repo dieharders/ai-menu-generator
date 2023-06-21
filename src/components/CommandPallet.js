@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 // import iconPriceTag from '../assets/icons/icon-price-tag.svg';
 import iconPrinter from '../assets/icons/icon-print.svg';
-import iconContract from '../assets/icons/icon-contract.svg';
+import iconWebsite from '../assets/icons/icon-website.svg';
 import styles from "./CommandPallet.module.scss";
 
 const CommandPallet = ({ website }) => {
@@ -35,7 +35,7 @@ const CommandPallet = ({ website }) => {
             </a>
             {website && (
                 <a href={website} className={[styles.iconContainer, styles.link].join(' ')}>
-                    <img src={iconContract} className={styles.icon} />
+                    <img src={iconWebsite} className={styles.icon} />
                     <p className={styles.title}>Website</p>
                 </a>
             )}
