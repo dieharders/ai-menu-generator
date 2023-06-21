@@ -24,6 +24,12 @@
     font-size: 1.15rem;
 }
 
+input.inputText:hover {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    filter: brightness(0.9);
+}
+
 input.inputText:focus {
     outline: none;
     border-color: var(--secondary);
@@ -39,8 +45,10 @@ input.inputText:focus {
 }
 
 .submitIcon {
-    // color: rgb(245, 87, 87);
-    color: var(--secondary);
+    // color: hsl(0, 89%, 65%);
+    // color: hsl(44, 89%, 65%);
+    color: var(--primary);
+    // color: var(--secondary);
     margin: auto;
     width: 2rem;
     padding: 0.25rem;
