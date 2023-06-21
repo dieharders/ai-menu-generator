@@ -45,6 +45,9 @@
     margin-top: 3rem;
     margin-bottom: 3rem;
     border-bottom: 0.1rem solid var(--secondary);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .name {
@@ -52,6 +55,7 @@
     margin: 0;
     font-size: 1.5rem;
     word-break: break-all;
+    font-family: var(--font-primary);
 }
 
 .description {
@@ -60,6 +64,7 @@
     margin: 0;
     margin-top: 0.75rem;
     word-break: break-all;
+    font-family: var(--font-primary);
 }
 
 .price {
@@ -68,6 +73,7 @@
     margin-top: 1rem;
     font-size: 1.25rem;
     word-break: break-all;
+    font-family: var(--font-secondary);
 }
 
 .imageContainer {

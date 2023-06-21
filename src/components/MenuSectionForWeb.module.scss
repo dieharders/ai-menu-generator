@@ -31,12 +31,16 @@
     margin-top: 1.5rem;
     margin-bottom: 3rem;
     border-bottom: 0.1rem solid var(--secondary);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .name {
     color: var(--secondary);
     margin: 0;
     word-wrap: break-word;
+    font-family: var(--font-primary);
 }
 
 .description {
@@ -44,6 +48,7 @@
     flex: 1 1 100%;
     margin: 0.75rem 0 0;
     word-wrap: break-word;
+    font-family: var(--font-primary);
 }
 
 .price {
@@ -52,6 +57,7 @@
     margin-top: 1rem;
     margin-right: 1rem;
     word-break: break-all;
+    font-family: var(--font-secondary);
 }
 
 .imageContainer {
