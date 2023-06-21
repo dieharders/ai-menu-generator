@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ReactComponent as FormSubmitSVG } from "../assets/icons/logo-pizza-color.svg";
 import styles from "./SearchBar.module.scss";
 
 const SearchBar = ({ handleSubmit, handleInputChange }) => {
@@ -31,10 +32,12 @@ const SearchBar = ({ handleSubmit, handleInputChange }) => {
                 type="text"
                 value={inputValue}
                 onChange={onChange}
-                placeholder="Company ID"
+                placeholder="Business ID"
                 className={styles.inputText}
             />
-            <button type="submit" className={styles.button}>Submit</button>
+            <button type="submit" name="Find Business" className={styles.button}>
+                <FormSubmitSVG className={styles.submitIcon} />
+            </button>
         </form>
     );
 };

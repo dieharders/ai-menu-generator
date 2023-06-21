@@ -34,6 +34,7 @@
     font-family: var(--font-heading);
     font-weight: 700;
     text-transform: uppercase;
+    word-break: break-all;
 }
 
 .name {
@@ -63,6 +64,8 @@
 .imageContainer {
     position: relative;
     display: block;
+    min-width: 10rem;
+    min-height: 10rem;
     width: 10rem;
     height: 10rem;
     margin: auto;

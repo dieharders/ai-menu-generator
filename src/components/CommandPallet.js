@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import iconPriceTag from '../assets/icons/icon-price-tag.svg';
-import iconPrinter from '../assets/icons/icon-printer.svg';
+import iconPrinter from '../assets/icons/icon-print.svg';
 import iconContract from '../assets/icons/icon-contract.svg';
 import styles from "./CommandPallet.module.scss";
 
