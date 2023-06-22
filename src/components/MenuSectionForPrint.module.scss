@@ -2,13 +2,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 3rem 0;
     justify-content: space-between;
     align-items: center;
-}
-
-// Select all .container except last one
-.itemsContainer > :not(:last-child) {
-    margin-bottom: 3rem;
 }
 
 .container {
@@ -19,6 +15,7 @@
     width: 30rem;
     height: 14rem;
     padding: 0;
+    margin: 0;
     // To render as a card
     // border-radius: 1rem;
     // background-color: lightgray;
@@ -29,7 +26,6 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 100%;
     width: 100%;
     padding: 0;
     padding-right: 1rem;
@@ -56,13 +52,16 @@
     margin: 0;
     font-size: 1.5rem;
     font-family: var(--font-primary);
+    max-height: 4rem;
+    overflow: hidden;
 }
 
 .description {
     color: black;
-    // flex: 1;
+    max-height: 7rem;
     margin: 0;
     margin-top: 0.75rem;
+    overflow: hidden;
     font-family: var(--font-primary);
 }
 
