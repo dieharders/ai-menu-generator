@@ -11,7 +11,8 @@ import styles from "./App.module.scss";
 export default function App() {
   const queryParameters = new URLSearchParams(window.location.search);
   const companyId = queryParameters.get("id");
-  const language = queryParameters.get("lang") || "en";
+  const lang = queryParameters.get("lang");
+  const language = lang === "undefined" ? "en" : lang;
   const isPrint = queryParameters.get("print") === 'true';
   const company = companies?.find(item => item.companyId === companyId);
   const [data, setData] = useState(null);
@@ -21,7 +22,7 @@ export default function App() {
     if (data || selectedLang.current === language || !company) return;
     setData(translate(company, language));
     selectedLang.current = language;
-  }, [])
+  }, []);
   
   useEffect(() => {
     if (!company?.color) return;
@@ -29,11 +30,11 @@ export default function App() {
     // Get color scheme from company data
     const hue = company?.color;
 
-    const primary_sat = '33%';
-    const primary_lit = '24%';
+    const primary_sat = '36%';
+    const primary_lit = '30%';
 
-    const secondary_sat = '30%';
-    const secondary_lit = '34%';
+    const secondary_sat = '33%';
+    const secondary_lit = '36%';
 
     const light_sat = '43%';
     const light_lit = '96%';

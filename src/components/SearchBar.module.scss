@@ -24,6 +24,10 @@
     font-size: 1.15rem;
 }
 
+.inputText::placeholder {
+    color: wheat;
+}
+
 input.inputText:hover {
     background-color: var(--secondary);
     border-color: var(--secondary);
@@ -33,7 +37,6 @@ input.inputText:hover {
 input.inputText:focus {
     outline: none;
     border-color: var(--secondary);
-    color: var(--light);
     background-color: var(--secondary);
 }
 
@@ -45,10 +48,7 @@ input.inputText:focus {
 }
 
 .submitIcon {
-    // color: hsl(0, 89%, 65%);
-    // color: hsl(44, 89%, 65%);
-    color: var(--primary);
-    // color: var(--secondary);
+    color: var(--background);
     margin: auto;
     width: 2rem;
     padding: 0.25rem;

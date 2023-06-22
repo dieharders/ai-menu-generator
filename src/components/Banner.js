@@ -7,7 +7,7 @@ const Banner = ({ title, backgroundURL, children }) => {
 
     return (
         <div className={styles.page}>
-            <div className={styles.container} style={{"backgroundImage": url}}>
+            <div className={styles.container} style={{backgroundImage: url}}>
                 <h1 className={styles.name}>{title}</h1>
             </div>
             {children}

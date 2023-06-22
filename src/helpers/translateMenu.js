@@ -5,7 +5,8 @@ const translateMenu = (companyData, lang) => {
 
     if (!targetLanguage) {
         console.error('No target language available!');
-        return companyData;
+        // Return default menu data
+        return { ...companyData, menu: englishMenu };
     }
 
     try {

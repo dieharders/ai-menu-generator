@@ -10,7 +10,7 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
       <h2 className={styles.heading}>{sectionName}</h2>
       {/* Sections */}
       <div className={styles.itemsContainer}>
-        {items?.map((meal, index) => (
+        {items?.map?.((meal, index) => (
           <article className={styles.container} key={index}>
             <div className={styles.textContainer}>
               {/* Name */}

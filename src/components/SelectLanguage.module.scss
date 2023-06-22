@@ -1,30 +1,55 @@
 .container {
     display: block;
+    position: relative;
     width: max-content;
     min-width: 12rem;
     height: max-content;
-    border-radius: 0.5rem;
     margin: auto;
     margin-left: 0;
     padding: 0.5rem;
     color: var(--light);
     text-align: center;
-    background-color: var(--secondary);
+}
+
+.containerAsButton  {
+    display: block;
+    position: relative;
+    width: max-content;
+    height: max-content;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 0;
+    color: var(--light);
+    text-align: center;
+}
+
+.bgColor {
+    background-color: hsl(0, 0%, 82%);
+    border-radius: 0.25rem;
 }
 
 .langLabel {
     display: inline-block;
     position: relative;
     margin-right: 0.5rem;
+    color: var(--background);
 }
 
 .selection {
     display: inline-block;
     position: relative;
-    width: 50%;
     margin: auto;
     margin-right: 0;
     padding: 0.15rem;
+    font-size: 0.85rem;
+    color: var(--background);
+}
+
+.icon {
+    display: block;
+    margin: auto;
+    padding: 0;
+    height: 2rem;
 }
 
 // Small screen

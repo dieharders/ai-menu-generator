@@ -1,17 +1,21 @@
 .container {
     position: relative;
     display: flex;
+    min-width: 4rem;
     width: 100%;
     margin: auto;
     margin-top: 2.5rem;
+    overflow-x: auto;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 0 2.5rem;
 }
 
 .iconContainer {
     position: relative;
-    display: inline-block;
-    margin: auto;
+    display: block;
+    margin: 0;
     padding: 0;
-    background-color: rgba(0,0,0,0);
     border-style: none;
     cursor: pointer;
     text-decoration: none;
@@ -25,11 +29,15 @@
     border-radius: 1.5rem;
     width: 4rem;
     height: 4rem;
-    background-color: rgb(210, 210, 210);
+    background-color: hsl(0, 0%, 82%);
+}
+
+.icon:hover {
+    background-color: hsl(0, 0%, 70%);
 }
 
 .title {
-    color: black;
+    color: var(--background);
     text-align: center;
     font-size: 1rem;
     margin-bottom: 0;
@@ -37,4 +45,13 @@
 
 .link {
     text-decoration: none;
+}
+
+
+// Small screen
+@media (max-width: 900px) {
+    .container {
+        padding-left: 2.25rem;
+        padding-right: 2.25rem;
+    }
 }
