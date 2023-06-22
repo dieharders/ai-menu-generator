@@ -2,7 +2,7 @@ import { useState } from "react";
 import { getLanguageLabel } from "../helpers/languageCodes";
 import styles from "./SelectLanguage.module.scss";
 
-const SelectLanguage = ({ onAction, showForm }) => {
+const SelectLanguage = ({ onAction, showForm, languages }) => {
     const queryParameters = new URLSearchParams(window.location.search);
     const lang = queryParameters.get("lang");
     const language = lang === "undefined" ? "en" : lang;
@@ -19,14 +19,17 @@ const SelectLanguage = ({ onAction, showForm }) => {
         window.location = newLocation;
     };
 
-    // @TODO Read all available languages from data and only render those options...
+    // Read all available languages from data and only render those options
+    const renderLanguageOptions = (arr) => {
+        return arr?.map(code => {
+            const label = getLanguageLabel(code);
+            return <option key={code} value={code}>{label}</option>;
+        });
+    };
+
     const renderSelection = (
         <select id="languages" name="languages" defaultValue={language} className={styles.selection}>
-            <option value="en">English</option>
-            <option value="de">German</option>
-            <option value="fr">French</option>
-            <option value="es">Spanish</option>
-            <option value="ru">Russian</option>
+            {renderLanguageOptions(languages)}
         </select>
     );
 

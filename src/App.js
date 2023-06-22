@@ -17,8 +17,11 @@ export default function App() {
   const company = companies?.find(item => item.companyId === companyId);
   const [data, setData] = useState(null);
   const selectedLang = useRef(null);
+  // Read available translations
+  const languages = company ? Object.keys(company?.menu) : [];
 
   useEffect(() => {
+    // Set menu data
     if (data || selectedLang.current === language || !company) return;
     setData(translate(company, language));
     selectedLang.current = language;
@@ -54,7 +57,7 @@ export default function App() {
     <Provider className={styles}>
       <Background />
       {companyId && isPrint && <MenuPageForPrint data={data} />}
-      {companyId && !isPrint && <MenuPageForWeb data={data} />}
+      {companyId && !isPrint && <MenuPageForWeb data={data} languages={languages} />}
       {!companyId && <Home />}
     </Provider>
   );

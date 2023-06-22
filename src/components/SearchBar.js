@@ -24,10 +24,10 @@ const SearchBar = ({ handleSubmit, handleInputChange }) => {
         queryParams.set("id", submittedValue);
         // Set the default language. Could include a toggle w/ search bar?
         const lang = queryParams.get("lang");
-        const language = lang === "undefined" ? "en" : lang;
+        const language = (lang || lang !== "undefined") ? lang : "en";
         queryParams.set("lang", language);
         const query = queryParams.toString();
-        window.location.href = `${window.location.origin}/?${query}`
+        window.location.href = `${window.location.origin}/?${query}`;
     }, [submittedValue]);
 
     return (

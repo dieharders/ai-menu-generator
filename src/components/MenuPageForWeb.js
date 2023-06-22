@@ -5,7 +5,7 @@ import Banner from "./Banner";
 import { renderSections } from "../helpers/render";
 import styles from "./MenuPageForWeb.module.scss";
 
-const MenuPageForWeb = ({ data }) => {
+const MenuPageForWeb = ({ data, languages }) => {
     const queryParameters = new URLSearchParams(window.location.search);
     const isOrderMenuVariant = queryParameters.get("order"); // Whether this should track orders
     const renderSection = ({key, val}) => {
@@ -16,7 +16,7 @@ const MenuPageForWeb = ({ data }) => {
       <>
         <div className={styles.bannerPage}>
           <Banner title={data?.companyName} backgroundURL={data?.bannerImage}>
-            <CommandPallet website={data?.website} />
+            <CommandPallet data={data} languages={languages} />
           </Banner>
         </div>
         <div className={styles.page}>

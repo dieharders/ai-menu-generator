@@ -1,7 +1,7 @@
 const languageCodes = {
     en: "English",
-    de: "German",
-    fr: "French",
+    de: "Deutsch",
+    fr: "Français",
     es: "Spanish",
     ru: "Russian"
 };

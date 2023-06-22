@@ -7,11 +7,12 @@ import iconSearch from '../assets/icons/icon-search.svg';
 import iconWebsite from '../assets/icons/icon-website.svg';
 import styles from "./CommandPallet.module.scss";
 
-const CommandPallet = ({ website }) => {
+const CommandPallet = ({ data, languages }) => {
     const printParams = new URLSearchParams(window.location.search);
     const [printUrl, setPrintUrl] = useState();
     // const orderParams = new URLSearchParams(window.location.search);
     // const [orderUrl, setOrderUrl] = useState();
+    const website = data?.website;
 
     useEffect(() => {
         const lang = printParams.get("lang");
@@ -40,7 +41,7 @@ const CommandPallet = ({ website }) => {
             </a>
             <div className={styles.iconContainer}>
                 <img src={iconLanguage} className={styles.icon} />
-                <SelectLanguage />
+                <SelectLanguage languages={languages} />
             </div>
             <a href={window.location.origin} className={styles.iconContainer}>
                 <img src={iconSearch} className={styles.icon} />
