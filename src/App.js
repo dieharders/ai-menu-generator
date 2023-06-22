@@ -6,13 +6,14 @@ import MenuPageForPrint from './components/MenuPageForPrint';
 import companies from "./data.json";
 import Background from "./components/BackgroundSVG";
 import translate from "./helpers/translateMenu";
+import languageCodes from "./helpers/languageCodes";
 import styles from "./App.module.scss";
 
 export default function App() {
   const queryParameters = new URLSearchParams(window.location.search);
   const companyId = queryParameters.get("id");
   const lang = queryParameters.get("lang");
-  const language = lang === "undefined" ? "en" : lang;
+  const language = languageCodes?.[lang] ? lang : "en";
   const isPrint = queryParameters.get("print") === 'true';
   const company = companies?.find(item => item.companyId === companyId);
   const [data, setData] = useState(null);

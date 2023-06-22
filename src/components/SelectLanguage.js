@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { getLanguageLabel } from "../helpers/languageCodes";
+import languageCodes from "../helpers/languageCodes";
 import styles from "./SelectLanguage.module.scss";
 
 const SelectLanguage = ({ onAction, showForm, languages }) => {
     const queryParameters = new URLSearchParams(window.location.search);
     const lang = queryParameters.get("lang");
-    const language = lang === "undefined" ? "en" : lang;
+    const language = languageCodes?.[lang] ? lang : "en";
     const [currentLang, setCurrentLang] = useState();
 
     const onLangSelection = (e) => {

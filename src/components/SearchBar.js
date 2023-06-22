@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ReactComponent as FormSubmitSVG } from "../assets/icons/icon-search.svg";
+import languageCodes from "../helpers/languageCodes";
 import styles from "./SearchBar.module.scss";
 
 const SearchBar = ({ handleSubmit, handleInputChange }) => {
@@ -24,7 +25,7 @@ const SearchBar = ({ handleSubmit, handleInputChange }) => {
         queryParams.set("id", submittedValue);
         // Set the default language. Could include a toggle w/ search bar?
         const lang = queryParams.get("lang");
-        const language = (lang || lang !== "undefined") ? lang : "en";
+        const language = languageCodes?.[lang] ? lang : "en";
         queryParams.set("lang", language);
         const query = queryParams.toString();
         window.location.href = `${window.location.origin}/?${query}`;

@@ -5,6 +5,7 @@ import iconPrinter from '../assets/icons/icon-print.svg';
 import iconLanguage from '../assets/icons/icon-lang.svg';
 import iconSearch from '../assets/icons/icon-search.svg';
 import iconWebsite from '../assets/icons/icon-website.svg';
+import languageCodes from "../helpers/languageCodes";
 import styles from "./CommandPallet.module.scss";
 
 const CommandPallet = ({ data, languages }) => {
@@ -17,7 +18,7 @@ const CommandPallet = ({ data, languages }) => {
     useEffect(() => {
         const lang = printParams.get("lang");
         printParams.set("print", true);
-        if (lang === "undefined") printParams.set("lang", "en");
+        if (!languageCodes?.[lang]) printParams.set("lang", "en");
         const query = printParams.toString();
         setPrintUrl(`${window.location.origin}/?${query}`);
     }, []);
