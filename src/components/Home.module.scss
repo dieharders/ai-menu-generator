@@ -1,10 +1,23 @@
 .container {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
     margin: auto;
+    gap: 4rem;
     padding: 2rem;
     padding-top: 14vh;
     width: 24rem;
+}
+
+.menuContainer {
+    position: relative;
+    display: block;
+    padding: 1rem;
+    border-width: 0.1rem;
+    border-radius: 1rem;
+    border-color: white;
+    border-style: solid;
+    background-color: #191A1C;
 }
 
 .title {
@@ -14,8 +27,16 @@
     margin-bottom: 2rem;
 }
 
+.or {
+    color: var(--light);
+    font-size: 2rem;
+    text-align: center;
+    margin: auto;
+}
+
 .description {
     color: var(--light);
+    font-size: large;
     text-align: center;
     margin-bottom: 2rem;
 }
