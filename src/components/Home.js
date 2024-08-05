@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <div>
-        <h1 className={styles.title}>Foodieee</h1>
+        <h1 className={styles.title}>FoodSee</h1>
         <p className={styles.description}>
           Automatically build accessible food menus for everyone.
         </p>
@@ -18,9 +18,7 @@ const Home = () => {
       <h3 className={styles.or}>OR</h3>
       <div className={styles.menuContainer}>
         <h2 className={styles.title}>Snap a menu</h2>
-        <p className={styles.description}>
-          Upload a picture of a menu to start.
-        </p>
+        <p className={styles.description}>Take a picture of a menu to start.</p>
         <GenerateMenuButton />
       </div>
     </div>

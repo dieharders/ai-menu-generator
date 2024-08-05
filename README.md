@@ -1,6 +1,8 @@
-# Foodieee (Omenu) - An Ai Food Menu Builder
+# FoodSee (Omenu) - An Ai Food Menu Builder
 
 Automatically build accessible food menus for everyone.
+
+Built by OpenBrewAi - https://www.openbrewai.com
 
 ## How it works
 
