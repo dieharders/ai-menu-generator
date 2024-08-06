@@ -12,7 +12,7 @@ Snap a pic of a food menu and Ai will turn that into an interactive version comp
 
 ### Interactive Menu
 
-View the menu digitally as a website or talk to it like a waiter and ask it questions about the menu.
+View the menu digitally as a website or talk to it like a waiter and ask questions about each menu.
 
 ### Pics of Food
 

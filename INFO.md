@@ -133,14 +133,12 @@ Once a menu image is uploaded, we start the build process:
   - https://ai.google.dev/gemini-api/docs/api-overview
   - https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=web
 
-- ❌ First try extracting info, convert to json, store (in memory) and display as web page.
-
 - ❌ Implement Vercel databases (images and json)
 
 - ❌ Load menu data from k/v. Load images from bucket using locations from menu data.
 
-- ❌ Convert existing website to Next.js (openbrew website already has similar setup, use app router)
+- ❌ Convert existing website to Next.js (openbrew website already has similar setup, use app router). Reset all api keys after testing.
 
 - ❌ Create server-side actions for Ai menu creation.
 
-- ❌ Extra: Use firebase for storing/retrieving embeddings?
+- ❌ Extra: Use firebase for storing/retrieving embeddings? [Gemini RAG](https://ai.google.dev/api/semantic-retrieval/question-answering)

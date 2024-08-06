@@ -2,7 +2,7 @@ import Input from "./Input";
 import styles from "./MenuSectionForWeb.module.scss";
 
 const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
-  const hasOrder = hasOrderInput === 'true';
+  const hasOrder = hasOrderInput === "true";
 
   return (
     <section>
@@ -11,7 +11,7 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
       {/* Sections */}
       <div className={styles.itemsContainer}>
         {items?.map?.((meal, index) => (
-          <article className={styles.container} key={index}>
+          <article className={styles.container} key={meal.id}>
             <div className={styles.textContainer}>
               {/* Name */}
               <h3 className={styles.name}>{meal.name}</h3>
@@ -28,16 +28,19 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
             <div className={styles.imageContainer}>
               <img
                 className={styles.photo}
-                src={require(`../assets/images/${meal.image}`)}
+                src={
+                  meal.imageSource
+                    ? require(`../assets/images/${meal.imageSource}`)
+                    : ""
+                }
                 alt={`${meal.category} - ${meal.name}`}
               />
             </div>
           </article>
         ))}
       </div>
-
     </section>
   );
-}
+};
 
 export default MenuSectionForWeb;

@@ -21,16 +21,19 @@ const MenuSectionForPrint = ({ items, sectionName }) => {
             <div className={styles.imageContainer}>
               <img
                 className={styles.photo}
-                src={require(`../assets/images/${meal.image}`)}
+                src={
+                  meal.imageSource
+                    ? require(`../assets/images/${meal.imageSource}`)
+                    : ""
+                }
                 alt={`${meal.category} - ${meal.name}`}
               />
             </div>
           </article>
         ))}
       </div>
-
     </section>
   );
-}
+};
 
 export default MenuSectionForPrint;
