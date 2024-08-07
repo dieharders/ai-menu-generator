@@ -9,14 +9,16 @@ const extractJsonFromText = (input) => {
 
 // Gen AI
 let genAI;
-const getAPIKey = () => {
+const getGeminiAPIKey = () => {
   // For testing and demonstration ONLY!
-  const inputComponent = document.querySelector("input[name=input-api-key]");
+  const inputComponent = document.querySelector(
+    "input[name=input-gemini-api-key]"
+  );
   const API_KEY = inputComponent.value;
   return API_KEY;
 };
 const getGenAI = () => {
-  if (!genAI) genAI = new GoogleGenerativeAI(getAPIKey());
+  if (!genAI) genAI = new GoogleGenerativeAI(getGeminiAPIKey());
   return genAI;
 };
 

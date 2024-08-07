@@ -48,19 +48,23 @@ Once a menu image is uploaded, we start the build process:
 
   - Save images as base64 strings to localStorage: https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page
 
-- ❌ Generate images with DaLL-E
+- ❌ Generate images with OpenAI DaLL-E
 
   - [OpenAi Image Gen](https://platform.openai.com/docs/api-reference/images/create)
 
   - [OpenAi Rate Limits](https://platform.openai.com/settings/organization/limits)
 
-  - Implement image generation func. Max 1 request/25s. Reduce/save image to 256 pixels at 75% compression, square, jpg.
+  - Add another input to enter OpenAI api key.
 
-- ❌ Chat prompt Q&A per menu. Use AQA model to perform Attributed Question-Answering tasks over a document.
+  - Implement image generation func. Max 1 request/25s.
+
+  - Reduce/save image to 256 pixels at 75% compression, square, jpg.
+
+- ❌ Display extra info (ingredients, etc) in tabular ui.
 
 - ❌ Implement translations. Use Gemini 1.0 Pro to translate entire menu into several languages (Russian, Korean, Chinese, German, French, Spanish, English, Dutch) in passes.
 
-- ❌ Display extra info (ingredients, etc) in tabular ui.
+- ❌ Chat prompt Q&A per menu. Use Google AQA model to perform Attributed Question-Answering tasks over a document.
 
 - ❌ Optional: Implement react toast for UI messages.
 

@@ -15,10 +15,6 @@ export const GenerateMenuButton = () => {
   const { extractMenuDataFromImage, convertMenuDataToStructured } = aiActions();
   const [isDisabled, setIsDisabled] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
-  const defaultMenuExists = StorageAPI.getItem(DEFAULT_MENU_ID);
-  const [isMenuButtonDisabled, setIsMenuButtonDisabled] = useState(
-    !defaultMenuExists
-  );
 
   const getImageInputFiles = () =>
     document.querySelector("input[type=file]")?.files || [];
@@ -164,75 +160,58 @@ export const GenerateMenuButton = () => {
         onChange={() => setIsDisabled(getImageInputFiles()?.length === 0)}
       ></input>
       {/* Generate button */}
-      <button
-        disabled={isDisabled}
-        className={styles.inputButton}
-        onClick={async () => {
-          try {
-            setIsDisabled(true);
-            setIsFetching(true);
-            const files = getImageInputFiles();
-            const hash = createFileHash(files);
-            // @TODO Exit if name/hash already exists (if storing in cloud)
-            // ...
-            const extractedData = await extractMenuDataFromImage(files);
-            console.log("@@ extraction successfull:\n", extractedData);
-            const structuredData = await convertMenuDataToStructured(
-              extractedData
-            );
-            if (Object.keys(structuredData).length === 0) {
-              throw new Error("structuredData failed");
-            } else {
-              console.log("@@ structuredData successfull:\n", structuredData);
-              let result = assignUniqueIds({
-                data: structuredData,
-                id: DEFAULT_MENU_ID, // always overwrite same id if storing locally
-                hash,
-              });
-              // Generate images
-              result = await generateImages(result);
-              // @TODO Create translations
+      {!isDisabled && (
+        <button
+          disabled={isDisabled}
+          className={styles.inputButton}
+          onClick={async () => {
+            try {
+              setIsDisabled(true);
+              setIsFetching(true);
+              const files = getImageInputFiles();
+              const hash = createFileHash(files);
+              // @TODO Exit if name/hash already exists (if storing in cloud)
               // ...
-              // Store all data locally (text & images)
-              const menuId = result?.menu?.id;
-              const payload = {
-                menu: result?.menu,
-                sections: result?.sections,
-                translations: result?.translations || [],
-              };
-              StorageAPI.setItem(menuId, payload);
+              const extractedData = await extractMenuDataFromImage(files);
+              console.log("@@ extraction successfull:\n", extractedData);
+              const structuredData = await convertMenuDataToStructured(
+                extractedData
+              );
+              if (Object.keys(structuredData).length === 0) {
+                throw new Error("structuredData failed");
+              } else {
+                console.log("@@ structuredData successfull:\n", structuredData);
+                let result = assignUniqueIds({
+                  data: structuredData,
+                  id: DEFAULT_MENU_ID, // always overwrite same id if storing locally
+                  hash,
+                });
+                // Generate images
+                result = await generateImages(result);
+                // @TODO Create translations
+                // ...
+                // Store all data locally (text & images)
+                const menuId = result?.menu?.id;
+                const payload = {
+                  menu: result?.menu,
+                  sections: result?.sections,
+                  translations: result?.translations || [],
+                };
+                StorageAPI.setItem(menuId, payload);
 
-              if (!menuId) throw new Error("No id found for menu.");
-              // Show a button to page when generation/saving is complete
-              setIsMenuButtonDisabled(false);
+                if (!menuId) throw new Error("No id found for menu.");
+                // Show a button to page when generation/saving is complete
+                setIsMenuButtonDisabled(false);
 
+                reset();
+              }
+            } catch (err) {
+              console.error("@@ extraction failed:\n", err);
               reset();
             }
-          } catch (err) {
-            console.error("@@ extraction failed:\n", err);
-            reset();
-          }
-        }}
-      >
-        {isFetching ? "Waiting..." : isDisabled ? "Choose pic" : "Generate"}
-      </button>
-      {/* Show generated menu button */}
-      {defaultMenuExists && (
-        <button
-          disabled={isMenuButtonDisabled || isFetching}
-          style={{ height: "2.5rem" }}
-          className={styles.inputButton}
-          onClick={() => {
-            // Go to generated page
-            const queryParams = new URLSearchParams(window.location.search);
-            queryParams.set("id", DEFAULT_MENU_ID);
-            const language = "en";
-            queryParams.set("lang", language);
-            const query = queryParams.toString();
-            window.location.href = `${window.location.origin}/?${query}`;
           }}
         >
-          View saved menu
+          {isFetching ? "Waiting..." : isDisabled ? "Choose pic" : "Generate"}
         </button>
       )}
     </div>
