@@ -9,7 +9,8 @@ const extractJsonFromText = (input) => {
 
 // API Key
 const getAPIKey = () => {
-  const API_KEY = "AIzaSyAGu72SgbX8YT0IPx_qhJPEIXqTXILNRPc"; // @TODO read from .env, change key after commiting.
+  // For testing and demonstration ONLY!
+  const API_KEY = "AIzaSyAGu72SgbX8YT0IPx_qhJPEIXqTXILNRPc"; // @TODO read from input on page
   return API_KEY;
 };
 const API_KEY = getAPIKey();
@@ -17,9 +18,11 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Models
 const Models = {
+  GEMINI_1_0_PRO: "gemini-1.0-pro", // text only, cheapest, use for translations
   GEMINI_1_5_FLASH: "gemini-1.5-flash",
   GEMINI_1_5_PRO: "gemini-1.5-pro",
   TEXT_EMBEDDING: "text-embedding-004",
+  AQA: "aqa", // Providing source-grounded answers to questions (RAG?)
 };
 
 // Formats
@@ -115,6 +118,7 @@ const structuredOutputFormat = `
     "bannerImageDescription": "",
     "bannerImageId": "", // leave blank
     "bannerImageSource": "", // leave blank
+    "sourceHash": "", // leave blank
   },
   "sections": [
     {

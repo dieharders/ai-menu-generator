@@ -133,12 +133,41 @@ Once a menu image is uploaded, we start the build process:
   - https://ai.google.dev/gemini-api/docs/api-overview
   - https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=web
 
-- ❌ Implement Vercel databases (images and json)
+- ❌ Store data locally on device (save images/json). Each generation overwrites the previous.
 
-- ❌ Load menu data from k/v. Load images from bucket using locations from menu data.
+  - Implement image generation func. Many calls or one? Cap max results (10). How to reduce image to only 256 pixels at 75% compression, ~100kb, square, jpg?
 
-- ❌ Convert existing website to Next.js (openbrew website already has similar setup, use app router). Reset all api keys after testing.
+  - Add placeholder image refs into data if menu goes over limit. Create square 256x256 placeholder image.
 
-- ❌ Create server-side actions for Ai menu creation.
+  - Save images as base64 strings to localStorage: https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page
 
-- ❌ Extra: Use firebase for storing/retrieving embeddings? [Gemini RAG](https://ai.google.dev/api/semantic-retrieval/question-answering)
+- ❌ Display extra info (ingredients, etc) in tabular ui.
+
+- ❌ Chat prompt Q&A per menu.
+
+- ❌ Implement translations.
+
+- ❌ Implement dev input on home page to enter your api key. Reset all api keys after testing.
+
+- ❌ Optional: Implement react.toast for UI messages.
+
+  - ❌ Show a loading menu (in center view) after clicking "generate". Hide all other UI and only display progress in toast. Provide a "cancel" button to back out to home page and cancel all outgoing requests.
+
+- ❌ Optional: Display link to any existing data near the search tool on home page. Clicking link takes you to that site.
+
+  - ❌ Commit some default menu data (min 3) and provide a handly link in the list.
+
+- ❌ Optional: Convert existing website to Next.js (openbrew website already has similar setup, use app router).
+
+  - We can publish code w/o server actions or api key. And use a local copy to make the video then commit the finalized next.js code later.
+
+  - ❌ Convert all api calls to server-side actions.
+
+  - This allows us to serve api requests publically.
+
+- ❌ Optional: Implement Vercel databases (save images/json on per user basis, user login required)
+
+  - ❌ Load menu data from k/v. Load images from bucket using locations from menu data.
+
+  - ❌ Extra: Use firebase for storing/retrieving embeddings? [Gemini RAG](https://ai.google.dev/api/semantic-retrieval/question-answering)
+    - When new record is added to real-time storage, update the embeddings as well.

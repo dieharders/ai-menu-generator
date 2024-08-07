@@ -22,7 +22,11 @@
     font-size: 1.15rem;
     cursor: pointer;
 }
-
+.inputButton:disabled, .inputButton:disabled:hover {
+    color: grey;
+    background-color: var(--secondary);
+    cursor: not-allowed;
+}
 .inputButton:hover {
     background-color: var(--secondary);
     border-color: var(--secondary);

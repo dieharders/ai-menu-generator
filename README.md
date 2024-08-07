@@ -26,6 +26,10 @@ Switch the menu to any of several languages.
 
 Lists ingredients in each food item and any associated health risk (allergy) info.
 
+### Save a Screenshot
+
+Save the menu to your device for later viewing offline.
+
 ## Screenshot Tool using Puppeteer
 
 This script will create an image or "printable" version of the menu that can be used to embed online or store locally for later viewing without internet connection.

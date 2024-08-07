@@ -8,7 +8,7 @@ const Home = () => {
       <div>
         <h1 className={styles.title}>FoodSee</h1>
         <p className={styles.description}>
-          Automatically build accessible food menus for everyone.
+          Convert pics to interactive food menus.
         </p>
       </div>
       <div className={styles.menuContainer}>
@@ -20,6 +20,11 @@ const Home = () => {
         <h2 className={styles.title}>Snap a menu</h2>
         <p className={styles.description}>Take a picture of a menu to start.</p>
         <GenerateMenuButton />
+      </div>
+      <div className={styles.footerContainer}>
+        <div className={styles.footer}>
+          Built w/ Google Gemini ♊ | Dedicated to Diane 💞
+        </div>
       </div>
     </div>
   );
