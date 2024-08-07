@@ -1,0 +1,42 @@
+.container {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: auto;
+    margin-top: 1.5rem;
+    padding: 0;
+}
+
+.inputText {
+    position: relative;
+    display: block;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-color: var(--primary);
+    color: wheat;
+    background-color: var(--primary);
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    margin-left: 0.1rem;
+    margin-right: 0.75rem;
+    text-align: center;
+    font-family: var(--font-primary);
+    font-size: 1.15rem;
+}
+
+.inputText::placeholder {
+    color: wheat;
+}
+
+input.inputText:hover {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    filter: brightness(0.9);
+}
+
+input.inputText:focus {
+    outline: none;
+    border-color: var(--secondary);
+    background-color: var(--secondary);
+}

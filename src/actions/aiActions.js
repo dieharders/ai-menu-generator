@@ -1,20 +1,24 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Use regex to extra text between ```json```
+// Use regex to extract text between ```json```
 const extractJsonFromText = (input) => {
   const regex = /```json([\s\S]*?)```/;
   const match = input.match(regex);
   return match ? match[1].trim() : null;
 };
 
-// API Key
+// Gen AI
+let genAI;
 const getAPIKey = () => {
   // For testing and demonstration ONLY!
-  const API_KEY = "AIzaSyAGu72SgbX8YT0IPx_qhJPEIXqTXILNRPc"; // @TODO read from input on page
+  const inputComponent = document.querySelector("input[name=input-api-key]");
+  const API_KEY = inputComponent.value;
   return API_KEY;
 };
-const API_KEY = getAPIKey();
-const genAI = new GoogleGenerativeAI(API_KEY);
+const getGenAI = () => {
+  if (!genAI) genAI = new GoogleGenerativeAI(getAPIKey());
+  return genAI;
+};
 
 // Models
 const Models = {
@@ -178,7 +182,7 @@ export const aiActions = () => {
     };
 
     const run = async () => {
-      const model = genAI.getGenerativeModel({
+      const model = getGenAI()?.getGenerativeModel({
         model: Models.GEMINI_1_5_FLASH,
       });
 
@@ -203,7 +207,7 @@ export const aiActions = () => {
 
     const structuredMenuPrompt = `Convert this markdown text to json format: ${unstructuredData}\n\nExample output:\n\n${structuredOutputFormat}\n\nResponse:`;
 
-    const model = genAI.getGenerativeModel({
+    const model = getGenAI()?.getGenerativeModel({
       model: Models.GEMINI_1_5_FLASH,
     });
 

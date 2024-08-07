@@ -133,6 +133,8 @@ Once a menu image is uploaded, we start the build process:
   - https://ai.google.dev/gemini-api/docs/api-overview
   - https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=web
 
+- ✅ Implement dev input on home page to enter your api key. Reset all api keys after testing.
+
 - ❌ Store data locally on device (save images/json). Each generation overwrites the previous.
 
   - Implement image generation func. Many calls or one? Cap max results (10). How to reduce image to only 256 pixels at 75% compression, ~100kb, square, jpg?
@@ -146,8 +148,6 @@ Once a menu image is uploaded, we start the build process:
 - ❌ Chat prompt Q&A per menu.
 
 - ❌ Implement translations.
-
-- ❌ Implement dev input on home page to enter your api key. Reset all api keys after testing.
 
 - ❌ Optional: Implement react.toast for UI messages.
 

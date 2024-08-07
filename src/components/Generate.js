@@ -19,7 +19,8 @@ export const GenerateMenuButton = () => {
 
   const reset = () => {
     setIsDisabled(true);
-    if (getImageInputFiles()?.files) getImageInputFiles().files = null;
+    const input = document.querySelector("input[type=file]");
+    if (input?.value) input.value = "";
     setIsFetching(false);
   };
 
