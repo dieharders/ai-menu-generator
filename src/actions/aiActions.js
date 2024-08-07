@@ -101,11 +101,11 @@ const extractionOutputFormat = `
 
 ### Health Info
 
-(if none exists generate one based on item data)
+(if none exists generate one)
 
 ### Allergy Info
 
-(if none exists generate one based on item data)
+(if none exists generate one)
 `;
 const structuredOutputFormat = `
 {

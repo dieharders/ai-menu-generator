@@ -26,7 +26,7 @@ export default function App() {
   useEffect(() => {
     // Set menu data
     if (data || selectedLang.current === language || !company) return;
-    // @TODO Properly translate later...
+    // @TODO Properly set translation data later...
     // setData(translate(company, language));
     setData(company);
     selectedLang.current = language;

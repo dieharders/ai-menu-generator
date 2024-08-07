@@ -29,9 +29,8 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
               <img
                 className={styles.photo}
                 src={
-                  meal.imageSource
-                    ? require(`../assets/images/${meal.imageSource}`)
-                    : ""
+                  meal.imageSource ||
+                  require(`../assets/images/placeholder.png`)
                 }
                 alt={`${meal.category} - ${meal.name}`}
               />
