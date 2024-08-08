@@ -10,22 +10,52 @@
     border-bottom: 0.1rem solid hsl(0, 0%, 82%);
 }
 
-.container {
+.articleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.mainContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    height: 160px; // so children take up available height
+    gap: 1rem;
+}
+
+.detailsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.detailNamesContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    font-size: small;
 }
 
 .textContainer {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
     height: 100%;
-    width: 75%;
-    padding: 1rem;
-    padding-left: 0;
+    width: 100%;
+    padding: 0;
     margin: auto;
-    margin-left: 0;
+    gap: 1rem;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
 .heading {
@@ -52,22 +82,25 @@
     margin: 0;
     word-wrap: break-word;
     font-family: var(--font-primary);
+    width: 100%;
 }
 
 .description {
     color: black;
     flex: 1 1 100%;
-    margin: 0.75rem 0 0;
+    margin: 0;
     word-wrap: break-word;
     font-family: var(--font-primary);
+    width: 100%;
 }
 
 .price {
     display: inline-block;
     position: relative;
-    margin-top: 1rem;
+    margin: 0;
     word-break: break-all;
     font-family: var(--font-secondary);
+    width: 100%;
 }
 
 .imageContainer {
@@ -94,10 +127,33 @@
     border-radius: 0.5rem;
 }
 
+.detailButton {
+    padding: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    border-width: 0;
+    border-bottom-width: 0.1rem;
+    border-color: transparent;
+    border-radius: 0;
+    border-style: solid;
+    background-color: transparent;
+}
+.detailButton:hover {
+    border-bottom-color: var(--secondary);
+    cursor: pointer;
+}
+.detailButton:focus, .detailButton:active {
+    border-bottom-color: var(--secondary);
+}
+
 // Extra Small screen
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     .container {
         flex-direction: column;
+    }
+    .mainContainer {
+        flex-direction: column;
+        height: 100%;
     }
     .imageContainer {
         margin: auto;
@@ -106,9 +162,8 @@
         margin: auto;
         padding: 0;
         padding-bottom: 1rem;
-        text-align: center;
     }
-    .name {
+    .name, .description, .price {
         text-align: center;
     }
 }

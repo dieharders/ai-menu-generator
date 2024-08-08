@@ -60,9 +60,11 @@ Once a menu image is uploaded, we start the build process:
 
   - Reduce/save image to 256 pixels at 75% compression, square, jpg.
 
-- ❌ Display extra info (ingredients, etc) in tabular ui.
+- ✅ Display extra info (ingredients, etc) in tabular ui.
 
 - ❌ Implement translations. Use Gemini 1.0 Pro to translate entire menu into several languages (Russian, Korean, Chinese, German, French, Spanish, English, Dutch) in passes.
+
+  - Fix translation state vars and read-in.
 
 - ❌ Chat prompt Q&A per menu. Use Google AQA model to perform Attributed Question-Answering tasks over a document.
 
