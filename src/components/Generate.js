@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { aiActions } from "../actions/aiActions";
+import { aiActions, OpenAIModels } from "../actions/aiActions";
 import { generateShortId } from "../helpers/uniqueId";
 import { StorageAPI } from "../helpers/storage";
 import styles from "./Generate.module.scss";
@@ -12,7 +12,11 @@ const createFileHash = (files = []) => {
 export const DEFAULT_MENU_ID = "DEFAULT_MENU";
 
 export const GenerateMenuButton = () => {
-  const { extractMenuDataFromImage, convertMenuDataToStructured } = aiActions();
+  const {
+    extractMenuDataFromImage,
+    convertMenuDataToStructured,
+    generateImage,
+  } = aiActions();
   const [isDisabled, setIsDisabled] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -30,6 +34,7 @@ export const GenerateMenuButton = () => {
     const img = new Image();
     return new Promise((resolve, reject) => {
       img.onload = () => {
+        // Compress image and resize to 256p
         const canvas = document.createElement("canvas");
         canvas.width = 256;
         canvas.height = 256;
@@ -37,7 +42,7 @@ export const GenerateMenuButton = () => {
         const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, 256, 256);
 
-        const dataURL = canvas.toDataURL("image/jpg");
+        const dataURL = canvas.toDataURL("image/jpg", 0.7);
         resolve(dataURL);
       };
 
@@ -51,18 +56,25 @@ export const GenerateMenuButton = () => {
 
   const generateImages = async (data) => {
     const timeout = 25000; // 25 sec
-    const genImage = async (description) => {
-      // @TODO Call image generator model
-      // ...
-      const img = require("../assets/images/placeholder.png");
-      // @TODO Image post-processing here if needed
-      // ...
+    let numGenerations = 0;
+    const maxGenerations = 10;
+    const createEncodedImage = async (description) => {
       let source = "";
+      let img = require("../assets/images/placeholder.png");
       try {
-        source = await encodeB64(img);
+        // Call image generation model
+        if (numGenerations < maxGenerations) {
+          img = await generateImage({
+            prompt: description,
+            model: OpenAIModels.DALL_E_2,
+          });
+        }
       } catch (err) {
-        log.error(err);
+        console.error(err);
       }
+      source = await encodeB64(img);
+      numGenerations += 1;
+
       return source;
     };
     const newData = { ...data };
@@ -90,7 +102,7 @@ export const GenerateMenuButton = () => {
               // Generate image for item
               const currItem = items[counter];
               const descr = currItem?.description;
-              const imageSource = await genImage(descr);
+              const imageSource = await createEncodedImage(descr);
               // Store images in data, counter 0 should always the banner
               if (counter === 0) newData.menu.bannerImageSource = imageSource;
               else {
@@ -104,7 +116,7 @@ export const GenerateMenuButton = () => {
                   imageSource;
               }
             } catch (err) {
-              log.error(`Failed to generate image:\n${err}`);
+              console.error(`Failed to generate image:\n${err}`);
               clearInterval(intervalId);
               resolve("stopped");
             }
@@ -200,8 +212,6 @@ export const GenerateMenuButton = () => {
                 StorageAPI.setItem(menuId, payload);
 
                 if (!menuId) throw new Error("No id found for menu.");
-                // Show a button to page when generation/saving is complete
-                setIsMenuButtonDisabled(false);
 
                 reset();
               }

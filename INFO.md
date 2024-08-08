@@ -48,7 +48,7 @@ Once a menu image is uploaded, we start the build process:
 
   - Save images as base64 strings to localStorage: https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page
 
-- ❌ Generate images with OpenAI DaLL-E
+- ✅ Generate images with OpenAI DaLL-E
 
   - [OpenAi Image Gen](https://platform.openai.com/docs/api-reference/images/create)
 
@@ -57,6 +57,8 @@ Once a menu image is uploaded, we start the build process:
   - Add another input to enter OpenAI api key.
 
   - Implement image generation func. Max 1 request/25s.
+
+  - Prevent processing images over limit.
 
   - Reduce/save image to 256 pixels at 75% compression, square, jpg.
 
@@ -68,13 +70,15 @@ Once a menu image is uploaded, we start the build process:
 
 - ❌ Chat prompt Q&A per menu. Use Google AQA model to perform Attributed Question-Answering tasks over a document.
 
+- ❌ Add credits to account to use image generation.
+
+- ❌ Optional: Commit some default menu data (min 3) and provide links in the list.
+
+- ❌ Optional: Add company details card above sections.
+
 - ❌ Optional: Implement react toast for UI messages.
 
   - Show a loading menu (in center view) after clicking "generate". Hide all other UI and only display progress in toast. Provide a "cancel" button to back out to home page and cancel all outgoing requests.
-
-- ❌ Optional: Display link to any existing data near the search tool on home page. Clicking link takes you to that site.
-
-  - Commit some default menu data (min 3) and provide a link in the list.
 
 - ❌ Optional: Convert existing website to Next.js (openbrew website already has similar setup, use app router).
 

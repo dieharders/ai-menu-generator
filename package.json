@@ -13,6 +13,7 @@
   "dependencies": {
     "nanoid": "^5.0.7",
     "@google/generative-ai": "^0.16.0",
+    "openai": "^4.55.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",

@@ -32,7 +32,7 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
       {/* Sections */}
       <div className={styles.itemsContainer}>
         {items?.map?.((meal, index) => {
-          const [currentDetail, setCurrentDetail] = useState("category");
+          const [currentDetail, setCurrentDetail] = useState("ingredients");
 
           return (
             <article className={styles.articleContainer} key={meal.id}>

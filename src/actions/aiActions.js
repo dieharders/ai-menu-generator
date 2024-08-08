@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 
 // Use regex to extract text between ```json```
 const extractJsonFromText = (input) => {
@@ -8,7 +9,7 @@ const extractJsonFromText = (input) => {
 };
 
 // Gen AI
-let genAI;
+let genGemini, genOpenAI;
 const getGeminiAPIKey = () => {
   // For testing and demonstration ONLY!
   const inputComponent = document.querySelector(
@@ -17,18 +18,38 @@ const getGeminiAPIKey = () => {
   const API_KEY = inputComponent.value;
   return API_KEY;
 };
-const getGenAI = () => {
-  if (!genAI) genAI = new GoogleGenerativeAI(getGeminiAPIKey());
-  return genAI;
+const getOpenAIAPIKey = () => {
+  // For testing and demonstration ONLY!
+  const inputComponent = document.querySelector(
+    "input[name=input-openai-api-key]"
+  );
+  const API_KEY = inputComponent.value;
+  return {
+    apiKey: API_KEY,
+    // Enable for testing ONLY
+    dangerouslyAllowBrowser: true,
+  };
+};
+const getGenGemini = () => {
+  if (!genGemini) genGemini = new GoogleGenerativeAI(getGeminiAPIKey());
+  return genGemini;
+};
+const getGenOpenAI = () => {
+  if (!genOpenAI) genOpenAI = new OpenAI(getOpenAIAPIKey());
+  return genOpenAI;
 };
 
 // Models
-const Models = {
+export const GeminiModels = {
   GEMINI_1_0_PRO: "gemini-1.0-pro", // text only, cheapest, use for translations
   GEMINI_1_5_FLASH: "gemini-1.5-flash",
   GEMINI_1_5_PRO: "gemini-1.5-pro",
   TEXT_EMBEDDING: "text-embedding-004",
   AQA: "aqa", // Providing source-grounded answers to questions (RAG?)
+};
+export const OpenAIModels = {
+  DALL_E_2: "dall-e-2",
+  DALL_E_3: "dall-e-3",
 };
 
 // Formats
@@ -184,8 +205,8 @@ export const aiActions = () => {
     };
 
     const run = async () => {
-      const model = getGenAI()?.getGenerativeModel({
-        model: Models.GEMINI_1_5_FLASH,
+      const model = getGenGemini()?.getGenerativeModel({
+        model: GeminiModels.GEMINI_1_5_FLASH,
       });
 
       const imageParts = await Promise.all(
@@ -209,8 +230,8 @@ export const aiActions = () => {
 
     const structuredMenuPrompt = `Convert this markdown text to json format: ${unstructuredData}\n\nExample output:\n\n${structuredOutputFormat}\n\nResponse:`;
 
-    const model = getGenAI()?.getGenerativeModel({
-      model: Models.GEMINI_1_5_FLASH,
+    const model = getGenGemini()?.getGenerativeModel({
+      model: GeminiModels.GEMINI_1_5_FLASH,
     });
 
     const result = await model.generateContent([
@@ -231,8 +252,22 @@ export const aiActions = () => {
     }
   };
 
+  const generateImage = async ({ prompt, model }) => {
+    const openai = getGenOpenAI();
+    const image = await openai.images.generate({
+      prompt,
+      model,
+      size: "256x256",
+      response_format: "b64_json",
+      // style: "vivid", // dall-e-3 only
+      // quality: "hd", // dall-e-3 only
+    });
+    console.log(image.data);
+  };
+
   return {
     extractMenuDataFromImage,
     convertMenuDataToStructured,
+    generateImage,
   };
 };
