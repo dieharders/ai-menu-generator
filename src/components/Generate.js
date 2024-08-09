@@ -62,8 +62,13 @@ export const GenerateMenuButton = () => {
   };
 
   const generateImages = async (data, numGenerations) => {
-    const timeout = 25000; // 25 sec
     const maxGenerations = 10;
+    const isOverLimit = numGenerations >= maxGenerations;
+    // Check api key
+    const openaiAPIKey = document.querySelector(
+      "input[name=input-openai-api-key]"
+    )?.value;
+    const timeout = isOverLimit || !openaiAPIKey ? 100 : 25000; // 25 sec or 100ms if over limit or no expected requests
 
     // Return an image as a base64 string
     const createEncodedImage = async (description) => {
@@ -71,7 +76,7 @@ export const GenerateMenuButton = () => {
       let img = require("../assets/images/placeholder.png");
       try {
         // Call image generation model
-        if (numGenerations < maxGenerations) {
+        if (!isOverLimit) {
           img = await generateImage({
             prompt: description,
             model: OpenAIModels.DALL_E_2,

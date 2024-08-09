@@ -1,14 +1,16 @@
 import { useContext } from "react";
 import { Context } from "../Context";
 import data from "../data";
-// import SelectLanguage from "./SelectLanguage";
-// import SearchBar from "./SearchBar";
+import { PromptMenu } from "./PromptMenu";
 import styles from "./Total.module.scss";
 
-export default function Total({hasOrderInput}) {
-  // const queryParameters = new URLSearchParams(window.location.search);
-  // const isPrint = queryParameters.get("print");
-  const isOrder = hasOrderInput === 'true';
+/**
+ * This appears at the footer.
+ * @param {any} hasOrderInput
+ * @returns
+ */
+export default function Total({ hasOrderInput }) {
+  const isOrder = hasOrderInput === "true";
   const [items] = useContext(Context);
 
   const totalPrice = Object.keys(items).reduce((acc, curr) => {
@@ -20,8 +22,7 @@ export default function Total({hasOrderInput}) {
 
   return (
     <div className={styles.total}>
-      {/* {!isPrint && <SelectLanguage showForm />} */}
-      {/* {!isPrint && <div className={styles.searchContainer}><SearchBar /></div>} */}
+      <PromptMenu />
       {isOrder && <span className={styles.totalTitle}>Total:</span>}
       {isOrder && <span className={styles.totalPrice}>${totalPrice}</span>}
     </div>

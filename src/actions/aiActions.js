@@ -114,7 +114,7 @@ const extractionOutputFormat = `
 
 ### Category
 
-(protein, grain, vegetable, fruit, dairy, alcoholic beverage, non-alcoholic beverage, other)
+(protein, grain, vegetable, fruit, dairy, food, alcoholic beverage, non-alcoholic beverage, other)
 
 ### Ingredients
 
@@ -213,7 +213,7 @@ export const aiActions = () => {
       ]);
       const response = result?.response;
       const text = response.text();
-      return text;
+      return text.trim();
     };
 
     return run();
@@ -296,10 +296,28 @@ export const aiActions = () => {
     console.log(image.data);
   };
 
+  const requestAnswer = async ({ prompt, info }) => {
+    try {
+      const model = getGenGemini()?.getGenerativeModel({
+        model: GeminiModels.GEMINI_1_0_PRO,
+      });
+
+      // Use `info` as basis for info retrieval
+      const result = await model.generateContent([prompt, info]);
+      const response = result?.response;
+      const text = response?.text();
+      return text;
+    } catch (err) {
+      console.error(`Failed to answer question:\n${err}`);
+      return "I apologize, something went wrong. I could not answer your question. Please try again.";
+    }
+  };
+
   return {
     extractMenuDataFromImage,
     convertMenuDataToStructured,
     translateMenuDataToLanguage,
     generateImage,
+    requestAnswer,
   };
 };

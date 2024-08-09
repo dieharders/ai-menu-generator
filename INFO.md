@@ -76,7 +76,7 @@ Once a menu image is uploaded, we start the build process:
 
   - Translate food types (protein, grain, vegetable, fruit, dairy, food, alcohol beverage, non-alcohol beverage, other)
 
-- ❌ Chat prompt Q&A per menu. Use Google AQA model to perform Attributed Question-Answering tasks over a document.
+- ✅ Chat prompt Q&A per menu. Use Google AQA model to perform Attributed Question-Answering tasks over a document.
 
 - ❌ Fix eslint for errors.
 
@@ -94,9 +94,11 @@ Once a menu image is uploaded, we start the build process:
 
   - Show a loading menu (in center view) after clicking "generate". Hide all other UI and only display progress in toast. Provide a "cancel" button to back out to home page and cancel all outgoing requests.
 
-- ✅ Optional: Fix the printer friendly functionality.
-
 - ❌ Optional: Make server functions on Vercel to make api requests.
+
+- ❌ Optional: Do a traditional Google search if no images can be generated and use the top result to display. User must tap the placeholder image to consent to seeing images from the web.
+
+- ✅ Optional: Fix the printer friendly functionality.
 
 - ❌ Optional: Convert existing website to Next.js (openbrew website already has similar setup, use app router).
 
