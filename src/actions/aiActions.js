@@ -1,3 +1,5 @@
+import { assignUniqueIds } from "../helpers/transformData";
+import languageCodes from "../helpers/languageCodes";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 
@@ -76,7 +78,7 @@ const extractionOutputFormat = `
 
 ## Theme Color
 
-(an integer between 0 and 255 that best represents the hue color value of this menu)
+(an integer between 0 and 360 degrees on color wheel that best represents the hue of this menu)
 
 ## Company Website
 
@@ -112,7 +114,7 @@ const extractionOutputFormat = `
 
 ### Category
 
-(protein, grain, vegetable, fruit, dairy, food, alcohol beverage, non-alcohol beverage, other)
+(protein, grain, vegetable, fruit, dairy, alcoholic beverage, non-alcoholic beverage, other)
 
 ### Ingredients
 
@@ -132,43 +134,35 @@ const extractionOutputFormat = `
 `;
 const structuredOutputFormat = `
 {
-  "menu": {
-    "name": "",
-    "id": "", // leave blank
-    "description": "",
-    "type": "",
-    "contact": "",
-    "location": "",
-    "color": 0,
-    "website": "",
-    "language": "",
-    "bannerImageDescription": "",
-    "bannerImageId": "", // leave blank
-    "bannerImageSource": "", // leave blank
-    "sourceHash": "", // leave blank
-  },
-  "sections": [
+  "name": "",
+  "id": "", // leave blank
+  "description": "",
+  "type": "",
+  "contact": "",
+  "location": "",
+  "color": 0,
+  "website": "",
+  "language": "",
+  "imageDescription": "", // banner image descr
+  "imageSource": "", // leave blank
+  "documentHash": "", // leave blank
+  "sectionNames": [""],
+  "items": [
     {
       "name": "",
       "id": "", // leave blank
-      "items": [
-        {
-          "name": "",
-          "id": "", // leave blank
-          "description": "",
-          "price": "0.00",
-          "currency": "",
-          "category": "",
-          "ingredients": "",
-          "imageDescription": "",
-          "imageId": "", // leave blank
-          "imageSource": "", // leave blank
-          "health": "",
-          "allergy": ""
-        }
-      ]
+      "description": "",
+      "sectionName": "",
+      "price": "0.00",
+      "currency": "",
+      "category": "",
+      "ingredients": "",
+      "imageDescription": "",
+      "imageSource": "", // leave blank
+      "health": "",
+      "allergy": ""
     }
-  ]
+  ],
 }
 `;
 
@@ -252,6 +246,43 @@ export const aiActions = () => {
     }
   };
 
+  /**
+   * Take a plain text document and translate it to another language,
+   * return in json format.
+   */
+  const translateMenuDataToLanguage = async ({ data, lang, primary }) => {
+    if (!data || !lang) return {};
+    // Ask to translate doc and return as json
+    const language = languageCodes[lang];
+    const prompt = `Translate the following text into ${language} language:\n\n${data}\n\nNow convert the translated text into json in this format:\n\n${structuredOutputFormat}`;
+    console.log("@@ prompting translator...");
+    let obj = {};
+    try {
+      // Generate
+      const model = getGenGemini()?.getGenerativeModel({
+        model: GeminiModels.GEMINI_1_5_FLASH,
+      });
+      // Response
+      const result = await model.generateContent(prompt);
+      const response = result?.response;
+      // Extract json from "text"
+      console.log("@@ translated text:", lang, response.text());
+      const jsonStr = extractJsonFromText(response.text());
+      obj = JSON.parse(jsonStr);
+      // Assign language
+      obj.language = lang;
+      // Assign same ids as primary
+      obj = assignUniqueIds({
+        data: obj,
+        primary,
+      });
+    } catch (err) {
+      console.error(`Failed to translate (${lang}):\n\n${err}`);
+    }
+
+    return obj || {};
+  };
+
   const generateImage = async ({ prompt, model }) => {
     const openai = getGenOpenAI();
     const image = await openai.images.generate({
@@ -268,6 +299,7 @@ export const aiActions = () => {
   return {
     extractMenuDataFromImage,
     convertMenuDataToStructured,
+    translateMenuDataToLanguage,
     generateImage,
   };
 };

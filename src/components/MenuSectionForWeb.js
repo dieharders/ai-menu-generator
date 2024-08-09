@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Input from "./Input";
+import { keys, translate } from "../helpers/appTranslations";
+import { getImagesData } from "../helpers/getData";
 import styles from "./MenuSectionForWeb.module.scss";
 
 const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
@@ -24,6 +26,10 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
         return "$";
     }
   };
+  const translateCategory = (detailType, str) => {
+    if (detailType !== "category") return str;
+    return translate(str);
+  };
 
   return (
     <section>
@@ -31,26 +37,26 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
       <h2 className={styles.heading}>{sectionName}</h2>
       {/* Sections */}
       <div className={styles.itemsContainer}>
-        {items?.map?.((meal, index) => {
+        {items?.map?.((item, index) => {
           const [currentDetail, setCurrentDetail] = useState("ingredients");
 
           return (
-            <article className={styles.articleContainer} key={meal.id}>
+            <article className={styles.articleContainer} key={item.id}>
               <div className={styles.mainContainer}>
                 {/* Main Details */}
                 <div className={styles.textContainer}>
                   {/* Name */}
-                  <h3 className={styles.name}>{meal.name}</h3>
+                  <h3 className={styles.name}>{item.name}</h3>
                   {/* Description */}
-                  <p className={styles.description}>{meal.description}</p>
+                  <p className={styles.description}>{item.description}</p>
                   {/* Price */}
                   <strong className={styles.price}>
-                    {getCurrencyChar(meal.currency)}
-                    {meal.price}
+                    {getCurrencyChar(item.currency)}
+                    {item.price}
                   </strong>
                   {/* Buy/Remove order buttons */}
                   {hasOrder && (
-                    <Input type={sectionName} name={meal.name} index={index} />
+                    <Input type={sectionName} name={item.name} index={index} />
                   )}
                 </div>
                 {/* Photo */}
@@ -58,10 +64,10 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
                   <img
                     className={styles.photo}
                     src={
-                      meal.imageSource ||
+                      getImagesData(item.id)?.imageSource ||
                       require(`../assets/images/placeholder.png`)
                     }
-                    alt={`${meal.category} - ${meal.name}`}
+                    alt={`${item.category} - ${item.name}`}
                   />
                 </div>
               </div>
@@ -74,25 +80,29 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
                       className={styles.detailButton}
                       onClick={() => setCurrentDetail("category")}
                     >
-                      <h3 className={styles.name}>Category</h3>
+                      <h3 className={styles.name}>
+                        {translate(keys.CATEGORY)}
+                      </h3>
                     </button>
                     <button
                       className={styles.detailButton}
                       onClick={() => setCurrentDetail("ingredients")}
                     >
-                      <h3 className={styles.name}>Ingredients</h3>
+                      <h3 className={styles.name}>
+                        {translate(keys.INGREDIENTS)}
+                      </h3>
                     </button>
                     <button
                       className={styles.detailButton}
                       onClick={() => setCurrentDetail("health")}
                     >
-                      <h3 className={styles.name}>Health</h3>
+                      <h3 className={styles.name}>{translate(keys.HEALTH)}</h3>
                     </button>
                     <button
                       className={styles.detailButton}
                       onClick={() => setCurrentDetail("allergy")}
                     >
-                      <h3 className={styles.name}>Allergy</h3>
+                      <h3 className={styles.name}>{translate(keys.ALLERGY)}</h3>
                     </button>
                   </div>
                   {/* Category */}
@@ -100,7 +110,7 @@ const MenuSectionForWeb = ({ items, sectionName, hasOrderInput }) => {
                     style={{ marginTop: "2rem" }}
                     className={styles.description}
                   >
-                    {meal[currentDetail]}
+                    {translateCategory(currentDetail, item[currentDetail])}
                   </p>
                 </span>
               </div>

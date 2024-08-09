@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { aiActions, OpenAIModels } from "../actions/aiActions";
-import { generateShortId } from "../helpers/uniqueId";
+import { assignUniqueIds } from "../helpers/transformData";
 import { StorageAPI } from "../helpers/storage";
+import { languages } from "../helpers/languageCodes";
 import styles from "./Generate.module.scss";
 
 const createFileHash = (files = []) => {
@@ -10,11 +11,13 @@ const createFileHash = (files = []) => {
 };
 
 export const DEFAULT_MENU_ID = "DEFAULT_MENU";
+export const SAVED_MENU_ID = "SAVED_MENU";
 
 export const GenerateMenuButton = () => {
   const {
     extractMenuDataFromImage,
     convertMenuDataToStructured,
+    translateMenuDataToLanguage,
     generateImage,
   } = aiActions();
   const [isDisabled, setIsDisabled] = useState(true);
@@ -28,6 +31,10 @@ export const GenerateMenuButton = () => {
     const input = document.querySelector("input[type=file]");
     if (input?.value) input.value = "";
     setIsFetching(false);
+  };
+
+  const waitForTimeout = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
   };
 
   const encodeB64 = async (imageSrc) => {
@@ -54,10 +61,11 @@ export const GenerateMenuButton = () => {
     });
   };
 
-  const generateImages = async (data) => {
+  const generateImages = async (data, numGenerations) => {
     const timeout = 25000; // 25 sec
-    let numGenerations = 0;
     const maxGenerations = 10;
+
+    // Return an image as a base64 string
     const createEncodedImage = async (description) => {
       let source = "";
       let img = require("../assets/images/placeholder.png");
@@ -73,95 +81,50 @@ export const GenerateMenuButton = () => {
         console.error(err);
       }
       source = await encodeB64(img);
-      numGenerations += 1;
 
       return source;
     };
-    const newData = { ...data };
+
+    // Loop thru all items and generate images
     const menu = {
-      id: newData.menu.id,
-      description: newData.menu.bannerImageDescription,
+      id: data.id,
+      description: data.imageDescription,
     };
-    const sectionItems = newData.sections.map((section) =>
-      section.items.map((item) => ({
-        id: item.id,
-        description: item.imageDescription,
-        sectionId: section.id,
-      }))
-    );
-    const items = [menu, ...sectionItems.flat()];
+    const menuItems = data.items.map((item) => ({
+      id: item.id,
+      description: item.imageDescription,
+    }));
+    const newData = { ...data };
+    const intervalImages = async () => {
+      let index = 0;
+      for (const item of [menu, ...menuItems]) {
+        console.log("@@ processing image for item: ", item);
+        try {
+          // Generate image for item
+          const descr = item?.description;
+          const imageSource = await createEncodedImage(descr, index);
+          // Assign for menu banner image
+          if (index === 0) newData.imageSource = imageSource;
+          else {
+            // Assign for menu items
+            const itemIndex = newData.items.findIndex((i) => i.id === item.id);
+            newData.items[itemIndex].imageSource = imageSource;
+          }
+        } catch (err) {
+          console.error(err);
+        }
+        index += 1;
 
-    const intervalPromise = () => {
-      return new Promise((resolve, reject) => {
-        let counter = 0;
-
-        // Loop thru all items and generate images
-        const startInterval = () => {
-          const intervalId = setInterval(async () => {
-            try {
-              // Generate image for item
-              const currItem = items[counter];
-              const descr = currItem?.description;
-              const imageSource = await createEncodedImage(descr);
-              // Store images in data, counter 0 should always the banner
-              if (counter === 0) newData.menu.bannerImageSource = imageSource;
-              else {
-                const sectionIndex = newData.sections.findIndex(
-                  (section) => section.id === currItem?.sectionId
-                );
-                const itemIndex = newData.sections[
-                  sectionIndex
-                ]?.items?.findIndex((i) => i.id === currItem?.id);
-                newData.sections[sectionIndex].items[itemIndex].imageSource =
-                  imageSource;
-              }
-            } catch (err) {
-              console.error(`Failed to generate image:\n${err}`);
-              clearInterval(intervalId);
-              resolve("stopped");
-            }
-            // Set timer
-            counter += 1;
-            if (counter >= items.length) {
-              clearInterval(intervalId);
-              resolve("stopped");
-            }
-          }, timeout);
-        };
-
-        startInterval();
-      });
+        // Wait between calls
+        await waitForTimeout(timeout);
+      }
+      return;
     };
+
     // fire api calls on a rolling basis (due to request limits)
-    await intervalPromise();
+    await intervalImages();
 
     return newData;
-  };
-
-  /**
-   * Loop through all items and assign a unique id
-   */
-  const assignUniqueIds = ({ data, id, hash = "" }) => {
-    if (!data || Object.keys(data).length === 0)
-      throw new Error("No data to assign.");
-    const result = { ...data };
-    // assign id to menu
-    result.menu.id = id || generateShortId();
-    // record unique hash of source file
-    result.menu.sourceHash = hash;
-    // assign id to each item and section
-    const sections = result?.sections?.map((section) => {
-      const sectionResult = { ...section, id: generateShortId() };
-      const sectionItems = sectionResult?.items?.map((item) => {
-        const itemResult = { ...item, id: generateShortId() };
-        return itemResult;
-      });
-      sectionResult.items = sectionItems;
-      return sectionResult;
-    });
-    result.sections = sections;
-
-    return result;
   };
 
   return (
@@ -184,34 +147,52 @@ export const GenerateMenuButton = () => {
               const hash = createFileHash(files);
               // @TODO Exit if name/hash already exists (if storing in cloud)
               // ...
-              const extractedData = await extractMenuDataFromImage(files);
-              console.log("@@ extraction successfull:\n", extractedData);
-              const structuredData = await convertMenuDataToStructured(
-                extractedData
+              const menuDocument = await extractMenuDataFromImage(files);
+              console.log("@@ extraction successfull:\n", menuDocument);
+              let structuredData = await convertMenuDataToStructured(
+                menuDocument
               );
               if (Object.keys(structuredData).length === 0) {
                 throw new Error("structuredData failed");
               } else {
-                console.log("@@ structuredData successfull:\n", structuredData);
-                let result = assignUniqueIds({
+                structuredData = assignUniqueIds({
                   data: structuredData,
-                  id: DEFAULT_MENU_ID, // always overwrite same id if storing locally
+                  id: DEFAULT_MENU_ID, // mark as the primary document
                   hash,
                 });
+                console.log("@@ structuredData successfull:\n", structuredData);
                 // Generate images
-                result = await generateImages(result);
-                // @TODO Create translations
-                // ...
-                // Store all data locally (text & images)
-                const menuId = result?.menu?.id;
-                const payload = {
-                  menu: result?.menu,
-                  sections: result?.sections,
-                  translations: result?.translations || [],
+                console.log("@@ generating images...");
+                structuredData = await generateImages(structuredData);
+                // Create translations
+                const timeout = 5000; // 5 seconds
+                const translations = [];
+                const iterateTranslations = async () => {
+                  for (const lang of languages) {
+                    console.log("@@ translating: ", lang);
+                    // Skip translating the source data
+                    if (structuredData.language === lang) continue;
+                    // Translate
+                    const res = await translateMenuDataToLanguage({
+                      data: menuDocument,
+                      lang,
+                      primary: structuredData,
+                    });
+                    // Record result
+                    translations.push(res);
+                    // Wait between calls
+                    await waitForTimeout(timeout);
+                  }
+                  return;
                 };
-                StorageAPI.setItem(menuId, payload);
-
+                await iterateTranslations();
+                // Store all data locally (text & images)
+                const menuId = structuredData?.id;
+                structuredData.sourceDocument = menuDocument; // save original text in primary data
                 if (!menuId) throw new Error("No id found for menu.");
+                const payload = [structuredData, ...translations];
+                StorageAPI.setItem(SAVED_MENU_ID, payload);
+                console.log("@@ finished!");
 
                 reset();
               }

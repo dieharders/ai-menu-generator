@@ -6,17 +6,18 @@ import iconLanguage from "../assets/icons/icon-lang.svg";
 import iconSearch from "../assets/icons/icon-search.svg";
 import iconWebsite from "../assets/icons/icon-website.svg";
 import languageCodes from "../helpers/languageCodes";
+import { keys, translate } from "../helpers/appTranslations";
 import styles from "./CommandPallet.module.scss";
 
-const CommandPallet = ({ data, languages }) => {
+const CommandPallet = ({ data }) => {
   const printParams = new URLSearchParams(window.location.search);
   const [printUrl, setPrintUrl] = useState();
+  const lang = printParams.get("lang");
   // const orderParams = new URLSearchParams(window.location.search);
   // const [orderUrl, setOrderUrl] = useState();
-  const website = data?.menu?.website;
+  const website = data?.website;
 
   useEffect(() => {
-    const lang = printParams.get("lang");
     printParams.set("print", true);
     if (!languageCodes?.[lang]) printParams.set("lang", "en");
     const query = printParams.toString();
@@ -38,15 +39,15 @@ const CommandPallet = ({ data, languages }) => {
             </a> */}
       <a href={printUrl} className={styles.iconContainer}>
         <img src={iconPrinter} className={styles.icon} />
-        <p className={styles.title}>Print Version</p>
+        <p className={styles.title}>{translate(keys.PRINT_VERSION)}</p>
       </a>
       <div className={styles.iconContainer}>
         <img src={iconLanguage} className={styles.icon} />
-        <SelectLanguage languages={languages} />
+        <SelectLanguage />
       </div>
       <a href={window.location.origin} className={styles.iconContainer}>
         <img src={iconSearch} className={styles.icon} />
-        <p className={styles.title}>Search</p>
+        <p className={styles.title}>{translate(keys.SEARCH)}</p>
       </a>
       {website && (
         <a
@@ -54,7 +55,7 @@ const CommandPallet = ({ data, languages }) => {
           className={[styles.iconContainer, styles.link].join(" ")}
         >
           <img src={iconWebsite} className={styles.icon} />
-          <p className={styles.title}>Website</p>
+          <p className={styles.title}>{translate(keys.WEBSITE)}</p>
         </a>
       )}
     </div>

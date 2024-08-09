@@ -6,10 +6,12 @@ import styles from "./Home.module.scss";
 const Home = () => {
   return (
     <div className={styles.container}>
-      <div>
-        <h1 className={styles.title}>FoodSee</h1>
+      <div className={styles.titleContainer}>
+        <div className={styles.glow}></div>
+        <h1 className={styles.appTitle}>Omni Menu</h1>
         <p className={styles.description}>
-          Convert pics to interactive food menus.
+          Interact with any food menu pic. Talk to your menu in your native
+          language, ask questions and discover dietary details.
         </p>
       </div>
       <div className={styles.menuContainer}>

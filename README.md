@@ -1,4 +1,4 @@
-# FoodSee (Omenu) - An Ai Food Menu Builder
+# Omni Menu (Omenu) - An Ai Food Menu Builder
 
 Automatically build accessible food menus for everyone.
 

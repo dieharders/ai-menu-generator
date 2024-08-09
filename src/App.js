@@ -3,40 +3,37 @@ import { Provider } from "./Context";
 import Home from "./components/Home";
 import MenuPageForWeb from "./components/MenuPageForWeb";
 import MenuPageForPrint from "./components/MenuPageForPrint";
-// import companies from "./data.json";
+// import menus from "./data.json";
 import { StorageAPI } from "./helpers/storage";
 import Background from "./components/BackgroundSVG";
-// import translate from "./helpers/translateMenu";
+import translate from "./helpers/translateMenu";
 import languageCodes from "./helpers/languageCodes";
 import styles from "./App.module.scss";
+import { SAVED_MENU_ID } from "./components/Generate";
 
 export default function App() {
   const queryParameters = new URLSearchParams(window.location.search);
-  const companyId = queryParameters.get("id");
+  const menuId = queryParameters.get("id");
   const lang = queryParameters.get("lang");
   const language = languageCodes?.[lang] ? lang : "en";
   const isPrint = queryParameters.get("print") === "true";
-  // const company = companies?.find(item => item.companyId === companyId); // data.json
-  const company = useMemo(() => StorageAPI.getItem(companyId), []); // menu
+  const menus = useMemo(() => StorageAPI.getItem(SAVED_MENU_ID), []);
+  const menu = menus?.find((m) => m.language === language);
   const [data, setData] = useState(null);
   const selectedLang = useRef(null);
-  // @TODO Read available translations
-  const languages = [];
 
   useEffect(() => {
     // Set menu data
-    if (data || selectedLang.current === language || !company) return;
-    // @TODO Properly set translation data later...
-    // setData(translate(company, language));
-    setData(company);
+    if (selectedLang.current === language || !menu) return;
+    // Set translation data
+    setData(translate({ data: menus, menu, lang }));
     selectedLang.current = language;
-  }, []);
+  }, [menu]);
 
   useEffect(() => {
-    if (!company?.color) return;
-
-    // Get color scheme from company data
-    const hue = company?.color;
+    // Get color scheme from menu data
+    const hueVal = 260; // 360 degrees total
+    const hue = lang ? menu?.color || hueVal : hueVal;
 
     const primary_sat = "36%";
     const primary_lit = "30%";
@@ -56,16 +53,14 @@ export default function App() {
     rootEl.style.setProperty("--primary", primary);
     rootEl.style.setProperty("--secondary", secondary);
     rootEl.style.setProperty("--light", light);
-  }, [company]);
+  }, [menu]);
 
   return (
     <Provider className={styles}>
       <Background />
-      {companyId && isPrint && <MenuPageForPrint data={data} />}
-      {companyId && !isPrint && (
-        <MenuPageForWeb data={data} languages={languages} />
-      )}
-      {!companyId && <Home />}
+      {menuId && isPrint && <MenuPageForPrint data={data} />}
+      {menuId && !isPrint && <MenuPageForWeb data={data} />}
+      {!menuId && <Home />}
     </Provider>
   );
 }

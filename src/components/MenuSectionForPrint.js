@@ -1,3 +1,4 @@
+import { getImagesData } from "../helpers/getData";
 import styles from "./MenuSectionForPrint.module.scss";
 
 const MenuSectionForPrint = ({ items, sectionName }) => {
@@ -7,26 +8,25 @@ const MenuSectionForPrint = ({ items, sectionName }) => {
       <h2 className={styles.heading}>{sectionName}</h2>
       {/* Sections */}
       <div className={styles.itemsContainer}>
-        {items?.map((meal, index) => (
+        {items?.map((item, index) => (
           <article className={styles.container} key={index}>
             <div className={styles.textContainer}>
               {/* Name */}
-              <h3 className={styles.name}>{meal.name}</h3>
+              <h3 className={styles.name}>{item.name}</h3>
               {/* Description */}
-              <p className={styles.description}>{meal.description}</p>
+              <p className={styles.description}>{item.description}</p>
               {/* Price */}
-              <strong className={styles.price}>${meal.price}</strong>
+              <strong className={styles.price}>${item.price}</strong>
             </div>
             {/* Photo */}
             <div className={styles.imageContainer}>
               <img
                 className={styles.photo}
                 src={
-                  meal.imageSource
-                    ? require(`../assets/images/${meal.imageSource}`)
-                    : ""
+                  getImagesData(item.id).imageSource ||
+                  require(`../assets/images/placeholder.png`)
                 }
-                alt={`${meal.category} - ${meal.name}`}
+                alt={`${item.category} - ${item.name}`}
               />
             </div>
           </article>

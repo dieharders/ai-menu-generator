@@ -4,13 +4,14 @@ import Total from "./Total";
 import CommandPallet from "./CommandPallet";
 import Banner from "./Banner";
 import { renderSections } from "../helpers/render";
+import { getImagesData } from "../helpers/getData";
 import languageCodes from "../helpers/languageCodes";
 import styles from "./MenuPageForWeb.module.scss";
 
-const MenuPageForWeb = ({ data, languages }) => {
+const MenuPageForWeb = ({ data }) => {
   const queryParameters = new URLSearchParams(window.location.search);
   const isOrderMenuVariant = queryParameters.get("order"); // Whether this should track orders
-  const renderSection = ({ section }) => {
+  const renderSection = (section) => {
     return (
       <MenuSection
         key={section?.id}
@@ -36,11 +37,8 @@ const MenuPageForWeb = ({ data, languages }) => {
   return (
     <>
       <div className={styles.bannerPage}>
-        <Banner
-          title={data?.menu?.name}
-          backgroundURL={data?.menu?.bannerImageSource}
-        >
-          <CommandPallet data={data} languages={languages} />
+        <Banner title={data?.name} backgroundURL={getImagesData()?.imageSource}>
+          <CommandPallet data={data} />
         </Banner>
       </div>
       <div className={styles.page}>

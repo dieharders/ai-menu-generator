@@ -1,15 +1,15 @@
 import { useState, useEffect, useMemo } from "react";
-import { ReactComponent as FormSubmitSVG } from "../assets/icons/icon-search.svg";
+// import { ReactComponent as FormSubmitSVG } from "../assets/icons/icon-search.svg";
 import languageCodes from "../helpers/languageCodes";
 import { StorageAPI } from "../helpers/storage";
-import { DEFAULT_MENU_ID } from "../components/Generate";
+import { SAVED_MENU_ID } from "../components/Generate";
 import styles from "./SearchBar.module.scss";
 
 const SearchBar = ({ handleSubmit, handleInputChange }) => {
   const queryParams = new URLSearchParams(window.location.search);
   const [submittedValue, setSubmittedValue] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const defaultMenuExists = StorageAPI.getItem(DEFAULT_MENU_ID);
+  const defaultMenuExists = StorageAPI.getItem(SAVED_MENU_ID);
   const isMenuButtonDisabled = useMemo(() => !defaultMenuExists, []);
 
   const onSubmit = (e) => {
@@ -37,7 +37,8 @@ const SearchBar = ({ handleSubmit, handleInputChange }) => {
 
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      <div className={styles.searchContainer}>
+      {/* We dont need this for now */}
+      {/* <div className={styles.searchContainer}>
         <input
           type="text"
           value={inputValue}
@@ -48,7 +49,7 @@ const SearchBar = ({ handleSubmit, handleInputChange }) => {
         <button type="submit" name="Find Business" className={styles.button}>
           <FormSubmitSVG className={styles.submitIcon} />
         </button>
-      </div>
+      </div> */}
       {/* Show saved menu button */}
       {defaultMenuExists && (
         <button
@@ -57,14 +58,14 @@ const SearchBar = ({ handleSubmit, handleInputChange }) => {
           onClick={() => {
             // Go to generated page
             const queryParams = new URLSearchParams(window.location.search);
-            queryParams.set("id", DEFAULT_MENU_ID);
+            queryParams.set("id", SAVED_MENU_ID);
             const language = "en";
             queryParams.set("lang", language);
             const query = queryParams.toString();
             window.location.href = `${window.location.origin}/?${query}`;
           }}
         >
-          👀 View saved menu
+          View saved menu
         </button>
       )}
     </form>
