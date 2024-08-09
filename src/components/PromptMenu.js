@@ -3,6 +3,7 @@ import { aiActions } from "../actions/aiActions";
 import { DEFAULT_MENU_ID } from "../components/Generate";
 import { StorageAPI } from "../helpers/storage";
 import { Loader } from "./Loader";
+import { ReactComponent as IconSend } from "../assets/icons/logo-sparkles.svg";
 import styles from "./PromptMenu.module.scss";
 
 export const PromptMenu = () => {
@@ -27,7 +28,9 @@ export const PromptMenu = () => {
     res && setAPIKeySubmitted(true);
     setAnswer(`Question: ${promptText}\n\nAnswer: ${res}`);
     setIsFetching(false);
-    setShowPrompt(true);
+    setTimeout(() => {
+      setShowPrompt(true);
+    }, 5000); // show after 5 sec
   };
   const handleEnterEvent = (event) => {
     if (event.key === "Enter") handlePromptRequest();
@@ -52,18 +55,23 @@ export const PromptMenu = () => {
           className={styles.inputText}
         />
       )}
+      {/* Prompt input */}
       {!isFetching && showPrompt && (
-        <input
-          type="text"
-          name="input-prompt-menu"
-          onKeyDown={handleEnterEvent}
-          placeholder="Ask me anything"
-          className={styles.inputText}
-        />
+        <div className={styles.promptInputContainer}>
+          <input
+            type="text"
+            name="input-prompt-menu"
+            onKeyDown={handleEnterEvent}
+            placeholder="Ask me anything"
+            className={styles.inputText}
+            style={{ paddingRight: "4rem" }}
+          />
+          <button className={styles.sendButton} onClick={handlePromptRequest}>
+            <IconSend className={styles.btnIcon} />
+          </button>
+        </div>
         // @TODO Dismiss answer button...
-        // @TODO Add a button to mouse click to send prompt request.
         // @TODO Button next to dismiss to read aloud the answer.
-        // @TODO Add timer to unhide prompt input after 5 second delay
       )}
     </div>
   );

@@ -31,6 +31,44 @@
   outline: none !important;
 }
 
+.promptInputContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-items: stretch;
+  gap: 0.25rem;
+  padding: 0;
+}
+
+.sendButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4rem;
+  height: 100%;
+  border-radius: 0.25rem;
+  border-style: none;
+  text-align: center;
+  padding: 0.25rem;
+  background-color: var(--light);
+  filter: brightness(90%);
+  cursor: pointer;
+}
+.sendButton:hover {
+  filter: brightness(80%);
+}
+.sendButton:hover > * {
+  color: var(--font-secondary);
+}
+
+.btnIcon {
+  color: var(--primary);
+  width: 100%;
+  height: 100%;
+}
+
 .inputText {
   position: relative;
   display: block;
@@ -47,6 +85,7 @@
   font-size: 1.15rem;
   outline-style: solid;
   outline-color: lightgrey;
+  outline-width: 0.15rem;
 }
 
 .inputText::placeholder {
