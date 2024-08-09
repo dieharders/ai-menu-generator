@@ -6,7 +6,7 @@ import { languages } from "../helpers/languageCodes";
 import styles from "./Generate.module.scss";
 
 const createFileHash = (files = []) => {
-  // @TODO Create a hash of the input files. Hash of multiple hashes.
+  // @TODO Create a hash of the input files or hash of multiple hashes.
   return "";
 };
 
