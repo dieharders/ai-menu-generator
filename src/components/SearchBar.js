@@ -5,12 +5,12 @@ import { StorageAPI } from "../helpers/storage";
 import { SAVED_MENU_ID } from "../components/Generate";
 import styles from "./SearchBar.module.scss";
 
-const SearchBar = ({ handleSubmit, handleInputChange }) => {
+const SearchBar = ({ setMenuId, handleSubmit, handleInputChange }) => {
   const queryParams = new URLSearchParams(window.location.search);
   const [submittedValue, setSubmittedValue] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const defaultMenuExists = StorageAPI.getItem(SAVED_MENU_ID);
-  const isMenuButtonDisabled = useMemo(() => !defaultMenuExists, []);
+  const defaultMenu = StorageAPI.getItem(SAVED_MENU_ID);
+  const isMenuButtonDisabled = useMemo(() => !defaultMenu, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +19,7 @@ const SearchBar = ({ handleSubmit, handleInputChange }) => {
     handleSubmit && handleSubmit();
   };
 
+  // Search input value
   const onChange = (e) => {
     setInputValue(e.target.value);
     handleInputChange && handleInputChange();
@@ -51,21 +52,27 @@ const SearchBar = ({ handleSubmit, handleInputChange }) => {
         </button>
       </div> */}
       {/* Show saved menu button */}
-      {defaultMenuExists && (
+      {defaultMenu && (
         <button
           disabled={isMenuButtonDisabled}
           className={styles.inputButton}
           onClick={() => {
-            // Go to generated page
+            // Go to saved page
             const queryParams = new URLSearchParams(window.location.search);
             queryParams.set("id", SAVED_MENU_ID);
             const language = "en";
             queryParams.set("lang", language);
             const query = queryParams.toString();
-            window.location.href = `${window.location.origin}/?${query}`;
+            history.replaceState(
+              null,
+              "",
+              `${window.location.origin}/?${query}`
+            );
+            setMenuId(SAVED_MENU_ID);
+            // window.location.href = `${window.location.origin}/?${query}`;
           }}
         >
-          View saved menu
+          {defaultMenu?.[0]?.name}
         </button>
       )}
     </form>

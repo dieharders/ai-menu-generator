@@ -1,17 +1,13 @@
 import styles from "./DevAPIKeyInput.module.scss";
 
 export const GeminiAPIKeyInput = () => {
-  // const onChange = (e) => {
-  //   setGeminiInputValue(e.target.value);
-  // };
-
   return (
     <div className={styles.container}>
       <input
         type="password"
         name="input-gemini-api-key"
-        // onChange={onChange}
         placeholder="Gemini API key"
+        // onChange={(e) => setKey(e.target.value)}
         className={styles.inputText}
       />
     </div>
@@ -25,6 +21,7 @@ export const OpenAIAPIKeyInput = () => {
         type="password"
         name="input-openai-api-key"
         placeholder="OpenAI API key"
+        // onChange={(e) => setKey(e.target.value)}
         className={styles.inputText}
       />
     </div>

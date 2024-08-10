@@ -10,6 +10,36 @@
   width: 24rem;
 }
 
+.apiMenuContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  color: var(--light);
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  background-color: var(--menu-background);
+  padding-left: 0.5rem;
+  border-radius: 0.25rem;
+  filter: brightness(85%);
+  padding: 0.5rem;
+}
+
+.keysContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.showKeysBtn {
+  width: 3rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
 .titleContainer {
   position: relative;
   display: block;
@@ -71,7 +101,7 @@
   color: var(--light);
   font-size: large;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .footerContainer {

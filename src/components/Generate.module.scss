@@ -1,39 +1,96 @@
 .container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    margin: auto;
-    gap: 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  margin: auto;
+  gap: 1rem;
+}
+
+.back {
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.instructions {
+  color: var(--light);
+  height: fit-content;
+  width: 100%;
+}
+
+.camera {
+  position: absolute;
+  position: relative;
+  top: 0;
+  left: 0;
+  font-size: 6rem;
+  color: var(--light);
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.fileInputContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  width: 100%;
+  padding: 0.25rem;
+  margin: auto;
+  border-radius: 0.5rem;
+  border-color: var(--light);
+  border-style: dashed;
+  border-width: 0.2rem;
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+.fileInput {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.camContainer {
+  width: 100%;
+  height: 100%;
 }
 
 .inputButton {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 10rem;
-    background-color: var(--primary);
-    border-radius: 0.5rem;
-    border-width: 0;
-    color: var(--light);
-    text-align: center;
-    font-weight: bold;
-    font-family: var(--font-primary);
-    font-size: 1.15rem;
-    cursor: pointer;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 10rem;
+  background-color: var(--primary);
+  border-radius: 0.5rem;
+  border-width: 0;
+  color: var(--light);
+  text-align: center;
+  font-weight: bold;
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  cursor: pointer;
 }
-.inputButton:disabled, .inputButton:disabled:hover {
-    color: grey;
-    background-color: var(--secondary);
-    cursor: not-allowed;
+.inputButton:disabled,
+.inputButton:disabled:hover {
+  color: grey;
+  background-color: var(--secondary);
+  cursor: not-allowed;
 }
 .inputButton:hover {
-    background-color: var(--secondary);
-    border-color: var(--secondary);
-    color: wheat;
-    filter: brightness(0.9);
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: wheat;
+  filter: brightness(0.9);
 }
 
 input {
-    width: 100%;
+  width: 100%;
 }

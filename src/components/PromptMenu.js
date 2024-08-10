@@ -13,7 +13,7 @@ export const PromptMenu = () => {
   const menuId = params.get("id");
   const menus = StorageAPI.getItem(menuId);
   const menu = menus?.find((m) => m.id === DEFAULT_MENU_ID);
-  const [apiKeySubmitted, setAPIKeySubmitted] = useState(false);
+  const [showApiKey, setShowAPIKey] = useState(false);
   const { requestAnswer } = aiActions();
   const [isFetching, setIsFetching] = useState(false);
   const [showPrompt, setShowPrompt] = useState(true);
@@ -88,7 +88,8 @@ export const PromptMenu = () => {
           value={answer}
         />
       )}
-      {!apiKeySubmitted && !isFetching && (
+      {/* API key input */}
+      {showApiKey && !isFetching && (
         <input
           type="password"
           name="input-gemini-api-key"
@@ -105,10 +106,21 @@ export const PromptMenu = () => {
             onKeyDown={handleEnterEvent}
             placeholder="Ask me anything"
             className={styles.inputText}
-            style={{ paddingRight: "4rem" }}
+            style={{ paddingRight: "6rem" }}
           />
-          <button className={styles.sendButton} onClick={handlePromptRequest}>
+          <button
+            title="Ask question"
+            className={styles.sendButton}
+            onClick={handlePromptRequest}
+          >
             <IconSend className={styles.btnIcon} />
+          </button>
+          <button
+            title="Show api key input"
+            className={styles.showInputBtn}
+            onClick={() => setShowAPIKey((prev) => !prev)}
+          >
+            <div className={styles.btnIcon}>🔐</div>
           </button>
         </div>
       )}

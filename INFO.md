@@ -78,25 +78,27 @@ Once a menu image is uploaded, we start the build process:
 
 - ✅ Chat prompt Q&A per menu. Use Google AQA model to perform Attributed Question-Answering tasks over a document.
 
-- ❌ Fix eslint for errors.
-
-- ❌ Add $ to OpenAI account to use image generation.
-
 - ✅ Optional: Set company/menu website to button link. Dont show button if no website listed.
 
-- ❌ Optional: Commit some default menu data (min 3) and provide links in a pulldown button.
+- ❌ Add company details card above sections.
 
-  - Probably dont need the search bar if we have a pulldown list
-
-- ❌ Optional: Add company details card above sections.
-
-- ❌ Optional: Implement react toast for UI messages.
+- ❌ Implement react toast for UI messages.
 
   - Show a loading menu (in center view) after clicking "generate". Hide all other UI and only display progress in toast. Provide a "cancel" button to back out to home page and cancel all outgoing requests.
 
-- ❌ Optional: Make server functions on Vercel to make api requests.
+- ❌ Commit some default menu data (min 3) and provide links in a pulldown button.
+
+  - Probably dont need the search bar if we have a pulldown list
+
+- ❌ Add $ to OpenAI account to use image generation.
+
+- ❌ Make server functions on Vercel to make api requests.
+
+  - Put requests behind a password check.
 
 - ❌ Optional: Do a traditional Google search if no images can be generated and use the top result to display. User must tap the placeholder image to consent to seeing images from the web.
+
+- ❌ Optional: Fix eslint for errors.
 
 - ✅ Optional: Fix the printer friendly functionality.
 

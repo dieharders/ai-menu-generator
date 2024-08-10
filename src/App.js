@@ -13,7 +13,7 @@ import { SAVED_MENU_ID } from "./components/Generate";
 
 export default function App() {
   const queryParameters = new URLSearchParams(window.location.search);
-  const menuId = queryParameters.get("id");
+  const [menuId, setMenuId] = useState(queryParameters.get("id"));
   const lang = queryParameters.get("lang");
   const language = languageCodes?.[lang] ? lang : "en";
   const isPrint = queryParameters.get("print") === "true";
@@ -60,7 +60,7 @@ export default function App() {
       <Background />
       {menuId && isPrint && <MenuPageForPrint data={data} />}
       {menuId && !isPrint && <MenuPageForWeb data={data} />}
-      {!menuId && <Home />}
+      {!menuId && <Home setMenuId={setMenuId} />}
     </Provider>
   );
 }

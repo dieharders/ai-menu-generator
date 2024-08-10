@@ -13,14 +13,13 @@ const createFileHash = (files = []) => {
 export const DEFAULT_MENU_ID = "DEFAULT_MENU";
 export const SAVED_MENU_ID = "SAVED_MENU";
 
-export const GenerateMenuButton = () => {
+export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
   const {
     extractMenuDataFromImage,
     convertMenuDataToStructured,
     translateMenuDataToLanguage,
     generateImage,
   } = aiActions();
-  const [isDisabled, setIsDisabled] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
 
   const getImageInputFiles = () =>
@@ -134,11 +133,29 @@ export const GenerateMenuButton = () => {
 
   return (
     <div className={styles.container}>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={() => setIsDisabled(getImageInputFiles()?.length === 0)}
-      ></input>
+      {/* Instructions */}
+      <div className={styles.instructions}>
+        <h1>{isDisabled ? "1. Snap!" : "2. Create"}</h1>
+        <h2>
+          {isDisabled
+            ? "Take picture(s) of a menu to start"
+            : "Convert images to interactive menu"}
+        </h2>
+      </div>
+      {/* File input */}
+      {isDisabled && (
+        <div className={styles.fileInputContainer}>
+          <div className={styles.camContainer}>
+            <div className={styles.camera}>+📸</div>
+            <input
+              className={styles.fileInput}
+              type="file"
+              accept="image/*"
+              onChange={() => setIsDisabled(getImageInputFiles()?.length === 0)}
+            />
+          </div>
+        </div>
+      )}
       {/* Generate button */}
       {!isDisabled && (
         <button
@@ -207,7 +224,13 @@ export const GenerateMenuButton = () => {
             }
           }}
         >
-          {isFetching ? "Waiting..." : isDisabled ? "Choose pic" : "Generate"}
+          {isFetching ? "Waiting..." : isDisabled ? "Choose pic" : "✨Generate"}
+        </button>
+      )}
+      {/* Back button */}
+      {!isDisabled && (
+        <button className={styles.back} onClick={reset}>
+          ↩ Back
         </button>
       )}
     </div>
