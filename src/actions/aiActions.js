@@ -1,6 +1,7 @@
 import { assignUniqueIds } from "../helpers/transformData";
 import languageCodes from "../helpers/languageCodes";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import toast from "react-hot-toast";
 import OpenAI from "openai";
 
 // Use regex to extract text between ```json```
@@ -241,7 +242,7 @@ export const aiActions = () => {
       const obj = JSON.parse(structText);
       return obj;
     } catch (err) {
-      console.error(`Failed to parse structured response.\n${err}`);
+      toast.error(`Failed to parse structured response.\n${err}`);
       return {};
     }
   };
@@ -277,7 +278,7 @@ export const aiActions = () => {
         primary,
       });
     } catch (err) {
-      console.error(`Failed to translate (${lang}):\n\n${err}`);
+      toast.error(`Failed to translate (${lang}):\n\n${err}`);
     }
 
     return obj || {};
@@ -293,7 +294,7 @@ export const aiActions = () => {
       // style: "vivid", // dall-e-3 only
       // quality: "hd", // dall-e-3 only
     });
-    console.log(image.data);
+    return image;
   };
 
   const requestAnswer = async ({ prompt, info }) => {
@@ -308,7 +309,7 @@ export const aiActions = () => {
       const text = response?.text();
       return text;
     } catch (err) {
-      console.error(`Failed to answer question:\n${err}`);
+      toast.error(`Failed to answer question:\n${err}`);
       return "I apologize, something went wrong. I could not answer your question. Please try again.";
     }
   };

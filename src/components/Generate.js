@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { aiActions, OpenAIModels } from "../actions/aiActions";
 import { assignUniqueIds } from "../helpers/transformData";
 import { StorageAPI } from "../helpers/storage";
 import { languages } from "../helpers/languageCodes";
+import toast from "react-hot-toast";
 import styles from "./Generate.module.scss";
 
 const createFileHash = (files = []) => {
@@ -82,7 +83,7 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
           });
         }
       } catch (err) {
-        console.error(err);
+        toast.error(`Failed to generate image:\n${err}`);
       }
       source = await encodeB64(img);
 
@@ -115,7 +116,7 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
             newData.items[itemIndex].imageSource = imageSource;
           }
         } catch (err) {
-          console.error(err);
+          toast.error(`Failed to process images:\n${err}`);
         }
         index += 1;
 
@@ -130,6 +131,67 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
 
     return newData;
   };
+
+  const onClick = useCallback(async () => {
+    try {
+      setIsDisabled(true);
+      setIsFetching(true);
+      const files = getImageInputFiles();
+      const hash = createFileHash(files);
+      // @TODO Exit if name/hash already exists (if storing in cloud)
+      // ...
+      const menuDocument = await extractMenuDataFromImage(files);
+      console.log("@@ extraction successfull:\n", menuDocument);
+      let structuredData = await convertMenuDataToStructured(menuDocument);
+      if (Object.keys(structuredData).length === 0) {
+        throw new Error("structuredData failed");
+      } else {
+        structuredData = assignUniqueIds({
+          data: structuredData,
+          id: DEFAULT_MENU_ID, // mark as the primary document
+          hash,
+        });
+        console.log("@@ structuredData successfull:\n", structuredData);
+        // Generate images
+        console.log("@@ generating images...");
+        structuredData = await generateImages(structuredData);
+        // Create translations
+        const timeout = 5000; // 5 seconds
+        const translations = [];
+        const iterateTranslations = async () => {
+          for (const lang of languages) {
+            console.log("@@ translating: ", lang);
+            // Skip translating the source data
+            if (structuredData.language === lang) continue;
+            // Translate
+            const res = await translateMenuDataToLanguage({
+              data: menuDocument,
+              lang,
+              primary: structuredData,
+            });
+            // Record result
+            translations.push(res);
+            // Wait between calls
+            await waitForTimeout(timeout);
+          }
+          return;
+        };
+        await iterateTranslations();
+        // Store all data locally (text & images)
+        const menuId = structuredData?.id;
+        structuredData.sourceDocument = menuDocument; // save original text in primary data
+        if (!menuId) throw new Error("No id found for menu.");
+        const payload = [structuredData, ...translations];
+        StorageAPI.setItem(SAVED_MENU_ID, payload);
+        toast.success("Finished menu!");
+
+        reset();
+      }
+    } catch (err) {
+      toast.error(`Failed to extract details:\n${err}`);
+      reset();
+    }
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -161,68 +223,17 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
         <button
           disabled={isDisabled}
           className={styles.inputButton}
-          onClick={async () => {
-            try {
-              setIsDisabled(true);
-              setIsFetching(true);
-              const files = getImageInputFiles();
-              const hash = createFileHash(files);
-              // @TODO Exit if name/hash already exists (if storing in cloud)
-              // ...
-              const menuDocument = await extractMenuDataFromImage(files);
-              console.log("@@ extraction successfull:\n", menuDocument);
-              let structuredData = await convertMenuDataToStructured(
-                menuDocument
-              );
-              if (Object.keys(structuredData).length === 0) {
-                throw new Error("structuredData failed");
-              } else {
-                structuredData = assignUniqueIds({
-                  data: structuredData,
-                  id: DEFAULT_MENU_ID, // mark as the primary document
-                  hash,
-                });
-                console.log("@@ structuredData successfull:\n", structuredData);
-                // Generate images
-                console.log("@@ generating images...");
-                structuredData = await generateImages(structuredData);
-                // Create translations
-                const timeout = 5000; // 5 seconds
-                const translations = [];
-                const iterateTranslations = async () => {
-                  for (const lang of languages) {
-                    console.log("@@ translating: ", lang);
-                    // Skip translating the source data
-                    if (structuredData.language === lang) continue;
-                    // Translate
-                    const res = await translateMenuDataToLanguage({
-                      data: menuDocument,
-                      lang,
-                      primary: structuredData,
-                    });
-                    // Record result
-                    translations.push(res);
-                    // Wait between calls
-                    await waitForTimeout(timeout);
-                  }
-                  return;
-                };
-                await iterateTranslations();
-                // Store all data locally (text & images)
-                const menuId = structuredData?.id;
-                structuredData.sourceDocument = menuDocument; // save original text in primary data
-                if (!menuId) throw new Error("No id found for menu.");
-                const payload = [structuredData, ...translations];
-                StorageAPI.setItem(SAVED_MENU_ID, payload);
-                console.log("@@ finished!");
-
-                reset();
-              }
-            } catch (err) {
-              console.error("@@ extraction failed:\n", err);
-              reset();
-            }
-          }}
+          onClick={async () =>
+            toast.promise(onClick(), {
+              style: {
+                minWidth: "6rem",
+              },
+              position: "top-center",
+              loading: "Generating menu...",
+              success: <b>Menu saved!</b>,
+              error: <b>Could not create menu.</b>,
+            })
+          }
         >
           {isFetching ? "Waiting..." : isDisabled ? "Choose pic" : "✨Generate"}
         </button>

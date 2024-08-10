@@ -84,7 +84,11 @@ Once a menu image is uploaded, we start the build process:
 
 - ❌ Implement react toast for UI messages.
 
-  - Show a loading menu (in center view) after clicking "generate". Hide all other UI and only display progress in toast. Provide a "cancel" button to back out to home page and cancel all outgoing requests.
+  - Show a loading menu (in center view) after clicking "generate". Hide all other UI and only display progress in toast.
+
+  - Provide a "cancel" button to back out to home page and cancel all outgoing requests.
+
+  - Generate button doesnt have access to file input if its hidden...save value on page level
 
 - ❌ Commit some default menu data (min 3) and provide links in a pulldown button.
 
