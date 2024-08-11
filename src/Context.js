@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 export const Context = React.createContext();
 
@@ -10,7 +10,7 @@ export const Provider = (props) => {
   const [geminiAPIKey, setGeminiAPIKey] = useState("");
   const [openaiAPIKey, setOpenaiAPIKey] = useState("");
   const [fileInputValue, setFileInputValue] = useState([]);
-  const [loadingText, setLoadingText] = useState("");
+  const loadingText = useRef(null);
   const [menuData, setMenuData] = useState({});
 
   const updateItem = (type, index, count) => {
@@ -32,7 +32,6 @@ export const Provider = (props) => {
         fileInputValue,
         setFileInputValue,
         loadingText,
-        setLoadingText,
         menuId,
         setMenuId,
         menuData,

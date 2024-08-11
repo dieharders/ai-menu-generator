@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext } from "react";
+import { useState, useCallback, useContext, useRef } from "react";
 import { Context } from "../Context";
 import { useAiActions, OpenAIModels } from "../actions/useAiActions";
 import { assignUniqueIds } from "../helpers/transformData";
@@ -23,25 +23,32 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
     generateImage,
   } = useAiActions();
   const [isFetching, setIsFetching] = useState(false);
-  const {
-    openaiAPIKey,
-    fileInputValue,
-    setFileInputValue,
-    loadingText,
-    setLoadingText,
-  } = useContext(Context);
+  const { openaiAPIKey, fileInputValue, setFileInputValue, loadingText } =
+    useContext(Context);
+
+  // Text to show in toast while generating
+  const signalAborted = useRef(false);
+  const setLoadingText = useCallback(
+    (text) => {
+      if (loadingText?.current?.innerText) loadingText.current.innerText = text;
+      if (signalAborted.current) throw new Error("Menu generation aborted.");
+    },
+    [loadingText]
+  );
 
   const getImageInputFiles = useCallback(() => {
     return fileInputValue || [];
   }, [fileInputValue]);
 
   const reset = useCallback(() => {
+    signalAborted.current = false;
+    loadingText.current = null;
     setIsDisabled(true);
     setIsFetching(false);
     const input = document.querySelector("input[type=file]");
     if (input?.value) input.value = "";
     setFileInputValue([]);
-  }, [setFileInputValue, setIsDisabled]);
+  }, [loadingText, setFileInputValue, setIsDisabled]);
 
   const waitForTimeout = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -87,9 +94,11 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
         let img = (await import("../assets/images/placeholder.png")).default;
         try {
           // Call image generation model
-          if (!isOverLimit) {
+          if (!isOverLimit && key) {
             setLoadingText(
-              `Generating image from description (${index}/${total}):\n\n${description}`
+              `Generating image from description (${
+                index - 1
+              }/${total}):\n\n${description}`
             );
 
             img = await generateImage({
@@ -99,7 +108,9 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
           }
           setLoadingText("Skipping image generation. Assigning placeholder.");
         } catch (err) {
-          toast.error(`Failed to generate image:\n${err}`);
+          const msg = `Failed to generate image:\n${err}`;
+          if (isOverLimit || !key) console.error(msg);
+          else toast.error(msg);
         }
         source = await encodeB64(img);
 
@@ -163,17 +174,15 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
 
   const onClick = useCallback(async () => {
     try {
-      setLoadingText("Generating menu...");
       setIsDisabled(true);
       setIsFetching(true);
       const files = getImageInputFiles();
       // @TODO Exit if name/hash already exists (if storing in cloud)
       // ...
-      setLoadingText("Hashing menu...");
       const hash = createFileHash(files);
       setLoadingText("Extracting details from photo(s)...");
       const menuDocument = await extractMenuDataFromImage(files);
-      setLoadingText("Completed extraction.\n\nProcessing details...");
+      setLoadingText("Processing menu details...");
       // Get structured data
       let structuredData = await convertMenuDataToStructured(menuDocument);
       if (Object.keys(structuredData).length === 0) {
@@ -185,8 +194,8 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
           id: DEFAULT_MENU_ID, // mark as the primary document
           hash,
         });
-        setLoadingText("Completed structuring data.\n\nGenerating images...");
         // Generate images
+        setLoadingText("Generating images...");
         structuredData = await generateImages(structuredData);
         // Create translations
         setLoadingText("Processing translations...");
@@ -198,7 +207,7 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
             setLoadingText(
               `Translating for ${lang} (${langIndex}/${
                 languages.length - 1
-              })...`
+              }) ...`
             );
             // Skip translating the source data
             if (structuredData.language === lang) continue;
@@ -223,13 +232,12 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
         if (!menuId) throw new Error("No id found for menu.");
         const payload = [structuredData, ...translations];
         StorageAPI.setItem(SAVED_MENU_ID, payload);
-        toast.success("Finished menu!");
 
         reset();
       }
     } catch (err) {
-      toast.error(`Failed to extract details:\n${err}`);
       reset();
+      return `${err}`;
     }
   }, [
     convertMenuDataToStructured,
@@ -242,63 +250,119 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
     translateMenuDataToLanguage,
   ]);
 
+  const FileInput = () => {
+    return (
+      <div className={styles.fileInputContainer}>
+        <div className={styles.camContainer}>
+          <div className={styles.camera}>+📸</div>
+          <input
+            className={styles.fileInput}
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const _inputURL = e.target.value;
+              const input = document.querySelector("input[type=file]");
+              const files = input?.files;
+              files && setFileInputValue(files);
+              files && setIsDisabled(files?.length === 0);
+            }}
+          />
+        </div>
+      </div>
+    );
+  };
+
+  const LoadingComponent = () => {
+    return (
+      <div className={styles.loadingToast}>
+        <b>Generating...this may take a few minutes</b>
+        <p ref={loadingText}>Reading photo(s)...</p>
+      </div>
+    );
+  };
+
+  const GenerateButton = () => {
+    return (
+      <button
+        disabled={isDisabled}
+        className={styles.inputButton}
+        onClick={async () =>
+          toast.promise(onClick(), {
+            style: {
+              minWidth: "6rem",
+            },
+            position: "top-center",
+            loading: <LoadingComponent />,
+            success: (data) => {
+              // Prevents success event when canceling promise
+              if (!data?.ok) throw new Error(data);
+              return <b>Menu saved! You may view it now.</b>;
+            },
+            error: (err) => (
+              <div>
+                <b>Failed to generate menu 😭</b>
+                <p>{err?.message}</p>
+              </div>
+            ),
+          })
+        }
+      >
+        ✨Generate
+      </button>
+    );
+  };
+
+  const Fetching = () => {
+    return (
+      <>
+        {/* Instructions */}
+        <div className={styles.instructions}>
+          <h1>3. Finish</h1>
+          <h2>Please wait while your menu is created.</h2>
+        </div>
+        {/* Cancel button */}
+        <button
+          className={styles.back}
+          onClick={() => {
+            toast("Canceling request, please wait...");
+            signalAborted.current = true;
+          }}
+        >
+          ❌ Cancel Generation
+        </button>
+      </>
+    );
+  };
+
+  const Main = () => {
+    return (
+      <>
+        {/* Instructions */}
+        <div className={styles.instructions}>
+          <h1>{isDisabled ? "1. Snap!" : "2. Create"}</h1>
+          <h2>
+            {isDisabled
+              ? "Take picture(s) of a menu to start"
+              : "Convert images to interactive menu"}
+          </h2>
+        </div>
+        {/* File input */}
+        {isDisabled && <FileInput />}
+        {/* Generate button */}
+        {!isDisabled && <GenerateButton />}
+        {/* Back button */}
+        {!isDisabled && (
+          <button className={styles.back} onClick={reset}>
+            ↩ Back
+          </button>
+        )}
+      </>
+    );
+  };
+
   return (
     <div className={styles.container}>
-      {/* Instructions */}
-      <div className={styles.instructions}>
-        <h1>{isDisabled ? "1. Snap!" : "2. Create"}</h1>
-        <h2>
-          {isDisabled
-            ? "Take picture(s) of a menu to start"
-            : "Convert images to interactive menu"}
-        </h2>
-      </div>
-      {/* File input */}
-      {isDisabled && (
-        <div className={styles.fileInputContainer}>
-          <div className={styles.camContainer}>
-            <div className={styles.camera}>+📸</div>
-            <input
-              className={styles.fileInput}
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const _inputURL = e.target.value;
-                const input = document.querySelector("input[type=file]");
-                const files = input?.files;
-                files && setFileInputValue(files);
-                files && setIsDisabled(files?.length === 0);
-              }}
-            />
-          </div>
-        </div>
-      )}
-      {/* Generate button */}
-      {!isDisabled && (
-        <button
-          disabled={isDisabled}
-          className={styles.inputButton}
-          onClick={async () =>
-            toast.promise(onClick(), {
-              style: {
-                minWidth: "6rem",
-              },
-              position: "top-center",
-              loading: loadingText,
-              success: <b>Menu saved!</b>,
-              error: <b>Could not create menu.</b>,
-            })
-          }
-        >
-          {isFetching ? "Waiting..." : isDisabled ? "Choose pic" : "✨Generate"}
-        </button>
-      )}
-      {/* Back button */}
-      {!isDisabled && (
-        <button className={styles.back} onClick={reset}>
-          ↩ Back
-        </button>
-      )}
+      {isFetching ? <Fetching /> : <Main />}
     </div>
   );
 };

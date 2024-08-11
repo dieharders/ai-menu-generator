@@ -80,7 +80,7 @@ Once a menu image is uploaded, we start the build process:
 
 - ✅ Optional: Set company/menu website to button link. Dont show button if no website listed.
 
-- ❌ Implement react toast for UI messages.
+- ✅ Implement react toast for UI messages.
 
   - Show a loading menu (in center view) after clicking "generate". Hide all other UI and only display progress in toast.
 
@@ -91,10 +91,6 @@ Once a menu image is uploaded, we start the build process:
 - ❌ Add $ to OpenAI account to use image generation.
 
 - ❌ Commit some default menu data (min 3) and provide links in a pulldown button.
-
-- ✅ Optional: Fix eslint for errors.
-
-- ✅ Optional: Fix the printer friendly functionality.
 
 - ❌ Optional: Make server functions on Vercel to make api requests.
 

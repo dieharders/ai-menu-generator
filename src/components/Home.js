@@ -8,16 +8,7 @@ import styles from "./Home.module.scss";
 const Home = () => {
   const [showKeyInputs, setShowKeyInputs] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
-  const {
-    geminiAPIKey,
-    setGeminiAPIKey,
-    openaiAPIKey,
-    setOpenaiAPIKey,
-    fileInputValue,
-    setFileInputValue,
-    loadingText,
-    setLoadingText,
-  } = useContext(Context);
+  const { setGeminiAPIKey, setOpenaiAPIKey } = useContext(Context);
 
   return (
     <div className={styles.container}>
@@ -33,7 +24,6 @@ const Home = () => {
         <h2 className={styles.title}>Saved menus</h2>
         <SearchBar />
       </div>
-      <h3 className={styles.or}>OR</h3>
       <div className={styles.menuContainer}>
         <h2 className={styles.title}>Create a menu</h2>
         {/* API keys menu */}
@@ -57,12 +47,6 @@ const Home = () => {
         <GenerateMenuButton
           isDisabled={isDisabled}
           setIsDisabled={setIsDisabled}
-          fileInputValue={fileInputValue}
-          setFileInputValue={setFileInputValue}
-          geminiAPIKey={geminiAPIKey}
-          openaiAPIKey={openaiAPIKey}
-          loadingText={loadingText}
-          setLoadingText={setLoadingText}
         />
       </div>
       {/* Footer */}

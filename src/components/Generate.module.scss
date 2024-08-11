@@ -7,6 +7,13 @@
   gap: 1rem;
 }
 
+.loadingToast {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 .back {
   cursor: pointer;
   padding: 0.25rem;
