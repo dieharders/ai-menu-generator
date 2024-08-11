@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "../Context";
 import SearchBar from "./SearchBar";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
 import { GenerateMenuButton } from "./Generate";
 import styles from "./Home.module.scss";
 
-const Home = ({ setMenuId }) => {
+const Home = () => {
   const [showKeyInputs, setShowKeyInputs] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const {
+    geminiAPIKey,
+    setGeminiAPIKey,
+    openaiAPIKey,
+    setOpenaiAPIKey,
+    fileInputValue,
+    setFileInputValue,
+    loadingText,
+    setLoadingText,
+  } = useContext(Context);
 
   return (
     <div className={styles.container}>
@@ -20,7 +31,7 @@ const Home = ({ setMenuId }) => {
       </div>
       <div className={styles.menuContainer}>
         <h2 className={styles.title}>Saved menus</h2>
-        <SearchBar setMenuId={setMenuId} />
+        <SearchBar />
       </div>
       <h3 className={styles.or}>OR</h3>
       <div className={styles.menuContainer}>
@@ -28,7 +39,7 @@ const Home = ({ setMenuId }) => {
         {/* API keys menu */}
         {!isDisabled && (
           <div className={styles.apiMenuContainer}>
-            <span>Enter api keys</span>
+            <span>Enter api keys 👉</span>
             <button
               className={styles.showKeysBtn}
               onClick={() => setShowKeyInputs((prev) => !prev)}
@@ -37,15 +48,21 @@ const Home = ({ setMenuId }) => {
             </button>
           </div>
         )}
-        {showKeyInputs && (
+        {!isDisabled && showKeyInputs && (
           <span className={styles.keysContainer}>
-            <GeminiAPIKeyInput />
-            <OpenAIAPIKeyInput />
+            <GeminiAPIKeyInput setKey={setGeminiAPIKey} />
+            <OpenAIAPIKeyInput setKey={setOpenaiAPIKey} />
           </span>
         )}
         <GenerateMenuButton
           isDisabled={isDisabled}
           setIsDisabled={setIsDisabled}
+          fileInputValue={fileInputValue}
+          setFileInputValue={setFileInputValue}
+          geminiAPIKey={geminiAPIKey}
+          openaiAPIKey={openaiAPIKey}
+          loadingText={loadingText}
+          setLoadingText={setLoadingText}
         />
       </div>
       {/* Footer */}

@@ -1,17 +1,17 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
+import { Context } from "../Context";
 // import { ReactComponent as FormSubmitSVG } from "../assets/icons/icon-search.svg";
-import languageCodes from "../helpers/languageCodes";
+import { languageCodes } from "../helpers/languageCodes";
 import { StorageAPI } from "../helpers/storage";
 import { SAVED_MENU_ID } from "../components/Generate";
 import styles from "./SearchBar.module.scss";
 
-const SearchBar = ({ setMenuId, handleSubmit, handleInputChange }) => {
-  const queryParams = new URLSearchParams(window.location.search);
+const SearchBar = ({ handleSubmit }) => {
   const [submittedValue, setSubmittedValue] = useState("");
   const [inputValue, setInputValue] = useState("");
   const defaultMenu = StorageAPI.getItem(SAVED_MENU_ID);
-  const isMenuButtonDisabled = useMemo(() => !defaultMenu, []);
-
+  const isMenuButtonDisabled = useMemo(() => !defaultMenu, [defaultMenu]);
+  const { setMenuId } = useContext(Context);
   const onSubmit = (e) => {
     e.preventDefault();
     setSubmittedValue(inputValue);
@@ -19,14 +19,9 @@ const SearchBar = ({ setMenuId, handleSubmit, handleInputChange }) => {
     handleSubmit && handleSubmit();
   };
 
-  // Search input value
-  const onChange = (e) => {
-    setInputValue(e.target.value);
-    handleInputChange && handleInputChange();
-  };
-
   useEffect(() => {
     if (!submittedValue) return;
+    const queryParams = new URLSearchParams(window.location.search);
     queryParams.set("id", submittedValue);
     // Set the default language. Could include a toggle w/ search bar?
     const lang = queryParams.get("lang");
@@ -38,7 +33,7 @@ const SearchBar = ({ setMenuId, handleSubmit, handleInputChange }) => {
 
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      {/* We dont need this for now */}
+      {/* We dont need search func for now */}
       {/* <div className={styles.searchContainer}>
         <input
           type="text"
@@ -63,13 +58,14 @@ const SearchBar = ({ setMenuId, handleSubmit, handleInputChange }) => {
             const language = "en";
             queryParams.set("lang", language);
             const query = queryParams.toString();
-            history.replaceState(
-              null,
-              "",
-              `${window.location.origin}/?${query}`
-            );
-            setMenuId(SAVED_MENU_ID);
-            // window.location.href = `${window.location.origin}/?${query}`;
+            // Doesnt re-load page when setting
+            // history.replaceState(
+            //   null,
+            //   "",
+            //   `${window.location.origin}/?${query}`
+            // );
+            window.location.href = `${window.location.origin}/?${query}`; // re-load page on nav
+            SAVED_MENU_ID && setMenuId(SAVED_MENU_ID);
           }}
         >
           {defaultMenu?.[0]?.name}

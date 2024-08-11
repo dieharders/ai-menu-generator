@@ -2,8 +2,16 @@ import React, { useState } from "react";
 
 export const Context = React.createContext();
 
-export const Provider = props => {
-  const [items, setItems] = useState({});
+export const Provider = (props) => {
+  const queryParameters = new URLSearchParams(window.location.search);
+  // State vals
+  const [items, setItems] = useState({}); // purchase items
+  const [menuId, setMenuId] = useState(queryParameters.get("id"));
+  const [geminiAPIKey, setGeminiAPIKey] = useState("");
+  const [openaiAPIKey, setOpenaiAPIKey] = useState("");
+  const [fileInputValue, setFileInputValue] = useState([]);
+  const [loadingText, setLoadingText] = useState("");
+  const [menuData, setMenuData] = useState({});
 
   const updateItem = (type, index, count) => {
     const key = `${type.toLowerCase()}-${index}`;
@@ -14,7 +22,23 @@ export const Provider = props => {
   };
 
   return (
-    <Context.Provider value={[items, updateItem]}>
+    <Context.Provider
+      value={{
+        purchases: [items, updateItem],
+        geminiAPIKey,
+        setGeminiAPIKey,
+        openaiAPIKey,
+        setOpenaiAPIKey,
+        fileInputValue,
+        setFileInputValue,
+        loadingText,
+        setLoadingText,
+        menuId,
+        setMenuId,
+        menuData,
+        setMenuData,
+      }}
+    >
       {props.children}
     </Context.Provider>
   );

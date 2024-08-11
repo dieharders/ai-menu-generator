@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { getLanguageLabel } from "../helpers/languageCodes";
-import languageCodes from "../helpers/languageCodes";
-import { languages } from "../helpers/languageCodes";
+import {
+  getLanguageLabel,
+  languageCodes,
+  languages,
+} from "../helpers/languageCodes";
 import styles from "./SelectLanguage.module.scss";
 
 const SelectLanguage = ({ onAction, showForm }) => {
   const queryParameters = new URLSearchParams(window.location.search);
   const lang = queryParameters.get("lang");
   const language = languageCodes?.[lang] ? lang : "en";
-  const [currentLang, setCurrentLang] = useState();
+  const [_currentLang, setCurrentLang] = useState();
 
   const onLangSelection = (e) => {
     const code = e?.target?.value;
@@ -49,8 +51,10 @@ const SelectLanguage = ({ onAction, showForm }) => {
       onChange={onAction || onLangSelection}
       className={[styles.container, styles.bgColor].join(" ")}
     >
-      <label className={styles.langLabel}>Language: </label>
-      {renderSelection}
+      <label className={styles.langLabel}>
+        Language:
+        {renderSelection}
+      </label>
     </form>
   );
 

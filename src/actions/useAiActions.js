@@ -1,6 +1,8 @@
 import { assignUniqueIds } from "../helpers/transformData";
-import languageCodes from "../helpers/languageCodes";
+import { languageCodes } from "../helpers/languageCodes";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { useContext } from "react";
+import { Context } from "../Context";
 import toast from "react-hot-toast";
 import OpenAI from "openai";
 
@@ -9,37 +11,6 @@ const extractJsonFromText = (input) => {
   const regex = /```json([\s\S]*?)```/;
   const match = input.match(regex);
   return match ? match[1].trim() : null;
-};
-
-// Gen AI
-let genGemini, genOpenAI;
-const getGeminiAPIKey = () => {
-  // For testing and demonstration ONLY!
-  const inputComponent = document.querySelector(
-    "input[name=input-gemini-api-key]"
-  );
-  const API_KEY = inputComponent.value;
-  return API_KEY;
-};
-const getOpenAIAPIKey = () => {
-  // For testing and demonstration ONLY!
-  const inputComponent = document.querySelector(
-    "input[name=input-openai-api-key]"
-  );
-  const API_KEY = inputComponent.value;
-  return {
-    apiKey: API_KEY,
-    // Enable for testing ONLY
-    dangerouslyAllowBrowser: true,
-  };
-};
-const getGenGemini = () => {
-  if (!genGemini) genGemini = new GoogleGenerativeAI(getGeminiAPIKey());
-  return genGemini;
-};
-const getGenOpenAI = () => {
-  if (!genOpenAI) genOpenAI = new OpenAI(getOpenAIAPIKey());
-  return genOpenAI;
 };
 
 // Models
@@ -176,7 +147,33 @@ const extractMenuPrompt = `These are picture(s) of menu from a restaurant or foo
  * gemini-1.5-flash:   15RPM, 1,500 RPD, Input (Audio, images, videos, and text), Input Tokens (1Million)
  * text-embedding-004: 1,500 RPM,        Input (Text), Input Tokens (2K), Dimension Size (768)
  */
-export const aiActions = () => {
+export const useAiActions = () => {
+  const { geminiAPIKey, openaiAPIKey } = useContext(Context);
+  // Gen AI
+  let genGemini, genOpenAI;
+  const getGeminiAPIKey = () => {
+    // For testing and demonstration ONLY!
+    // const inputComponent = document.querySelector("input[name=input-gemini-api-key]");
+    return geminiAPIKey || "";
+  };
+  const getOpenAIAPIKey = () => {
+    // For testing and demonstration ONLY!
+    // const inputComponent = document.querySelector("input[name=input-openai-api-key]");
+    return {
+      apiKey: openaiAPIKey || "",
+      // Enable for testing ONLY
+      dangerouslyAllowBrowser: true,
+    };
+  };
+  const getGenGemini = () => {
+    if (!genGemini) genGemini = new GoogleGenerativeAI(getGeminiAPIKey());
+    return genGemini;
+  };
+  const getGenOpenAI = () => {
+    if (!genOpenAI) genOpenAI = new OpenAI(getOpenAIAPIKey());
+    return genOpenAI;
+  };
+
   const extractMenuDataFromImage = async (filesUpload) => {
     if (!filesUpload || filesUpload.length === 0)
       throw new Error("Please provide an image.");
@@ -256,7 +253,6 @@ export const aiActions = () => {
     // Ask to translate doc and return as json
     const language = languageCodes[lang];
     const prompt = `Translate the following text into ${language} language:\n\n${data}\n\nNow convert the translated text into json in this format:\n\n${structuredOutputFormat}`;
-    console.log("@@ prompting translator...");
     let obj = {};
     try {
       // Generate
@@ -267,7 +263,7 @@ export const aiActions = () => {
       const result = await model.generateContent(prompt);
       const response = result?.response;
       // Extract json from "text"
-      console.log("@@ translated text:", lang, response.text());
+      // console.log("@@ translated text:", lang, response.text());
       const jsonStr = extractJsonFromText(response.text());
       obj = JSON.parse(jsonStr);
       // Assign language
@@ -278,7 +274,7 @@ export const aiActions = () => {
         primary,
       });
     } catch (err) {
-      toast.error(`Failed to translate (${lang}):\n\n${err}`);
+      toast.error(`Failed to translate (${lang}):\n${err}`);
     }
 
     return obj || {};

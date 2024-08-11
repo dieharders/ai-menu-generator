@@ -1,9 +1,7 @@
 import styles from "./Banner.module.scss";
 
 const Banner = ({ title, backgroundURL, children }) => {
-  const defaultImage = require("../assets/banners/wolfhoundbar.png");
-  const path = backgroundURL || defaultImage;
-  const url = `url(${path})`;
+  const url = `url(${backgroundURL})`;
 
   return (
     <div className={styles.page}>

@@ -47,6 +47,11 @@
   border-width: 0.2rem;
   font-size: 1rem;
   overflow: hidden;
+  filter: brightness(90%);
+}
+.fileInputContainer:hover {
+  filter: brightness(125%);
+  background-color: var(--menu-background);
 }
 
 .fileInput {

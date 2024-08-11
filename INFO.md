@@ -80,31 +80,29 @@ Once a menu image is uploaded, we start the build process:
 
 - ✅ Optional: Set company/menu website to button link. Dont show button if no website listed.
 
-- ❌ Add company details card above sections.
-
 - ❌ Implement react toast for UI messages.
 
   - Show a loading menu (in center view) after clicking "generate". Hide all other UI and only display progress in toast.
 
   - Provide a "cancel" button to back out to home page and cancel all outgoing requests.
 
-  - Generate button doesnt have access to file input if its hidden...save value on page level
-
-- ❌ Commit some default menu data (min 3) and provide links in a pulldown button.
-
-  - Probably dont need the search bar if we have a pulldown list
+- ❌ Add company details card above sections.
 
 - ❌ Add $ to OpenAI account to use image generation.
 
-- ❌ Make server functions on Vercel to make api requests.
+- ❌ Commit some default menu data (min 3) and provide links in a pulldown button.
+
+- ✅ Optional: Fix eslint for errors.
+
+- ✅ Optional: Fix the printer friendly functionality.
+
+- ❌ Optional: Make server functions on Vercel to make api requests.
 
   - Put requests behind a password check.
 
+- ❌ Optional: Allow multiple images to be uploaded (max 3 total)
+
 - ❌ Optional: Do a traditional Google search if no images can be generated and use the top result to display. User must tap the placeholder image to consent to seeing images from the web.
-
-- ❌ Optional: Fix eslint for errors.
-
-- ✅ Optional: Fix the printer friendly functionality.
 
 - ❌ Optional: Convert existing website to Next.js (openbrew website already has similar setup, use app router).
 

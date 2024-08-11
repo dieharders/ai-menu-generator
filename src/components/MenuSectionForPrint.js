@@ -1,5 +1,6 @@
 import { getImagesData } from "../helpers/getData";
 import styles from "./MenuSectionForPrint.module.scss";
+import placeholder from "../assets/images/placeholder.png";
 
 const MenuSectionForPrint = ({ items, sectionName }) => {
   return (
@@ -22,10 +23,7 @@ const MenuSectionForPrint = ({ items, sectionName }) => {
             <div className={styles.imageContainer}>
               <img
                 className={styles.photo}
-                src={
-                  getImagesData(item.id).imageSource ||
-                  require(`../assets/images/placeholder.png`)
-                }
+                src={getImagesData(item.id).imageSource || placeholder}
                 alt={`${item.category} - ${item.name}`}
               />
             </div>

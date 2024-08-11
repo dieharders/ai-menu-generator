@@ -173,5 +173,7 @@ const translations = {
 export const translate = (key) => {
   const params = new URLSearchParams(window.location.search);
   const langCode = params.get("lang");
-  return translations[langCode][key];
+  const t = translations?.[langCode]?.[key];
+  if (!t) console.error("Translation failed. No data exists.");
+  return t;
 };

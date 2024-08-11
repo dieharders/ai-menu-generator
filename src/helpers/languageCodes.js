@@ -14,5 +14,3 @@ export const languageCodes = {
 export const getLanguageLabel = (languageCode) => {
   return languageCodes?.[languageCode];
 };
-
-export default languageCodes;

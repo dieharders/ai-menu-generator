@@ -11,7 +11,8 @@ import styles from "./Total.module.scss";
  */
 export default function Total({ hasOrderInput }) {
   const isOrder = hasOrderInput === "true";
-  const [items] = useContext(Context);
+  const { purchases } = useContext(Context);
+  const [items] = purchases;
 
   const totalPrice = Object.keys(items).reduce((acc, curr) => {
     const [group, item] = curr.split("-");
