@@ -1,31 +1,15 @@
-const translateMenu = (companyData, lang) => {
-    const menu = companyData?.menu;
-    const englishMenu = menu?.en;
-    const targetLanguage = menu?.[lang];
+import toast from "react-hot-toast";
 
-    if (!targetLanguage) {
-        console.error('No target language available!');
-        // Return default menu data
-        return { ...companyData, menu: englishMenu };
-    }
+const translateMenu = ({ data, menu, lang }) => {
+  const englishMenu = data?.find((i) => i.language === "en");
 
-    try {
-        let newMenu = {};
-        Object.entries(targetLanguage)?.forEach(([sectionTitle, section], index) => {
-            const englishSection = Object.values(englishMenu)?.[index];
-            const translatedSection = section.map((item, itemIndex) => {
-                const englishItem = englishSection?.[itemIndex];
-                return { ...englishItem, ...item };
-            });
+  if (!lang) {
+    toast.error("No target language available!");
+    // Return default menu data
+    return englishMenu;
+  }
 
-            newMenu[sectionTitle] = translatedSection;
-        });
-        const parsedData = { ...companyData, menu: newMenu };
-        return parsedData;
-    } catch(err) {
-        console.error('Error translating!', err);
-    };
+  return menu;
 };
 
 export default translateMenu;
- 

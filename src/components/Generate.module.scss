@@ -1,0 +1,174 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  margin: auto;
+  gap: 1rem;
+}
+
+.loadingToast {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.btn {
+  width: 100%;
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: large;
+  font-weight: bold;
+}
+.btn:disabled {
+  cursor: not-allowed;
+}
+
+.title {
+  color: var(--light);
+  text-align: center;
+  margin: auto;
+  margin-bottom: 2rem;
+  font-size: x-large;
+}
+
+.instructions {
+  color: var(--light);
+  height: fit-content;
+  width: 100%;
+}
+
+.camera {
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  font-size: 6rem;
+  color: var(--light);
+  text-align: center;
+  font-family: var(--font-secondary);
+  width: 100%;
+  height: 100%;
+}
+.camera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  line-height: normal;
+}
+
+.camera div {
+  margin: auto;
+  padding: 0;
+}
+
+.btnsContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.apiMenuContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  color: wheat;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  background-color: var(--menu-background);
+  padding-left: 0.5rem;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+
+.showKeysBtn {
+  font-size: 1.25rem;
+  align-self: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+.keysContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fileInputContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  height: 12rem;
+  width: 100%;
+  padding: 0.25rem;
+  margin: auto;
+  border-radius: 0.5rem;
+  border-color: var(--light);
+  border-style: dashed;
+  border-width: 0.2rem;
+  font-size: 1rem;
+  overflow: hidden;
+  background-color: var(--menu-background);
+  filter: brightness(90%);
+}
+.fileInputContainer:hover {
+  filter: brightness(125%);
+  background-color: var(--menu-background);
+}
+
+.fileInput {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.camContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.inputButton {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 10rem;
+  background-color: var(--primary);
+  border-radius: 0.5rem;
+  border-width: 0;
+  color: var(--light);
+  text-align: center;
+  font-weight: bold;
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.inputButton:disabled,
+.inputButton:disabled:hover {
+  color: grey;
+  background-color: var(--secondary);
+  cursor: not-allowed;
+}
+.inputButton:hover {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: wheat;
+  filter: brightness(0.9);
+}
+
+input {
+  width: 100%;
+}

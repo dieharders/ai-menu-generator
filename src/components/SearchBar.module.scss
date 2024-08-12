@@ -1,55 +1,91 @@
-
 .form {
-    position: relative;
-    display: flex;
-    height: 2.5rem;
-    margin: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 1rem;
+}
+
+.searchContainer {
+  position: relative;
+  display: flex;
+  height: 2.5rem;
+  margin: auto;
 }
 
 .inputText {
-    position: relative;
-    display: block;
-    border-radius: 0.25rem;
-    border-style: solid;
-    border-color: var(--primary);
-    color: wheat;
-    background-color: var(--primary);
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    margin-left: 0.1rem;
-    margin-right: 0.75rem;
-    text-align: center;
-    font-family: var(--font-primary);
-    font-size: 1.15rem;
+  position: relative;
+  display: block;
+  border-radius: 0.25rem;
+  border-style: solid;
+  border-color: var(--secondary);
+  color: wheat;
+  background-color: var(--menu-background);
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  margin-left: 0.1rem;
+  margin-right: 0.75rem;
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 1.15rem;
 }
 
 .inputText::placeholder {
-    color: wheat;
+  color: wheat;
 }
 
 input.inputText:hover {
-    background-color: var(--secondary);
-    border-color: var(--secondary);
-    filter: brightness(0.9);
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  filter: brightness(0.9);
 }
 
 input.inputText:focus {
-    outline: none;
-    border-color: var(--secondary);
-    background-color: var(--secondary);
+  outline: none;
+  border-color: var(--secondary);
+  background-color: var(--secondary);
+}
+
+.inputButton {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 2.5rem;
+  background-color: var(--primary);
+  border-radius: 0.25rem;
+  border-width: 0;
+  color: var(--light);
+  text-align: center;
+  font-weight: bold;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  filter: brightness(0.85);
+  cursor: pointer;
+}
+.inputButton:disabled,
+.inputButton:disabled:hover {
+  color: grey;
+  background-color: var(--secondary);
+  cursor: not-allowed;
+}
+.inputButton:hover {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: var(--light);
 }
 
 .button {
-    position: relative;
-    display: block;
-    width: fit-content;
-    height: 100%;
+  position: relative;
+  display: block;
+  width: fit-content;
+  height: 100%;
+  cursor: pointer;
 }
 
 .submitIcon {
-    color: var(--background);
-    margin: auto;
-    width: 2rem;
-    padding: 0.25rem;
+  color: var(--background);
+  margin: auto;
+  width: 2rem;
+  padding: 0.25rem;
 }

@@ -111,9 +111,9 @@ export default function Logo({ src }) {
 
   const imageIcon = (
     <div className={styles.logo}>
-      <img src={`logos/${src}`} className={styles.imageIcon} />
+      <img alt="icon" src={`logos/${src}`} className={styles.imageIcon} />
     </div>
-    )
+  );
 
   return src ? imageIcon : svgIcon;
 }

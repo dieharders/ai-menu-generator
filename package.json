@@ -1,12 +1,20 @@
 {
-  "name": "react-restaurant-menu",
-  "version": "1.0.1",
-  "description": "Simple menu order sheet made with React",
+  "name": "ai-food-menu-builder",
+  "version": "1.1.0",
+  "description": "This app takes a user uploaded picture of a food menu and creates an interactive and accessible version.",
   "keywords": [
-    "react"
+    "react",
+    "ai",
+    "llm",
+    "food",
+    "menu"
   ],
   "main": "src/index.js",
   "dependencies": {
+    "nanoid": "^5.0.7",
+    "react-hot-toast": "^2.4.1",
+    "@google/generative-ai": "^0.16.0",
+    "openai": "^4.55.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
@@ -14,6 +22,7 @@
     "puppeteer": "^20.5.0"
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.6.2",
     "sass": "^1.62.1",
     "typescript": "3.3.3"
   },

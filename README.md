@@ -1,8 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Oh! Menu - An Ai Food Menu Builder
 
-## Where to find Webpack config
+Automatically build accessible food menus from pictures.
 
-You can find all webpack config inside `node_modules/react-scripts/config`. Webpack configuration is being handled by react-scripts.
+Built by OpenBrewAi - https://www.openbrewai.com
+
+## How it works
+
+Snap a pic of a food menu and Ai will turn that into an interactive version complete with images, translations, health info and more. Even talk to the menu as if it were your waiter.
+
+## Features
+
+### Interactive Menu
+
+View the menu digitally as a website or talk to it like a waiter and ask questions about each menu.
+
+### Pics of Food
+
+If no image exists, one will be generated based on the description. Never guess about what you are about to order.
+
+### Translations
+
+Switch the menu to any of several languages.
+
+### Ingredient Breakdown
+
+Lists ingredients in each food item and any associated health risk (allergy) info.
+
+### Save a Screenshot
+
+Save the menu to your device for later viewing offline.
+
+## Screenshot Tool using Puppeteer
+
+This script will create an image or "printable" version of the menu that can be used to embed online or store locally for later viewing without internet connection.
+
+Run `npm start` to start the app on localhost:3000.
+
+Run `node puppeteer-screenshot` from the `src/tools` dir.
+
+This will go through each menu page, open a headless browser and export a screenshot to `src/tools/screenshots`.
 
 ## Available Scripts
 
@@ -10,37 +46,14 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### Deploy to Hosting via Vercel
+## Deploy to Hosting via Vercel
 
 When pushing to `/main` branch Vercel will automatically deploy website.
 
-### Screenshot Tool using Puppeteer
+## Where to find Webpack config
 
-Run `npm start` to start the app on localhost:3000.
-Run `node puppeteer-screenshot` from the `src/tools` dir.
-This will go through each company, open a headless browser and export a screenshot to `src/tools/screenshots`.
-
-### Made with:
-
-Restaurant Menu Layout: [react-restaurant-menu](https://codesandbox.io/s/react-restaurant-menu-i4d3o)
+You can find all webpack config inside `node_modules/react-scripts/config`. Webpack configuration is being handled by react-scripts.
