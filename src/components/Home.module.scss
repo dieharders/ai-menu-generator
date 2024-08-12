@@ -10,36 +10,6 @@
   width: 24rem;
 }
 
-.apiMenuContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: space-between;
-  color: var(--light);
-  gap: 0.5rem;
-  font-size: 1.25rem;
-  background-color: var(--menu-background);
-  padding-left: 0.5rem;
-  border-radius: 0.25rem;
-  filter: brightness(85%);
-  padding: 0.5rem;
-}
-
-.keysContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.showKeysBtn {
-  width: 3rem;
-  font-size: 1.25rem;
-  cursor: pointer;
-  align-self: flex-end;
-}
-
 .titleContainer {
   position: relative;
   display: block;
@@ -77,6 +47,7 @@
   text-align: center;
   margin: auto;
   margin-bottom: 2rem;
+  font-size: x-large;
 }
 
 .appTitle {
@@ -84,6 +55,9 @@
   margin-bottom: 2.5rem;
   font-size: 2.5rem;
   font-weight: bolder;
+}
+
+.appTitleContainer {
   background: -webkit-linear-gradient(hsl(263, 100%, 70%), hsl(192, 100%, 10%));
   -webkit-background-clip: text;
   background-clip: text;

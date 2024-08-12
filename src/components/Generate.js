@@ -4,6 +4,7 @@ import { useAiActions, OpenAIModels } from "../actions/useAiActions";
 import { assignUniqueIds } from "../helpers/transformData";
 import { StorageAPI } from "../helpers/storage";
 import { languages } from "../helpers/languageCodes";
+import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
 import toast from "react-hot-toast";
 import styles from "./Generate.module.scss";
 
@@ -15,7 +16,12 @@ const createFileHash = (_files = []) => {
 export const DEFAULT_MENU_ID = "DEFAULT_MENU";
 export const SAVED_MENU_ID = "SAVED_MENU";
 
-export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
+export const GenerateMenu = ({
+  isDisabled,
+  setIsDisabled,
+  stepIndex,
+  setStepIndex,
+}) => {
   const {
     extractMenuDataFromImage,
     convertMenuDataToStructured,
@@ -23,8 +29,13 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
     generateImage,
   } = useAiActions();
   const [isFetching, setIsFetching] = useState(false);
-  const { openaiAPIKey, fileInputValue, setFileInputValue, loadingText } =
-    useContext(Context);
+  const {
+    fileInputValue,
+    setFileInputValue,
+    loadingText,
+    geminiAPIKeyRef,
+    openaiAPIKeyRef,
+  } = useContext(Context);
 
   // Text to show in toast while generating
   const signalAborted = useRef(false);
@@ -41,6 +52,7 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
   }, [fileInputValue]);
 
   const reset = useCallback(() => {
+    setStepIndex(0);
     signalAborted.current = false;
     loadingText.current = null;
     setIsDisabled(true);
@@ -48,7 +60,7 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
     const input = document.querySelector("input[type=file]");
     if (input?.value) input.value = "";
     setFileInputValue([]);
-  }, [loadingText, setFileInputValue, setIsDisabled]);
+  }, [loadingText, setFileInputValue, setIsDisabled, setStepIndex]);
 
   const waitForTimeout = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -85,7 +97,7 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
       // Check api key
       const key =
         document.querySelector("input[name=input-openai-api-key]")?.value ||
-        openaiAPIKey;
+        openaiAPIKeyRef.current;
       const timeout = isOverLimit || !key ? 100 : 25000; // 25 sec or 100ms if over limit or no expected requests
 
       // Return an image as a base64 string
@@ -169,11 +181,12 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
 
       return newData;
     },
-    [generateImage, openaiAPIKey, setLoadingText]
+    [generateImage, openaiAPIKeyRef, setLoadingText]
   );
 
   const onClick = useCallback(async () => {
     try {
+      setStepIndex(4);
       setIsDisabled(true);
       setIsFetching(true);
       const files = getImageInputFiles();
@@ -247,6 +260,7 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
     reset,
     setIsDisabled,
     setLoadingText,
+    setStepIndex,
     translateMenuDataToLanguage,
   ]);
 
@@ -254,7 +268,9 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
     return (
       <div className={styles.fileInputContainer}>
         <div className={styles.camContainer}>
-          <div className={styles.camera}>+📸</div>
+          <div className={styles.camera}>
+            <div>📸</div>
+          </div>
           <input
             className={styles.fileInput}
             type="file"
@@ -315,21 +331,110 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
   const Fetching = () => {
     return (
       <>
-        {/* Instructions */}
         <div className={styles.instructions}>
-          <h1>3. Finish</h1>
-          <h2>Please wait while your menu is created.</h2>
+          {/* Title */}
+          <h1 className={styles.title}>Building menu</h1>
+          {/* Instructions */}
+          <h2>Please wait...</h2>
         </div>
-        {/* Cancel button */}
-        <button
-          className={styles.back}
-          onClick={() => {
-            toast("Canceling request, please wait...");
-            signalAborted.current = true;
-          }}
-        >
-          ❌ Cancel Generation
-        </button>
+        <div className={styles.btnsContainer}>
+          {/* Cancel button */}
+          <button
+            className={styles.btn}
+            onClick={() => {
+              toast("Canceling request, please wait...");
+              signalAborted.current = true;
+            }}
+          >
+            ❌ Cancel Generation
+          </button>
+        </div>
+      </>
+    );
+  };
+
+  const Menu4 = () => {
+    return (
+      <>
+        <div className={styles.instructions}>
+          {/* Title */}
+          <h1 className={styles.title}>3. Start</h1>
+          {/* Instructions */}
+          <h2>Convert images to an interactive menu.</h2>
+        </div>
+        {/* Generate button */}
+        <GenerateButton />
+        <div className={styles.btnsContainer}>
+          {/* Back button */}
+          <button className={styles.btn} onClick={() => setStepIndex(2)}>
+            ↩ Back
+          </button>
+        </div>
+      </>
+    );
+  };
+
+  const Menu3 = () => {
+    return (
+      <>
+        <div className={styles.instructions}>
+          {/* Title */}
+          <h1 className={styles.title}>2. Snap a pic!</h1>
+          {/* Instructions */}
+          <h2>Take picture(s) of your menu to upload.</h2>
+        </div>
+        {/* File Input */}
+        <FileInput />
+        <div className={styles.btnsContainer}>
+          {/* Back button */}
+          <button className={styles.btn} onClick={() => setStepIndex(1)}>
+            ↩ Back
+          </button>
+          {/* Next button */}
+          <button
+            className={styles.btn}
+            onClick={() => setStepIndex(3)}
+            disabled={isDisabled}
+          >
+            Next ➡
+          </button>
+        </div>
+      </>
+    );
+  };
+
+  const Menu2 = () => {
+    return (
+      <>
+        <div className={styles.instructions}>
+          {/* Title */}
+          <h1 className={styles.title}>1. Enter api keys</h1>
+          {/* API keys menu */}
+          <div className={styles.apiMenuContainer}>
+            <span>Testing purposes only</span>
+            <div className={styles.showKeysBtn}>🔐</div>
+          </div>
+          <span className={styles.keysContainer}>
+            <GeminiAPIKeyInput inputValue={geminiAPIKeyRef} />
+            <OpenAIAPIKeyInput inputValue={openaiAPIKeyRef} />
+          </span>
+        </div>
+        <div className={styles.btnsContainer}>
+          {/* Back button */}
+          <button
+            className={styles.btn}
+            onClick={() => {
+              setStepIndex(0);
+              reset();
+            }}
+          >
+            ↩ Back
+          </button>
+          {/* Next button */}
+          <button className={styles.btn} onClick={() => setStepIndex(2)}>
+            Next ➡
+          </button>
+        </div>
       </>
     );
   };
@@ -337,32 +442,34 @@ export const GenerateMenuButton = ({ isDisabled, setIsDisabled }) => {
   const Main = () => {
     return (
       <>
-        {/* Instructions */}
         <div className={styles.instructions}>
-          <h1>{isDisabled ? "1. Snap!" : "2. Create"}</h1>
-          <h2>
-            {isDisabled
-              ? "Take picture(s) of a menu to start"
-              : "Convert images to interactive menu"}
-          </h2>
+          {/* Title */}
+          <h1 className={styles.title}>Create a menu</h1>
+          {/* Instructions */}
+          <h2 style={{ textAlign: "center" }}>📷+🤖=📃</h2>
         </div>
-        {/* File input */}
-        {isDisabled && <FileInput />}
-        {/* Generate button */}
-        {!isDisabled && <GenerateButton />}
-        {/* Back button */}
-        {!isDisabled && (
-          <button className={styles.back} onClick={reset}>
-            ↩ Back
-          </button>
-        )}
+        {/* Next button */}
+        <button className={styles.btn} onClick={() => setStepIndex(1)}>
+          🚀 Start
+        </button>
       </>
     );
   };
 
-  return (
-    <div className={styles.container}>
-      {isFetching ? <Fetching /> : <Main />}
-    </div>
-  );
+  const switchMenu = () => {
+    switch (stepIndex) {
+      case 0:
+        return <Main />;
+      case 1:
+        return <Menu2 />;
+      case 2:
+        return <Menu3 />;
+      case 3:
+        return isFetching ? <Fetching /> : <Menu4 />;
+      default:
+        return <Main />;
+    }
+  };
+
+  return <div className={styles.container}>{switchMenu()}</div>;
 };

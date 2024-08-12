@@ -14,9 +14,23 @@
   gap: 0.25rem;
 }
 
-.back {
+.btn {
+  width: 100%;
   cursor: pointer;
   padding: 0.25rem;
+  font-size: large;
+  font-weight: bold;
+}
+.btn:disabled {
+  cursor: not-allowed;
+}
+
+.title {
+  color: var(--light);
+  text-align: center;
+  margin: auto;
+  margin-bottom: 2rem;
+  font-size: x-large;
 }
 
 .instructions {
@@ -26,15 +40,67 @@
 }
 
 .camera {
-  position: absolute;
+  display: block;
   position: relative;
   top: 0;
   left: 0;
   font-size: 6rem;
   color: var(--light);
   text-align: center;
+  font-family: var(--font-secondary);
   width: 100%;
   height: 100%;
+}
+.camera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  line-height: normal;
+}
+
+.camera div {
+  margin: auto;
+  padding: 0;
+}
+
+.btnsContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.apiMenuContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  color: var(--light);
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  background-color: var(--menu-background);
+  padding-left: 0.5rem;
+  border-radius: 0.25rem;
+  filter: brightness(85%);
+  padding: 0.5rem;
+}
+
+.showKeysBtn {
+  font-size: 1.25rem;
+  align-self: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+.keysContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .fileInputContainer {
@@ -44,7 +110,7 @@
   justify-items: center;
   justify-content: center;
   align-items: center;
-  height: 10rem;
+  height: 12rem;
   width: 100%;
   padding: 0.25rem;
   margin: auto;

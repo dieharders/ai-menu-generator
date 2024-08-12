@@ -1,4 +1,4 @@
-# Omni Menu (Omenu) - An Ai Food Menu Builder
+# OMenu (Omni Menu) - An Ai Food Menu Builder
 
 Automatically build accessible food menus for everyone.
 

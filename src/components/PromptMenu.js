@@ -18,7 +18,7 @@ export const PromptMenu = () => {
   const menus = StorageAPI.getItem(menuId);
   const menu = menus?.find((m) => m.id === DEFAULT_MENU_ID);
   const [showApiKey, setShowAPIKey] = useState(false);
-  const { setGeminiAPIKey } = useContext(Context);
+  const { geminiAPIKeyRef } = useContext(Context);
   const { requestAnswer } = useAiActions();
   const [isFetching, setIsFetching] = useState(false);
   const [showPrompt, setShowPrompt] = useState(true);
@@ -37,10 +37,20 @@ export const PromptMenu = () => {
     setIsFetching(false);
     setTimeout(() => {
       setShowPrompt(true);
-    }, 5000); // show after 5 sec
+    }, 5000); // show prompt input after 5 sec
   };
+  const toastHandlePrompt = async () =>
+    toast.promise(handlePromptRequest(), {
+      style: {
+        minWidth: "6rem",
+      },
+      position: "top-center",
+      loading: "Thinking...",
+      success: <b>Here is your answer!</b>,
+      error: <b>Could not answer your question 😭</b>,
+    });
   const handleEnterEvent = (event) => {
-    if (event.key === "Enter") handlePromptRequest();
+    if (event.key === "Enter") toastHandlePrompt();
   };
 
   const onDismiss = () => {
@@ -95,7 +105,7 @@ export const PromptMenu = () => {
       {/* API key input */}
       {showApiKey && !isFetching && (
         <GeminiAPIKeyInput
-          setKey={setGeminiAPIKey}
+          inputValue={geminiAPIKeyRef}
           className={styles.inputText}
         />
       )}
@@ -113,17 +123,7 @@ export const PromptMenu = () => {
           <button
             title="Ask question"
             className={styles.sendButton}
-            onClick={() =>
-              toast.promise(handlePromptRequest(), {
-                style: {
-                  minWidth: "6rem",
-                },
-                position: "top-center",
-                loading: "Thinking...",
-                success: <b>Here is your answer!</b>,
-                error: <b>Could not answer your question 😭</b>,
-              })
-            }
+            onClick={toastHandlePrompt}
           >
             <IconSend className={styles.btnIcon} />
           </button>

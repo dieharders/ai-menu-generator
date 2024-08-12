@@ -7,8 +7,8 @@ export const Provider = (props) => {
   // State vals
   const [items, setItems] = useState({}); // purchase items
   const [menuId, setMenuId] = useState(queryParameters.get("id"));
-  const [geminiAPIKey, setGeminiAPIKey] = useState("");
-  const [openaiAPIKey, setOpenaiAPIKey] = useState("");
+  const geminiAPIKeyRef = useRef("");
+  const openaiAPIKeyRef = useRef("");
   const [fileInputValue, setFileInputValue] = useState([]);
   const loadingText = useRef(null);
   const [menuData, setMenuData] = useState({});
@@ -25,10 +25,8 @@ export const Provider = (props) => {
     <Context.Provider
       value={{
         purchases: [items, updateItem],
-        geminiAPIKey,
-        setGeminiAPIKey,
-        openaiAPIKey,
-        setOpenaiAPIKey,
+        geminiAPIKeyRef,
+        openaiAPIKeyRef,
         fileInputValue,
         setFileInputValue,
         loadingText,

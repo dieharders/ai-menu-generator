@@ -1,52 +1,39 @@
-import { useState, useContext } from "react";
-import { Context } from "../Context";
+import { useState } from "react";
 import SearchBar from "./SearchBar";
-import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
-import { GenerateMenuButton } from "./Generate";
+import { GenerateMenu } from "./Generate";
 import styles from "./Home.module.scss";
 
 const Home = () => {
-  const [showKeyInputs, setShowKeyInputs] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
   const [isDisabled, setIsDisabled] = useState(true);
-  const { setGeminiAPIKey, setOpenaiAPIKey } = useContext(Context);
 
   return (
     <div className={styles.container}>
+      {/* App title */}
       <div className={styles.titleContainer}>
         <div className={styles.glow}></div>
-        <h1 className={styles.appTitle}>Omni Menu</h1>
+        <h1 className={styles.appTitle}>
+          <span className={styles.appTitleContainer}>Oh</span>
+          <span>😲</span>
+          <span className={styles.appTitleContainer}>! Menu</span>
+        </h1>
         <p className={styles.description}>
           Interact with any food menu pic. Talk to your menu in your native
           language, ask questions and discover dietary details.
         </p>
       </div>
+      {/* Saved menus */}
       <div className={styles.menuContainer}>
         <h2 className={styles.title}>Saved menus</h2>
         <SearchBar />
       </div>
+      {/* Instructions */}
       <div className={styles.menuContainer}>
-        <h2 className={styles.title}>Create a menu</h2>
-        {/* API keys menu */}
-        {!isDisabled && (
-          <div className={styles.apiMenuContainer}>
-            <span>Enter api keys 👉</span>
-            <button
-              className={styles.showKeysBtn}
-              onClick={() => setShowKeyInputs((prev) => !prev)}
-            >
-              🔐
-            </button>
-          </div>
-        )}
-        {!isDisabled && showKeyInputs && (
-          <span className={styles.keysContainer}>
-            <GeminiAPIKeyInput setKey={setGeminiAPIKey} />
-            <OpenAIAPIKeyInput setKey={setOpenaiAPIKey} />
-          </span>
-        )}
-        <GenerateMenuButton
+        <GenerateMenu
           isDisabled={isDisabled}
           setIsDisabled={setIsDisabled}
+          stepIndex={stepIndex}
+          setStepIndex={setStepIndex}
         />
       </div>
       {/* Footer */}

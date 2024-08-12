@@ -158,19 +158,19 @@ const extractMenuPrompt = `These are picture(s) of menu from a restaurant or foo
  * text-embedding-004: 1,500 RPM,        Input (Text), Input Tokens (2K), Dimension Size (768)
  */
 export const useAiActions = () => {
-  const { geminiAPIKey, openaiAPIKey } = useContext(Context);
+  const { geminiAPIKeyRef, openaiAPIKeyRef } = useContext(Context);
   // Gen AI
   let genGemini, genOpenAI;
   const getGeminiAPIKey = () => {
     // For testing and demonstration ONLY!
     // const inputComponent = document.querySelector("input[name=input-gemini-api-key]");
-    return geminiAPIKey || "";
+    return geminiAPIKeyRef.current || "";
   };
   const getOpenAIAPIKey = () => {
     // For testing and demonstration ONLY!
     // const inputComponent = document.querySelector("input[name=input-openai-api-key]");
     return {
-      apiKey: openaiAPIKey || "",
+      apiKey: openaiAPIKeyRef.current || "",
       // Enable for testing ONLY
       dangerouslyAllowBrowser: true,
     };

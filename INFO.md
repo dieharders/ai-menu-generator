@@ -88,7 +88,11 @@ Once a menu image is uploaded, we start the build process:
 
 - ✅ Add company details card above sections.
 
-- ❌ Re-design home page layout.
+- ✅ Re-design home page layout.
+
+  - Inputs not working on home page, cant enter text.
+
+  - Input on menu page cant save value if hidden (add a useState).
 
 - ❌ Add more detailed breakdown example for "health" and "allergy"
 
