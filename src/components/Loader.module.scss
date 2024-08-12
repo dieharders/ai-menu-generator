@@ -1,12 +1,5 @@
 // https://codepen.io/jkantner/pen/mdMydQO
 
-// * {
-//   border: 0;
-//   box-sizing: border-box;
-//   margin: 0;
-//   padding: 0;
-// }
-
 :root {
   --hue: 223;
   --bg: hsl(var(--hue), 10%, 90%);
@@ -18,15 +11,6 @@
   --white-d: hsl(var(--hue), 10%, 45%);
   // font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
 }
-
-// body {
-//   background-color: var(--bg);
-//   color: var(--fg);
-//   font: 1em/1.5 sans-serif;
-//   height: 100vh;
-//   display: grid;
-//   place-items: center;
-// }
 
 .container {
   position: relative;

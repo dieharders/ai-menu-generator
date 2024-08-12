@@ -1,6 +1,6 @@
-# OMenu (Omni Menu) - An Ai Food Menu Builder
+# Oh! Menu - An Ai Food Menu Builder
 
-Automatically build accessible food menus for everyone.
+Automatically build accessible food menus from pictures.
 
 Built by OpenBrewAi - https://www.openbrewai.com
 

@@ -1,7 +1,7 @@
 {
-  "name": "accessible-ai-food-menu-builder",
+  "name": "ai-food-menu-builder",
   "version": "1.1.0",
-  "description": "This app takes a user uploaded picture of a food menu and creates an interactive and accessible version hosted online for anyone to use.",
+  "description": "This app takes a user uploaded picture of a food menu and creates an interactive and accessible version.",
   "keywords": [
     "react",
     "ai",

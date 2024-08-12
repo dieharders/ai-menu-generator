@@ -166,8 +166,7 @@ const translations = {
 
 /**
  * Translate words in app to other language.
- * @param {*} lang
- * @param {*} key
+ * @param {string} key
  * @returns
  */
 export const translate = (key) => {

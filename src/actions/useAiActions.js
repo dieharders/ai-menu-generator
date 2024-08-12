@@ -273,7 +273,6 @@ export const useAiActions = () => {
       const result = await model.generateContent(prompt);
       const response = result?.response;
       // Extract json from "text"
-      // console.log("@@ translated text:", lang, response.text());
       const jsonStr = extractJsonFromText(response.text());
       obj = JSON.parse(jsonStr);
       // Assign language

@@ -6,7 +6,7 @@ import styles from "./Total.module.scss";
 
 /**
  * This appears at the footer.
- * @param {any} hasOrderInput
+ * @param {boolean} hasOrderInput
  * @returns
  */
 export default function Total({ hasOrderInput }) {

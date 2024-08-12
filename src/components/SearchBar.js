@@ -58,7 +58,7 @@ const SearchBar = ({ handleSubmit }) => {
             const language = "en";
             queryParams.set("lang", language);
             const query = queryParams.toString();
-            // Doesnt re-load page when setting
+            // Wont re-load page when setting
             // history.replaceState(
             //   null,
             //   "",

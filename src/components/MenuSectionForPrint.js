@@ -23,7 +23,7 @@ const MenuSectionForPrint = ({ items, sectionName }) => {
             <div className={styles.imageContainer}>
               <img
                 className={styles.photo}
-                src={getImagesData(item.id).imageSource || placeholder}
+                src={getImagesData?.(item.id)?.imageSource || placeholder}
                 alt={`${item.category} - ${item.name}`}
               />
             </div>
