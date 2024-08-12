@@ -17,6 +17,7 @@ const MenuPageForWeb = () => {
   const { menuData: data } = useContext(Context);
   usePage();
   const isOrderMenuVariant = queryParameters.get("order"); // Whether this should track orders
+
   const renderSection = (section) => {
     return (
       <MenuSection
@@ -45,6 +46,12 @@ const MenuPageForWeb = () => {
       <div className={styles.bannerPage}>
         <Banner
           title={data?.name}
+          description={data?.description}
+          type={data?.type}
+          category={data?.category}
+          contact={data?.contact}
+          location={data?.location}
+          cost={data?.cost}
           backgroundURL={getImagesData()?.imageSource || placeholder}
         >
           <CommandPallet data={data} />

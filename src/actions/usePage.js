@@ -39,8 +39,8 @@ export const usePage = () => {
     const primary_sat = "36%";
     const primary_lit = "30%";
 
-    const secondary_sat = "33%";
-    const secondary_lit = "36%";
+    const secondary_sat = "30%";
+    const secondary_lit = "48%";
 
     const light_sat = "43%";
     const light_lit = "96%";

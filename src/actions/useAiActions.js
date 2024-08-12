@@ -40,13 +40,21 @@ const extractionOutputFormat = `
 
 (american, japanese, greek)
 
+## Category
+
+(bar, restaurant, food truck, chain, take-out)
+
 ## Contact Info
 
-(if none exists, leave out)
+((XXX)XXX-XXXX, if none exists, leave out)
 
 ## Location Info
 
 (if none exists, leave out)
+
+## Cost
+
+(Least to most expensive: $, $$, $$$, $$$$)
 
 ## Theme Color
 
@@ -110,8 +118,10 @@ const structuredOutputFormat = `
   "id": "", // leave blank
   "description": "",
   "type": "",
+  "category: "",
   "contact": "",
   "location": "",
+  "cost": "",
   "color": 0,
   "website": "",
   "language": "",

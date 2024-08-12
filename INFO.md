@@ -86,7 +86,11 @@ Once a menu image is uploaded, we start the build process:
 
   - Provide a "cancel" button to back out to home page and cancel all outgoing requests.
 
-- ❌ Add company details card above sections.
+- ✅ Add company details card above sections.
+
+- ❌ Re-design home page layout.
+
+- ❌ Add more detailed breakdown example for "health" and "allergy"
 
 - ❌ Add $ to OpenAI account to use image generation.
 
