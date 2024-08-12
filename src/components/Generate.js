@@ -328,7 +328,7 @@ export const GenerateMenu = ({
     );
   };
 
-  const Fetching = () => {
+  const Loading = () => {
     return (
       <>
         <div className={styles.instructions}>
@@ -446,7 +446,7 @@ export const GenerateMenu = ({
           {/* Title */}
           <h1 className={styles.title}>Create a menu</h1>
           {/* Instructions */}
-          <h2 style={{ textAlign: "center" }}>📷+🤖=📃</h2>
+          <h2 style={{ textAlign: "center", fontSize: "3rem" }}>📷+🤖=📃</h2>
         </div>
         {/* Next button */}
         <button className={styles.btn} onClick={() => setStepIndex(1)}>
@@ -465,7 +465,9 @@ export const GenerateMenu = ({
       case 2:
         return <Menu3 />;
       case 3:
-        return isFetching ? <Fetching /> : <Menu4 />;
+        return <Menu4 />;
+      case 4:
+        return <Loading />;
       default:
         return <Main />;
     }

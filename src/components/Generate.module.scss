@@ -78,13 +78,12 @@
   flex-direction: row;
   align-items: stretch;
   justify-content: space-between;
-  color: var(--light);
+  color: wheat;
   gap: 0.5rem;
   font-size: 1.25rem;
   background-color: var(--menu-background);
   padding-left: 0.5rem;
   border-radius: 0.25rem;
-  filter: brightness(85%);
   padding: 0.5rem;
 }
 
@@ -120,6 +119,7 @@
   border-width: 0.2rem;
   font-size: 1rem;
   overflow: hidden;
+  background-color: var(--menu-background);
   filter: brightness(90%);
 }
 .fileInputContainer:hover {

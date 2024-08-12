@@ -10,16 +10,15 @@ const Home = () => {
   return (
     <div className={styles.container}>
       {/* App title */}
+      <h1 className={styles.appTitle}>
+        <span className={styles.appTitleContainer}>Oh</span>
+        <span>😲</span>
+        <span className={styles.appTitleContainer}>! Menu</span>
+      </h1>
       <div className={styles.titleContainer}>
-        <div className={styles.glow}></div>
-        <h1 className={styles.appTitle}>
-          <span className={styles.appTitleContainer}>Oh</span>
-          <span>😲</span>
-          <span className={styles.appTitleContainer}>! Menu</span>
-        </h1>
         <p className={styles.description}>
           Interact with any food menu pic. Talk to your menu in your native
-          language, ask questions and discover dietary details.
+          language and ask questions.
         </p>
       </div>
       {/* Saved menus */}

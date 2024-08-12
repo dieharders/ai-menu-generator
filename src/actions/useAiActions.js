@@ -106,11 +106,29 @@ const extractionOutputFormat = `
 
 ### Health Info
 
-(if none exists generate one)
+Nutritional Info
+
+Calories:
+
+Protein:
+
+Total Fat:
+
+Cholesterol:
+
+Sodium:
+
+Total Carbohydrates:
+
+Health Benefits:
+
+Dietary Considerations:
+
+Vegan/Vegetarian?
 
 ### Allergy Info
 
-(if none exists generate one)
+(contains fish, dairy, nuts, or other common allergens)
 `;
 const structuredOutputFormat = `
 {
