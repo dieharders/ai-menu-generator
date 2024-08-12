@@ -40,7 +40,7 @@ const extractionOutputFormat = `
 
 (american, japanese, greek)
 
-## Category
+## Establishment Category
 
 (bar, restaurant, food truck, chain, take-out)
 
@@ -54,7 +54,7 @@ const extractionOutputFormat = `
 
 ## Cost
 
-(Least to most expensive: $, $$, $$$, $$$$)
+(how expensive on scale: $, $$, $$$, $$$$)
 
 ## Theme Color
 
@@ -92,7 +92,7 @@ const extractionOutputFormat = `
 
 (USD, YEN, EUR)
 
-### Category
+### Food Category
 
 (protein, grain, vegetable, fruit, dairy, food, alcoholic beverage, non-alcoholic beverage, other)
 
@@ -104,31 +104,13 @@ const extractionOutputFormat = `
 
 (if none exists generate one based on description, ingredients, price, item name, section name)
 
-### Health Info
+### Health (Nutritional) Info
 
-Nutritional Info
-
-Calories:
-
-Protein:
-
-Total Fat:
-
-Cholesterol:
-
-Sodium:
-
-Total Carbohydrates:
-
-Health Benefits:
-
-Dietary Considerations:
-
-Vegan/Vegetarian?
+(if none exists generate one based on source of calories, protein, fat, cholesterol, carbs. whether it is vegan/vegetarian or dietary considerations)
 
 ### Allergy Info
 
-(contains fish, dairy, nuts, or other common allergens)
+(list if it contains any fish, dairy, nuts, or other common allergens)
 `;
 const structuredOutputFormat = `
 {

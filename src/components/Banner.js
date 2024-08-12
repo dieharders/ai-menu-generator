@@ -23,7 +23,7 @@ const Banner = ({
           <span>
             <b>{cost || "$"}</b>
             <b>{category || "restaurant"}</b>
-            <b>{type || "american"}</b>
+            <b>{type}</b>
           </span>
           <span>
             <b>{contact || "No contact"}</b>

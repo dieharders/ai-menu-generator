@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext, useRef } from "react";
+import { useCallback, useContext, useRef } from "react";
 import { Context } from "../Context";
 import { useAiActions, OpenAIModels } from "../actions/useAiActions";
 import { assignUniqueIds } from "../helpers/transformData";
@@ -28,7 +28,6 @@ export const GenerateMenu = ({
     translateMenuDataToLanguage,
     generateImage,
   } = useAiActions();
-  const [isFetching, setIsFetching] = useState(false);
   const {
     fileInputValue,
     setFileInputValue,
@@ -56,7 +55,6 @@ export const GenerateMenu = ({
     signalAborted.current = false;
     loadingText.current = null;
     setIsDisabled(true);
-    setIsFetching(false);
     const input = document.querySelector("input[type=file]");
     if (input?.value) input.value = "";
     setFileInputValue([]);
@@ -188,7 +186,6 @@ export const GenerateMenu = ({
     try {
       setStepIndex(4);
       setIsDisabled(true);
-      setIsFetching(true);
       const files = getImageInputFiles();
       // @TODO Exit if name/hash already exists (if storing in cloud)
       // ...
