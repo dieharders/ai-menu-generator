@@ -116,7 +116,7 @@ export const PromptMenu = () => {
             type="text"
             name="input-prompt-menu"
             onKeyDown={handleEnterEvent}
-            placeholder="Ask me anything"
+            placeholder="Ask me anything..."
             className={styles.inputText}
             style={{ paddingRight: "6rem" }}
           />

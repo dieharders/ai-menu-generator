@@ -11,9 +11,9 @@ const Home = () => {
     <div className={styles.container}>
       {/* App title */}
       <h1 className={styles.appTitle}>
-        <span className={styles.appTitleContainer}>Oh</span>
+        <span className={styles.appTitleContainer}>Oh!</span>
         <span>😲</span>
-        <span className={styles.appTitleContainer}>! Menu</span>
+        <span className={styles.appTitleContainer}>Menu</span>
       </h1>
       <div className={styles.titleContainer}>
         <p className={styles.description}>

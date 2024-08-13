@@ -1,4 +1,4 @@
-# Oh! Menu - An Ai Food Menu Builder
+# Oh!😲Menu - Ai Food Menu Builder
 
 Automatically build accessible food menus from pictures.
 
@@ -26,9 +26,33 @@ Switch the menu to any of several languages.
 
 Lists ingredients in each food item and any associated health risk (allergy) info.
 
+### Data Stored locally
+
+Menu data is stored on-device in LocalStorage.
+
 ### Save a Screenshot
 
 Save the menu to your device for later viewing offline.
+
+### Image Generation via OpenAI DaLL-E
+
+- [OpenAI API Key](https://platform.openai.com/api-keys)
+
+- [OpenAi Image Gen](https://platform.openai.com/docs/api-reference/images/create)
+
+- [OpenAi Rate Limits](https://platform.openai.com/settings/organization/limits)
+
+### Text Generation via Google Gemini
+
+- [SDK](https://github.com/google-gemini/generative-ai-js)
+
+- [API](https://ai.google.dev/gemini-api/docs/api-overview)
+
+- [API Key](https://aistudio.google.com/app/u/3/apikey)
+
+- [Tutorial](https://ai.google.dev/gemini-api/docs/get-started/tutorial)
+
+- [Rate Limits](https://ai.google.dev/gemini-api/docs/models/gemini)
 
 ## Screenshot Tool using Puppeteer
 

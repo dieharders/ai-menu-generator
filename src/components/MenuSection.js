@@ -56,6 +56,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
         {/* Photo */}
         <div className={styles.imageContainer}>
           <img
+            title={item.imageDescription}
             className={styles.photo}
             src={getImagesData(item.id)?.imageSource || placeholder}
             alt={`${item.category} - ${item.name}`}

@@ -20,12 +20,12 @@ const Banner = ({
         />
         <div className={styles.details}>
           <h1 className={styles.title}>{title || "Restaurant"}</h1>
-          <span>
+          <span className={styles.detailSpan}>
             <b>{cost || "$"}</b>
             <b>{category || "restaurant"}</b>
             <b>{type}</b>
           </span>
-          <span>
+          <span className={styles.detailSpan}>
             <b>{contact || "No contact"}</b>
             <b>{location || "No location"}</b>
           </span>
