@@ -342,7 +342,7 @@ export const GenerateMenu = ({
             Stay on page until complete.
           </b>
           <div className={styles.loaderContainer}>
-            <Loader />
+            <Loader className={styles.loaderContainer} />
           </div>
         </div>
         <div className={styles.btnsContainer}>

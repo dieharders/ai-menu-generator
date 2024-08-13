@@ -17,23 +17,25 @@ const Home = () => {
       </h1>
       <div className={styles.titleContainer}>
         <p className={styles.description}>
-          Interact with any food menu pic. Talk to your menu in your native
-          language and ask questions.
+          Interact with any food menu pic in multiple languages. Browse
+          nutrition and other info.
         </p>
       </div>
-      {/* Saved menus */}
-      <div className={styles.menuContainer}>
-        <h2 className={styles.title}>Saved menus</h2>
-        <SearchBar />
-      </div>
-      {/* Instructions */}
-      <div className={styles.menuContainer}>
-        <GenerateMenu
-          isDisabled={isDisabled}
-          setIsDisabled={setIsDisabled}
-          stepIndex={stepIndex}
-          setStepIndex={setStepIndex}
-        />
+      <div className={styles.menusContainer}>
+        {/* Saved Menus */}
+        <div className={styles.menuContainer}>
+          <h2 className={styles.title}>Saved menus</h2>
+          <SearchBar />
+        </div>
+        {/* Create Menus */}
+        <div className={styles.menuContainer} style={{ width: "28rem" }}>
+          <GenerateMenu
+            isDisabled={isDisabled}
+            setIsDisabled={setIsDisabled}
+            stepIndex={stepIndex}
+            setStepIndex={setStepIndex}
+          />
+        </div>
       </div>
       {/* Footer */}
       <div className={styles.footerContainer}>

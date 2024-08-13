@@ -7,12 +7,15 @@
   padding: 2rem;
   padding-top: 14vh;
   padding-bottom: 6rem;
-  width: 24rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .titleContainer {
   position: relative;
   display: block;
+  width: 24rem;
   padding: 1rem;
   border-width: 0.1rem;
   border-radius: 1rem;
@@ -50,9 +53,19 @@
 //     0 0 140px 90px rgb(179, 102, 255);
 // }
 
+.menusContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
 .menuContainer {
   position: relative;
   display: block;
+  width: 24rem;
   margin: 0;
   padding: 1rem;
   border-width: 0.1rem;
@@ -79,16 +92,16 @@
 .appTitle {
   color: var(--primary);
   margin: 0;
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: bolder;
-  z-index: 1;
+  // z-index: 1;
 }
 
 .appTitleContainer {
   background: -webkit-linear-gradient(
     hsl(0, 0%, 100%),
     hsl(263, 100%, 70%),
-    hsl(192, 100%, 15%)
+    hsl(192, 100%, 19%)
   );
   color: #f4daff;
   -webkit-background-clip: text;
@@ -108,6 +121,7 @@
   font-size: large;
   text-align: center;
   margin-bottom: 1rem;
+  width: 24rem;
 }
 
 .footerContainer {
