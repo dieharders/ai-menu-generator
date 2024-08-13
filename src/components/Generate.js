@@ -89,40 +89,43 @@ export const GenerateMenu = ({
   };
 
   const generateImages = useCallback(
-    async (data, numGenerations) => {
+    async (data) => {
       const maxGenerations = 10;
-      const isOverLimit = numGenerations >= maxGenerations;
+
       // Check api key
-      const key =
-        document.querySelector("input[name=input-openai-api-key]")?.value ||
-        openaiAPIKeyRef.current;
-      const timeout = isOverLimit || !key ? 100 : 25000; // 25 sec or 100ms if over limit or no expected requests
+      const key = openaiAPIKeyRef.current;
 
       // Return an image as a base64 string
       const createEncodedImage = async (description, index, total) => {
         let source = "";
-        let img = (await import("../assets/images/placeholder.png")).default;
+        const isOverLimit = index >= maxGenerations;
         try {
           // Call image generation model
           if (!isOverLimit && key) {
             setLoadingText(
-              `Generating image from description (${
-                index - 1
-              }/${total}):\n\n${description}`
+              `Generating image from description (${index}/${total}):\n\n${description}`
             );
 
-            img = await generateImage({
+            const imgRes = await generateImage({
               prompt: description,
               model: OpenAIModels.DALL_E_2,
             });
+            const parsed = imgRes?.data?.[0]?.["b64_json"];
+            source = `data:image/png;base64,${parsed}`;
+          } else {
+            const img = (await import("../assets/images/placeholder.png"))
+              .default;
+            source = await encodeB64(img);
           }
           setLoadingText("Skipping image generation. Assigning placeholder.");
         } catch (err) {
           const msg = `Failed to generate image:\n${err}`;
           if (isOverLimit || !key) console.error(msg);
           else toast.error(msg);
+          const img = (await import("../assets/images/placeholder.png"))
+            .default;
+          source = await encodeB64(img);
         }
-        source = await encodeB64(img);
 
         return source;
       };
@@ -151,8 +154,8 @@ export const GenerateMenu = ({
             const descr = item?.description;
             const imageSource = await createEncodedImage(
               descr,
-              index + 1,
-              totalItems.length - 1
+              index,
+              totalItems.length
             );
             // Assign for menu banner image
             if (index === 0) newData.imageSource = imageSource;
@@ -169,6 +172,8 @@ export const GenerateMenu = ({
           index += 1;
 
           // Wait between calls
+          const isOverLimit = index >= maxGenerations;
+          const timeout = isOverLimit || !key ? 100 : 25000; // 25 sec or 100ms if over limit or no expected requests
           await waitForTimeout(timeout);
         }
         return;
@@ -209,33 +214,31 @@ export const GenerateMenu = ({
         structuredData = await generateImages(structuredData);
         // Create translations
         setLoadingText("Processing translations...");
-        const timeout = 5000; // 5 seconds
-        const translations = [];
         const iterateTranslations = async () => {
+          const results = [];
           let langIndex = 1;
           for (const lang of languages) {
             setLoadingText(
-              `Translating for ${lang} (${langIndex}/${
-                languages.length - 1
-              }) ...`
+              `Translating for ${lang} (${langIndex}/${languages.length}) ...`
             );
-            // Skip translating the source data
+            // Skip translating the source data again
             if (structuredData.language === lang) continue;
+            // Wait between calls
+            const timeout = 5000; // 5 seconds
+            await waitForTimeout(timeout);
             // Translate
             const res = await translateMenuDataToLanguage({
               data: menuDocument,
               lang,
-              primary: structuredData,
+              primary: structuredData, // denote the source doc
             });
-            langIndex += 1;
             // Record result
-            translations.push(res);
-            // Wait between calls
-            await waitForTimeout(timeout);
+            langIndex += 1;
+            results.push(res);
           }
-          return;
+          return results;
         };
-        await iterateTranslations();
+        const translations = await iterateTranslations();
         // Store all data locally (text & images)
         const menuId = structuredData?.id;
         structuredData.sourceDocument = menuDocument; // save original text in primary data
@@ -288,7 +291,9 @@ export const GenerateMenu = ({
   const LoadingComponent = () => {
     return (
       <div className={styles.loadingToast}>
-        <b>Generating...this may take a few minutes</b>
+        {/* Header */}
+        <b>Generating...this may take a few minutes. Do not exit page.</b>
+        {/* Event details */}
         <p ref={loadingText}>Reading photo(s)...</p>
       </div>
     );
@@ -308,7 +313,7 @@ export const GenerateMenu = ({
             loading: <LoadingComponent />,
             success: (data) => {
               // Prevents success event when canceling promise
-              if (!data?.ok) throw new Error(data);
+              if (data && !data.ok) throw new Error(data);
               return <b>Menu saved! You may view it now.</b>;
             },
             error: (err) => (
@@ -330,9 +335,12 @@ export const GenerateMenu = ({
       <>
         <div className={styles.instructions}>
           {/* Title */}
-          <h1 className={styles.title}>Building menu</h1>
+          <h1 className={styles.title}>Building menu...</h1>
           {/* Instructions */}
-          <h2>Please wait...</h2>
+          <b className={styles.loadingInstruction}>
+            Stay on page until building completes.
+          </b>
+          {/* @TODO Play an animation gif here */}
         </div>
         <div className={styles.btnsContainer}>
           {/* Cancel button */}
