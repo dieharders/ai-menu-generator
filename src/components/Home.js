@@ -28,7 +28,7 @@ const Home = () => {
           <SearchBar />
         </div>
         {/* Create Menus */}
-        <div className={styles.menuContainer} style={{ width: "28rem" }}>
+        <div className={styles.menuContainer}>
           <GenerateMenu
             isDisabled={isDisabled}
             setIsDisabled={setIsDisabled}

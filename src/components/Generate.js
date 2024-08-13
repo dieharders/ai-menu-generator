@@ -368,7 +368,7 @@ export const GenerateMenu = ({
           {/* Title */}
           <h1 className={styles.title}>3. Start</h1>
           {/* Instructions */}
-          <h2>Convert images to an interactive menu.</h2>
+          <h2>Convert image(s) to menu.</h2>
         </div>
         {/* Generate button */}
         <GenerateButton />
