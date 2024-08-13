@@ -1,8 +1,8 @@
 import styles from "./Loader.module.scss";
 
-export const Loader = () => {
+export const Loader = ({ className }) => {
   return (
-    <div className={styles.container}>
+    <div className={[styles.container, className].join(",")}>
       <div className={styles.book}>
         <div
           className={[styles["book__pg"], styles["-shadow"]].join(" ")}

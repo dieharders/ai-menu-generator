@@ -4,14 +4,11 @@
 
 - Website that displays each menu. Makes server-side calls to Gemini model using Google Ai Javascript SDK.
 
-- Hosted on `https://foodsee.openbrewai.com`
+- Hosted on `https://ohmenu.openbrewai.com`
 
 - Camera function on website allows user to snap a pic of a menu or upload from camera roll. This image is used to inform the Ai what to build.
 
-- Website uses Next.js and Vercel for hosting
-
-  - Vercel K/V for menu data
-  - Vercel Blob Store for menu images (1mb each)
+- Website uses React and Vercel for hosting.
 
 - API calls are made for inferencing. Then some "glue" operations will be handled locally on device when processing all responses.
 
@@ -31,72 +28,11 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
-- ✅ Image upload functionality
+- ❌ Better photo prompts for image generation.
 
-- ✅ Implement Google Gemini JS [SDK](https://github.com/google-gemini/generative-ai-js) or Vercel Ai [SDK](https://sdk.vercel.ai/docs/introduction)
+- ❌ Generate images on demand by clicking on placeholder image?
 
-  - [API](https://ai.google.dev/gemini-api/docs/api-overview)
-  - [API Key](https://aistudio.google.com/app/u/3/apikey)
-  - [Tutorial](https://ai.google.dev/gemini-api/docs/get-started/tutorial)
-  - [Rate Limits](https://ai.google.dev/gemini-api/docs/models/gemini)
-
-- ✅ Implement dev input on home page to enter your api key.
-
-- ✅ Store data locally on device (save images/json). Each generation overwrites the previous.
-
-  - Use square 256x256 placeholder image as fallback.
-
-  - Save images as base64 strings to localStorage: https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page
-
-- ✅ Generate images with OpenAI DaLL-E
-
-  - [OpenAi Image Gen](https://platform.openai.com/docs/api-reference/images/create)
-
-  - [OpenAi Rate Limits](https://platform.openai.com/settings/organization/limits)
-
-  - Add another input to enter OpenAI api key.
-
-  - Implement image generation func. Max 1 request/25s.
-
-  - Prevent processing images over limit.
-
-  - Reduce/save image to 256 pixels at 75% compression, square, jpg.
-
-- ✅ Display extra info (ingredients, etc) in tabular ui.
-
-- ✅ Implement translations. Use Gemini 1.0 Pro to translate entire menu into several languages in rolling passes.
-
-  - Fix translation state vars and read-in.
-
-  - Edit menu data schema to accomodate translations
-
-  - Translate app text (category, ingredients, health, allergy, search, print version, website)
-
-  - All menus should use the primary menu's image sources.
-
-  - Translate food types (protein, grain, vegetable, fruit, dairy, food, alcohol beverage, non-alcohol beverage, other)
-
-- ✅ Chat prompt Q&A per menu. Use Google AQA model to perform Attributed Question-Answering tasks over a document.
-
-- ✅ Optional: Set company/menu website to button link. Dont show button if no website listed.
-
-- ✅ Implement react toast for UI messages.
-
-  - Show a loading menu (in center view) after clicking "generate". Hide all other UI and only display progress in toast.
-
-  - Provide a "cancel" button to back out to home page and cancel all outgoing requests.
-
-- ✅ Add company details card above sections.
-
-- ✅ Add more detailed breakdown example for "health" and "allergy"
-
-- ❌ Add $ to OpenAI account to use image generation.
-
-- ❌ Commit some default menu data (min 3) and provide links in a pulldown button.
-
-- ❌ Optional: Make server functions on Vercel to make api requests.
-
-  - Put requests behind a password check.
+- ❌ Commit some default menu data (min 3).
 
 - ❌ Optional: Allow multiple images to be uploaded (max 3 total)
 
@@ -104,14 +40,10 @@ Once a menu image is uploaded, we start the build process:
 
 - ❌ Optional: Convert existing website to Next.js (openbrew website already has similar setup, use app router).
 
-  - Convert all api calls to server-side actions.
+  - Convert all api calls to server-side actions OR use cloud functions without needing to convert website and put requests behind a password check.
 
   - This allows us to serve api requests publically.
 
 - ❌ Optional: Implement Vercel databases (save images/json on per user basis, user login required)
 
-  - Load menu data from k/v. Load images from bucket using locations from menu data.
-
-- ❌ Optional: Implement firebase for storing/retrieving embeddings? [Gemini RAG](https://ai.google.dev/api/semantic-retrieval/question-answering)
-
-  - When new record is added to real-time storage, update the embeddings as well.
+  - Load menu data from k/v. Load images from Blob Store.

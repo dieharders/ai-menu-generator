@@ -11,29 +11,31 @@ const Home = () => {
     <div className={styles.container}>
       {/* App title */}
       <h1 className={styles.appTitle}>
-        <span className={styles.appTitleContainer}>Oh</span>
+        <span className={styles.appTitleContainer}>Oh!</span>
         <span>😲</span>
-        <span className={styles.appTitleContainer}>! Menu</span>
+        <span className={styles.appTitleContainer}>Menu</span>
       </h1>
       <div className={styles.titleContainer}>
         <p className={styles.description}>
-          Interact with any food menu pic. Talk to your menu in your native
-          language and ask questions.
+          Interact with any food menu pic in multiple languages. Browse
+          nutrition and other info.
         </p>
       </div>
-      {/* Saved menus */}
-      <div className={styles.menuContainer}>
-        <h2 className={styles.title}>Saved menus</h2>
-        <SearchBar />
-      </div>
-      {/* Instructions */}
-      <div className={styles.menuContainer}>
-        <GenerateMenu
-          isDisabled={isDisabled}
-          setIsDisabled={setIsDisabled}
-          stepIndex={stepIndex}
-          setStepIndex={setStepIndex}
-        />
+      <div className={styles.menusContainer}>
+        {/* Saved Menus */}
+        <div className={styles.menuContainer}>
+          <h2 className={styles.title}>Saved menus</h2>
+          <SearchBar />
+        </div>
+        {/* Create Menus */}
+        <div className={styles.menuContainer}>
+          <GenerateMenu
+            isDisabled={isDisabled}
+            setIsDisabled={setIsDisabled}
+            stepIndex={stepIndex}
+            setStepIndex={setStepIndex}
+          />
+        </div>
       </div>
       {/* Footer */}
       <div className={styles.footerContainer}>

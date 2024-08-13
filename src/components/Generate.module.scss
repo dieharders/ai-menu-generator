@@ -3,8 +3,13 @@
   display: flex;
   flex-direction: column;
   justify-items: center;
+  align-items: center;
   margin: auto;
-  gap: 1rem;
+  gap: 2rem;
+}
+
+.loaderContainer {
+  transform: scale(1);
 }
 
 .loadingToast {
@@ -12,6 +17,20 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+.loadingInstruction {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.loaderContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn {
@@ -37,6 +56,7 @@
   color: var(--light);
   height: fit-content;
   width: 100%;
+  text-align: center;
 }
 
 .camera {
@@ -106,11 +126,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-items: center;
   justify-content: center;
   align-items: center;
-  height: 12rem;
+  height: 15rem;
   width: 100%;
+  max-width: 15rem;
   padding: 0.25rem;
   margin: auto;
   border-radius: 0.5rem;
@@ -145,6 +165,7 @@
   position: relative;
   display: block;
   width: 100%;
+  max-width: 20rem;
   height: 10rem;
   background-color: var(--primary);
   border-radius: 0.5rem;
@@ -155,6 +176,7 @@
   font-family: var(--font-primary);
   font-size: 2.5rem;
   cursor: pointer;
+  overflow: hidden;
 }
 .inputButton:disabled,
 .inputButton:disabled:hover {
@@ -169,6 +191,6 @@
   filter: brightness(0.9);
 }
 
-input {
+input.fileInput {
   width: 100%;
 }

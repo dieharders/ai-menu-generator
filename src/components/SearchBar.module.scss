@@ -6,6 +6,11 @@
   gap: 1rem;
 }
 
+.examplesHeader {
+  text-align: center;
+  color: var(--light);
+}
+
 .searchContainer {
   position: relative;
   display: flex;
@@ -47,7 +52,8 @@ input.inputText:focus {
   background-color: var(--secondary);
 }
 
-.inputButton {
+.inputButton,
+.emptyInputButton {
   position: relative;
   display: block;
   width: 100%;
@@ -73,6 +79,13 @@ input.inputText:focus {
   background-color: var(--secondary);
   border-color: var(--secondary);
   color: var(--light);
+}
+
+.emptyInputButton:disabled {
+  border-style: dashed;
+  border-width: 0.15rem;
+  background-color: transparent;
+  cursor: not-allowed;
 }
 
 .button {

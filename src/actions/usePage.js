@@ -4,7 +4,7 @@ import translate from "../helpers/translateMenu";
 import { StorageAPI } from "../helpers/storage";
 import { languageCodes } from "../helpers/languageCodes";
 import { SAVED_MENU_ID } from "../components/Generate";
-// import menus from "./data.json"; // cached menu data
+import cachedMenus from "../data.json"; // cached menu data
 
 /**
  * Sets up a page.
@@ -13,7 +13,11 @@ export const usePage = () => {
   const { setMenuData, setMenuId } = useContext(Context);
   const queryParameters = new URLSearchParams(window.location.search);
   const menuId = queryParameters.get("id");
-  const menus = useMemo(() => StorageAPI.getItem(SAVED_MENU_ID), []);
+  const menus = useMemo(() => {
+    // Determine if we should read from localStorage or from included data.json
+    if (menuId.includes("_MENU")) return StorageAPI.getItem(SAVED_MENU_ID);
+    return cachedMenus?.[menuId];
+  }, [menuId]);
   const selectedLang = useRef(null);
   const lang = queryParameters.get("lang");
   const language = languageCodes?.[lang] ? lang : "en";
