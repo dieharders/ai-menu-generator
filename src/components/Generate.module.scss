@@ -20,6 +20,13 @@
   width: 100%;
 }
 
+.loaderContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn {
   width: 100%;
   cursor: pointer;

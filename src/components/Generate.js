@@ -5,6 +5,7 @@ import { assignUniqueIds } from "../helpers/transformData";
 import { StorageAPI } from "../helpers/storage";
 import { languages } from "../helpers/languageCodes";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
+import { Loader } from "./Loader";
 import toast from "react-hot-toast";
 import styles from "./Generate.module.scss";
 
@@ -338,9 +339,11 @@ export const GenerateMenu = ({
           <h1 className={styles.title}>Building menu...</h1>
           {/* Instructions */}
           <b className={styles.loadingInstruction}>
-            Stay on page until building completes.
+            Stay on page until complete.
           </b>
-          {/* @TODO Play an animation gif here */}
+          <div className={styles.loaderContainer}>
+            <Loader />
+          </div>
         </div>
         <div className={styles.btnsContainer}>
           {/* Cancel button */}
