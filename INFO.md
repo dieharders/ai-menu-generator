@@ -28,6 +28,8 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
+- ❌ Try re-implementing abort signal. The exception may not show in prod.
+
 - ❌ Better photo prompts for image generation.
 
 - ❌ Generate images on demand by clicking on placeholder image?

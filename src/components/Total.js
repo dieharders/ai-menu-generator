@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Context } from "../Context";
-import data from "../data";
+import data from "../data.json";
 import { PromptMenu } from "./PromptMenu";
 import styles from "./Total.module.scss";
 

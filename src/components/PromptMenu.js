@@ -3,6 +3,7 @@ import { Context } from "../Context";
 import { useAiActions } from "../actions/useAiActions";
 import { DEFAULT_MENU_ID } from "../components/Generate";
 import { StorageAPI } from "../helpers/storage";
+import cachedMenus from "../data.json";
 import { Loader } from "./Loader";
 import { ReactComponent as IconSend } from "../assets/icons/icon-send.svg";
 import { ReactComponent as IconX } from "../assets/icons/icon-cross-2.svg";
@@ -15,32 +16,33 @@ export const PromptMenu = () => {
   const params = new URLSearchParams(window.location.search);
   const isPrint = params.get("print");
   const menuId = params.get("id");
-  const menus = StorageAPI.getItem(menuId);
-  const menu = menus?.find((m) => m.id === DEFAULT_MENU_ID);
+  const menus = StorageAPI.getItem(menuId) || cachedMenus?.[menuId];
+  const menu = menus?.find((m) => m.id === DEFAULT_MENU_ID) || menus?.[0];
   const [showApiKey, setShowAPIKey] = useState(false);
   const { geminiAPIKeyRef } = useContext(Context);
   const { requestAnswer } = useAiActions();
   const [isFetching, setIsFetching] = useState(false);
-  const [showPrompt, setShowPrompt] = useState(true);
   const [answer, setAnswer] = useState("");
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const handlePromptRequest = async () => {
     setIsFetching(true);
-    setShowPrompt(false);
     setAnswer("Thinking...");
-    const info = menu.sourceDocument || ""; // original menu source data (markdown)
-    const component = document.querySelector("input[name=input-prompt-menu]");
-    const promptText = component?.value;
-    const res = await requestAnswer({ prompt: promptText, info });
-    setAnswer(`Question: ${promptText}\n\nAnswer: ${res}`);
-    setIsFetching(false);
-    setTimeout(() => {
-      setShowPrompt(true);
-    }, 5000); // show prompt input after 5 sec
+    try {
+      const info = menu?.sourceDocument || ""; // original menu source data (markdown)
+      const component = document.querySelector("input[name=input-prompt-menu]");
+      const promptText = component?.value;
+      const res = await requestAnswer({ prompt: promptText, info });
+      setAnswer(`Question: ${promptText}\n\nAnswer: ${res}`);
+      setTimeout(() => {
+        setIsFetching(false);
+      }, 5000); // show prompt input after 5 sec
+    } catch (err) {
+      console.error(`${err}`);
+    }
   };
-  const toastHandlePrompt = async () =>
-    toast.promise(handlePromptRequest(), {
+  const toastHandlePrompt = async () => {
+    await toast.promise(handlePromptRequest(), {
       style: {
         minWidth: "6rem",
       },
@@ -49,6 +51,9 @@ export const PromptMenu = () => {
       success: <b>Here is your answer!</b>,
       error: <b>Could not answer your question 😭</b>,
     });
+    setIsFetching(false);
+    return;
+  };
   const handleEnterEvent = (event) => {
     if (event.key === "Enter") toastHandlePrompt();
   };
@@ -110,7 +115,7 @@ export const PromptMenu = () => {
         />
       )}
       {/* Prompt input */}
-      {!isFetching && showPrompt && !isPrint && (
+      {!isFetching && !isPrint && (
         <div className={styles.promptInputContainer}>
           <input
             type="text"
