@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { extractJsonFromText } from "../apiUtils/data";
 import { assignUniqueIds } from "../apiUtils/ids";
-import { GeminiModels } from "../apiUtils/aiModels";
+import { GeminiModels, getGeminiApiKey } from "../apiUtils/aiModels";
 
 export const config = {
   runtime: "edge", // "nodejs", "python", etc
@@ -16,7 +16,7 @@ export const POST = async (req: Request) => {
   try {
     const { language, langCode, prompt, primary, apiKey } = await req.json();
     // Generate
-    const serverApiKey = process?.env?.GEMINI_API_KEY;
+    const serverApiKey = getGeminiApiKey();
     const genGemini = new GoogleGenerativeAI(apiKey || serverApiKey);
     const model = genGemini?.getGenerativeModel({
       model: GeminiModels.GEMINI_1_5_FLASH,

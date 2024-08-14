@@ -11,3 +11,7 @@ export const OpenAIModels = {
   DALL_E_2: "dall-e-2",
   DALL_E_3: "dall-e-3",
 };
+
+export const getGeminiApiKey = () => process?.env?.GEMINI_API_KEY;
+
+export const getOpenAIApiKey = () => process?.env?.OPENAI_API_KEY;

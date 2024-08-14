@@ -1,7 +1,8 @@
-import { OpenAIModels } from "../apiUtils/aiModels";
-import { waitForTimeout } from "../apiUtils/common";
 import OpenAI from "openai";
+import { OpenAIModels, getOpenAIApiKey } from "../apiUtils/aiModels";
+import { waitForTimeout } from "../apiUtils/common";
 
+// @TODO We wont need this var after refactor
 const maxGenerations = 10;
 
 const generateImage = async ({ prompt, model, apiKey }) => {
@@ -96,7 +97,7 @@ export const POST = async (req: Request) => {
           descr,
           index,
           totalItems.length,
-          apiKey
+          apiKey || getOpenAIApiKey()
         );
         // Assign for menu banner image
         if (index === 0) newData.imageSource = imageSource;

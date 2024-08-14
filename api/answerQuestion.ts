@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GeminiModels } from "../apiUtils/aiModels";
+import { GeminiModels, getGeminiApiKey } from "../apiUtils/aiModels";
 
 export const config = {
   runtime: "edge", // "nodejs", "python", etc
@@ -8,7 +8,7 @@ export const config = {
 export const POST = async (req: Request) => {
   try {
     const { prompt, info, apiKey } = await req.json();
-    const serverApiKey = process?.env?.GEMINI_API_KEY;
+    const serverApiKey = getGeminiApiKey();
     const genGemini = new GoogleGenerativeAI(apiKey || serverApiKey);
     const model = genGemini?.getGenerativeModel({
       model: GeminiModels.GEMINI_1_0_PRO,
