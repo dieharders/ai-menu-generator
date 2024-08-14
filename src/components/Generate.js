@@ -321,7 +321,14 @@ export const GenerateMenu = ({
           <h2 style={{ textAlign: "center", fontSize: "3rem" }}>📷+🤖=📃</h2>
         </div>
         {/* Next button */}
-        <button className={styles.btn} onClick={() => setStepIndex(1)}>
+        <button
+          className={styles.btn}
+          onClick={() => {
+            const isLocal = window.location.hostname.includes("localhost");
+            // Show api keys menu ONLY if running locally
+            setStepIndex(isLocal ? 1 : 2);
+          }}
+        >
           🚀 Start
         </button>
       </>
