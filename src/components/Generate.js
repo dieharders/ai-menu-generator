@@ -74,9 +74,12 @@ export const GenerateMenu = ({
         prompt: structuredMenuPrompt,
         menuDocument,
       });
+
       // Generate images
-      setLoadingText("Generating images...");
-      structuredData = await generateMenuImages({ data: structuredData });
+      // @TODO Disabling this for now. Want to refactor this to request once per image.
+      // setLoadingText("Generating images...");
+      // structuredData = await generateMenuImages({ data: structuredData });
+
       // Create translations
       setLoadingText("Processing translations...");
       const iterateTranslations = async () => {
