@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Context } from "../Context";
-import { useAiActions } from "../actions/useAiActions";
+import { useAiActions } from "../actions/useAiActions.ts";
 import { DEFAULT_MENU_ID } from "../components/Generate";
 import { StorageAPI } from "../helpers/storage";
 import cachedMenus from "../data.json";

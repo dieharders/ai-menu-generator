@@ -1,7 +1,7 @@
 import { useCallback, useContext, useRef } from "react";
 import { Context } from "../Context";
-import { useAiActions, OpenAIModels } from "../actions/useAiActions";
-import { assignUniqueIds } from "../helpers/transformData";
+import { useAiActions, OpenAIModels } from "../actions/useAiActions.ts";
+import { assignUniqueIds } from "../helpers/transformData.ts";
 import { StorageAPI } from "../helpers/storage";
 import { languages } from "../helpers/languageCodes";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
@@ -387,7 +387,7 @@ export const GenerateMenu = ({
       <>
         <div className={styles.instructions}>
           {/* Title */}
-          <h1 className={styles.title}>2. Snap a pic!</h1>
+          <h1 className={styles.title}>1. Snap a pic!</h1>
           {/* Instructions */}
           <h2>Take picture(s) of your menu to upload.</h2>
         </div>
@@ -416,10 +416,10 @@ export const GenerateMenu = ({
       <>
         <div className={styles.instructions}>
           {/* Title */}
-          <h1 className={styles.title}>1. Enter api keys</h1>
+          <h1 className={styles.title}>Enter api keys</h1>
           {/* API keys menu */}
           <div className={styles.apiMenuContainer}>
-            <span>Testing purposes only</span>
+            <span>For testing only</span>
             <div className={styles.showKeysBtn}>🔐</div>
           </div>
           <span className={styles.keysContainer}>

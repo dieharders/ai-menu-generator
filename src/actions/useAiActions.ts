@@ -1,4 +1,4 @@
-import { assignUniqueIds } from "../helpers/transformData";
+import { assignUniqueIds } from "../helpers/transformData.ts";
 import { languageCodes } from "../helpers/languageCodes";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useContext } from "react";
@@ -161,30 +161,30 @@ export const useAiActions = () => {
   const { geminiAPIKeyRef, openaiAPIKeyRef } = useContext(Context);
   // Gen AI
   let genGemini, genOpenAI;
-  const getGeminiAPIKey = () => {
+  const getGeminiAPIKey = (key?: string) => {
     // For testing and demonstration ONLY!
     // const inputComponent = document.querySelector("input[name=input-gemini-api-key]");
-    return geminiAPIKeyRef.current || "";
+    return geminiAPIKeyRef.current || key || "";
   };
-  const getOpenAIAPIKey = () => {
+  const getOpenAIAPIKey = (key?: string) => {
     // For testing and demonstration ONLY!
     // const inputComponent = document.querySelector("input[name=input-openai-api-key]");
     return {
-      apiKey: openaiAPIKeyRef.current || "",
+      apiKey: openaiAPIKeyRef.current || key || "",
       // Enable for testing ONLY
       dangerouslyAllowBrowser: true,
     };
   };
-  const getGenGemini = () => {
-    if (!genGemini) genGemini = new GoogleGenerativeAI(getGeminiAPIKey());
+  const getGenGemini = (key?: string) => {
+    if (!genGemini) genGemini = new GoogleGenerativeAI(getGeminiAPIKey(key));
     return genGemini;
   };
-  const getGenOpenAI = () => {
-    if (!genOpenAI) genOpenAI = new OpenAI(getOpenAIAPIKey());
+  const getGenOpenAI = (key?: string) => {
+    if (!genOpenAI) genOpenAI = new OpenAI(getOpenAIAPIKey(key));
     return genOpenAI;
   };
 
-  const extractMenuDataFromImage = async (filesUpload) => {
+  const extractMenuDataFromImage = async (filesUpload: File[]) => {
     if (!filesUpload || filesUpload.length === 0)
       throw new Error("Please provide an image.");
 
@@ -192,10 +192,11 @@ export const useAiActions = () => {
      * Converts a File object to a GoogleGenerativeAI.Part object.
      * Takes image types (image/png, image/jpeg, image/webp)
      */
-    const encodeFileToGenerative = async (file) => {
+    const encodeFileToGenerative = async (file: File) => {
       const base64EncodedDataPromise = new Promise((resolve) => {
         const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result.split(",")[1]);
+        reader.onloadend = () =>
+          resolve(reader.result?.toString().split(",")[1]);
         reader.readAsDataURL(file);
       });
       return {
@@ -206,8 +207,12 @@ export const useAiActions = () => {
       };
     };
 
+    // We put a closure around our api funcs w/o params to prevent abuse.
     const run = async () => {
-      const model = getGenGemini()?.getGenerativeModel({
+      "use server";
+
+      const serverSideApiKey = process?.env?.GEMINI_API_KEY;
+      const model = getGenGemini(serverSideApiKey)?.getGenerativeModel({
         model: GeminiModels.GEMINI_1_5_FLASH,
       });
 
@@ -228,11 +233,13 @@ export const useAiActions = () => {
   };
 
   const convertMenuDataToStructured = async (unstructuredData) => {
+    "use server";
+
     if (!unstructuredData) throw new Error("Please provide data to process.");
 
     const structuredMenuPrompt = `Convert this markdown text to json format: ${unstructuredData}\n\nExample output:\n\n${structuredOutputFormat}\n\nResponse:`;
-
-    const model = getGenGemini()?.getGenerativeModel({
+    const serverSideApiKey = process?.env?.GEMINI_API_KEY;
+    const model = getGenGemini(serverSideApiKey)?.getGenerativeModel({
       model: GeminiModels.GEMINI_1_5_FLASH,
     });
 
@@ -259,6 +266,8 @@ export const useAiActions = () => {
    * return in json format.
    */
   const translateMenuDataToLanguage = async ({ data, lang, primary }) => {
+    "use server";
+
     if (!data || !lang) return {};
     // Ask to translate doc and return as json
     const language = languageCodes[lang];
@@ -266,7 +275,8 @@ export const useAiActions = () => {
     let obj = {};
     try {
       // Generate
-      const model = getGenGemini()?.getGenerativeModel({
+      const serverSideApiKey = process?.env?.GEMINI_API_KEY;
+      const model = getGenGemini(serverSideApiKey)?.getGenerativeModel({
         model: GeminiModels.GEMINI_1_5_FLASH,
       });
       // Response
@@ -276,7 +286,7 @@ export const useAiActions = () => {
       const jsonStr = extractJsonFromText(response.text());
       obj = JSON.parse(jsonStr);
       // Assign language
-      obj.language = lang;
+      obj[language] = lang;
       // Assign same ids as primary
       obj = assignUniqueIds({
         data: obj,
@@ -290,7 +300,10 @@ export const useAiActions = () => {
   };
 
   const generateImage = async ({ prompt, model }) => {
-    const openai = getGenOpenAI();
+    "use server";
+
+    const serverSideApiKey = process?.env?.OPENAI_API_KEY;
+    const openai = getGenOpenAI(serverSideApiKey);
     const image = await openai.images.generate({
       prompt,
       model,
@@ -303,8 +316,11 @@ export const useAiActions = () => {
   };
 
   const requestAnswer = async ({ prompt, info }) => {
+    "use server";
+
     try {
-      const model = getGenGemini()?.getGenerativeModel({
+      const serverSideApiKey = process?.env?.GEMINI_API_KEY;
+      const model = getGenGemini(serverSideApiKey)?.getGenerativeModel({
         model: GeminiModels.GEMINI_1_0_PRO,
       });
 
