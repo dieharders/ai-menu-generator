@@ -57,20 +57,23 @@ export const useAiActions = () => {
       );
 
       const extractMenuPrompt = `These are picture(s) of menu from a restaurant or food store. Write a book report on everything you see in the image, think step by step. Break it down by sections shown in image or create sections if none exist for food, drinks, appetizers, etc. Write each section using shorthand notation in markdown format. Example output:\n\n${extractionOutputFormat}`;
-      const result = await fetch(`${window.location}/api/extractMenuData`, {
-        method: "POST",
-        body: JSON.stringify({
-          prompt: extractMenuPrompt,
-          images: imageParts,
-          apiKey: getGeminiAPIKey(),
-        }),
-      });
+      const result = await fetch(
+        `${location.protocol}//${location.host}/api/extractMenuData${location.pathname}`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            prompt: extractMenuPrompt,
+            images: imageParts,
+            apiKey: getGeminiAPIKey(),
+          }),
+        }
+      );
 
       const r = await result?.json();
       if (r?.error) throw new Error(r.message);
       return r.data;
     } catch (err) {
-      toast.error(err);
+      toast.error(`Failed to extract menu data:\n${err}`);
     }
   };
 
@@ -84,16 +87,19 @@ export const useAiActions = () => {
     const prompt = `Translate the following text into ${language} language:\n\n${data}\n\nNow convert the translated text into json in this format:\n\n${structuredOutputFormat}`;
 
     try {
-      const result = await fetch(`${window.location}/api/translateMenu`, {
-        method: "POST",
-        body: JSON.stringify({
-          prompt,
-          language,
-          langCode: lang,
-          primary,
-          apiKey: getGeminiAPIKey(),
-        }),
-      });
+      const result = await fetch(
+        `${location.protocol}//${location.host}/api/translateMenu${location.pathname}`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            prompt,
+            language,
+            langCode: lang,
+            primary,
+            apiKey: getGeminiAPIKey(),
+          }),
+        }
+      );
       const res = await result.json();
       if (res?.error) throw new Error(res.message);
       return res?.data;
@@ -104,15 +110,18 @@ export const useAiActions = () => {
 
   const structureMenuData = async ({ menuDocument, prompt }) => {
     try {
-      const res = await fetch(`${window.location}/api/structureMenu`, {
-        method: "POST",
-        body: JSON.stringify({
-          menuDocument,
-          prompt,
-          id: DEFAULT_MENU_ID,
-          apiKey: getGeminiAPIKey(),
-        }),
-      });
+      const res = await fetch(
+        `${location.protocol}//${location.host}/api/structureMenu${location.pathname}`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            menuDocument,
+            prompt,
+            id: DEFAULT_MENU_ID,
+            apiKey: getGeminiAPIKey(),
+          }),
+        }
+      );
       const result = await res.json();
       if (result?.error) throw new Error(result.message);
       if (result?.data && Object.keys(result.data).length === 0)
@@ -124,9 +133,12 @@ export const useAiActions = () => {
   };
 
   const requestAnswer = async ({ prompt, info }) => {
+    const errMsg =
+      "I apologize, something went wrong. I could not answer your question. Please try again.";
+
     try {
       const fetchResponse = await fetch(
-        `${window.location}/api/answerQuestion`,
+        `${location.protocol}//${location.host}/api/answerQuestion${location.pathname}`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -136,22 +148,26 @@ export const useAiActions = () => {
           }),
         }
       );
+      if (!fetchResponse.ok) throw new Error(fetchResponse?.statusText);
       const res = await fetchResponse?.json();
-      if (res?.error) throw new Error(res.message);
+      if (res?.error) throw new Error(res?.message);
       return res?.data;
     } catch (err) {
       toast.error(`Failed to answer question:\n${err}`);
-      return "I apologize, something went wrong. I could not answer your question. Please try again.";
+      return errMsg;
     }
   };
 
   // @TODO We cannot have one function return all images, edge func cant handle payload size. Make one req/image.
   const generateMenuImages = async ({ data }) => {
     try {
-      const res = await fetch(`${window.location}/api/generateImages`, {
-        method: "POST",
-        body: JSON.stringify({ data, apiKey: getOpenAIAPIKey() }),
-      });
+      const res = await fetch(
+        `${location.protocol}//${location.host}/api/generateImages${location.pathname}`,
+        {
+          method: "POST",
+          body: JSON.stringify({ data, apiKey: getOpenAIAPIKey() }),
+        }
+      );
       const result = await res.json();
       if (result?.error) throw new Error(result.message);
       return result?.data;

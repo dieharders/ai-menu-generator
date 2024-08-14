@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { extractJsonFromText } from "../apiUtils/data.ts";
-import { assignUniqueIds } from "../apiUtils/ids.ts";
-import { GeminiModels } from "../apiUtils/aiModels.ts";
+import { extractJsonFromText } from "../apiUtils/data";
+import { assignUniqueIds } from "../apiUtils/ids";
+import { GeminiModels } from "../apiUtils/aiModels";
 
 export const config = {
   runtime: "edge", // "nodejs", "python", etc

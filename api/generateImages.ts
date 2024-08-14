@@ -1,5 +1,5 @@
-import { OpenAIModels } from "../apiUtils/aiModels.ts";
-import { waitForTimeout } from "../apiUtils/common.ts";
+import { OpenAIModels } from "../apiUtils/aiModels";
+import { waitForTimeout } from "../apiUtils/common";
 import OpenAI from "openai";
 
 const maxGenerations = 10;

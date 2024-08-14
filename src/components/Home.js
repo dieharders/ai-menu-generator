@@ -22,11 +22,6 @@ const Home = () => {
         </p>
       </div>
       <div className={styles.menusContainer}>
-        {/* Saved Menus */}
-        <div className={styles.menuContainer}>
-          <h2 className={styles.title}>Saved menus</h2>
-          <SearchBar />
-        </div>
         {/* Create Menus */}
         <div className={styles.menuContainer}>
           <GenerateMenu
@@ -35,6 +30,11 @@ const Home = () => {
             stepIndex={stepIndex}
             setStepIndex={setStepIndex}
           />
+        </div>
+        {/* Saved Menus */}
+        <div className={styles.menuContainer}>
+          <h2 className={styles.title}>Saved menus</h2>
+          <SearchBar />
         </div>
       </div>
       {/* Footer */}

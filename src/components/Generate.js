@@ -1,9 +1,7 @@
 import { useCallback, useContext, useRef } from "react";
 import { Context } from "../Context";
-import {
-  useAiActions,
-  structuredOutputFormat,
-} from "../actions/useAiActions.ts";
+import { useAiActions } from "../actions/useAiActions";
+import { structuredOutputFormat } from "../helpers/formats";
 import { StorageAPI } from "../helpers/storage";
 import { languages } from "../helpers/languageCodes";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
@@ -24,7 +22,7 @@ export const GenerateMenu = ({
     structureMenuData,
     extractMenuDataFromImage,
     translateMenuDataToLanguage,
-    generateMenuImages,
+    // generateMenuImages,
   } = useAiActions();
   const {
     fileInputValue,
@@ -122,7 +120,6 @@ export const GenerateMenu = ({
   }, [
     extractMenuDataFromImage,
     fileInputValue,
-    generateMenuImages,
     reset,
     setIsDisabled,
     setLoadingText,
