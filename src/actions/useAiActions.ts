@@ -1,155 +1,12 @@
-import { assignUniqueIds } from "../helpers/transformData.ts";
-import { languageCodes } from "../helpers/languageCodes";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useContext } from "react";
+import { DEFAULT_MENU_ID } from "../components/Generate";
+import { languageCodes } from "../helpers/languageCodes";
 import { Context } from "../Context";
+import {
+  extractionOutputFormat,
+  structuredOutputFormat,
+} from "../helpers/formats";
 import toast from "react-hot-toast";
-import OpenAI from "openai";
-
-// Use regex to extract text between ```json```
-const extractJsonFromText = (input) => {
-  const regex = /```json([\s\S]*?)```/;
-  const match = input.match(regex);
-  return match ? match[1].trim() : null;
-};
-
-// Models
-export const GeminiModels = {
-  GEMINI_1_0_PRO: "gemini-1.0-pro", // text only, cheapest, use for translations
-  GEMINI_1_5_FLASH: "gemini-1.5-flash",
-  GEMINI_1_5_PRO: "gemini-1.5-pro",
-  TEXT_EMBEDDING: "text-embedding-004",
-  AQA: "aqa", // Providing source-grounded answers to questions (RAG?)
-};
-export const OpenAIModels = {
-  DALL_E_2: "dall-e-2",
-  DALL_E_3: "dall-e-3",
-};
-
-// Formats
-const extractionOutputFormat = `
-# Company Name
-
-(if none exists generate one)
-
-## Company Description
-
-(if none exists generate one)
-
-## Food Type
-
-(american, japanese, greek)
-
-## Establishment Category
-
-(bar, restaurant, food truck, chain, take-out)
-
-## Contact Info
-
-((XXX)XXX-XXXX, if none exists, leave out)
-
-## Location Info
-
-(if none exists, leave out)
-
-## Cost
-
-(how expensive on scale: $, $$, $$$, $$$$)
-
-## Theme Color
-
-(an integer between 0 and 360 degrees on color wheel that best represents the hue of this menu)
-
-## Company Website
-
-(if none exists, leave out)
-
-## Language
-
-(ISO 639-1 format: en, de, ko)
-
-## Banner Image Description
-
-(generate a description of this menu's banner image based on color, language, location, food type, company name, company description)
-
-# Section
-
-(section name)
-
-## Item
-
-(item name)
-
-### Description
-
-(if none exists generate one based on item name)
-
-### Price
-
-(number)
-
-### Currency
-
-(USD, YEN, EUR)
-
-### Food Category
-
-(protein, grain, vegetable, fruit, dairy, food, alcoholic beverage, non-alcoholic beverage, other)
-
-### Ingredients
-
-(if none exists generate one based on description, price, item name, section name)
-
-### Image Description
-
-(if none exists generate one based on description, ingredients, price, item name, section name)
-
-### Health (Nutritional) Info
-
-(if none exists generate one based on source of calories, protein, fat, cholesterol, carbs. whether it is vegan/vegetarian or dietary considerations)
-
-### Allergy Info
-
-(list if it contains any fish, dairy, nuts, or other common allergens)
-`;
-const structuredOutputFormat = `
-{
-  "name": "",
-  "id": "", // leave blank
-  "description": "",
-  "type": "",
-  "category: "",
-  "contact": "",
-  "location": "",
-  "cost": "",
-  "color": 0,
-  "website": "",
-  "language": "",
-  "imageDescription": "", // banner image descr
-  "imageSource": "", // leave blank
-  "documentHash": "", // leave blank
-  "sectionNames": [""],
-  "items": [
-    {
-      "name": "",
-      "id": "", // leave blank
-      "description": "",
-      "sectionName": "",
-      "price": "0.00",
-      "currency": "",
-      "category": "",
-      "ingredients": "",
-      "imageDescription": "",
-      "imageSource": "", // leave blank
-      "health": "",
-      "allergy": ""
-    }
-  ],
-}
-`;
-
-// Prompts
-const extractMenuPrompt = `These are picture(s) of menu from a restaurant or food store. Write a book report on everything you see in the image, think step by step. Break it down by sections shown in image or create sections if none exist for food, drinks, appetizers, etc. Write each section using shorthand notation in markdown format. Example output:\n\n${extractionOutputFormat}`;
 
 /**
  * We use @google/generative-ai package for api calls.
@@ -160,186 +17,156 @@ const extractMenuPrompt = `These are picture(s) of menu from a restaurant or foo
 export const useAiActions = () => {
   const { geminiAPIKeyRef, openaiAPIKeyRef } = useContext(Context);
   // Gen AI
-  let genGemini, genOpenAI;
-  const getGeminiAPIKey = (key?: string) => {
+  const getGeminiAPIKey = () => {
     // For testing and demonstration ONLY!
     // const inputComponent = document.querySelector("input[name=input-gemini-api-key]");
-    return geminiAPIKeyRef.current || key || "";
+    return geminiAPIKeyRef.current || "";
   };
-  const getOpenAIAPIKey = (key?: string) => {
+  const getOpenAIAPIKey = () => {
     // For testing and demonstration ONLY!
     // const inputComponent = document.querySelector("input[name=input-openai-api-key]");
-    return {
-      apiKey: openaiAPIKeyRef.current || key || "",
-      // Enable for testing ONLY
-      dangerouslyAllowBrowser: true,
-    };
+    return openaiAPIKeyRef.current || "";
   };
-  const getGenGemini = (key?: string) => {
-    if (!genGemini) genGemini = new GoogleGenerativeAI(getGeminiAPIKey(key));
-    return genGemini;
-  };
-  const getGenOpenAI = (key?: string) => {
-    if (!genOpenAI) genOpenAI = new OpenAI(getOpenAIAPIKey(key));
-    return genOpenAI;
-  };
-
   const extractMenuDataFromImage = async (filesUpload: File[]) => {
     if (!filesUpload || filesUpload.length === 0)
       throw new Error("Please provide an image.");
 
-    /**
-     * Converts a File object to a GoogleGenerativeAI.Part object.
-     * Takes image types (image/png, image/jpeg, image/webp)
-     */
-    const encodeFileToGenerative = async (file: File) => {
-      const base64EncodedDataPromise = new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () =>
-          resolve(reader.result?.toString().split(",")[1]);
-        reader.readAsDataURL(file);
-      });
-      return {
-        inlineData: {
-          data: await base64EncodedDataPromise,
-          mimeType: file.type,
-        },
+    try {
+      /**
+       * Converts a File object to a GoogleGenerativeAI.Part object.
+       * Takes image types (image/png, image/jpeg, image/webp).
+       */
+      const encodeFileToGenerative = async (file: File) => {
+        const base64EncodedDataPromise = new Promise((resolve) => {
+          // @TODO We may need to compress/downsize since vercel edge func only handle 5mb payload
+          const reader = new FileReader();
+          reader.onloadend = () =>
+            resolve(reader.result?.toString().split(",")[1]);
+          reader.readAsDataURL(file);
+        });
+        return {
+          inlineData: {
+            data: await base64EncodedDataPromise,
+            mimeType: file.type,
+          },
+        };
       };
-    };
-
-    // We put a closure around our api funcs w/o params to prevent abuse.
-    const run = async () => {
-      "use server";
-
-      const serverSideApiKey = process?.env?.GEMINI_API_KEY;
-      const model = getGenGemini(serverSideApiKey)?.getGenerativeModel({
-        model: GeminiModels.GEMINI_1_5_FLASH,
-      });
 
       const imageParts = await Promise.all(
         [...filesUpload].map(encodeFileToGenerative)
       );
 
-      const result = await model.generateContent([
-        extractMenuPrompt,
-        ...imageParts,
-      ]);
-      const response = result?.response;
-      const text = response.text();
-      return text.trim();
-    };
+      const extractMenuPrompt = `These are picture(s) of menu from a restaurant or food store. Write a book report on everything you see in the image, think step by step. Break it down by sections shown in image or create sections if none exist for food, drinks, appetizers, etc. Write each section using shorthand notation in markdown format. Example output:\n\n${extractionOutputFormat}`;
+      const result = await fetch(`${window.location}/api/extractMenuData`, {
+        method: "POST",
+        body: JSON.stringify({
+          prompt: extractMenuPrompt,
+          images: imageParts,
+          apiKey: getGeminiAPIKey(),
+        }),
+      });
 
-    return run();
-  };
-
-  const convertMenuDataToStructured = async (unstructuredData) => {
-    "use server";
-
-    if (!unstructuredData) throw new Error("Please provide data to process.");
-
-    const structuredMenuPrompt = `Convert this markdown text to json format: ${unstructuredData}\n\nExample output:\n\n${structuredOutputFormat}\n\nResponse:`;
-    const serverSideApiKey = process?.env?.GEMINI_API_KEY;
-    const model = getGenGemini(serverSideApiKey)?.getGenerativeModel({
-      model: GeminiModels.GEMINI_1_5_FLASH,
-    });
-
-    const result = await model.generateContent([
-      structuredMenuPrompt,
-      unstructuredData,
-    ]);
-    const response = result?.response;
-    const text = response.text();
-    // Convert result to js object
-    const structText = extractJsonFromText(text);
-    if (!structText) throw new Error("Failed to extract json from response.");
-    try {
-      const obj = JSON.parse(structText);
-      return obj;
+      const r = await result?.json();
+      if (r?.error) throw new Error(r.message);
+      return r.data;
     } catch (err) {
-      toast.error(`Failed to parse structured response.\n${err}`);
-      return {};
+      toast.error(err);
     }
   };
 
   /**
-   * Take a plain text document and translate it to another language,
-   * return in json format.
+   * Take a plain text document and translate it to another language, return in json format.
    */
   const translateMenuDataToLanguage = async ({ data, lang, primary }) => {
-    "use server";
-
     if (!data || !lang) return {};
     // Ask to translate doc and return as json
     const language = languageCodes[lang];
     const prompt = `Translate the following text into ${language} language:\n\n${data}\n\nNow convert the translated text into json in this format:\n\n${structuredOutputFormat}`;
-    let obj = {};
+
     try {
-      // Generate
-      const serverSideApiKey = process?.env?.GEMINI_API_KEY;
-      const model = getGenGemini(serverSideApiKey)?.getGenerativeModel({
-        model: GeminiModels.GEMINI_1_5_FLASH,
+      const result = await fetch(`${window.location}/api/translateMenu`, {
+        method: "POST",
+        body: JSON.stringify({
+          prompt,
+          language,
+          langCode: lang,
+          primary,
+          apiKey: getGeminiAPIKey(),
+        }),
       });
-      // Response
-      const result = await model.generateContent(prompt);
-      const response = result?.response;
-      // Extract json from "text"
-      const jsonStr = extractJsonFromText(response.text());
-      obj = JSON.parse(jsonStr);
-      // Assign language
-      obj[language] = lang;
-      // Assign same ids as primary
-      obj = assignUniqueIds({
-        data: obj,
-        primary,
-      });
+      const res = await result.json();
+      if (res?.error) throw new Error(res.message);
+      return res?.data;
     } catch (err) {
       toast.error(`Failed to translate (${lang}):\n${err}`);
     }
-
-    return obj || {};
   };
 
-  const generateImage = async ({ prompt, model }) => {
-    "use server";
-
-    const serverSideApiKey = process?.env?.OPENAI_API_KEY;
-    const openai = getGenOpenAI(serverSideApiKey);
-    const image = await openai.images.generate({
-      prompt,
-      model,
-      size: "256x256",
-      response_format: "b64_json",
-      // style: "vivid", // dall-e-3 only
-      // quality: "hd", // dall-e-3 only
-    });
-    return image;
+  const structureMenuData = async ({ menuDocument, prompt }) => {
+    try {
+      const res = await fetch(`${window.location}/api/structureMenu`, {
+        method: "POST",
+        body: JSON.stringify({
+          menuDocument,
+          prompt,
+          id: DEFAULT_MENU_ID,
+          apiKey: getGeminiAPIKey(),
+        }),
+      });
+      const result = await res.json();
+      if (result?.error) throw new Error(result.message);
+      if (result?.data && Object.keys(result.data).length === 0)
+        throw new Error("No data returned.");
+      return result?.data;
+    } catch (err) {
+      toast.error(`Failed to structure menu:\n${err}`);
+    }
   };
 
   const requestAnswer = async ({ prompt, info }) => {
-    "use server";
-
     try {
-      const serverSideApiKey = process?.env?.GEMINI_API_KEY;
-      const model = getGenGemini(serverSideApiKey)?.getGenerativeModel({
-        model: GeminiModels.GEMINI_1_0_PRO,
-      });
-
-      // Use `info` as basis for info retrieval
-      const result = await model.generateContent([prompt, info]);
-      const response = result?.response;
-      const text = response?.text();
-      return text;
+      const fetchResponse = await fetch(
+        `${window.location}/api/answerQuestion`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            prompt,
+            info,
+            apiKey: getGeminiAPIKey(),
+          }),
+        }
+      );
+      const res = await fetchResponse?.json();
+      if (res?.error) throw new Error(res.message);
+      return res?.data;
     } catch (err) {
       toast.error(`Failed to answer question:\n${err}`);
       return "I apologize, something went wrong. I could not answer your question. Please try again.";
     }
   };
 
+  // @TODO We cannot have one function return all images, edge func cant handle payload size. Make one req/image.
+  const generateMenuImages = async ({ data }) => {
+    try {
+      const res = await fetch(`${window.location}/api/generateImages`, {
+        method: "POST",
+        body: JSON.stringify({ data, apiKey: getOpenAIAPIKey() }),
+      });
+      const result = await res.json();
+      if (result?.error) throw new Error(result.message);
+      return result?.data;
+    } catch (err) {
+      toast.error(`Failed to generate images:\n${err}`);
+    }
+  };
+
   return {
     extractMenuDataFromImage,
-    convertMenuDataToStructured,
     translateMenuDataToLanguage,
-    generateImage,
+    structureMenuData,
     requestAnswer,
+    generateMenuImages,
+    getOpenAIAPIKey,
+    getGeminiAPIKey,
   };
 };

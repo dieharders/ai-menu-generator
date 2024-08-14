@@ -1,18 +1,15 @@
 import { useCallback, useContext, useRef } from "react";
 import { Context } from "../Context";
-import { useAiActions, OpenAIModels } from "../actions/useAiActions.ts";
-import { assignUniqueIds } from "../helpers/transformData.ts";
+import {
+  useAiActions,
+  structuredOutputFormat,
+} from "../actions/useAiActions.ts";
 import { StorageAPI } from "../helpers/storage";
 import { languages } from "../helpers/languageCodes";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
 import { Loader } from "./Loader";
 import toast from "react-hot-toast";
 import styles from "./Generate.module.scss";
-
-const createFileHash = (_files = []) => {
-  // @TODO Create a hash of the input files or hash of multiple hashes.
-  return "";
-};
 
 export const DEFAULT_MENU_ID = "DEFAULT_MENU";
 export const SAVED_MENU_ID = "SAVED_MENU";
@@ -24,10 +21,10 @@ export const GenerateMenu = ({
   setStepIndex,
 }) => {
   const {
+    structureMenuData,
     extractMenuDataFromImage,
-    convertMenuDataToStructured,
     translateMenuDataToLanguage,
-    generateImage,
+    generateMenuImages,
   } = useAiActions();
   const {
     fileInputValue,
@@ -47,10 +44,6 @@ export const GenerateMenu = ({
     [loadingText]
   );
 
-  const getImageInputFiles = useCallback(() => {
-    return fileInputValue || [];
-  }, [fileInputValue]);
-
   const reset = useCallback(() => {
     setStepIndex(0);
     signalAborted.current = false;
@@ -65,203 +58,73 @@ export const GenerateMenu = ({
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
 
-  const encodeB64 = async (imageSrc) => {
-    const img = new Image();
-    return new Promise((resolve, reject) => {
-      img.onload = () => {
-        // Compress image and resize to 256p
-        const canvas = document.createElement("canvas");
-        canvas.width = 256;
-        canvas.height = 256;
-
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, 256, 256);
-
-        const dataURL = canvas.toDataURL("image/jpg", 0.7);
-        resolve(dataURL);
-      };
-
-      img.onerror = () => {
-        reject("Failed to load image");
-      };
-
-      img.src = imageSrc;
-    });
-  };
-
-  const generateImages = useCallback(
-    async (data) => {
-      const maxGenerations = 10;
-
-      // Check api key
-      const key = openaiAPIKeyRef.current;
-
-      // Return an image as a base64 string
-      const createEncodedImage = async (description, index, total) => {
-        let source = "";
-        const isOverLimit = index >= maxGenerations;
-        try {
-          // Call image generation model
-          if (!isOverLimit && key) {
-            setLoadingText(
-              `Generating image from description (${index}/${total}):\n\n${description}`
-            );
-
-            const imgRes = await generateImage({
-              prompt: description,
-              model: OpenAIModels.DALL_E_2,
-            });
-            const parsed = imgRes?.data?.[0]?.["b64_json"];
-            source = `data:image/png;base64,${parsed}`;
-          } else {
-            const img = (await import("../assets/images/placeholder.png"))
-              .default;
-            source = await encodeB64(img);
-          }
-          setLoadingText("Skipping image generation. Assigning placeholder.");
-        } catch (err) {
-          const msg = `Failed to generate image:\n${err}`;
-          if (isOverLimit || !key) console.error(msg);
-          else toast.error(msg);
-          const img = (await import("../assets/images/placeholder.png"))
-            .default;
-          source = await encodeB64(img);
-        }
-
-        return source;
-      };
-
-      // Loop thru all items and generate images
-      const menu = {
-        id: data.id,
-        description: data.imageDescription,
-      };
-      const menuItems = data.items.map((item) => ({
-        id: item.id,
-        description: item.imageDescription,
-      }));
-      const newData = { ...data };
-      const intervalImages = async () => {
-        let index = 0;
-        const totalItems = [menu, ...menuItems];
-        for (const item of totalItems) {
-          setLoadingText(
-            `Processing image for item (${index + 1}/${
-              totalItems.length - 1
-            }):\n\n${item}`
-          );
-          try {
-            // Generate image for item
-            const descr = item?.description;
-            const imageSource = await createEncodedImage(
-              descr,
-              index,
-              totalItems.length
-            );
-            // Assign for menu banner image
-            if (index === 0) newData.imageSource = imageSource;
-            else {
-              // Assign for menu items
-              const itemIndex = newData.items.findIndex(
-                (i) => i.id === item.id
-              );
-              newData.items[itemIndex].imageSource = imageSource;
-            }
-          } catch (err) {
-            toast.error(`Failed to process image:\n${err}`);
-          }
-          index += 1;
-
-          // Wait between calls
-          const isOverLimit = index >= maxGenerations;
-          const timeout = isOverLimit || !key ? 100 : 25000; // 25 sec or 100ms if over limit or no expected requests
-          await waitForTimeout(timeout);
-        }
-        return;
-      };
-
-      // fire api calls on a rolling basis (due to request limits)
-      await intervalImages();
-
-      return newData;
-    },
-    [generateImage, openaiAPIKeyRef, setLoadingText]
-  );
-
   const onClick = useCallback(async () => {
     try {
       setStepIndex(4);
       setIsDisabled(true);
-      const files = getImageInputFiles();
+      const files = fileInputValue || [];
       // @TODO Exit if name/hash already exists (if storing in cloud)
       // ...
-      const hash = createFileHash(files);
       setLoadingText("Extracting details from photo(s)...");
       const menuDocument = await extractMenuDataFromImage(files);
       setLoadingText("Processing menu details...");
       // Get structured data
-      let structuredData = await convertMenuDataToStructured(menuDocument);
-      if (Object.keys(structuredData).length === 0) {
-        throw new Error("Failed to structure data.");
-      } else {
-        setLoadingText("Assigning ids to items...");
-        structuredData = assignUniqueIds({
-          data: structuredData,
-          id: DEFAULT_MENU_ID, // mark as the primary document
-          hash,
-        });
-        // Generate images
-        setLoadingText("Generating images...");
-        structuredData = await generateImages(structuredData);
-        // Create translations
-        setLoadingText("Processing translations...");
-        const iterateTranslations = async () => {
-          const results = [];
-          let langIndex = 1;
-          for (const lang of languages) {
-            setLoadingText(
-              `Translating for ${lang} (${langIndex}/${languages.length}) ...`
-            );
-            // Skip translating the source data again
-            if (structuredData.language === lang) continue;
-            // Wait between calls
-            const timeout = 5000; // 5 seconds
-            await waitForTimeout(timeout);
-            // Translate
-            const res = await translateMenuDataToLanguage({
-              data: menuDocument,
-              lang,
-              primary: structuredData, // denote the source doc
-            });
-            // Record result
-            langIndex += 1;
-            results.push(res);
-          }
-          return results;
-        };
-        const translations = await iterateTranslations();
-        // Store all data locally (text & images)
-        const menuId = structuredData?.id;
-        structuredData.sourceDocument = menuDocument; // save original text in primary data
-        if (!menuId) throw new Error("No id found for menu.");
-        const payload = [structuredData, ...translations];
-        StorageAPI.setItem(SAVED_MENU_ID, payload);
+      const structuredMenuPrompt = `Convert this markdown text to json format: ${menuDocument}\n\nExample output:\n\n${structuredOutputFormat}\n\nResponse:`;
+      let structuredData = await structureMenuData({
+        prompt: structuredMenuPrompt,
+        menuDocument,
+      });
+      // Generate images
+      setLoadingText("Generating images...");
+      structuredData = await generateMenuImages({ data: structuredData });
+      // Create translations
+      setLoadingText("Processing translations...");
+      const iterateTranslations = async () => {
+        const results = [];
+        let langIndex = 1;
+        for (const lang of languages) {
+          setLoadingText(
+            `Translating for ${lang} (${langIndex}/${languages.length}) ...`
+          );
+          // Skip translating the source data again
+          if (structuredData.language === lang) continue;
+          // Wait between calls
+          const timeout = 5000; // 5 seconds
+          await waitForTimeout(timeout);
+          // Translate
+          const res = await translateMenuDataToLanguage({
+            data: menuDocument,
+            lang,
+            primary: structuredData, // denote the source doc
+          });
+          // Record result
+          langIndex += 1;
+          results.push(res);
+        }
+        return results;
+      };
+      const translations = await iterateTranslations();
+      // Store all data locally (text & images)
+      const menuId = structuredData?.id;
+      structuredData.sourceDocument = menuDocument; // save original text in primary data
+      if (!menuId) throw new Error("No id found for menu.");
+      const payload = [structuredData, ...translations];
+      StorageAPI.setItem(SAVED_MENU_ID, payload);
 
-        reset();
-      }
+      reset();
     } catch (err) {
       reset();
       return `${err}`;
     }
   }, [
-    convertMenuDataToStructured,
     extractMenuDataFromImage,
-    generateImages,
-    getImageInputFiles,
+    fileInputValue,
+    generateMenuImages,
     reset,
     setIsDisabled,
     setLoadingText,
     setStepIndex,
+    structureMenuData,
     translateMenuDataToLanguage,
   ]);
 

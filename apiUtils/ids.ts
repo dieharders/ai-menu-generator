@@ -1,4 +1,9 @@
-import { generateShortId } from "./uniqueId";
+import { customAlphabet } from "nanoid";
+
+export const generateShortId = customAlphabet(
+  "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+  8
+); // 8-character random string
 
 interface I_Props {
   data: any;

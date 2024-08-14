@@ -56,13 +56,13 @@ Save the menu to your device for later viewing offline.
 
 ## Screenshot Tool using Puppeteer
 
-This script will create an image or "printable" version of the menu that can be used to embed online or store locally for later viewing without internet connection.
+This script was previously built for other purposes. Kept here for posterity. It is not required for the app to function. This is something you would run offline as a job if you for some reason wanted to bulk screenshot all your menus (maybe a cache server?).
 
-Run `npm start` to start the app on localhost:3000.
+- Run `npm start` to start the app on localhost:3000.
 
-Run `node puppeteer-screenshot` from the `src/tools` dir.
+- Run `node puppeteer-screenshot` from the `src/tools` dir.
 
-This will go through each menu page, open a headless browser and export a screenshot to `src/tools/screenshots`.
+- This will go through each menu page, open a headless browser and export a screenshot to `src/tools/screenshots`.
 
 ## Available Scripts
 
@@ -73,6 +73,10 @@ In the project directory, you can run:
 ### `npm test`
 
 ### `npm run build`
+
+### `vercel dev`
+
+This will allow you to locally test the api backend for vercel edge functions.
 
 ## Deploy to Hosting via Vercel
 
