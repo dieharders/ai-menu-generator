@@ -79,6 +79,7 @@ export const GenerateMenu = ({
       // structuredData = await generateMenuImages({ data: structuredData });
 
       // Create translations
+      // @TODO Instead of translating everything at once, add a button on menu page to translate specified lang.
       setLoadingText("Processing translations...");
       const iterateTranslations = async () => {
         const results = [];
