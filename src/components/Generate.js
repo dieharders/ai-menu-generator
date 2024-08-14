@@ -91,7 +91,7 @@ export const GenerateMenu = ({
           // Skip translating the source data again
           if (structuredData.language === lang) continue;
           // Wait between calls
-          const timeout = 5000; // 5 seconds
+          const timeout = 10000; // 5sec for AI calls, but 10sec for Vercel edge funcs🥺
           await waitForTimeout(timeout);
           // Translate
           const res = await translateMenuDataToLanguage({
