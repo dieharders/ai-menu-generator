@@ -90,10 +90,13 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
           </div>
           {/* Selected detail description */}
           <p
-            style={{ marginTop: "2rem", marginBottom: "1rem" }}
+            style={{
+              alignItems: "center",
+              marginTop: "1rem",
+            }}
             className={styles.description}
           >
-            {item[currentDetail]}
+            {item[currentDetail] || "No info 😐"}
           </p>
         </span>
       </div>
