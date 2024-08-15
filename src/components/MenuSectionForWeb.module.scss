@@ -86,6 +86,9 @@
 }
 
 .description {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
   color: var(--secondary);
   flex: 1 1 100%;
   margin: 0;
@@ -170,5 +173,8 @@
   .description,
   .price {
     text-align: center;
+  }
+  .description {
+    justify-content: center;
   }
 }

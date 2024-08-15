@@ -29,11 +29,6 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
   };
   const [currentDetail, setCurrentDetail] = useState("ingredients");
 
-  const translateCategory = (detailType, str) => {
-    if (detailType !== "category") return str;
-    return translate(str);
-  };
-
   return (
     <article className={styles.articleContainer} key={item.id}>
       <div className={styles.mainContainer}>
@@ -41,13 +36,13 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
         <div className={styles.textContainer}>
           {/* Name */}
           <h3 className={styles.name}>{item.name}</h3>
-          {/* Description */}
-          <p className={styles.description}>{item.description}</p>
           {/* Price */}
           <strong className={styles.price}>
             {getCurrencyChar(item.currency)}
             {item.price}
           </strong>
+          {/* Description */}
+          <p className={styles.description}>{item.description}</p>
           {/* Buy/Remove order buttons */}
           {hasOrder && (
             <Input type={sectionName} name={item.name} index={index} />
@@ -95,7 +90,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
           </div>
           {/* Category */}
           <p style={{ marginTop: "2rem" }} className={styles.description}>
-            {translateCategory(currentDetail, item[currentDetail])}
+            {item[currentDetail]}
           </p>
         </span>
       </div>
