@@ -97,7 +97,7 @@ export const structuredOutputFormat = `
   "color": 0,
   "website": "",
   "language": "",
-  "imageDescription": "", // banner image descr
+  "imageDescription": "", // banner image description
   "imageSource": "", // leave blank
   "documentHash": "", // leave blank
   "sectionNames": [""],

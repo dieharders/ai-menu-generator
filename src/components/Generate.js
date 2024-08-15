@@ -67,7 +67,7 @@ export const GenerateMenu = ({
       const menuDocument = await extractMenuDataFromImage(files);
       setLoadingText("Processing menu details...");
       // Get structured data
-      const structuredMenuPrompt = `Convert this markdown text to json format: ${menuDocument}\n\nExample output:\n\n${structuredOutputFormat}\n\nResponse:`;
+      const structuredMenuPrompt = `Convert this markdown text:\n\n${menuDocument}\n\nto JSON schema:\n\n${structuredOutputFormat}\n\nResponse:`;
       let structuredData = await structureMenuData({
         prompt: structuredMenuPrompt,
         menuDocument,
@@ -79,7 +79,7 @@ export const GenerateMenu = ({
       // structuredData = await generateMenuImages({ data: structuredData });
 
       // Create translations
-      // @TODO Instead of translating everything at once, add a button on menu page to translate specified lang.
+      // @TODO Instead of translating everything, add checkboxes on "Generate" menu to translate only specified langs, (english is only one default checked).
       setLoadingText("Processing translations...");
       const iterateTranslations = async () => {
         const results = [];

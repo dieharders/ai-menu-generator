@@ -93,7 +93,6 @@ export const useAiActions = () => {
           method: "POST",
           body: JSON.stringify({
             prompt,
-            language,
             langCode: lang,
             primary,
             apiKey: getGeminiAPIKey(),
