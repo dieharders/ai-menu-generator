@@ -24,12 +24,17 @@ export const PromptMenu = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [answer, setAnswer] = useState("");
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isAnswerOpen, setIsAnswerOpen] = useState(false);
 
   const handlePromptRequest = async () => {
     try {
       const component = document.querySelector("input[name=input-prompt-menu]");
       const promptText = component?.value;
-      if (!promptText) throw new Error("Please ask a question.");
+      if (!promptText) {
+        // Show prev answer
+        if (answer) setIsAnswerOpen(true);
+        throw new Error("Please ask a question.");
+      }
       setIsFetching(true);
       setAnswer("Thinking...");
       const info = menu?.sourceDocument || ""; // original menu source data (markdown)
@@ -64,8 +69,8 @@ export const PromptMenu = () => {
   };
 
   const onDismiss = () => {
-    // Clear answer value
-    setAnswer("");
+    // Hide answer
+    setIsAnswerOpen(false);
   };
 
   /**
@@ -84,7 +89,7 @@ export const PromptMenu = () => {
   return (
     <div className={styles.container}>
       {isFetching && <Loader />}
-      {!isFetching && answer && (
+      {!isFetching && answer && isAnswerOpen && (
         <div className={styles.buttonsContainer}>
           {/* // Read aloud answer button */}
           <button
@@ -104,7 +109,7 @@ export const PromptMenu = () => {
           </button>
         </div>
       )}
-      {!isFetching && answer && (
+      {!isFetching && answer && isAnswerOpen && (
         <textarea
           className={styles.answerContainer}
           readOnly={true}
