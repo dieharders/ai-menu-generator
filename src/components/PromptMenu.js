@@ -39,6 +39,7 @@ export const PromptMenu = () => {
       }, 5000); // show prompt input after 5 sec
     } catch (err) {
       console.error(`${err}`);
+      toast.error(`Failed to answer question:\n${err}`);
     }
   };
   const toastHandlePrompt = async () => {

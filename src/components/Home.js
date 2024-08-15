@@ -22,11 +22,6 @@ const Home = () => {
         </p>
       </div>
       <div className={styles.menusContainer}>
-        {/* Saved Menus */}
-        <div className={styles.menuContainer}>
-          <h2 className={styles.title}>Saved menus</h2>
-          <SearchBar />
-        </div>
         {/* Create Menus */}
         <div className={styles.menuContainer}>
           <GenerateMenu
@@ -36,11 +31,16 @@ const Home = () => {
             setStepIndex={setStepIndex}
           />
         </div>
+        {/* Saved Menus */}
+        <div className={styles.menuContainer}>
+          <h2 className={styles.title}>Saved menus</h2>
+          <SearchBar />
+        </div>
       </div>
       {/* Footer */}
       <div className={styles.footerContainer}>
         <div className={styles.footer}>
-          Built w/ Google Gemini ♊ | Dedicated to Diane 💞
+          Built w/ Google Gemini ♊ OpenAI 💮 | Dedicated to Diane 💖
         </div>
       </div>
     </div>
