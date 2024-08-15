@@ -28,6 +28,11 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
     }
   };
   const [currentDetail, setCurrentDetail] = useState("ingredients");
+  const checkClicked = (val) => {
+    return currentDetail === val
+      ? { borderBottomColor: "var(--secondary)" }
+      : {};
+  };
 
   return (
     <article className={styles.articleContainer} key={item.id}>
@@ -64,24 +69,28 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
           {/* Detail Name */}
           <div className={styles.detailNamesContainer}>
             <button
+              style={checkClicked("category")}
               className={styles.detailButton}
               onClick={() => setCurrentDetail("category")}
             >
               <h3 className={styles.name}>{translate(keys.CATEGORY)}</h3>
             </button>
             <button
+              style={checkClicked("ingredients")}
               className={styles.detailButton}
               onClick={() => setCurrentDetail("ingredients")}
             >
               <h3 className={styles.name}>{translate(keys.INGREDIENTS)}</h3>
             </button>
             <button
+              style={checkClicked("health")}
               className={styles.detailButton}
               onClick={() => setCurrentDetail("health")}
             >
               <h3 className={styles.name}>{translate(keys.HEALTH)}</h3>
             </button>
             <button
+              style={checkClicked("allergy")}
               className={styles.detailButton}
               onClick={() => setCurrentDetail("allergy")}
             >
