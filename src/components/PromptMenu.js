@@ -26,12 +26,13 @@ export const PromptMenu = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const handlePromptRequest = async () => {
-    setIsFetching(true);
-    setAnswer("Thinking...");
     try {
-      const info = menu?.sourceDocument || ""; // original menu source data (markdown)
       const component = document.querySelector("input[name=input-prompt-menu]");
       const promptText = component?.value;
+      if (!promptText) throw new Error("Please ask a question.");
+      setIsFetching(true);
+      setAnswer("Thinking...");
+      const info = menu?.sourceDocument || ""; // original menu source data (markdown)
       const res = await requestAnswer({ prompt: promptText, info });
       setAnswer(`Question: ${promptText}\n\nAnswer: ${res}`);
       setTimeout(() => {
@@ -39,7 +40,7 @@ export const PromptMenu = () => {
       }, 5000); // show prompt input after 5 sec
     } catch (err) {
       console.error(`${err}`);
-      toast.error(`Failed to answer question:\n${err}`);
+      return err;
     }
   };
   const toastHandlePrompt = async () => {
@@ -49,8 +50,11 @@ export const PromptMenu = () => {
       },
       position: "top-center",
       loading: "Thinking...",
-      success: <b>Here is your answer!</b>,
-      error: <b>Could not answer your question 😭</b>,
+      success: (data) => {
+        if (data instanceof Error) throw data;
+        return <b>Here is your answer!</b>;
+      },
+      error: (err) => <b>Could not answer your question 😭{`\n${err}`}</b>,
     });
     setIsFetching(false);
     return;
