@@ -25,6 +25,7 @@ export const PromptMenu = () => {
   const [answer, setAnswer] = useState("");
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isAnswerOpen, setIsAnswerOpen] = useState(false);
+  const isLocalEnv = window.location.hostname.includes("localhost");
 
   const handlePromptRequest = async () => {
     try {
@@ -143,13 +144,16 @@ export const PromptMenu = () => {
           >
             <IconSend className={styles.btnIcon} />
           </button>
-          <button
-            title="Show api key input"
-            className={styles.showInputBtn}
-            onClick={() => setShowAPIKey((prev) => !prev)}
-          >
-            <div className={styles.btnIcon}>🔐</div>
-          </button>
+          {/* API key button (show/hide) */}
+          {isLocalEnv && (
+            <button
+              title="Show api key input"
+              className={styles.showInputBtn}
+              onClick={() => setShowAPIKey((prev) => !prev)}
+            >
+              <div className={styles.btnIcon}>🔐</div>
+            </button>
+          )}
         </div>
       )}
     </div>
