@@ -22,10 +22,12 @@ export default function Total({ hasOrderInput }) {
   }, 0);
 
   return (
-    <div className={styles.total}>
-      <PromptMenu />
-      {isOrder && <span className={styles.totalTitle}>Total:</span>}
-      {isOrder && <span className={styles.totalPrice}>${totalPrice}</span>}
+    <div className={styles.totalContainer}>
+      <div className={styles.total}>
+        <PromptMenu />
+        {isOrder && <span className={styles.totalTitle}>Total:</span>}
+        {isOrder && <span className={styles.totalPrice}>${totalPrice}</span>}
+      </div>
     </div>
   );
 }

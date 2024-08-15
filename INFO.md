@@ -28,24 +28,20 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
-- ❌ Try re-implementing abort signal. The exception may not show in prod.
+- ❌ Generate images on demand by clicking on placeholder image.
+
+- ❌ Commit some default menu data with images (min 3).
+
+- ❌ Better prompts for menu question/answer (put instructions and menu data in the system prompt). Add a max output token limit: 2000.
 
 - ❌ Better photo prompts for image generation.
 
-- ❌ Generate images on demand by clicking on placeholder image?
-
-- ❌ Commit some default menu data (min 3).
+- ❌ Try re-implementing abort signal to cancel generation process. The exception may not show in prod.
 
 - ❌ Optional: Allow multiple images to be uploaded (max 3 total)
 
 - ❌ Optional: Do a traditional Google search if no images can be generated and use the top result to display. User must tap the placeholder image to consent to seeing images from the web.
 
-- ❌ Optional: Convert existing website to Next.js (openbrew website already has similar setup, use app router).
-
-  - Convert all api calls to server-side actions OR use cloud functions without needing to convert website and put requests behind a password check.
-
-  - This allows us to serve api requests publically.
-
-- ❌ Optional: Implement Vercel databases (save images/json on per user basis, user login required)
+- ❌ Optional: Implement cloud storage per user. Vercel databases (save images/json on per user basis, user login required)
 
   - Load menu data from k/v. Load images from Blob Store.

@@ -6,7 +6,7 @@
   padding-left: 2.25rem;
   padding-right: 2.25rem;
   padding-top: 2rem;
-  padding-bottom: 0;
+  padding-bottom: 22rem; // leaves room above prompt fold
   margin: auto;
   max-width: 50rem;
   background-color: var(--light);
@@ -29,12 +29,11 @@
 // Small screen
 @media (max-width: 900px) {
   .page {
-    margin: auto;
     width: 100%;
     max-width: 100%;
-    padding: 2.5rem;
-    padding-bottom: 0;
     padding-top: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
     box-shadow: none;
   }
   .bannerPage {
