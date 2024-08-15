@@ -1,6 +1,7 @@
 .total {
   display: flex;
-  position: sticky;
+  position: fixed;
+  max-width: 50rem;
   width: 100%;
   min-height: 2rem;
   height: max-content;
@@ -10,8 +11,8 @@
   margin-top: 2.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
   bottom: 0;
   color: var(--secondary);
   background-color: var(--light);
@@ -41,6 +42,13 @@
   height: max-content;
 }
 
+// Medium screen
+@media (max-width: 900px) {
+  .total {
+    max-width: none;
+  }
+}
+
 // Small screen
 @media (max-width: 600px) {
   .searchContainer {
@@ -48,8 +56,7 @@
     width: 100%;
   }
   .total {
+    max-width: none;
     flex-direction: column;
-    margin-left: 0;
-    margin-right: 0;
   }
 }

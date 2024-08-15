@@ -60,7 +60,6 @@ const MenuPageForWeb = () => {
       </div>
       {/* Main body */}
       <div className={styles.page}>
-        <div style={{ position: "fixed" }}></div>
         {renderSections(data, renderSection)}
         <Total hasOrderInput={isOrderMenuVariant} />
       </div>

@@ -88,8 +88,11 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
               <h3 className={styles.name}>{translate(keys.ALLERGY)}</h3>
             </button>
           </div>
-          {/* Category */}
-          <p style={{ marginTop: "2rem" }} className={styles.description}>
+          {/* Selected detail description */}
+          <p
+            style={{ marginTop: "2rem", marginBottom: "1rem" }}
+            className={styles.description}
+          >
             {item[currentDetail]}
           </p>
         </span>
