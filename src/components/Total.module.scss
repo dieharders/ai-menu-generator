@@ -6,10 +6,12 @@
   height: max-content;
   align-self: center;
   align-items: flex-end;
+  margin: auto;
   margin-top: 2.5rem;
-  padding: 0;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  padding-left: 0;
+  padding-right: 0;
   bottom: 0;
   color: var(--secondary);
   background-color: var(--light);
@@ -17,7 +19,7 @@
   box-shadow: 0 -0.5rem 0.75rem 0.5rem var(--light);
   z-index: 200;
 }
-  
+
 .totalTitle {
   font-size: 1.25rem;
   margin: 0;
@@ -42,8 +44,8 @@
 // Small screen
 @media (max-width: 600px) {
   .searchContainer {
-      margin: auto;
-      width: 100%;
+    margin: auto;
+    width: 100%;
   }
   .total {
     flex-direction: column;
