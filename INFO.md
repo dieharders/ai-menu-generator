@@ -28,11 +28,9 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
-- ❌ Generate images on demand by clicking on placeholder image.
-
 - ❌ Commit some default menu data with images (min 3).
 
-- ❌ Better prompts for menu question/answer (put instructions and menu data in the system prompt). Add a max output token limit: 2000.
+- ❌ Better prompts for menu question/answer (put instructions and menu data in the system prompt). Add a max output token limit: ~750.
 
 - ❌ Better photo prompts for image generation.
 
@@ -40,7 +38,7 @@ Once a menu image is uploaded, we start the build process:
 
 - ❌ Optional: Allow multiple images to be uploaded (max 3 total)
 
-- ❌ Optional: Do a traditional Google search if no images can be generated and use the top result to display. User must tap the placeholder image to consent to seeing images from the web.
+- ❌ Optional: Do a traditional Google search if no images can be generated and use the top result to display. User must tap the placeholder image to consent to seeing images from the web. And/or use the image along with description to generate a specific scene.
 
 - ❌ Optional: Implement cloud storage per user. Vercel databases (save images/json on per user basis, user login required)
 
