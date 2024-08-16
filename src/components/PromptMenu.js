@@ -8,7 +8,7 @@ import { Loader } from "./Loader";
 import { ReactComponent as IconSend } from "../assets/icons/icon-send.svg";
 import { ReactComponent as IconX } from "../assets/icons/icon-cross-2.svg";
 import { ReactComponent as SpeakAloud } from "../assets/icons/icon-speak-aloud.svg";
-import { GeminiAPIKeyInput } from "./DevAPIKeyInput";
+import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
 import toast from "react-hot-toast";
 import styles from "./PromptMenu.module.scss";
 
@@ -19,7 +19,7 @@ export const PromptMenu = () => {
   const menus = StorageAPI.getItem(menuId) || cachedMenus?.[menuId];
   const menu = menus?.find((m) => m.id === DEFAULT_MENU_ID) || menus?.[0];
   const [showApiKey, setShowAPIKey] = useState(false);
-  const { geminiAPIKeyRef } = useContext(Context);
+  const { geminiAPIKeyRef, openaiAPIKeyRef } = useContext(Context);
   const { requestAnswer } = useAiActions();
   const [isFetching, setIsFetching] = useState(false);
   const [answer, setAnswer] = useState("");
@@ -123,6 +123,12 @@ export const PromptMenu = () => {
       {showApiKey && !isFetching && (
         <GeminiAPIKeyInput
           inputValue={geminiAPIKeyRef}
+          className={styles.inputText}
+        />
+      )}
+      {showApiKey && !isFetching && (
+        <OpenAIAPIKeyInput
+          inputValue={openaiAPIKeyRef}
           className={styles.inputText}
         />
       )}

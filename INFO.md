@@ -30,8 +30,6 @@ Once a menu image is uploaded, we start the build process:
 
 - ❌ Generate images on demand by clicking on placeholder image.
 
-  - Add the openai api key input to menu page.
-
 - ❌ Commit some default menu data with images (min 3).
 
 - ❌ Better prompts for menu question/answer (put instructions and menu data in the system prompt). Add a max output token limit: 2000.
