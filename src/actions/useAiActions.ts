@@ -160,9 +160,11 @@ export const useAiActions = () => {
   const generateMenuImage = async ({
     name,
     description,
+    ingredients,
   }: {
     name: string;
     description: string;
+    ingredients: string;
   }) => {
     try {
       const apiKey = getOpenAIAPIKey();
@@ -175,6 +177,7 @@ export const useAiActions = () => {
           body: JSON.stringify({
             name,
             description,
+            ingredients,
             apiKey,
           }),
         }

@@ -44,16 +44,18 @@ export const config = {
 };
 
 export const POST = async (req: Request) => {
-  const { name, description, apiKey } = await req.json();
+  const { name, description, ingredients, apiKey } = await req.json();
   let imageSource = "";
 
   try {
     // Build a prompt
     const descr = description ? `Description: ${description}` : "";
+    const ingredientsDescr = ingredients ? `Ingredients: ${ingredients}` : "";
     const prompt = `
     A professional, high-resolution photograph of an elegant food presentation shot from a three-quarters view focused on subject with bokeh effect:
     Subject: ${name}.
     ${descr}
+    ${ingredientsDescr}
     Style: Curated, high quality, food menu style similar to photos on unsplash.com or Yelp.
     Scene: Place the subject on a decorated table or other surface in an environment that reflects the location of the origin of the item. The food is beautifully arranged with artistic garnishes that will contrast with the subject. The lighting is warm and natural, highlighting the textures and colors of the dishes, creating a welcoming and appetizing atmosphere. The background is blurred slightly to emphasize the focus on the food.
     `;

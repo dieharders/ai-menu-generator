@@ -42,6 +42,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
         const res = await generateMenuImage({
           name: item.name,
           description: item.description,
+          ingredients: item.ingredients,
         });
         data = res?.imageSource;
         // Check error msg
@@ -90,11 +91,13 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
     return (
       <div className={styles.loadingToast}>
         {/* Header */}
-        <b>Generating...this may take some time. Do not exit page.</b>
+        <b>Generating image...this may take some time. Do not exit page.</b>
         {/* Details */}
         <p>
+          Name: {item.name}
+          {"\n"}
           Description:{"\n"}
-          {item.imageDescription}
+          {item.imageDescription || "No description"}
         </p>
       </div>
     );
