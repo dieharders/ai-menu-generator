@@ -28,21 +28,19 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
-- ❌ Generate images on demand by clicking on placeholder image.
-
-  - Add the openai api key input to menu page.
-
 - ❌ Commit some default menu data with images (min 3).
 
-- ❌ Better prompts for menu question/answer (put instructions and menu data in the system prompt). Add a max output token limit: 2000.
+- ❌ Do a traditional Google search to populate placeholder images and use the top result to display. User must tap the placeholder image to consent to seeing images from the web. And/or use the image along with description to generate a specific scene.
 
-- ❌ Better photo prompts for image generation.
+  - https://developers.google.com/custom-search/v1/overview
 
-- ❌ Try re-implementing abort signal to cancel generation process. The exception may not show in prod.
+  - or Unsplash https://unsplash.com/documentation
+
+- ❌ Better prompts for menu question/answer (put instructions and menu data in the system prompt). Add a max output token limit: ~750.
+
+- ❌ Optional: Try re-implementing abort signal to cancel generation process. The exception may not show in prod.
 
 - ❌ Optional: Allow multiple images to be uploaded (max 3 total)
-
-- ❌ Optional: Do a traditional Google search if no images can be generated and use the top result to display. User must tap the placeholder image to consent to seeing images from the web.
 
 - ❌ Optional: Implement cloud storage per user. Vercel databases (save images/json on per user basis, user login required)
 

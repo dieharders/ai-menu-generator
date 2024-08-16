@@ -15,6 +15,7 @@ export const usePage = () => {
   const menuId = queryParameters.get("id");
   const menus = useMemo(() => {
     // Determine if we should read from localStorage or from included data.json
+    // @TODO Replace example menus ids with single digit id so we can better tell.
     if (menuId.includes("_MENU")) return StorageAPI.getItem(SAVED_MENU_ID);
     return cachedMenus?.[menuId];
   }, [menuId]);
