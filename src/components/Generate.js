@@ -3,7 +3,7 @@ import { Context } from "../Context";
 import { useAiActions } from "../actions/useAiActions";
 import { structuredOutputFormat } from "../helpers/formats";
 import { StorageAPI } from "../helpers/storage";
-import { languages } from "../helpers/languageCodes";
+import { languages, getLanguageLabel } from "../helpers/languageCodes";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
 import { Loader } from "./Loader";
 import toast from "react-hot-toast";
@@ -31,7 +31,7 @@ export const GenerateMenu = ({
     geminiAPIKeyRef,
     openaiAPIKeyRef,
   } = useContext(Context);
-
+  const languageChoices = useRef([]);
   // Text to show in toast while generating
   const signalAborted = useRef(false);
   const setLoadingText = useCallback(
@@ -58,6 +58,9 @@ export const GenerateMenu = ({
 
   const onClick = useCallback(async () => {
     try {
+      // Prevent if no language chosen
+      if (languageChoices.current.length === 0)
+        return new Error("Please choose at least one language 🌐.");
       setStepIndex(4);
       setIsDisabled(true);
       const files = fileInputValue || [];
@@ -84,9 +87,10 @@ export const GenerateMenu = ({
       const iterateTranslations = async () => {
         const results = [];
         let langIndex = 1;
-        for (const lang of languages) {
+
+        for (const lang of languageChoices.current) {
           setLoadingText(
-            `Translating for ${lang} (${langIndex}/${languages.length}) ...`
+            `Translating for ${lang} (${langIndex}/${languageChoices.current.length}) ...`
           );
           // Skip translating the source data again
           if (structuredData.language === lang) continue;
@@ -103,6 +107,7 @@ export const GenerateMenu = ({
           langIndex += 1;
           results.push(res);
         }
+
         return results;
       };
       const translations = await iterateTranslations();
@@ -225,15 +230,53 @@ export const GenerateMenu = ({
     );
   };
 
+  const LanguageCheckboxes = ({ language }) => {
+    const value = useRef(false);
+    const label = (
+      <label htmlFor={language}>{getLanguageLabel(language)}</label>
+    );
+    const input = (
+      <input
+        ref={value}
+        id={language}
+        type="checkbox"
+        className={styles.checkbox}
+        onChange={(val) => {
+          const v = val.target.checked;
+          const prev = languageChoices.current;
+          // add
+          if (v === true && !prev.includes(language))
+            languageChoices.current.push(language);
+          // remove
+          else
+            languageChoices.current = languageChoices.current.filter(
+              (e) => e !== language
+            );
+        }}
+      />
+    );
+    return (
+      <span>
+        {label}
+        {input}
+      </span>
+    );
+  };
+
+  // Generate menu
   const Menu4 = () => {
     return (
       <>
         <div className={styles.instructions}>
           {/* Title */}
-          <h1 className={styles.title}>3. Start</h1>
-          {/* Instructions */}
-          <h2>Convert image(s) to menu.</h2>
+          <h1 className={styles.title}>Choose languages to translate 🌐</h1>
         </div>
+        {/* Choose languages to translate to */}
+        <form action="" className={styles.langChoiceContainer}>
+          {languages?.map((lang) => (
+            <LanguageCheckboxes key={lang} language={lang} />
+          ))}
+        </form>
         {/* Generate button */}
         <GenerateButton />
         <div className={styles.btnsContainer}>
@@ -251,7 +294,7 @@ export const GenerateMenu = ({
       <>
         <div className={styles.instructions}>
           {/* Title */}
-          <h1 className={styles.title}>1. Snap a pic!</h1>
+          <h1 className={styles.title}>Snap a pic!</h1>
           {/* Instructions */}
           <h2>Take picture(s) of your menu to upload.</h2>
         </div>
@@ -281,6 +324,8 @@ export const GenerateMenu = ({
         <div className={styles.instructions}>
           {/* Title */}
           <h1 className={styles.title}>Enter api keys</h1>
+        </div>
+        <span style={{ width: "100%" }}>
           {/* API keys menu */}
           <div className={styles.apiMenuContainer}>
             <span>For testing only</span>
@@ -290,7 +335,7 @@ export const GenerateMenu = ({
             <GeminiAPIKeyInput inputValue={geminiAPIKeyRef} />
             <OpenAIAPIKeyInput inputValue={openaiAPIKeyRef} />
           </span>
-        </div>
+        </span>
         <div className={styles.btnsContainer}>
           {/* Back button */}
           <button
