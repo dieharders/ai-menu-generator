@@ -51,11 +51,11 @@ export const POST = async (req: Request) => {
     // Build a prompt
     const descr = description ? `Description: ${description}` : "";
     const prompt = `
-    A professionally shot photo from a three-quarters view focused on subject with bokeh effect, similar to photos on unsplash.com:
+    A professional, high-resolution photograph of an elegant food presentation shot from a three-quarters view focused on subject with bokeh effect:
     Subject: ${name}.
     ${descr}
-    Style: Curated, high quality, food menu style.
-    Scene: Place the subject on a table or surface in an environment that reflects the location of the origin of the item. Place some smaller decoritive items around the subject that will contrast.
+    Style: Curated, high quality, food menu style similar to photos on unsplash.com or Yelp.
+    Scene: Place the subject on a decorated table or other surface in an environment that reflects the location of the origin of the item. The food is beautifully arranged with artistic garnishes that will contrast with the subject. The lighting is warm and natural, highlighting the textures and colors of the dishes, creating a welcoming and appetizing atmosphere. The background is blurred slightly to emphasize the focus on the food.
     `;
 
     // Generate image for item
