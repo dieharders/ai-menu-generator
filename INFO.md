@@ -40,6 +40,10 @@ Once a menu image is uploaded, we start the build process:
 
 - ❌ Optional: Do a traditional Google search if no images can be generated and use the top result to display. User must tap the placeholder image to consent to seeing images from the web. And/or use the image along with description to generate a specific scene.
 
+  - https://developers.google.com/custom-search/v1/overview
+
+  - or Unsplash https://unsplash.com/documentation
+
 - ❌ Optional: Implement cloud storage per user. Vercel databases (save images/json on per user basis, user login required)
 
   - Load menu data from k/v. Load images from Blob Store.
