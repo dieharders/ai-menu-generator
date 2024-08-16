@@ -18,7 +18,7 @@ const Home = () => {
       <div className={styles.titleContainer}>
         <p className={styles.description}>
           Interact with any food menu pic in multiple languages. Browse
-          nutrition and other info.
+          nutrition info or ask a question.
         </p>
       </div>
       <div className={styles.menusContainer}>

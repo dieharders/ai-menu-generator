@@ -8,6 +8,18 @@
   gap: 2rem;
 }
 
+.langChoiceContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: stretch;
+  justify-content: center;
+  color: var(--light);
+  text-align: center;
+}
+
 .loaderContainer {
   transform: scale(1);
 }
@@ -31,6 +43,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.checkbox {
+  display: inline-block;
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+}
+
+.instructions h1,
+.instructions h2 {
+  margin-bottom: 0;
 }
 
 .btn {

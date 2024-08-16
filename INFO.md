@@ -30,7 +30,7 @@ Once a menu image is uploaded, we start the build process:
 
 - ❌ Generate images on demand by clicking on placeholder image.
 
-- ❌ Option to choose which languages are translated before generation.
+  - Add the openai api key input to menu page.
 
 - ❌ Commit some default menu data with images (min 3).
 
