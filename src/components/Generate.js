@@ -269,7 +269,7 @@ export const GenerateMenu = ({
       <>
         <div className={styles.instructions}>
           {/* Title */}
-          <h1 className={styles.title}>Choose languages to translate 🌐</h1>
+          <h1 className={styles.title}>🌐 Choose languages</h1>
         </div>
         {/* Choose languages to translate to */}
         <form action="" className={styles.langChoiceContainer}>

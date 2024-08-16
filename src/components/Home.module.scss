@@ -1,21 +1,23 @@
 .container {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin: auto;
   gap: 4rem;
   padding: 2rem;
   padding-top: 14vh;
   padding-bottom: 6rem;
   width: 100%;
+  min-height: 50rem;
   justify-content: center;
   align-items: center;
 }
 
-.titleContainer {
+.descriptionContainer {
   position: relative;
   display: block;
-  width: 24rem;
+  width: 100%;
   padding: 1rem;
   border-width: 0.1rem;
   border-radius: 1rem;
@@ -53,14 +55,23 @@
 //     0 0 140px 90px rgb(179, 102, 255);
 // }
 
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  max-width: 30rem;
+  gap: 2rem;
+}
+
 .menusContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 4rem;
   align-items: flex-start;
   justify-content: center;
-  width: 100%;
+  align-self: stretch;
 }
 
 .menuContainer {
@@ -81,6 +92,54 @@
     rgba(180, 0, 255, 0.07) 0px 32px 64px;
 }
 
+.btnsContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1.5rem;
+  padding: 0;
+  padding-top: 2rem;
+}
+
+.btn,
+.btnView {
+  position: relative;
+  min-height: 1rem;
+  min-width: 3rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+  font-family: var(--font-primary);
+  background-color: var(--primary);
+  border: 0;
+  color: var(--light);
+  border-color: var(--primary);
+  border-radius: 0.25rem;
+  border-style: solid;
+  border-width: 0.1rem;
+}
+.btn {
+  filter: brightness(90%);
+}
+.btn:hover {
+  filter: brightness(110%);
+}
+
+.btnView {
+  color: var(--light);
+  border-color: var(--light);
+  background-color: transparent;
+}
+.btnView:hover {
+  background-color: var(--light);
+  color: var(--menu-background);
+}
+
 .title,
 .appTitle {
   color: var(--light);
@@ -95,6 +154,7 @@
   margin: 0;
   font-size: 5rem;
   font-weight: bolder;
+  align-self: center;
   // z-index: 1;
 }
 
@@ -145,6 +205,7 @@
 
 // Small screen
 @media (max-width: 550px) {
+  .menusContainer,
   .menuContainer,
   .titleContainer {
     width: 100%;
