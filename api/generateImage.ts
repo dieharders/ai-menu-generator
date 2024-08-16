@@ -33,8 +33,7 @@ const createEncodedImage = async (prompt: string, apiKey: string) => {
     return source;
   } catch (err) {
     const msg = `Failed to generate image:\n${err}`;
-    if (!apiKey) console.error(msg);
-    else console.error(`${msg}`);
+    console.error(`${msg}`);
     throw msg;
   }
 };
@@ -65,7 +64,7 @@ export const POST = async (req: Request) => {
     return new Response(JSON.stringify({ data: { imageSource } }));
   } catch (err) {
     const msg = `Failed to process image:\n${err}`;
-    console.error(msg);
+    console.error(`${msg}`);
 
     return new Response(
       JSON.stringify({ error: true, message: msg, data: {} }),
