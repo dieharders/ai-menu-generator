@@ -11,9 +11,18 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
   const hasOrder = hasOrderInput === "true";
   const [currentDetail, setCurrentDetail] = useState("ingredients");
   const generateText = "✨Generate image";
-  const [buttonContext, setButtonContext] = useState("");
+  const isMobile = () => {
+    const regex =
+      /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    return regex.test(navigator.userAgent);
+  };
+  const [buttonContext, setButtonContext] = useState(
+    isMobile() && !item.imageSource ? generateText : ""
+  );
   const { generateMenuImage } = useAiActions();
-  const [disablePhotoButton, setDisablePhotoButton] = useState(false);
+  const [disablePhotoButton, setDisablePhotoButton] = useState(
+    item?.imageSource ? true : false
+  );
   const checkClicked = (val) => {
     return currentDetail === val
       ? { borderBottomColor: "var(--secondary)" }
@@ -121,7 +130,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
             onBlur={() => {}}
             onMouseOver={() => {
               if (!item.imageSource) setButtonContext(generateText);
-              else setButtonContext("");
+              else if (!isMobile()) setButtonContext("");
             }}
           >
             {buttonContext && (
