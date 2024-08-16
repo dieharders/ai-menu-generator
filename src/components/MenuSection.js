@@ -2,11 +2,40 @@ import { useState } from "react";
 import Input from "./Input";
 import { keys, translate } from "../helpers/appTranslations";
 import { getImagesData } from "../helpers/getData";
+import { useAiActions } from "../actions/useAiActions";
 import placeholder from "../assets/images/placeholder.png";
+import toast from "react-hot-toast";
 import styles from "./MenuSectionForWeb.module.scss";
 
 export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
   const hasOrder = hasOrderInput === "true";
+  const [currentDetail, setCurrentDetail] = useState("ingredients");
+  const generateText = "✨Generate image";
+  const [buttonContext, setButtonContext] = useState("");
+  const { generateMenuImage } = useAiActions();
+  const [disablePhotoButton, setDisablePhotoButton] = useState(false);
+  const checkClicked = (val) => {
+    return currentDetail === val
+      ? { borderBottomColor: "var(--secondary)" }
+      : {};
+  };
+  const onAction = async () => {
+    let data = "";
+    try {
+      setDisablePhotoButton(true);
+      if (!item.imageSource) {
+        const res = await generateMenuImage(item.imageSource);
+        data = await res?.imageSource;
+        // @TODO save source to localStorage
+        // ... LocalStorage.set("", data)
+      }
+      setDisablePhotoButton(false);
+      return data;
+    } catch (err) {
+      setDisablePhotoButton(false);
+      return `${err}`;
+    }
+  };
   const getCurrencyChar = (type) => {
     switch (type) {
       case "ESP":
@@ -27,11 +56,19 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
         return "$";
     }
   };
-  const [currentDetail, setCurrentDetail] = useState("ingredients");
-  const checkClicked = (val) => {
-    return currentDetail === val
-      ? { borderBottomColor: "var(--secondary)" }
-      : {};
+
+  const LoadingComponent = () => {
+    return (
+      <div className={styles.loadingToast}>
+        {/* Header */}
+        <b>Generating...this may take some time. Do not exit page.</b>
+        {/* Details */}
+        <p>
+          Description:{"\n"}
+          {item.imageDescription}
+        </p>
+      </div>
+    );
   };
 
   return (
@@ -55,12 +92,48 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
         </div>
         {/* Photo */}
         <div className={styles.imageContainer}>
-          <img
-            title={item.imageDescription}
-            className={styles.photo}
-            src={getImagesData(item.id)?.imageSource || placeholder}
-            alt={`${item.category} - ${item.name}`}
-          />
+          <button
+            className={styles.imageButton}
+            disabled={disablePhotoButton}
+            onClick={async () =>
+              toast.promise(onAction(), {
+                style: {
+                  minWidth: "6rem",
+                },
+                position: "top-center",
+                loading: <LoadingComponent />,
+                success: (data) => {
+                  // Prevents success event when canceling promise
+                  if (data && !data.ok) throw new Error(data);
+                  if (!data) throw new Error("No data was returned.");
+                  return <b>Image saved!</b>;
+                },
+                error: (err) => (
+                  <div>
+                    <b>Failed to generate image 😭</b>
+                    <p>{err?.message}</p>
+                  </div>
+                ),
+              })
+            }
+            onFocus={() => {}}
+            onMouseOut={() => setButtonContext("")}
+            onBlur={() => {}}
+            onMouseOver={() => {
+              if (!item.imageSource) setButtonContext(generateText);
+              else setButtonContext("");
+            }}
+          >
+            {buttonContext && (
+              <div className={styles.genIcon}>{buttonContext}</div>
+            )}
+            <img
+              title={item.imageDescription}
+              className={styles.photo}
+              src={getImagesData(item.id)?.imageSource || placeholder}
+              alt={`${item.category} - ${item.name}`}
+            ></img>
+          </button>
         </div>
       </div>
       {/* Extra Details */}

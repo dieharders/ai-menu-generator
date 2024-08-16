@@ -22,7 +22,6 @@ export const GenerateMenu = ({
     structureMenuData,
     extractMenuDataFromImage,
     translateMenuDataToLanguage,
-    // generateMenuImages,
   } = useAiActions();
   const {
     fileInputValue,
@@ -76,13 +75,7 @@ export const GenerateMenu = ({
         menuDocument,
       });
 
-      // Generate images
-      // @TODO Disabling this for now. Want to refactor this to request once per image.
-      // setLoadingText("Generating images...");
-      // structuredData = await generateMenuImages({ data: structuredData });
-
       // Create translations
-      // @TODO Instead of translating everything, add checkboxes on "Generate" menu to translate only specified langs, (english is only one default checked).
       setLoadingText("Processing translations...");
       const iterateTranslations = async () => {
         const results = [];

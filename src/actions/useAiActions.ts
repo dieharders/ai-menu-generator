@@ -157,14 +157,13 @@ export const useAiActions = () => {
     }
   };
 
-  // @TODO We cannot have one function return all images, edge func cant handle payload size. Make one req/image.
-  const generateMenuImages = async ({ data }) => {
+  const generateMenuImage = async (imageSource: string) => {
     try {
       const res = await fetch(
-        `${location.protocol}//${location.host}/api/generateImages${location.pathname}`,
+        `${location.protocol}//${location.host}/api/generateImage${location.pathname}`,
         {
           method: "POST",
-          body: JSON.stringify({ data, apiKey: getOpenAIAPIKey() }),
+          body: JSON.stringify({ imageSource, apiKey: getOpenAIAPIKey() }),
         }
       );
       const result = await res.json();
@@ -180,7 +179,7 @@ export const useAiActions = () => {
     translateMenuDataToLanguage,
     structureMenuData,
     requestAnswer,
-    generateMenuImages,
+    generateMenuImage,
     getOpenAIAPIKey,
     getGeminiAPIKey,
   };

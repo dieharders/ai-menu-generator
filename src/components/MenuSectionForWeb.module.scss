@@ -130,6 +130,45 @@
   object-fit: cover;
   background-color: grey;
   border-radius: 0.5rem;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: var(--secondary);
+}
+
+.imageButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 0;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+.imageButton:hover {
+  filter: brightness(90%);
+  cursor: pointer;
+}
+.imageButton:disabled {
+  cursor: not-allowed;
+}
+
+.genIcon {
+  position: absolute;
+  display: block;
+  font-size: 1rem;
+  font-family: var(--font-secondary);
+  font-weight: bold;
+  background-color: var(--light);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 0.25rem;
+}
+
+.loadingToast {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .detailButton {
