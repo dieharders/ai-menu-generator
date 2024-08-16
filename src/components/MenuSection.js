@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "../Context";
 import Input from "./Input";
 import { keys, translate } from "../helpers/appTranslations";
 import { getImagesData } from "../helpers/getData";
@@ -6,8 +7,11 @@ import { useAiActions } from "../actions/useAiActions";
 import placeholder from "../assets/images/placeholder.png";
 import toast from "react-hot-toast";
 import styles from "./MenuSectionForWeb.module.scss";
+import { StorageAPI } from "../helpers/storage";
+import { DEFAULT_MENU_ID, SAVED_MENU_ID } from "./Generate";
 
 export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
+  const { setMenuData } = useContext(Context);
   const hasOrder = hasOrderInput === "true";
   const [currentDetail, setCurrentDetail] = useState("ingredients");
   const generateText = "✨Generate image";
@@ -23,28 +27,44 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
   const [disablePhotoButton, setDisablePhotoButton] = useState(
     item?.imageSource ? true : false
   );
-  const checkClicked = (val) => {
+
+  const isDetailActive = (val) => {
     return currentDetail === val
       ? { borderBottomColor: "var(--secondary)" }
       : {};
   };
+
   const onAction = async () => {
     let data = "";
+    setDisablePhotoButton(true);
     try {
-      setDisablePhotoButton(true);
       if (!item.imageSource) {
-        const res = await generateMenuImage(item.imageSource);
-        data = await res?.imageSource;
-        // @TODO save source to localStorage
-        // ... LocalStorage.set("", data)
+        const res = await generateMenuImage({
+          name: item.name,
+          description: item.description,
+        });
+        data = res?.imageSource;
+        // Check error msg
+        if (res?.error) return res;
+        // Save source to localStorage
+        const menu = StorageAPI.getItem(SAVED_MENU_ID);
+        const primary = menu?.find((i) => i.id === DEFAULT_MENU_ID);
+        const items = primary?.items;
+        const newItem = items.find((i) => i.id === item.id);
+        if (!newItem || !data || !menu)
+          throw new Error("Could not save image. Something went wrong.");
+        // Save new menu data to disk
+        newItem.imageSource = data;
+        StorageAPI.setItem(SAVED_MENU_ID, menu);
+        // Update menu data
+        setMenuData(primary);
       }
-      setDisablePhotoButton(false);
       return data;
     } catch (err) {
-      setDisablePhotoButton(false);
       return `${err}`;
     }
   };
+
   const getCurrencyChar = (type) => {
     switch (type) {
       case "ESP":
@@ -113,16 +133,19 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
                 loading: <LoadingComponent />,
                 success: (data) => {
                   // Prevents success event when canceling promise
-                  if (data && !data.ok) throw new Error(data);
+                  if (data?.error) throw new Error(data.message);
                   if (!data) throw new Error("No data was returned.");
                   return <b>Image saved!</b>;
                 },
-                error: (err) => (
-                  <div>
-                    <b>Failed to generate image 😭</b>
-                    <p>{err?.message}</p>
-                  </div>
-                ),
+                error: (err) => {
+                  setDisablePhotoButton(false);
+                  return (
+                    <div>
+                      <b>Failed to generate image 😭</b>
+                      <p>{err?.message}</p>
+                    </div>
+                  );
+                },
               })
             }
             onFocus={() => {}}
@@ -151,28 +174,28 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
           {/* Detail Name */}
           <div className={styles.detailNamesContainer}>
             <button
-              style={checkClicked("category")}
+              style={isDetailActive("category")}
               className={styles.detailButton}
               onClick={() => setCurrentDetail("category")}
             >
               <h3 className={styles.name}>{translate(keys.CATEGORY)}</h3>
             </button>
             <button
-              style={checkClicked("ingredients")}
+              style={isDetailActive("ingredients")}
               className={styles.detailButton}
               onClick={() => setCurrentDetail("ingredients")}
             >
               <h3 className={styles.name}>{translate(keys.INGREDIENTS)}</h3>
             </button>
             <button
-              style={checkClicked("health")}
+              style={isDetailActive("health")}
               className={styles.detailButton}
               onClick={() => setCurrentDetail("health")}
             >
               <h3 className={styles.name}>{translate(keys.HEALTH)}</h3>
             </button>
             <button
-              style={checkClicked("allergy")}
+              style={isDetailActive("allergy")}
               className={styles.detailButton}
               onClick={() => setCurrentDetail("allergy")}
             >

@@ -58,7 +58,7 @@ export const useAiActions = () => {
 
       const extractMenuPrompt = `These are picture(s) of menu from a restaurant or food store. Write a book report on everything you see in the image, think step by step. Break it down by sections shown in image or create sections if none exist for food, drinks, appetizers, etc. Write each section using shorthand notation in markdown format. Example output:\n\n${extractionOutputFormat}`;
       const result = await fetch(
-        `${location.protocol}//${location.host}/api/extractMenuData${location.pathname}`,
+        `${location.protocol}//${location.host}/api/extractMenuData`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -88,7 +88,7 @@ export const useAiActions = () => {
 
     try {
       const result = await fetch(
-        `${location.protocol}//${location.host}/api/translateMenu${location.pathname}`,
+        `${location.protocol}//${location.host}/api/translateMenu`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -110,7 +110,7 @@ export const useAiActions = () => {
   const structureMenuData = async ({ menuDocument, prompt }) => {
     try {
       const res = await fetch(
-        `${location.protocol}//${location.host}/api/structureMenu${location.pathname}`,
+        `${location.protocol}//${location.host}/api/structureMenu`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -137,7 +137,7 @@ export const useAiActions = () => {
 
     try {
       const fetchResponse = await fetch(
-        `${location.protocol}//${location.host}/api/answerQuestion${location.pathname}`,
+        `${location.protocol}//${location.host}/api/answerQuestion`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -157,20 +157,33 @@ export const useAiActions = () => {
     }
   };
 
-  const generateMenuImage = async (imageSource: string) => {
+  const generateMenuImage = async ({
+    name,
+    description,
+  }: {
+    name: string;
+    description: string;
+  }) => {
     try {
+      const apiKey = getOpenAIAPIKey();
+      if (!apiKey) throw new Error("Please provide an API key.");
+
       const res = await fetch(
-        `${location.protocol}//${location.host}/api/generateImage${location.pathname}`,
+        `${location.protocol}//${location.host}/api/generateImage`,
         {
           method: "POST",
-          body: JSON.stringify({ imageSource, apiKey: getOpenAIAPIKey() }),
+          body: JSON.stringify({
+            name,
+            description,
+            apiKey,
+          }),
         }
       );
       const result = await res.json();
       if (result?.error) throw new Error(result.message);
       return result?.data;
     } catch (err) {
-      toast.error(`Failed to generate images:\n${err}`);
+      return { error: true, message: `${err}` };
     }
   };
 
