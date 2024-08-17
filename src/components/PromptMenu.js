@@ -90,10 +90,11 @@ export const PromptMenu = () => {
 
   return (
     <div className={styles.container}>
+      {/* Loading anim */}
       {isFetching && <Loader />}
       {!isFetching && answer && isAnswerOpen && (
         <div className={styles.buttonsContainer}>
-          {/* // Read aloud answer button */}
+          {/* Read aloud answer button */}
           <button
             title="Read Aloud"
             className={styles.btnTool}
@@ -101,7 +102,7 @@ export const PromptMenu = () => {
           >
             <SpeakAloud className={styles.btnIcon} />
           </button>
-          {/* // Dismiss answer button */}
+          {/* Dismiss answer button */}
           <button
             title="Dismiss Answer"
             className={styles.btnTool}
@@ -111,6 +112,7 @@ export const PromptMenu = () => {
           </button>
         </div>
       )}
+      {/* Answer text box */}
       {!isFetching && answer && isAnswerOpen && (
         <textarea
           className={styles.answerContainer}
