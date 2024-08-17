@@ -12,7 +12,7 @@ import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
 import toast from "react-hot-toast";
 import styles from "./PromptMenu.module.scss";
 
-export const PromptMenu = () => {
+export const PromptMenu = ({ promptText = "", setPromptText }) => {
   const params = new URLSearchParams(window.location.search);
   const isPrint = params.get("print");
   const menuId = params.get("id");
@@ -27,10 +27,48 @@ export const PromptMenu = () => {
   const [isAnswerOpen, setIsAnswerOpen] = useState(false);
   const isLocalEnv = window.location.hostname.includes("localhost");
 
+  const setVegan = () =>
+    setPromptText(
+      "Look through each item and determine if they are or have ingredients that make them vegan, then list out all items that are vegan."
+    );
+
+  const setVegie = () =>
+    setPromptText(
+      "Look through each item and determine if they are or have ingredients that make them vegetarian, then list out all items that are vegetarian."
+    );
+
+  const setMeaty = () =>
+    setPromptText(
+      "Look through each item and determine if they contain meat, then list out all items that have meat."
+    );
+
+  const setCheapest = () =>
+    setPromptText(
+      "Look through each item and note their price, then tell me the cheapest item."
+    );
+
+  const setDrinks = () =>
+    setPromptText(
+      "Think through each item on menu and determine if they a drink/beverage, then only list out items that are a drink."
+    );
+
+  const setNonAlcohol = () =>
+    setPromptText(
+      "Think through each item on menu and determine if they a drink/beverage that contains alcohol, then only list out items that are a non-alcoholic drink."
+    );
+
+  const setMealsOnly = () =>
+    setPromptText(
+      "Look through each item and determine if they are a meal of food (not drinks, condiments or other), then list out only items that are meals."
+    );
+
+  const setShortVersion = () =>
+    setPromptText(
+      "Think through each item on menu then summarize that item (combine name, section name, price, ngredients, allergy, health, category, item description into one shorter description), then return a short list of every menu item."
+    );
+
   const handlePromptRequest = async () => {
     try {
-      const component = document.querySelector("input[name=input-prompt-menu]");
-      const promptText = component?.value;
       if (!promptText) {
         // Show prev answer
         if (answer) setIsAnswerOpen(true);
@@ -92,6 +130,34 @@ export const PromptMenu = () => {
     <div className={styles.container}>
       {/* Loading anim */}
       {isFetching && <Loader />}
+      {!isFetching && (
+        <div className={styles.promptsContainer}>
+          <button className={styles.promptExample} onClick={setVegan}>
+            Vegan
+          </button>
+          <button className={styles.promptExample} onClick={setVegie}>
+            Vegetarian
+          </button>
+          <button className={styles.promptExample} onClick={setMeaty}>
+            Meatlovers
+          </button>
+          <button className={styles.promptExample} onClick={setCheapest}>
+            Cheapest
+          </button>
+          <button className={styles.promptExample} onClick={setDrinks}>
+            Drinks
+          </button>
+          <button className={styles.promptExample} onClick={setNonAlcohol}>
+            Non-alcoholic
+          </button>
+          <button className={styles.promptExample} onClick={setMealsOnly}>
+            Meals
+          </button>
+          <button className={styles.promptExample} onClick={setShortVersion}>
+            Shorter version
+          </button>
+        </div>
+      )}
       {!isFetching && answer && isAnswerOpen && (
         <div className={styles.buttonsContainer}>
           {/* Read aloud answer button */}
@@ -140,7 +206,9 @@ export const PromptMenu = () => {
           <input
             type="text"
             name="input-prompt-menu"
+            value={promptText}
             onKeyDown={handleEnterEvent}
+            onChange={(e) => setPromptText(e.target.value)}
             placeholder="Ask me anything..."
             className={styles.inputText}
             style={{ paddingRight: "6rem" }}

@@ -52,6 +52,36 @@
   padding: 0;
 }
 
+.promptsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+  padding: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.promptExample {
+  color: var(--light);
+  background-color: var(--primary);
+  padding: 0.25rem;
+  margin: 0;
+  font-size: small;
+  font-weight: bold;
+  font-family: var(--font-primary);
+  outline: 0;
+  border: 0;
+  border-radius: 0.25rem;
+  filter: brightness(85%);
+  cursor: pointer;
+}
+.promptExample:hover {
+  filter: brightness(105%);
+}
+
 .btnTool {
   position: relative;
   border-radius: 0.25rem;

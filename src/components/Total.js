@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../Context";
 import data from "../data.json";
 import { PromptMenu } from "./PromptMenu";
@@ -12,6 +12,7 @@ import styles from "./Total.module.scss";
 export default function Total({ hasOrderInput }) {
   const isOrder = hasOrderInput === "true";
   const { purchases } = useContext(Context);
+  const [promptText, setPromptText] = useState("");
   const [items] = purchases;
 
   const totalPrice = Object.keys(items).reduce((acc, curr) => {
@@ -24,7 +25,7 @@ export default function Total({ hasOrderInput }) {
   return (
     <div className={styles.totalContainer}>
       <div className={styles.total}>
-        <PromptMenu />
+        <PromptMenu promptText={promptText} setPromptText={setPromptText} />
         {isOrder && <span className={styles.totalTitle}>Total:</span>}
         {isOrder && <span className={styles.totalPrice}>${totalPrice}</span>}
       </div>
