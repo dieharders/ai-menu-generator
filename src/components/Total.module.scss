@@ -11,6 +11,7 @@
   bottom: 0;
   overflow: hidden;
   z-index: 200;
+  pointer-events: none; // allows clicking underneathe the fade
 }
 
 .total {
