@@ -43,6 +43,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
           name: item.name,
           description: item.description,
           ingredients: item.ingredients,
+          category: item.category,
         });
         data = res?.imageSource;
         // Check error msg

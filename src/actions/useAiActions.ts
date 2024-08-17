@@ -161,10 +161,12 @@ export const useAiActions = () => {
     name,
     description,
     ingredients,
+    category,
   }: {
     name: string;
     description: string;
     ingredients: string;
+    category: string;
   }) => {
     try {
       const apiKey = getOpenAIAPIKey();
@@ -178,6 +180,7 @@ export const useAiActions = () => {
             name,
             description,
             ingredients,
+            category,
             apiKey,
           }),
         }

@@ -43,16 +43,18 @@ export const config = {
 };
 
 export const POST = async (req: Request) => {
-  const { name, description, ingredients, apiKey } = await req.json();
+  const { name, description, category, ingredients, apiKey } = await req.json();
   let imageSource = "";
 
   try {
     // Build a prompt
     const descr = description ? `Description: ${description}` : "";
-    const ingredientsDescr = ingredients ? `Ingredients: ${ingredients}` : "";
+    const type = category ? `Category: ${category}.` : "";
+    const ingredientsDescr = ingredients ? `Ingredients: ${ingredients}.` : "";
     const prompt = `
     A professional, high-resolution photograph of an elegant food presentation shot from a three-quarters view focused on subject with bokeh effect:
     Subject: ${name}.
+    ${type}
     ${descr}
     ${ingredientsDescr}
     Style: Curated, high quality, food menu style similar to photos on unsplash.com or Yelp.
