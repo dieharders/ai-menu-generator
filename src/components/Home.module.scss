@@ -202,6 +202,9 @@
   font-size: small;
   text-align: center;
 }
+.footer a {
+  color: var(--light);
+}
 
 // Small screen
 @media (max-width: 550px) {
