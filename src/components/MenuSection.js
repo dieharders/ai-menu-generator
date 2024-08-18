@@ -10,7 +10,13 @@ import styles from "./MenuSectionForWeb.module.scss";
 import { StorageAPI } from "../helpers/storage";
 import { DEFAULT_MENU_ID, SAVED_MENU_ID } from "./Generate";
 
-export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
+export const MenuSection = ({
+  item,
+  index,
+  defaultImageSource,
+  sectionName,
+  hasOrderInput,
+}) => {
   const { setMenuData } = useContext(Context);
   const hasOrder = hasOrderInput === "true";
   const [currentDetail, setCurrentDetail] = useState("ingredients");
@@ -166,7 +172,11 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
             <img
               title={item.imageDescription}
               className={styles.photo}
-              src={getImagesData(item.id)?.imageSource || placeholder}
+              src={
+                getImagesData(item.id)?.imageSource ||
+                defaultImageSource ||
+                placeholder
+              }
               alt={`${item.category} - ${item.name}`}
             ></img>
           </button>

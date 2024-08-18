@@ -28,6 +28,8 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
+- ❌ Add generate image button to menu banner.
+
 - ❌ Commit some default menu data with images (min 3).
 
 - ❌ Do a traditional Google search to populate placeholder images and use the top result to display. User must tap the placeholder image to consent to seeing images from the web. And/or use the image along with description to generate a specific scene.

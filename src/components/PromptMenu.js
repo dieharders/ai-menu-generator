@@ -78,9 +78,10 @@ export const PromptMenu = ({ promptText = "", setPromptText }) => {
       setAnswer("Thinking...");
       const info = menu?.sourceDocument || ""; // original menu source data (markdown)
       const res = await requestAnswer({ prompt: promptText, info });
-      setAnswer(`Question: ${promptText}\n\nAnswer: ${res}`);
+      setAnswer(`${res}`);
       setIsAnswerOpen(true);
       setTimeout(() => {
+        setPromptText("");
         setIsFetching(false);
       }, 5000); // show prompt input after 5 sec
     } catch (err) {
