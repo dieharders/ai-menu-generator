@@ -34,6 +34,16 @@ const Home = () => {
             View 👀 Menus
           </button>
         </div>
+        <div className={styles.projectLink}>
+          Read more about the project:{" "}
+          <a
+            href="https://github.com/dieharders/image-menu"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Github
+          </a>
+        </div>
       </div>
       <div className={styles.menusContainer}>
         {/* Create Menus */}
