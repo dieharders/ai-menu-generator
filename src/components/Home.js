@@ -58,7 +58,8 @@ const Home = () => {
       {/* Footer */}
       <div className={styles.footerContainer}>
         <div className={styles.footer}>
-          Built w/ Google Gemini ♊ OpenAI 💮 | Dedicated to Diane 💖
+          Built by <a href="https://www.openbrewai.com">OpenBrewAi</a> 🍺 |
+          Dedicated to Diane 💖
         </div>
       </div>
     </div>
