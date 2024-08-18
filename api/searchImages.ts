@@ -35,7 +35,7 @@ const searchImage = async (
     return { id, imageUrl, imageTitle };
   } else {
     const msg = "No images found.";
-    console.error(msg);
+    console.error(msg, res.statusText);
     throw new Error(msg);
   }
 };
@@ -47,6 +47,7 @@ interface I_ImageRequest {
   category: string;
 }
 
+// Free tier limit of 100 queries per day
 export const POST = async (req: Request) => {
   try {
     const { requests } = await req.json();
