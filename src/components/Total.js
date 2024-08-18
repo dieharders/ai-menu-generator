@@ -24,6 +24,7 @@ export default function Total({ hasOrderInput }) {
 
   return (
     <div className={styles.totalContainer}>
+      <div className={styles.fade}></div>
       <div className={styles.total}>
         <PromptMenu promptText={promptText} setPromptText={setPromptText} />
         {isOrder && <span className={styles.totalTitle}>Total:</span>}
