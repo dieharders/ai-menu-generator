@@ -15,7 +15,7 @@ const MenuSectionForWeb = ({
       <div className={styles.itemsContainer}>
         {items?.map?.((item, index) => {
           // Menu Item
-          const menuItem = defaultImages?.find((i) => i.id === item.id);
+          const menuItem = defaultImages?.find((i) => i?.id === item.id);
           const defaultImage = menuItem?.imageUrl;
           return (
             <MenuSection
