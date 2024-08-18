@@ -13,19 +13,20 @@
   bottom: 0;
   overflow: hidden;
   z-index: 200;
+  pointer-events: none; // allows clicking underneathe the fade. cannot be in same div as child btns.
 }
 
 .fade {
   display: block;
   position: relative;
-  height: 0.25rem;
+  height: 0.1rem;
   width: 100%;
+  align-self: center;
   background-color: var(--light);
   box-shadow: 0 -0.25rem 0.75rem 0.75rem var(--light);
   padding: 0;
   margin: 0;
   margin-top: 2rem; // allows fade to peak above fold
-  pointer-events: none; // allows clicking underneathe the fade
 }
 
 .total {
@@ -43,6 +44,7 @@
   color: var(--secondary);
   background-color: var(--light);
   border-top: 0.1rem solid var(--secondary);
+  pointer-events: all;
 }
 
 .totalTitle {
