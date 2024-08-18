@@ -80,10 +80,8 @@ export const PromptMenu = ({ promptText = "", setPromptText }) => {
       const res = await requestAnswer({ prompt: promptText, info });
       setAnswer(`${res}`);
       setIsAnswerOpen(true);
-      setTimeout(() => {
-        setPromptText("");
-        setIsFetching(false);
-      }, 5000); // show prompt input after 5 sec
+      setPromptText("");
+      setIsFetching(false);
     } catch (err) {
       console.error(`${err}`);
       return err;
