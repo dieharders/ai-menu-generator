@@ -31,7 +31,7 @@ export const searchImagesAction = async (
  */
 export const requestImageSearch = async (req: any) => {
   const response = await searchImagesAction([req]);
-  const result = response?.[0]; // adjust edge func to return 1> results
+  const result = response?.[0]; // you can adjust edge func to return 1> results
 
   if (result) return result.imageUrl;
 

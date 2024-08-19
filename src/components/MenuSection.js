@@ -71,7 +71,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
     try {
       if (!item.imageSource) {
         // Do Ai gen on dev env only (change as needed)
-        if (window.location.origin.includes("localhost"))
+        if (window.location.hostname.includes("localhost"))
           data = await onGenImageRequest();
         // Do image search on prod only (change as needed)
         else data = await onGoogleImageRequest();
