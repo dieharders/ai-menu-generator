@@ -28,7 +28,7 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
-- ❌ Add generate/save image button to menu banner.
+- ❌ Add generate/save image button to menu banner. `document.location = base64String`
 
 - ❌ Commit some default menu data with images (min 3).
 
