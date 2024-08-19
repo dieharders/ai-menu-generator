@@ -34,8 +34,8 @@ const searchImage = async (
     console.log(`Downloading image ${resultIndex + 1}: ${imageTitle}`);
     return { id, imageUrl, imageTitle };
   } else {
-    const msg = "No images found.";
-    console.error(msg, res.statusText);
+    const msg = `No images found. ${res.statusText}`;
+    console.error(msg);
     throw new Error(msg);
   }
 };

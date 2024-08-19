@@ -6,17 +6,12 @@ import { getImagesData } from "../helpers/getData";
 import { useAiActions } from "../actions/useAiActions";
 import placeholder from "../assets/images/placeholder.png";
 import toast from "react-hot-toast";
-import styles from "./MenuSectionForWeb.module.scss";
 import { StorageAPI } from "../helpers/storage";
 import { DEFAULT_MENU_ID, SAVED_MENU_ID } from "./Generate";
+import { requestImageSearch } from "../actions/tools";
+import styles from "./MenuSectionForWeb.module.scss";
 
-export const MenuSection = ({
-  item,
-  index,
-  defaultImageSource,
-  sectionName,
-  hasOrderInput,
-}) => {
+export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
   const { setMenuData } = useContext(Context);
   const hasOrder = hasOrderInput === "true";
   const [currentDetail, setCurrentDetail] = useState("ingredients");
@@ -40,26 +35,56 @@ export const MenuSection = ({
       : {};
   };
 
+  // Make a single google image search request
+  const onGoogleImageRequest = async () => {
+    const imgUrl = await requestImageSearch({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      category: item.category,
+    });
+    // Check error
+    if (!imgUrl) return { error: true, message: "No image(s) returned." };
+    // Return img source string
+    return imgUrl;
+  };
+
+  // Make a single Ai image generation request
+  const onGenImageRequest = async () => {
+    let data = "";
+    const res = await generateMenuImage({
+      name: item.name,
+      description: item.description,
+      ingredients: item.ingredients,
+      category: item.category,
+    });
+    data = res?.imageSource;
+    // Check error msg
+    if (res?.error) return res;
+    // Return img source string
+    return data;
+  };
+
   const onAction = async () => {
     let data = "";
     setDisablePhotoButton(true);
     try {
       if (!item.imageSource) {
-        const res = await generateMenuImage({
-          name: item.name,
-          description: item.description,
-          ingredients: item.ingredients,
-          category: item.category,
-        });
-        data = res?.imageSource;
-        // Check error msg
-        if (res?.error) return res;
+        // Do Ai gen on dev env only (change as needed)
+        if (window.location.origin.includes("localhost"))
+          data = await onGenImageRequest();
+        // Do image search on prod only (change as needed)
+        else data = await onGoogleImageRequest();
+        // Check response ok
+        if (data?.error) return data;
         // Save source to localStorage
         const menu = StorageAPI.getItem(SAVED_MENU_ID);
         const primary = menu?.find((i) => i.id === DEFAULT_MENU_ID);
         const items = primary?.items;
         const newItem = items.find((i) => i.id === item.id);
-        if (!newItem || !data || !menu)
+        if (!data && typeof data !== "string")
+          throw new Error("Could not save image. No data returned to persist.");
+        if (!newItem || !menu)
           throw new Error("Could not save image. Something went wrong.");
         // Save new menu data to disk
         newItem.imageSource = data;
@@ -172,11 +197,7 @@ export const MenuSection = ({
             <img
               title={item.imageDescription}
               className={styles.photo}
-              src={
-                getImagesData(item.id)?.imageSource ||
-                defaultImageSource ||
-                placeholder
-              }
+              src={getImagesData(item.id)?.imageSource || placeholder}
               alt={`${item.category} - ${item.name}`}
             ></img>
           </button>

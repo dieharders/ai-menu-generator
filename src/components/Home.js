@@ -34,6 +34,16 @@ const Home = () => {
             View 👀 Menus
           </button>
         </div>
+        <div className={styles.projectLink}>
+          Read more about the project:{" "}
+          <a
+            href="https://github.com/dieharders/image-menu"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Github
+          </a>
+        </div>
       </div>
       <div className={styles.menusContainer}>
         {/* Create Menus */}
@@ -58,7 +68,8 @@ const Home = () => {
       {/* Footer */}
       <div className={styles.footerContainer}>
         <div className={styles.footer}>
-          Built w/ Google Gemini ♊ OpenAI 💮 | Dedicated to Diane 💖
+          Built by <a href="https://www.openbrewai.com">OpenBrewAi</a> 🍺 |
+          Dedicated to Diane 💖
         </div>
       </div>
     </div>

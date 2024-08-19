@@ -39,6 +39,18 @@ export const useAiActions = () => {
       const encodeFileToGenerative = async (file: File) => {
         const base64EncodedDataPromise = new Promise((resolve) => {
           // @TODO We may need to compress/downsize since vercel edge func only handle 5mb payload
+          // - https://github.com/google-gemini/generative-ai-android/issues/26
+          // val baos = ByteArrayOutputStream()
+          // bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+          // val inputContent = content {
+          //   blob("image/jpeg", boas.toByteArray())
+          //   text("Read text from image")
+          // }
+          // ...
+
+          // @TODO Detect images over 4MB limit and reject. Inform user to upload 3MB file max.
+          // ...
+
           const reader = new FileReader();
           reader.onloadend = () =>
             resolve(reader.result?.toString().split(",")[1]);

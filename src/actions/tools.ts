@@ -24,3 +24,16 @@ export const searchImagesAction = async (
     console.error(`${err}`);
   }
 };
+
+/**
+ * Fetch one image from google search for a given item.
+ * Returns a url string that points to image on another server.
+ */
+export const requestImageSearch = async (req: any) => {
+  const response = await searchImagesAction([req]);
+  const result = response?.[0]; // adjust edge func to return 1> results
+
+  if (result) return result.imageUrl;
+
+  return { error: true, message: "Trouble searching google images." };
+};

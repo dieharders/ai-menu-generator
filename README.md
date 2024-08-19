@@ -10,13 +10,13 @@ Snap a pic of a food menu and Ai will turn that into an interactive version comp
 
 ## Features
 
-### Interactive Menu
+### Interactive Menu Chatbot
 
-View the menu digitally as a website or talk to it like a waiter and ask questions about each menu.
+Scroll through the menu as a website and talk to it like a waiter who will answer any questions about the menu/restaurant.
 
 ### Pics of Food
 
-If no image exists, one will be generated based on the description. Never guess about what you are about to order.
+If no image exists, you can choose to generate one (using Ai on "localhost" dev env or using Google Search on production) based on the description. Never guess about what you are about to order. **Image generation requires a paid OpenAI api key.**
 
 ### Translations
 
@@ -29,10 +29,6 @@ Lists ingredients in each food item and any associated health risk (allergy) inf
 ### Data Stored locally
 
 Menu data is stored on-device in LocalStorage.
-
-### Save a Screenshot
-
-Save the menu to your device for later viewing offline.
 
 ### Image Generation via OpenAI DaLL-E
 
