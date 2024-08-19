@@ -92,6 +92,25 @@
   -webkit-filter: blur(4px) brightness(55%);
 }
 
+.imageButton {
+  display: flex;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-secondary);
+  font-size: medium;
+  padding: 0.5rem;
+  margin: auto;
+  border: 0;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+.imageButton:disabled {
+  cursor: not-allowed;
+}
+
 // Small screen
 @media (max-width: 900px) {
   .container {
