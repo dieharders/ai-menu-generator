@@ -23,6 +23,7 @@ export const GenerateMenu = ({
     extractMenuDataFromImage,
     translateMenuDataToLanguage,
   } = useAiActions();
+  const isLocal = window.location.hostname.includes("localhost");
   const {
     fileInputValue,
     setFileInputValue,
@@ -295,7 +296,10 @@ export const GenerateMenu = ({
         <FileInput />
         <div className={styles.btnsContainer}>
           {/* Back button */}
-          <button className={styles.btn} onClick={() => setStepIndex(1)}>
+          <button
+            className={styles.btn}
+            onClick={() => (isLocal ? setStepIndex(1) : setStepIndex(0))}
+          >
             ↩ Back
           </button>
           {/* Next button */}
@@ -362,7 +366,6 @@ export const GenerateMenu = ({
         <button
           className={styles.btn}
           onClick={() => {
-            const isLocal = window.location.hostname.includes("localhost");
             // Show api keys menu ONLY if running locally
             setStepIndex(isLocal ? 1 : 2);
           }}
