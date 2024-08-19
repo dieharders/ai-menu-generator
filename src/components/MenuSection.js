@@ -44,7 +44,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
       category: item.category,
     });
     // Check error
-    if (!imgUrl) throw new Error("No image(s) returned.");
+    if (!imgUrl) return { error: true, message: "No image(s) returned." };
     // Return img source string
     return imgUrl;
   };
@@ -71,7 +71,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
     try {
       if (!item.imageSource) {
         // Do Ai gen on dev env only (change as needed)
-        if (window.location.origin.includes("xxx"))
+        if (window.location.origin.includes("localhost"))
           data = await onGenImageRequest();
         // Do image search on prod only (change as needed)
         else data = await onGoogleImageRequest();
