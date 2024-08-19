@@ -30,26 +30,6 @@ Lists ingredients in each food item and any associated health risk (allergy) inf
 
 Menu data is stored on-device in LocalStorage.
 
-### Image Generation via OpenAI DaLL-E
-
-- [OpenAI API Key](https://platform.openai.com/api-keys)
-
-- [OpenAi Image Gen](https://platform.openai.com/docs/api-reference/images/create)
-
-- [OpenAi Rate Limits](https://platform.openai.com/settings/organization/limits)
-
-### Text Generation via Google Gemini
-
-- [SDK](https://github.com/google-gemini/generative-ai-js)
-
-- [API](https://ai.google.dev/gemini-api/docs/api-overview)
-
-- [API Key](https://aistudio.google.com/app/u/3/apikey)
-
-- [Tutorial](https://ai.google.dev/gemini-api/docs/get-started/tutorial)
-
-- [Rate Limits](https://ai.google.dev/gemini-api/docs/models/gemini)
-
 ## Screenshot Tool using Puppeteer
 
 This script was previously built for other purposes. Kept here for posterity. It is not required for the app to function. This is something you would run offline as a job if you for some reason wanted to bulk screenshot all your menus (maybe a cache server?).
@@ -81,3 +61,29 @@ When pushing to `/main` branch Vercel will automatically deploy website.
 ## Where to find Webpack config
 
 You can find all webpack config inside `node_modules/react-scripts/config`. Webpack configuration is being handled by react-scripts.
+
+## More Info
+
+### Image Search via Google Custom Search JSON API
+
+- [Custom Search Engine](https://developers.google.com/custom-search/v1/overview)
+
+### Image Generation via OpenAI DaLL-E
+
+- [OpenAI API Key](https://platform.openai.com/api-keys)
+
+- [OpenAi Image Gen](https://platform.openai.com/docs/api-reference/images/create)
+
+- [OpenAi Rate Limits](https://platform.openai.com/settings/organization/limits)
+
+### Text Generation via Google Gemini
+
+- [SDK](https://github.com/google-gemini/generative-ai-js)
+
+- [API](https://ai.google.dev/gemini-api/docs/api-overview)
+
+- [API Key](https://aistudio.google.com/app/u/3/apikey)
+
+- [Tutorial](https://ai.google.dev/gemini-api/docs/get-started/tutorial)
+
+- [Rate Limits](https://ai.google.dev/gemini-api/docs/models/gemini)

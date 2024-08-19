@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { assignUniqueIds } from "../apiUtils/ids";
-import { extractJsonFromText } from "../apiUtils/data";
+import { extractJsonFromText } from "../apiUtils/parsing";
 import { GeminiModels, getGeminiApiKey } from "../apiUtils/aiModels";
 
 export const config = {
