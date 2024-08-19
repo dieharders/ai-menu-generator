@@ -10,13 +10,18 @@ import cachedMenus from "../data.json"; // cached menu data
  * Sets up a page.
  */
 export const usePage = () => {
-  const { menuData, setMenuData, setMenuId, setStoredImages } =
-    useContext(Context);
+  const {
+    menuData,
+    setMenuData,
+    setMenuId,
+    setStoredImages,
+    availableLanguages,
+  } = useContext(Context);
   const queryParameters = new URLSearchParams(window.location.search);
   const menuId = queryParameters.get("id");
   const menus = useMemo(() => {
     // Determine if we should read from localStorage or from included data.json
-    // @TODO Replace example menus ids with "_MENU" in id so we can better tell.
+    // @TODO Replace example menus ids with "EXAMPLE_MENU" in id so we can better tell.
     if (menuId.includes("_MENU")) return StorageAPI.getItem(SAVED_MENU_ID);
     return cachedMenus?.[menuId];
   }, [menuId]);
@@ -35,7 +40,9 @@ export const usePage = () => {
     // Set translation data
     setMenuData(translate({ data: menus, menu, lang }));
     selectedLang.current = language;
-  }, [lang, language, menu, menus, setMenuData]);
+    // Set available languages to display
+    availableLanguages.current = menus?.map((m) => m.language);
+  }, [availableLanguages, lang, language, menu, menus, setMenuData]);
 
   // Track our record of persisted images on disk.
   // Watch "menuData" to detect changes on menu data when fetching images.
