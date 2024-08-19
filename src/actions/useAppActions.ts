@@ -58,8 +58,8 @@ export const useAppActions = () => {
       // Check response ok
       if (typeof data === "object" && data?.error) return data;
       // Save source to localStorage
-      const menuStorage = StorageAPI.getItem(SAVED_MENU_ID) || "";
-      const menu = JSON.parse(menuStorage);
+      const menuStorage = StorageAPI.getItem(SAVED_MENU_ID) || [];
+      const menu = menuStorage;
       const primary = menu?.find((i: any) => i.id === DEFAULT_MENU_ID);
       const items = primary?.items;
       const newItem =
@@ -72,7 +72,7 @@ export const useAppActions = () => {
         throw new Error("Could not save image. Something went wrong.");
       // Save new menu data to disk
       newItem.imageSource = data;
-      StorageAPI.setItem(SAVED_MENU_ID, JSON.stringify(menu));
+      StorageAPI.setItem(SAVED_MENU_ID, menu);
       // Update menu data
       setMenuData(primary);
     } catch (err) {
