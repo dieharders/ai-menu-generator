@@ -1,3 +1,4 @@
 src/tools
 README.md
 INFO.md
+.env.example
