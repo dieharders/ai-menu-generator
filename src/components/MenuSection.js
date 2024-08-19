@@ -35,6 +35,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
       : {};
   };
 
+  // @TODO Replace with hook
   // Make a single google image search request
   const onGoogleImageRequest = async () => {
     const imgUrl = await requestImageSearch({
@@ -49,6 +50,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
     return imgUrl;
   };
 
+  // @TODO Replace with hook
   // Make a single Ai image generation request
   const onGenImageRequest = async () => {
     let data = "";
@@ -65,6 +67,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
     return data;
   };
 
+  // @TODO Replace with hook
   const onAction = async () => {
     let data = "";
     setDisablePhotoButton(true);
@@ -119,6 +122,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
     }
   };
 
+  // @TODO Replace with hook
   const LoadingComponent = () => {
     return (
       <div className={styles.loadingToast}>
