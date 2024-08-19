@@ -28,17 +28,11 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
-- ❌ Add generate image button to menu banner.
+- ❌ Add generate/save image button to menu banner.
 
 - ❌ Commit some default menu data with images (min 3).
 
-- ❌ Do a traditional Google search to populate placeholder images and use the top result to display. User must tap the placeholder image to consent to seeing images from the web. And/or use the image along with description to generate a specific scene.
-
-  - https://developers.google.com/custom-search/v1/overview
-
-  - or Unsplash https://unsplash.com/documentation
-
-- ❌ Better prompts for menu question/answer (put instructions and menu data in the system prompt). Add a max output token limit: ~750.
+- ❌ Optional: Better prompts for menu question/answer (put instructions and menu data in the system prompt). Add a max output token limit: ~300.
 
 - ❌ Optional: Try re-implementing abort signal to cancel generation process. The exception may not show in prod.
 
