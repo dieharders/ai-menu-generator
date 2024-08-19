@@ -24,3 +24,25 @@ export const searchImagesAction = async (
     console.error(`${err}`);
   }
 };
+
+/**
+ * Fetch some default image(s) from google for a given item.
+ * Returns a url string that points to image on another server.
+ */
+export const requestImageSearch = async (item: any) => {
+  const source = item?.imageSource;
+  if (source) throw new Error("Item already has image.");
+
+  const req = {
+    id: item.id,
+    name: item.name,
+    description: item.description,
+    category: item.category,
+  };
+  const response = await searchImagesAction([req]);
+  const result = response?.[0];
+
+  if (result) return result.imageUrl;
+
+  return { error: true, message: "Trouble searching google images." };
+};
