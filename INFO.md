@@ -28,16 +28,12 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
-- ❌ Add generate/save image button to menu banner. `document.location = base64String`
-
 - ❌ Commit some default menu data with images (min 3).
 
-- ❌ Optional: Better prompts for menu question/answer (put instructions and menu data in the system prompt). Add a max output token limit: ~300.
+- ❌ Try re-implementing abort signal to cancel generation process. The exception may not show in prod.
 
-- ❌ Optional: Try re-implementing abort signal to cancel generation process. The exception may not show in prod.
+- ❌ Allow multiple images to be uploaded (max 3 total)
 
-- ❌ Optional: Allow multiple images to be uploaded (max 3 total)
-
-- ❌ Optional: Implement cloud storage per user. Vercel databases (save images/json on per user basis, user login required)
+- ❌ Implement cloud storage per user. Vercel databases (save images/json on per user basis, user login required)
 
   - Load menu data from k/v. Load images from Blob Store.
