@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { DEFAULT_MENU_ID } from "../components/Generate";
 import { languageCodes } from "../helpers/languageCodes";
 import { Context } from "../Context";
+import { encodeImage } from "../helpers/encode";
 import {
   extractionOutputFormat,
   structuredOutputFormat,
@@ -32,33 +33,42 @@ export const useAiActions = () => {
       throw new Error("Please provide an image.");
 
     try {
+      const readImage = (file: File): Promise<string> =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+
+          reader.onloadend = () => {
+            resolve(reader.result?.toString() || "");
+          };
+
+          reader.onerror = (err) => {
+            reject(err);
+          };
+        });
       /**
        * Converts a File object to a GoogleGenerativeAI.Part object.
        * Takes image types (image/png, image/jpeg, image/webp).
        */
       const encodeFileToGenerative = async (file: File) => {
-        const base64EncodedDataPromise = new Promise((resolve) => {
-          // @TODO We may need to compress/downsize since vercel edge func only handle 5mb payload
-          // - https://github.com/google-gemini/generative-ai-android/issues/26
-          // val baos = ByteArrayOutputStream()
-          // bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-          // val inputContent = content {
-          //   blob("image/jpeg", boas.toByteArray())
-          //   text("Read text from image")
-          // }
-          // ...
+        // Check file type is image
+        if (!file.type.includes("image/")) throw "Please upload an image file.";
 
-          // @TODO Detect images over 4MB limit and reject. Inform user to upload 3MB file max.
-          // ...
+        const imageSource = await readImage(file);
+        const sizeLimit = 20971520; // 20mb, https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference
+        let base64EncodedData = imageSource;
+        // Compress since Gemini Pro Vision has max payload
+        if (file.size >= sizeLimit) {
+          console.warn(`File is over limit (${file.size}), compressing...`);
+          base64EncodedData = await encodeImage({
+            imageSource,
+            quality: 0.65,
+          });
+        }
 
-          const reader = new FileReader();
-          reader.onloadend = () =>
-            resolve(reader.result?.toString().split(",")[1]);
-          reader.readAsDataURL(file);
-        });
         return {
           inlineData: {
-            data: await base64EncodedDataPromise,
+            data: base64EncodedData.split(",")[1],
             mimeType: file.type,
           },
         };
@@ -85,7 +95,7 @@ export const useAiActions = () => {
       if (r?.error) throw new Error(r.message);
       return r.data;
     } catch (err) {
-      toast.error(`Failed to extract menu data:\n${err}`);
+      throw new Error(`${err}`);
     }
   };
 
