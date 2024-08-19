@@ -6,7 +6,7 @@ import Total from "./Total";
 import CommandPallet from "./CommandPallet";
 import Banner from "./Banner";
 import { renderSections } from "../helpers/render";
-import { getImagesData } from "../helpers/getData";
+import { useImagesData } from "../helpers/getData";
 import { languageCodes } from "../helpers/languageCodes";
 import placeholder from "../assets/images/placeholder.png";
 import styles from "./MenuPageForWeb.module.scss";
@@ -53,7 +53,7 @@ const MenuPageForWeb = () => {
           contact={data?.contact}
           location={data?.location}
           cost={data?.cost}
-          backgroundURL={getImagesData()?.imageSource || placeholder}
+          backgroundURL={useImagesData()?.imageSource || placeholder}
         >
           <CommandPallet data={data} />
         </Banner>

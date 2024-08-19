@@ -7,7 +7,7 @@ import Banner from "./Banner";
 import Footer from "./Footer";
 import { renderSections } from "../helpers/render";
 import { getLanguageLabel } from "../helpers/languageCodes";
-import { getImagesData } from "../helpers/getData";
+import { useImagesData } from "../helpers/getData";
 import styles from "./MenuPageForPrint.module.scss";
 
 const MenuPageForPrint = () => {
@@ -31,7 +31,7 @@ const MenuPageForPrint = () => {
   return (
     <>
       <div className={styles.bannerPage}>
-        <Banner title={data?.name} backgroundURL={getImagesData()?.imageSource}>
+        <Banner title={data?.name} backgroundURL={useImagesData()?.imageSource}>
           {!isEnglishVersion && (
             <h2 className={styles.language}>({languageLabel} version)</h2>
           )}

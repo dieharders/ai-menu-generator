@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Context } from "../Context";
 import Input from "./Input";
 import { keys, translate } from "../helpers/appTranslations";
-import { getImagesData } from "../helpers/getData";
+import { useImagesData } from "../helpers/getData";
 import { useAiActions } from "../actions/useAiActions";
 import placeholder from "../assets/images/placeholder.png";
 import toast from "react-hot-toast";
@@ -197,7 +197,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
             <img
               title={item.imageDescription}
               className={styles.photo}
-              src={getImagesData(item.id)?.imageSource || placeholder}
+              src={useImagesData(item.id)?.imageSource || placeholder}
               alt={`${item.category} - ${item.name}`}
             ></img>
           </button>

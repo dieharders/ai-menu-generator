@@ -3,14 +3,15 @@ import { Context } from "../Context";
 import translate from "../helpers/translateMenu";
 import { StorageAPI } from "../helpers/storage";
 import { languageCodes } from "../helpers/languageCodes";
-import { SAVED_MENU_ID } from "../components/Generate";
+import { SAVED_MENU_ID, DEFAULT_MENU_ID } from "../components/Generate";
 import cachedMenus from "../data.json"; // cached menu data
 
 /**
  * Sets up a page.
  */
 export const usePage = () => {
-  const { setMenuData, setMenuId } = useContext(Context);
+  const { menuData, setMenuData, setMenuId, setStoredImages } =
+    useContext(Context);
   const queryParameters = new URLSearchParams(window.location.search);
   const menuId = queryParameters.get("id");
   const menus = useMemo(() => {
@@ -35,6 +36,23 @@ export const usePage = () => {
     setMenuData(translate({ data: menus, menu, lang }));
     selectedLang.current = language;
   }, [lang, language, menu, menus, setMenuData]);
+
+  // Track our record of persisted images on disk.
+  // Watch "menuData" to detect changes on menu data when fetching images.
+  useEffect(() => {
+    const master_menu = menuId.includes("_MENU")
+      ? StorageAPI.getItem(SAVED_MENU_ID)
+      : cachedMenus?.[menuId];
+
+    const data = master_menu?.find((i) => i.id === DEFAULT_MENU_ID);
+    const items = data.items.map((i) => ({
+      id: i.id,
+      imageSource: i.imageSource,
+    }));
+    const images = [{ id: "banner", imageSource: data.imageSource }, ...items];
+    // Track changed images
+    if (images?.length > 0) setStoredImages(images);
+  }, [menuData, setStoredImages, menuId]);
 
   useEffect(() => {
     // Get color scheme from menu data

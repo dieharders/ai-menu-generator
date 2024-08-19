@@ -5,6 +5,7 @@ export const Context = React.createContext();
 export const Provider = (props) => {
   const queryParameters = new URLSearchParams(window.location.search);
   // State vals
+  const [storedImages, setStoredImages] = useState([]); // track what images are persisted on disk
   const [items, setItems] = useState({}); // purchase items
   const [menuId, setMenuId] = useState(queryParameters.get("id"));
   const geminiAPIKeyRef = useRef("");
@@ -34,6 +35,8 @@ export const Provider = (props) => {
         setMenuId,
         menuData,
         setMenuData,
+        storedImages,
+        setStoredImages,
       }}
     >
       {props.children}

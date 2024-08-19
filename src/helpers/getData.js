@@ -1,9 +1,11 @@
-import { SAVED_MENU_ID, DEFAULT_MENU_ID } from "../components/Generate";
-import { StorageAPI } from "../helpers/storage";
+import { useContext } from "react";
+import { Context } from "../Context";
 
-export const getImagesData = (id) => {
-  const data = StorageAPI.getItem(SAVED_MENU_ID);
-  const menu = data?.find((i) => i.id === DEFAULT_MENU_ID);
-  const item = menu?.items?.find((i) => i.id === id);
-  return id ? item : menu;
+export const useImagesData = (id = "") => {
+  const { storedImages } = useContext(Context);
+  // Return banner image if no id passed
+  if (!id) return storedImages.find((i) => i.id === "banner");
+
+  const item = storedImages?.find((i) => i.id === id);
+  return item;
 };
