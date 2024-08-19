@@ -26,21 +26,12 @@ export const searchImagesAction = async (
 };
 
 /**
- * Fetch some default image(s) from google for a given item.
+ * Fetch one image from google search for a given item.
  * Returns a url string that points to image on another server.
  */
-export const requestImageSearch = async (item: any) => {
-  const source = item?.imageSource;
-  if (source) throw new Error("Item already has image.");
-
-  const req = {
-    id: item.id,
-    name: item.name,
-    description: item.description,
-    category: item.category,
-  };
+export const requestImageSearch = async (req: any) => {
   const response = await searchImagesAction([req]);
-  const result = response?.[0];
+  const result = response?.[0]; // adjust edge func to return 1> results
 
   if (result) return result.imageUrl;
 

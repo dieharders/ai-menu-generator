@@ -37,7 +37,12 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
 
   // Make a single google image search request
   const onGoogleImageRequest = async () => {
-    const imgUrl = await requestImageSearch(item);
+    const imgUrl = await requestImageSearch({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      category: item.category,
+    });
     // Check error
     if (!imgUrl) throw new Error("No image(s) returned.");
     // Return img source string
@@ -66,7 +71,7 @@ export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
     try {
       if (!item.imageSource) {
         // Do Ai gen on dev env only (change as needed)
-        if (window.location.origin.includes("localhost"))
+        if (window.location.origin.includes("xxx"))
           data = await onGenImageRequest();
         // Do image search on prod only (change as needed)
         else data = await onGoogleImageRequest();
