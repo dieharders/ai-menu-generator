@@ -123,7 +123,6 @@
   font-weight: bold;
   text-align: center;
   font-family: var(--font-primary);
-  background-color: var(--primary);
   border: 0;
   color: var(--light);
   border-color: var(--primary);
@@ -133,9 +132,12 @@
 }
 .btn {
   filter: brightness(90%);
+  background-color: transparent;
 }
-.btn:hover {
+.btn:hover,
+.btn.active {
   filter: brightness(110%);
+  background-color: var(--primary);
 }
 
 .btnView {
@@ -143,7 +145,8 @@
   border-color: var(--light);
   background-color: transparent;
 }
-.btnView:hover {
+.btnView:hover,
+.btnView.active {
   background-color: var(--light);
   color: var(--menu-background);
 }

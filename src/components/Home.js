@@ -24,11 +24,18 @@ const Home = () => {
           </p>
         </div>
         <div className={styles.btnsContainer}>
-          <button className={styles.btn} onClick={() => setShowMenu("start")}>
+          <button
+            className={`${styles.btn} ${
+              showMenu === "start" ? styles.active : ""
+            }`}
+            onClick={() => setShowMenu("start")}
+          >
             Generate 🌟 Menu
           </button>
           <button
-            className={styles.btnView}
+            className={`${styles.btnView} ${
+              showMenu === "view" ? styles.active : ""
+            }`}
             onClick={() => setShowMenu("view")}
           >
             View 👀 Menus
