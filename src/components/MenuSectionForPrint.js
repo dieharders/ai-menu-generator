@@ -1,6 +1,6 @@
-import { getImagesData } from "../helpers/getData";
+// import { getImagesData } from "../helpers/getData";
+// import placeholder from "../assets/images/placeholder.png";
 import styles from "./MenuSectionForPrint.module.scss";
-import placeholder from "../assets/images/placeholder.png";
 
 const MenuSectionForPrint = ({ items, sectionName }) => {
   return (
@@ -20,13 +20,13 @@ const MenuSectionForPrint = ({ items, sectionName }) => {
               <strong className={styles.price}>${item.price}</strong>
             </div>
             {/* Photo */}
-            <div className={styles.imageContainer}>
+            {/* <div className={styles.imageContainer}>
               <img
                 className={styles.photo}
                 src={getImagesData?.(item.id)?.imageSource || placeholder}
                 alt={`${item.category} - ${item.name}`}
               />
-            </div>
+            </div> */}
           </article>
         ))}
       </div>

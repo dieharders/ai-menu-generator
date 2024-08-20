@@ -1,9 +1,6 @@
-import { useState } from "react";
-import {
-  getLanguageLabel,
-  languageCodes,
-  languages,
-} from "../helpers/languageCodes";
+import { useState, useContext } from "react";
+import { Context } from "../Context";
+import { getLanguageLabel, languageCodes } from "../helpers/languageCodes";
 import styles from "./SelectLanguage.module.scss";
 
 const SelectLanguage = ({ onAction, showForm }) => {
@@ -11,7 +8,7 @@ const SelectLanguage = ({ onAction, showForm }) => {
   const lang = queryParameters.get("lang");
   const language = languageCodes?.[lang] ? lang : "en";
   const [_currentLang, setCurrentLang] = useState();
-
+  const { availableLanguages } = useContext(Context);
   const onLangSelection = (e) => {
     const code = e?.target?.value;
     const label = getLanguageLabel(code);
@@ -24,8 +21,8 @@ const SelectLanguage = ({ onAction, showForm }) => {
   };
 
   // Read all available languages from data and only render those options
-  const renderLanguageOptions = (arr) => {
-    return arr?.map((code) => {
+  const renderLanguageOptions = () => {
+    return availableLanguages.current?.map((code) => {
       const label = getLanguageLabel(code);
       return (
         <option key={code} value={code}>
@@ -39,10 +36,11 @@ const SelectLanguage = ({ onAction, showForm }) => {
     <select
       id="languages"
       name="languages"
-      defaultValue={language}
+      readOnly
+      value={language}
       className={styles.selection}
     >
-      {renderLanguageOptions(languages)}
+      {renderLanguageOptions()}
     </select>
   );
 

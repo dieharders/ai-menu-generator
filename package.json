@@ -1,13 +1,15 @@
 {
-  "name": "ai-food-menu-builder",
-  "version": "1.2.0",
+  "name": "llm-food-menu",
+  "version": "1.2.1",
   "description": "This app takes a user uploaded picture of a food menu and creates an interactive and accessible version.",
   "keywords": [
     "react",
     "ai",
     "llm",
     "food",
-    "menu"
+    "menu",
+    "google-gemini",
+    "image-generation"
   ],
   "main": "src/index.js",
   "dependencies": {
