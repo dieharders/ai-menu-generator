@@ -134,9 +134,10 @@
   filter: brightness(90%);
   background-color: transparent;
 }
-.btn:hover,
-.btn.active {
+.btn:hover {
   filter: brightness(110%);
+}
+.btn.active {
   background-color: var(--primary);
 }
 
@@ -144,11 +145,14 @@
   color: var(--light);
   border-color: var(--light);
   background-color: transparent;
+  filter: brightness(90%);
 }
-.btnView:hover,
+.btnView:hover {
+  filter: brightness(110%);
+}
 .btnView.active {
-  background-color: var(--light);
   color: var(--menu-background);
+  background-color: var(--light);
 }
 
 .title,

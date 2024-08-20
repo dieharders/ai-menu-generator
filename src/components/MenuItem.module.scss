@@ -1,15 +1,3 @@
-.itemsContainer {
-  overflow: hidden;
-}
-
-.itemsContainer > :not(:last-child) {
-  padding: 0;
-  padding-bottom: 1.5rem;
-  margin: auto;
-  margin-bottom: 1.5rem;
-  border-bottom: 0.1rem solid hsl(0, 0%, 82%);
-}
-
 .articleContainer {
   display: flex;
   flex-direction: column;
@@ -56,25 +44,6 @@
   gap: 1rem;
   align-items: flex-start;
   justify-content: space-between;
-}
-
-.heading {
-  position: sticky;
-  top: 0;
-  color: var(--primary);
-  background-color: var(--light);
-  font-size: 2rem;
-  padding: 0;
-  padding-top: 1.25rem;
-  margin: auto;
-  margin-top: 1.5rem;
-  margin-bottom: 3rem;
-  border-bottom: 0.1rem solid var(--secondary);
-  font-family: var(--font-secondary);
-  font-weight: 700;
-  text-transform: uppercase;
-  word-break: break-all;
-  z-index: 100;
 }
 
 .name {

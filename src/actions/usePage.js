@@ -52,11 +52,12 @@ export const usePage = () => {
       : cachedMenus?.[menuId];
 
     const data = master_menu?.find((i) => i.id === DEFAULT_MENU_ID);
-    const items = data.items.map((i) => ({
-      id: i.id,
-      imageSource: i.imageSource,
-    }));
-    const images = [{ id: "banner", imageSource: data.imageSource }, ...items];
+    const items =
+      data?.items?.map((i) => ({
+        id: i.id,
+        imageSource: i.imageSource,
+      })) || [];
+    const images = [{ id: "banner", imageSource: data?.imageSource }, ...items];
     // Track changed images
     if (images?.length > 0) setStoredImages(images);
   }, [menuData, setStoredImages, menuId]);

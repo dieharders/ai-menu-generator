@@ -28,9 +28,7 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
-- ❌ Cleanup, remove pricing, menupageforprint, components and refactor MenuSection.
-
-- ❌ Commit some default menu data with images (min 3).
+- ❌ Commit some default menu data with images (min 3), find some example menus. Add a poster image to github project.
 
 - ❌ Implement cloud storage per user. Vercel databases (save images/json on per user basis, user login required)
 

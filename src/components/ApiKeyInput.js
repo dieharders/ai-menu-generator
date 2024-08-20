@@ -1,4 +1,4 @@
-import styles from "./DevAPIKeyInput.module.scss";
+import styles from "./ApiKeyInput.module.scss";
 
 export const GeminiAPIKeyInput = ({ className, inputValue }) => {
   return (

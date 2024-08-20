@@ -1,0 +1,93 @@
+import { useEffect, useContext } from "react";
+import { Context } from "../Context";
+import { usePage } from "../actions/usePage";
+import Total from "./Total";
+import CommandPallet from "./CommandPallet";
+import Banner from "./Banner";
+import { MenuItem } from "./MenuItem";
+import { useImagesData } from "../helpers/getData";
+import { languageCodes } from "../helpers/languageCodes";
+import placeholder from "../assets/images/placeholder.png";
+import styles from "./MenuPage.module.scss";
+
+const queryParameters = new URLSearchParams(window.location.search);
+
+export const MenuPage = () => {
+  const { menuData } = useContext(Context);
+  usePage();
+  const isOrderMenuVariant = queryParameters.get("order"); // Whether this should track orders
+
+  const Section = ({ data }) => {
+    return (
+      <section>
+        {/* Section heading */}
+        <h2 className={styles.heading}>{data?.name}</h2>
+        {/* Items */}
+        <div className={styles.itemsContainer}>
+          {data?.items?.map?.((item, index) => {
+            // Menu Item
+            return (
+              <MenuItem
+                key={item.id}
+                item={item}
+                index={index}
+                sectionName={data?.name}
+                hasOrderInput={isOrderMenuVariant}
+              />
+            );
+          })}
+        </div>
+      </section>
+    );
+  };
+
+  const renderSections = (data) => {
+    if (!data || data.items?.length === 0) return;
+    return data.sectionNames?.map((name, index) => {
+      const items = data.items?.filter((item) => name === item.sectionName);
+      const section = {
+        id: `${index}`,
+        items,
+        name,
+      };
+      return <Section key={section.id} data={section} />;
+    });
+  };
+
+  useEffect(() => {
+    const lang = queryParameters.get("lang");
+    const hasLang = languageCodes?.[lang];
+
+    if (menuData && !hasLang) {
+      queryParameters.set("lang", "en");
+      const query = queryParameters.toString();
+      // Set url param if no language specified
+      window.history.replaceState(null, null, query);
+    }
+  }, [menuData]);
+
+  return (
+    <>
+      {/* Top banner */}
+      <div className={styles.bannerPage}>
+        <Banner
+          title={menuData?.name}
+          description={menuData?.description}
+          type={menuData?.type}
+          category={menuData?.category}
+          contact={menuData?.contact}
+          location={menuData?.location}
+          cost={menuData?.cost}
+          backgroundURL={useImagesData()?.imageSource || placeholder}
+        >
+          <CommandPallet data={menuData} />
+        </Banner>
+      </div>
+      {/* Main body */}
+      <div className={styles.page}>
+        {renderSections(menuData)}
+        <Total hasOrderInput={isOrderMenuVariant} />
+      </div>
+    </>
+  );
+};

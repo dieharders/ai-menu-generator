@@ -8,7 +8,7 @@ import { Loader } from "./Loader";
 import { ReactComponent as IconSend } from "../assets/icons/icon-send.svg";
 import { ReactComponent as IconX } from "../assets/icons/icon-cross-2.svg";
 import { ReactComponent as SpeakAloud } from "../assets/icons/icon-speak-aloud.svg";
-import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
+import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./ApiKeyInput";
 import toast from "react-hot-toast";
 import styles from "./PromptMenu.module.scss";
 

@@ -6,9 +6,9 @@ import { LoadingToast } from "./LoadingToast";
 import placeholder from "../assets/images/placeholder.png";
 import toast from "react-hot-toast";
 import { useAppActions } from "../actions/useAppActions";
-import styles from "./MenuSectionForWeb.module.scss";
+import styles from "./MenuItem.module.scss";
 
-export const MenuSection = ({ item, index, sectionName, hasOrderInput }) => {
+export const MenuItem = ({ item, index, sectionName, hasOrderInput }) => {
   const hasOrder = hasOrderInput === "true";
   const [currentDetail, setCurrentDetail] = useState("ingredients");
   const generateText = "✨Generate image";

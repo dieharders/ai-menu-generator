@@ -1,7 +1,6 @@
 import { Provider } from "./Context";
 import Home from "./components/Home";
-import MenuPageForWeb from "./components/MenuPageForWeb";
-import MenuPageForPrint from "./components/MenuPageForPrint";
+import { MenuPage } from "./components/MenuPage";
 import Background from "./components/BackgroundSVG";
 import styles from "./App.module.scss";
 
@@ -13,8 +12,7 @@ export default function App() {
   return (
     <Provider className={styles}>
       <Background />
-      {menuId && isPrint && <MenuPageForPrint />}
-      {menuId && !isPrint && <MenuPageForWeb />}
+      {menuId && !isPrint && <MenuPage />}
       {!menuId && <Home />}
     </Provider>
   );
