@@ -6,11 +6,9 @@ import { StorageAPI } from "../helpers/storage";
 import { languages, getLanguageLabel } from "../helpers/languageCodes";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
 import { Loader } from "./Loader";
+import { SAVED_MENU_ID } from "../helpers/constants";
 import toast from "react-hot-toast";
 import styles from "./Generate.module.scss";
-
-export const DEFAULT_MENU_ID = "DEFAULT_MENU";
-export const SAVED_MENU_ID = "SAVED_MENU";
 
 export const GenerateMenu = ({
   isDisabled,
@@ -32,19 +30,20 @@ export const GenerateMenu = ({
     openaiAPIKeyRef,
   } = useContext(Context);
   const languageChoices = useRef([]);
+  // Used to abort the current fetch request(s)
+  const controller = useRef(new AbortController());
+  const signal = controller.current.signal;
   // Text to show in toast while generating
-  const signalAborted = useRef(false);
   const setLoadingText = useCallback(
     (text) => {
       if (loadingText?.current?.innerText) loadingText.current.innerText = text;
-      if (signalAborted.current) throw new Error("Menu generation aborted.");
     },
     [loadingText]
   );
 
   const reset = useCallback(() => {
     setStepIndex(0);
-    signalAborted.current = false;
+    controller.current = new AbortController();
     loadingText.current = null;
     setIsDisabled(true);
     const input = document.querySelector("input[type=file]");
@@ -67,13 +66,14 @@ export const GenerateMenu = ({
       // @TODO Exit if name/hash already exists (if storing in cloud)
       // ...
       setLoadingText("Extracting details from photo(s)...");
-      const menuDocument = await extractMenuDataFromImage(files);
+      const menuDocument = await extractMenuDataFromImage(files, signal);
       setLoadingText("Processing menu details...");
       // Get structured data
       const structuredMenuPrompt = `Convert this markdown text:\n\n${menuDocument}\n\nto JSON schema:\n\n${structuredOutputFormat}\n\nResponse:`;
       let structuredData = await structureMenuData({
         prompt: structuredMenuPrompt,
         menuDocument,
+        signal,
       });
 
       // Create translations
@@ -96,6 +96,7 @@ export const GenerateMenu = ({
             data: menuDocument,
             lang,
             primary: structuredData, // denote the source doc
+            signal,
           });
           // Record result
           langIndex += 1;
@@ -124,6 +125,7 @@ export const GenerateMenu = ({
     setIsDisabled,
     setLoadingText,
     setStepIndex,
+    signal,
     structureMenuData,
     translateMenuDataToLanguage,
   ]);
@@ -212,10 +214,7 @@ export const GenerateMenu = ({
           {/* Cancel button */}
           <button
             className={styles.btn}
-            onClick={() => {
-              toast("Canceling request, please wait...");
-              signalAborted.current = true;
-            }}
+            onClick={() => controller.current.abort("Menu generation aborted.")}
           >
             ❌ Cancel Generation
           </button>

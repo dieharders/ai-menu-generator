@@ -4,7 +4,7 @@ import { Context } from "../Context";
 import cachedMenus from "../data.json"; // cached menu data
 import { languageCodes } from "../helpers/languageCodes";
 import { StorageAPI } from "../helpers/storage";
-import { SAVED_MENU_ID } from "../components/Generate";
+import { SAVED_MENU_ID } from "../helpers/constants";
 import styles from "./SearchBar.module.scss";
 
 const SearchBar = ({ handleSubmit }) => {
