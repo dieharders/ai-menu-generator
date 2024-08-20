@@ -8,13 +8,12 @@ import { Loader } from "./Loader";
 import { ReactComponent as IconSend } from "../assets/icons/icon-send.svg";
 import { ReactComponent as IconX } from "../assets/icons/icon-cross-2.svg";
 import { ReactComponent as SpeakAloud } from "../assets/icons/icon-speak-aloud.svg";
-import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
+import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./ApiKeyInput";
 import toast from "react-hot-toast";
 import styles from "./PromptMenu.module.scss";
 
 export const PromptMenu = ({ promptText = "", setPromptText }) => {
   const params = new URLSearchParams(window.location.search);
-  const isPrint = params.get("print");
   const menuId = params.get("id");
   const menus = StorageAPI.getItem(menuId) || cachedMenus?.[menuId];
   const menu = menus?.find((m) => m.id === DEFAULT_MENU_ID) || menus?.[0];
@@ -200,7 +199,7 @@ export const PromptMenu = ({ promptText = "", setPromptText }) => {
         />
       )}
       {/* Prompt input */}
-      {!isFetching && !isPrint && (
+      {!isFetching && (
         <div className={styles.promptInputContainer}>
           <input
             type="text"

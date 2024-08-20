@@ -4,7 +4,7 @@ import { useAiActions } from "../actions/useAiActions";
 import { structuredOutputFormat } from "../helpers/formats";
 import { StorageAPI } from "../helpers/storage";
 import { languages, getLanguageLabel } from "../helpers/languageCodes";
-import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
+import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./ApiKeyInput";
 import { Loader } from "./Loader";
 import { SAVED_MENU_ID } from "../helpers/constants";
 import toast from "react-hot-toast";

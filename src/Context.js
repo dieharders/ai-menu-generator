@@ -7,7 +7,6 @@ export const Provider = (props) => {
   // State vals
   const availableLanguages = useRef([]);
   const [storedImages, setStoredImages] = useState([]); // track what images are persisted on disk
-  const [items, setItems] = useState({}); // purchase items
   const [menuId, setMenuId] = useState(queryParameters.get("id"));
   const geminiAPIKeyRef = useRef("");
   const openaiAPIKeyRef = useRef("");
@@ -15,18 +14,9 @@ export const Provider = (props) => {
   const loadingText = useRef(null);
   const [menuData, setMenuData] = useState({});
 
-  const updateItem = (type, index, count) => {
-    const key = `${type.toLowerCase()}-${index}`;
-    const value = Number.isNaN(Number(count)) ? 0 : Number(count);
-    const amount = Math.max(0, value);
-
-    setItems({ ...items, [key]: Number(amount) });
-  };
-
   return (
     <Context.Provider
       value={{
-        purchases: [items, updateItem],
         geminiAPIKeyRef,
         openaiAPIKeyRef,
         fileInputValue,

@@ -13,6 +13,18 @@
   box-shadow: 0 3rem 2rem 2.25rem rgba(0, 0, 0, 0.7);
 }
 
+.itemsContainer {
+  overflow: hidden;
+}
+
+.itemsContainer > :not(:last-child) {
+  padding: 0;
+  padding-bottom: 1.5rem;
+  margin: auto;
+  margin-bottom: 1.5rem;
+  border-bottom: 0.1rem solid hsl(0, 0%, 82%);
+}
+
 .bannerPage {
   display: flex;
   position: relative;
@@ -24,6 +36,25 @@
   max-width: 50rem;
   background-color: var(--light);
   box-shadow: 0 0 2rem 2.25rem rgba(0, 0, 0, 0.7);
+}
+
+.heading {
+  position: sticky;
+  top: 0;
+  color: var(--primary);
+  background-color: var(--light);
+  font-size: 2rem;
+  padding: 0;
+  padding-top: 1.25rem;
+  margin: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  border-bottom: 0.1rem solid var(--secondary);
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+  word-break: break-all;
+  z-index: 100;
 }
 
 // Small screen

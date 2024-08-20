@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../Context";
-// import { ReactComponent as FormSubmitSVG } from "../assets/icons/icon-search.svg";
 import cachedMenus from "../data.json"; // cached menu data
 import { languageCodes } from "../helpers/languageCodes";
 import { StorageAPI } from "../helpers/storage";
@@ -55,19 +54,6 @@ const SearchBar = ({ handleSubmit }) => {
 
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      {/* We dont need search func for now */}
-      {/* <div className={styles.searchContainer}>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={onChange}
-          placeholder="Menu ID"
-          className={styles.inputText}
-        />
-        <button type="submit" name="Find Business" className={styles.button}>
-          <FormSubmitSVG className={styles.submitIcon} />
-        </button>
-      </div> */}
       {/* Show saved menu button */}
       {defaultMenu ? (
         <MenuButton item={defaultMenu} id={SAVED_MENU_ID} />
