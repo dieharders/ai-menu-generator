@@ -3,7 +3,7 @@ import { Context } from "../Context";
 import translate from "../helpers/translateMenu";
 import { StorageAPI } from "../helpers/storage";
 import { languageCodes } from "../helpers/languageCodes";
-import { SAVED_MENU_ID, DEFAULT_MENU_ID } from "../components/Generate";
+import { DEFAULT_MENU_ID, SAVED_MENU_ID } from "../helpers/constants";
 import cachedMenus from "../data.json"; // cached menu data
 
 /**

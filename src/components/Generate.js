@@ -6,11 +6,9 @@ import { StorageAPI } from "../helpers/storage";
 import { languages, getLanguageLabel } from "../helpers/languageCodes";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./DevAPIKeyInput";
 import { Loader } from "./Loader";
+import { SAVED_MENU_ID } from "../helpers/constants";
 import toast from "react-hot-toast";
 import styles from "./Generate.module.scss";
-
-export const DEFAULT_MENU_ID = "DEFAULT_MENU";
-export const SAVED_MENU_ID = "SAVED_MENU";
 
 export const GenerateMenu = ({
   isDisabled,

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useAiActions } from "./useAiActions";
 import { Context } from "../Context";
 import { requestImageSearch } from "./tools";
-import { DEFAULT_MENU_ID, SAVED_MENU_ID } from "../components/Generate";
+import { DEFAULT_MENU_ID, SAVED_MENU_ID } from "../helpers/constants";
 import { StorageAPI } from "../helpers/storage";
 import { I_ItemProps } from "./types";
 

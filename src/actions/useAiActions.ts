@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DEFAULT_MENU_ID } from "../components/Generate";
+import { DEFAULT_MENU_ID } from "../helpers/constants";
 import { languageCodes } from "../helpers/languageCodes";
 import { Context } from "../Context";
 import { encodeImage } from "../helpers/encode";
