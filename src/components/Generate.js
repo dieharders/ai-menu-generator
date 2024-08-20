@@ -141,6 +141,7 @@ export const GenerateMenu = ({
             className={styles.fileInput}
             type="file"
             accept="image/*"
+            multiple
             onChange={(e) => {
               const _inputURL = e.target.value;
               const input = document.querySelector("input[type=file]");

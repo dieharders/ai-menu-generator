@@ -32,8 +32,6 @@ Once a menu image is uploaded, we start the build process:
 
 - ❌ Commit some default menu data with images (min 3).
 
-- ❌ Allow multiple images to be uploaded (max 3 total)
-
 - ❌ Implement cloud storage per user. Vercel databases (save images/json on per user basis, user login required)
 
   - Load menu data from k/v. Load images from Blob Store.
