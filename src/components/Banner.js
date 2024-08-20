@@ -26,7 +26,6 @@ const Banner = ({
       id: "banner",
       name: title,
       description: description,
-      ingredients: null,
       category: category,
     };
     return imageAction(item);

@@ -4,13 +4,14 @@ import { Context } from "../Context";
 import { requestImageSearch } from "./tools";
 import { DEFAULT_MENU_ID, SAVED_MENU_ID } from "../components/Generate";
 import { StorageAPI } from "../helpers/storage";
+import { I_ItemProps } from "./types";
 
 export const useAppActions = () => {
   const { generateMenuImage } = useAiActions();
   const { setMenuData } = useContext(Context);
 
   // Make a single google image search request
-  const onGoogleImageRequest = async (item: any) => {
+  const onGoogleImageRequest = async (item: I_ItemProps) => {
     const imgUrl = await requestImageSearch({
       id: item.id,
       name: item.name,
@@ -24,13 +25,13 @@ export const useAppActions = () => {
   };
 
   // Make a single Ai image generation request
-  const onGenImageRequest = async (item: any) => {
+  const onGenImageRequest = async (item: I_ItemProps) => {
     let data = "";
     const res = await generateMenuImage({
       name: item.name,
-      description: item.description,
-      ingredients: item.ingredients,
-      category: item.category,
+      description: item.description || "",
+      ingredients: item.ingredients || "",
+      category: item.category || "",
     });
     data = res?.imageSource;
     // Check error msg
@@ -40,17 +41,11 @@ export const useAppActions = () => {
   };
 
   // Image Action
-  interface itemProps {
-    id: string;
-    name: string;
-    description: string;
-    ingredients: string;
-    category: string;
-  }
-  const imageAction = async (item: itemProps) => {
+  const imageAction = async (item: I_ItemProps) => {
     let data: string | { error: boolean; message: string };
 
     try {
+      // Request an image
       if (window.location.hostname.includes("localhost"))
         data = await onGenImageRequest(item);
       else data = await onGoogleImageRequest(item);
