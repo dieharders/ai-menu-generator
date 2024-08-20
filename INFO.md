@@ -28,9 +28,9 @@ Once a menu image is uploaded, we start the build process:
 
 ## Task List
 
-- ❌ Commit some default menu data with images (min 3).
+- ❌ Cleanup, remove pricing, menupageforprint, components and refactor MenuSection.
 
-- ❌ Try re-implementing abort signal to cancel generation process. The exception may not show in prod.
+- ❌ Commit some default menu data with images (min 3).
 
 - ❌ Allow multiple images to be uploaded (max 3 total)
 

@@ -28,7 +28,10 @@ export const useAiActions = () => {
     // const inputComponent = document.querySelector("input[name=input-openai-api-key]");
     return openaiAPIKeyRef.current || "";
   };
-  const extractMenuDataFromImage = async (filesUpload: File[]) => {
+  const extractMenuDataFromImage = async (
+    filesUpload: File[],
+    signal: AbortSignal
+  ) => {
     if (!filesUpload || filesUpload.length === 0)
       throw new Error("Please provide an image.");
 
@@ -88,6 +91,7 @@ export const useAiActions = () => {
             images: imageParts,
             apiKey: getGeminiAPIKey(),
           }),
+          signal,
         }
       );
 
@@ -102,7 +106,12 @@ export const useAiActions = () => {
   /**
    * Take a plain text document and translate it to another language, return in json format.
    */
-  const translateMenuDataToLanguage = async ({ data, lang, primary }) => {
+  const translateMenuDataToLanguage = async ({
+    data,
+    lang,
+    primary,
+    signal,
+  }) => {
     if (!data || !lang) return {};
     // Ask to translate doc and return as json
     const language = languageCodes[lang];
@@ -119,6 +128,7 @@ export const useAiActions = () => {
             primary,
             apiKey: getGeminiAPIKey(),
           }),
+          signal,
         }
       );
       const res = await result.json();
@@ -129,7 +139,7 @@ export const useAiActions = () => {
     }
   };
 
-  const structureMenuData = async ({ menuDocument, prompt }) => {
+  const structureMenuData = async ({ menuDocument, prompt, signal }) => {
     try {
       const res = await fetch(
         `${location.protocol}//${location.host}/api/structureMenu`,
@@ -141,6 +151,7 @@ export const useAiActions = () => {
             id: DEFAULT_MENU_ID,
             apiKey: getGeminiAPIKey(),
           }),
+          signal,
         }
       );
       const result = await res.json();
