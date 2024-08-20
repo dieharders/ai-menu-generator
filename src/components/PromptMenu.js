@@ -14,7 +14,6 @@ import styles from "./PromptMenu.module.scss";
 
 export const PromptMenu = ({ promptText = "", setPromptText }) => {
   const params = new URLSearchParams(window.location.search);
-  const isPrint = params.get("print");
   const menuId = params.get("id");
   const menus = StorageAPI.getItem(menuId) || cachedMenus?.[menuId];
   const menu = menus?.find((m) => m.id === DEFAULT_MENU_ID) || menus?.[0];
@@ -200,7 +199,7 @@ export const PromptMenu = ({ promptText = "", setPromptText }) => {
         />
       )}
       {/* Prompt input */}
-      {!isFetching && !isPrint && (
+      {!isFetching && (
         <div className={styles.promptInputContainer}>
           <input
             type="text"

@@ -6,14 +6,12 @@ import styles from "./App.module.scss";
 
 export default function App() {
   const queryParameters = new URLSearchParams(window.location.search);
-  const isPrint = queryParameters.get("print") === "true";
   const menuId = queryParameters.get("id");
 
   return (
     <Provider className={styles}>
       <Background />
-      {menuId && !isPrint && <MenuPage />}
-      {!menuId && <Home />}
+      {menuId ? <MenuPage /> : <Home />}
     </Provider>
   );
 }
