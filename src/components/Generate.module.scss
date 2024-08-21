@@ -79,9 +79,18 @@
 }
 
 .instrText {
+  position: relative;
+  display: flex;
+  height: 7rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
   text-align: center;
   font-size: 3rem;
-  filter: grayscale(100) opacity(75%);
+  color: var(--secondary);
+  overflow: hidden;
+  padding: 1rem;
 }
 
 .instructions {
@@ -97,13 +106,13 @@
   top: 0;
   left: 0;
   font-size: 6rem;
-  color: var(--light);
+  color: var(--primary);
   text-align: center;
   padding: 2.5rem;
   font-family: var(--font-secondary);
   width: 100%;
   height: 100%;
-  filter: brightness(50%);
+  filter: opacity(50%);
 }
 .camera {
   display: flex;

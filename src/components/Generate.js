@@ -8,6 +8,8 @@ import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./ApiKeyInput";
 import { Loader } from "./Loader";
 import { SAVED_MENU_ID } from "../helpers/constants";
 import { ReactComponent as ImagesIcon } from "../assets/icons/icon-images.svg";
+import { ReactComponent as MenuIcon } from "../assets/icons/icon-menu.svg";
+import { ReactComponent as BotIcon } from "../assets/icons/icon-bot.svg";
 import toast from "react-hot-toast";
 import styles from "./Generate.module.scss";
 
@@ -136,7 +138,7 @@ export const GenerateMenu = ({
       <div className={styles.fileInputContainer}>
         <div className={styles.camContainer}>
           <div className={styles.camera}>
-            <ImagesIcon />
+            <ImagesIcon fill="#ffdd67" />
           </div>
           <input
             className={styles.fileInput}
@@ -359,7 +361,13 @@ export const GenerateMenu = ({
           {/* Title */}
           <h1 className={styles.title}>Convert images to menu</h1>
           {/* Instructions */}
-          <h2 className={styles.instrText}>📷+🤖=📃</h2>
+          <h2 className={styles.instrText}>
+            <ImagesIcon fill={"#ffdd67"} />
+            <p style={{ color: "white" }}>+</p>
+            <BotIcon fill={"#ffdd67"} />
+            <p style={{ color: "white" }}>=</p>
+            <MenuIcon fill={"#ffdd67"} />
+          </h2>
         </div>
         {/* Next button */}
         <button
