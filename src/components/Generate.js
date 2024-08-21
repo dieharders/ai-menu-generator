@@ -7,6 +7,9 @@ import { languages, getLanguageLabel } from "../helpers/languageCodes";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./ApiKeyInput";
 import { Loader } from "./Loader";
 import { SAVED_MENU_ID } from "../helpers/constants";
+import { ReactComponent as CameraIcon } from "../assets/icons/icon-camera.svg";
+import { ReactComponent as CameraPlusIcon } from "../assets/icons/icon-camera-plus.svg";
+import { ReactComponent as MenuIcon } from "../assets/icons/icon-menu.svg";
 import toast from "react-hot-toast";
 import styles from "./Generate.module.scss";
 
@@ -135,7 +138,7 @@ export const GenerateMenu = ({
       <div className={styles.fileInputContainer}>
         <div className={styles.camContainer}>
           <div className={styles.camera}>
-            <div>📸</div>
+            <CameraPlusIcon fill="white" />
           </div>
           <input
             className={styles.fileInput}
@@ -288,9 +291,7 @@ export const GenerateMenu = ({
       <>
         <div className={styles.instructions}>
           {/* Title */}
-          <h1 className={styles.title}>Snap a pic!</h1>
-          {/* Instructions */}
-          <h2>Take picture(s) of your menu to upload.</h2>
+          <h1 className={styles.title}>Snap a pic of your menu</h1>
         </div>
         {/* File Input */}
         <FileInput />
@@ -358,9 +359,19 @@ export const GenerateMenu = ({
       <>
         <div className={styles.instructions}>
           {/* Title */}
-          <h1 className={styles.title}>Create a menu</h1>
+          <h1 className={styles.title}>Convert images to menu</h1>
           {/* Instructions */}
-          <h2 style={{ textAlign: "center", fontSize: "3rem" }}>📷+🤖=📃</h2>
+          <h2 className={styles.instrText}>
+            <CameraIcon
+              fill="black"
+              style={{ width: "max-content", height: "5rem" }}
+            />
+            <p style={{ color: "white" }}>=</p>
+            <MenuIcon
+              fill="black"
+              style={{ width: "max-content", height: "5rem" }}
+            />
+          </h2>
         </div>
         {/* Next button */}
         <button

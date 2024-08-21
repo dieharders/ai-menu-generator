@@ -59,7 +59,7 @@ const SearchBar = ({ handleSubmit }) => {
         <MenuButton item={defaultMenu} id={SAVED_MENU_ID} />
       ) : (
         <button disabled={true} className={styles.emptyInputButton}>
-          Empty save slot
+          Empty save
         </button>
       )}
       {/* Examples */}

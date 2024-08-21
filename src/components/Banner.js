@@ -15,6 +15,7 @@ const Banner = ({
   cost,
   backgroundURL,
   children,
+  menuSourceImage = "",
 }) => {
   const hasImage = useImagesData()?.imageSource;
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -68,16 +69,27 @@ const Banner = ({
           className={styles.background}
           style={{ backgroundImage: `url(${backgroundURL})` }}
         />
-        {/* Gen buttons */}
-        {!hasImage && (
-          <button
-            disabled={isButtonDisabled}
-            className={styles.imageButton}
-            onClick={actionToast}
-          >
-            ✨ Generate image
-          </button>
-        )}
+        <div className={styles.btnsContainer}>
+          {/* Gen button */}
+          {!hasImage && (
+            <button
+              disabled={isButtonDisabled}
+              className={styles.imageButton}
+              onClick={actionToast}
+            >
+              ✨ Generate image
+            </button>
+          )}
+          {/* Original source menu image */}
+          {!menuSourceImage && (
+            <button
+              className={styles.sourceMenuButton}
+              onClick={() => (window.location = menuSourceImage)}
+            >
+              📄 Original menu
+            </button>
+          )}
+        </div>
         {/* Company details */}
         <div className={styles.details}>
           <h1 className={styles.title}>{title || "Restaurant"}</h1>

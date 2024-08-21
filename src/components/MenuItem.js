@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Input from "./Input";
 import { keys, translate } from "../helpers/appTranslations";
 import { useImagesData } from "../helpers/getData";
 import { LoadingToast } from "./LoadingToast";
@@ -8,8 +7,7 @@ import toast from "react-hot-toast";
 import { useAppActions } from "../actions/useAppActions";
 import styles from "./MenuItem.module.scss";
 
-export const MenuItem = ({ item, index, sectionName, hasOrderInput }) => {
-  const hasOrder = hasOrderInput === "true";
+export const MenuItem = ({ item }) => {
   const [currentDetail, setCurrentDetail] = useState("ingredients");
   const generateText = "✨Generate image";
   const { imageAction } = useAppActions();
@@ -106,10 +104,6 @@ export const MenuItem = ({ item, index, sectionName, hasOrderInput }) => {
           </strong>
           {/* Description */}
           <p className={styles.description}>{item.description}</p>
-          {/* Buy/Remove order buttons */}
-          {hasOrder && (
-            <Input type={sectionName} name={item.name} index={index} />
-          )}
         </div>
         {/* Photo */}
         <div className={styles.imageContainer}>
