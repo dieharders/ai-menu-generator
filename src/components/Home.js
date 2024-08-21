@@ -21,7 +21,7 @@ const Home = () => {
         <div className={styles.descriptionContainer}>
           <p className={styles.description}>
             Interactive food menus in multiple languages. Browse pics, nutrition
-            info, ask questions. Get started by uploading your menu image.
+            info, and ask questions.
           </p>
         </div>
         <div className={styles.btnsContainer}>

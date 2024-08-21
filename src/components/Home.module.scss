@@ -129,6 +129,7 @@
   border-radius: 0.25rem;
   border-style: solid;
   border-width: 0.1rem;
+  overflow: hidden;
 }
 .btn {
   filter: brightness(90%);
@@ -158,8 +159,8 @@
 .logo {
   display: block;
   position: relative;
-  width: 8rem;
-  height: 8rem;
+  width: 7rem;
+  height: 7rem;
   bottom: -1rem;
   left: 0;
 }

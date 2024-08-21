@@ -7,9 +7,9 @@ import { languages, getLanguageLabel } from "../helpers/languageCodes";
 import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./ApiKeyInput";
 import { Loader } from "./Loader";
 import { SAVED_MENU_ID } from "../helpers/constants";
-import { ReactComponent as ImagesIcon } from "../assets/icons/icon-images.svg";
+import { ReactComponent as CameraIcon } from "../assets/icons/icon-camera.svg";
+import { ReactComponent as CameraPlusIcon } from "../assets/icons/icon-camera-plus.svg";
 import { ReactComponent as MenuIcon } from "../assets/icons/icon-menu.svg";
-import { ReactComponent as BotIcon } from "../assets/icons/icon-bot.svg";
 import toast from "react-hot-toast";
 import styles from "./Generate.module.scss";
 
@@ -138,7 +138,7 @@ export const GenerateMenu = ({
       <div className={styles.fileInputContainer}>
         <div className={styles.camContainer}>
           <div className={styles.camera}>
-            <ImagesIcon fill="#ffdd67" />
+            <CameraPlusIcon fill="white" />
           </div>
           <input
             className={styles.fileInput}
@@ -362,11 +362,15 @@ export const GenerateMenu = ({
           <h1 className={styles.title}>Convert images to menu</h1>
           {/* Instructions */}
           <h2 className={styles.instrText}>
-            <ImagesIcon fill={"#ffdd67"} />
-            <p style={{ color: "white" }}>+</p>
-            <BotIcon fill={"#ffdd67"} />
+            <CameraIcon
+              fill="black"
+              style={{ width: "max-content", height: "5rem" }}
+            />
             <p style={{ color: "white" }}>=</p>
-            <MenuIcon fill={"#ffdd67"} />
+            <MenuIcon
+              fill="black"
+              style={{ width: "max-content", height: "5rem" }}
+            />
           </h2>
         </div>
         {/* Next button */}
