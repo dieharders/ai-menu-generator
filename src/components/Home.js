@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SearchBar from "./SearchBar";
 import { GenerateMenu } from "./Generate";
+import { ReactComponent as PizzaFace } from "../assets/icons/logo-pizza-face.svg";
 import styles from "./Home.module.scss";
 
 const Home = () => {
@@ -14,13 +15,13 @@ const Home = () => {
         {/* App title */}
         <h1 className={styles.appTitle}>
           <span className={styles.appTitleContainer}>Oh!</span>
-          <span>😲</span>
+          <PizzaFace className={styles.logo} />
           <span className={styles.appTitleContainer}>Menu</span>
         </h1>
         <div className={styles.descriptionContainer}>
           <p className={styles.description}>
-            Interact with any food menu pic in multiple languages. Browse
-            nutrition info or ask a question.
+            Interactive food menus in multiple languages. Browse pics, nutrition
+            info, ask questions. Get started by uploading your menu image.
           </p>
         </div>
         <div className={styles.btnsContainer}>
@@ -42,13 +43,13 @@ const Home = () => {
           </button>
         </div>
         <div className={styles.projectLink}>
-          Read more about the project:{" "}
+          Read more about the{" "}
           <a
             href="https://github.com/dieharders/image-menu"
             rel="noreferrer"
             target="_blank"
           >
-            Github
+            Github project
           </a>
         </div>
       </div>

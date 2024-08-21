@@ -15,7 +15,6 @@ const queryParameters = new URLSearchParams(window.location.search);
 export const MenuPage = () => {
   const { menuData } = useContext(Context);
   usePage();
-  const isOrderMenuVariant = queryParameters.get("order"); // Whether this should track orders
 
   const Section = ({ data }) => {
     return (
@@ -24,17 +23,9 @@ export const MenuPage = () => {
         <h2 className={styles.heading}>{data?.name}</h2>
         {/* Items */}
         <div className={styles.itemsContainer}>
-          {data?.items?.map?.((item, index) => {
+          {data?.items?.map?.((item) => {
             // Menu Item
-            return (
-              <MenuItem
-                key={item.id}
-                item={item}
-                index={index}
-                sectionName={data?.name}
-                hasOrderInput={isOrderMenuVariant}
-              />
-            );
+            return <MenuItem key={item.id} item={item} />;
           })}
         </div>
       </section>
@@ -79,6 +70,7 @@ export const MenuPage = () => {
           location={menuData?.location}
           cost={menuData?.cost}
           backgroundURL={useImagesData()?.imageSource || placeholder}
+          menuSourceImage={menuData?.sourceMenuImage}
         >
           <CommandPallet data={menuData} />
         </Banner>
@@ -86,7 +78,7 @@ export const MenuPage = () => {
       {/* Main body */}
       <div className={styles.page}>
         {renderSections(menuData)}
-        <Total hasOrderInput={isOrderMenuVariant} />
+        <Total />
       </div>
     </>
   );
