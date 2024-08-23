@@ -11,7 +11,11 @@ export const MenuItem = ({ item }) => {
   const generateText = "✨Generate image";
   const { imageAction } = useAppActions();
   const imgData = useImagesData(item.id);
-  const imageSrc = imgData?.imageSource ? `images/${imgData?.imageSource}` : "";
+  const imageSrc = imgData?.imageSource?.includes("data:image/")
+    ? imgData?.imageSource
+    : imgData?.imageSource
+    ? `images/${imgData?.imageSource}`
+    : "";
 
   const isMobile = () => {
     const regex =

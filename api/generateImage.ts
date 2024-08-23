@@ -48,7 +48,7 @@ export const POST = async (req: Request) => {
   let imageSource = "";
 
   try {
-    // Build a prompt
+    // Build a prompt, max length 1000
     const descr = description ? `Description: ${description}` : "";
     const type = category ? `Category: ${category}.` : "";
     const ingredientsDescr = ingredients ? `Ingredients: ${ingredients}.` : "";
@@ -57,9 +57,9 @@ export const POST = async (req: Request) => {
     Subject: ${name}.
     ${type}
     ${descr}
-    ${ingredientsDescr}
+    ${ingredientsDescr?.substring?.(0, 100)}
     Style: Curated, high quality, food menu style similar to photos on unsplash.com or Yelp.
-    Scene: Place the subject on a decorated table or other surface in an environment that reflects the location of the origin of the item. The food is beautifully arranged with artistic garnishes that will contrast with the subject. The lighting is warm and natural, highlighting the textures and colors of the dishes, creating a welcoming and appetizing atmosphere. The background is blurred slightly to emphasize the focus on the food.
+    Scene: Place the subject on a decorated surface. Arrange food with artistic garnishes that contrasts with the subject. Lighting is warm and natural to highlight the dish. Background is blurred slightly to emphasize focus on the food.
     `;
 
     // Generate image for item
