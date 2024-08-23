@@ -1,12 +1,12 @@
 import OpenAI from "openai";
 import { OpenAIModels, getOpenAIApiKey } from "../apiUtils/aiModels";
 
-const generateImage = async ({ prompt, model, apiKey }) => {
-  const openai = new OpenAI(apiKey);
+const generateImage = async ({ prompt, model, size, apiKey }) => {
+  const openai = new OpenAI({ apiKey });
   const image = await openai.images.generate({
     prompt,
     model,
-    size: "256x256", // dall-e-3 only supports 1024x and up
+    size,
     response_format: "b64_json",
     // style: "vivid", // dall-e-3 only
     // quality: "hd", // dall-e-3 only
@@ -24,6 +24,7 @@ const createEncodedImage = async (prompt: string, apiKey: string) => {
         apiKey,
         prompt,
         model: OpenAIModels.DALL_E_2,
+        size: "256x256", // dall-e-3 only supports 1024x and up
       });
       const parsed = imgRes?.data?.[0]?.["b64_json"];
       source = `data:image/png;base64,${parsed}`;

@@ -4,7 +4,7 @@ import { useAiActions } from "../actions/useAiActions";
 import { structuredOutputFormat } from "../helpers/formats";
 import { StorageAPI } from "../helpers/storage";
 import { languages, getLanguageLabel } from "../helpers/languageCodes";
-import { GeminiAPIKeyInput, OpenAIAPIKeyInput } from "./ApiKeyInput";
+import { GeminiAPIKeyInput } from "./ApiKeyInput";
 import { Loader } from "./Loader";
 import { SAVED_MENU_ID } from "../helpers/constants";
 import { ReactComponent as CameraIcon } from "../assets/icons/icon-camera.svg";
@@ -25,13 +25,8 @@ export const GenerateMenu = ({
     translateMenuDataToLanguage,
   } = useAiActions();
   const isLocal = window.location.hostname.includes("localhost");
-  const {
-    fileInputValue,
-    setFileInputValue,
-    loadingText,
-    geminiAPIKeyRef,
-    openaiAPIKeyRef,
-  } = useContext(Context);
+  const { fileInputValue, setFileInputValue, loadingText, geminiAPIKeyRef } =
+    useContext(Context);
   const languageChoices = useRef([]);
   // Used to abort the current fetch request(s)
   const controller = useRef(new AbortController());
@@ -87,7 +82,9 @@ export const GenerateMenu = ({
 
         for (const lang of languageChoices.current) {
           setLoadingText(
-            `Translating for ${lang} (${langIndex}/${languageChoices.current.length}) ...`
+            `Translating for ${lang} (${langIndex}/${
+              languageChoices.current.length - 1
+            }) ...`
           );
           // Skip translating the source data again
           if (structuredData.language === lang) continue;
@@ -331,7 +328,6 @@ export const GenerateMenu = ({
           </div>
           <span className={styles.keysContainer}>
             <GeminiAPIKeyInput inputValue={geminiAPIKeyRef} />
-            <OpenAIAPIKeyInput inputValue={openaiAPIKeyRef} />
           </span>
         </span>
         <div className={styles.btnsContainer}>
