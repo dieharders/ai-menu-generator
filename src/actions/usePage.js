@@ -57,7 +57,10 @@ export const usePage = () => {
         id: i.id,
         imageSource: i.imageSource,
       })) || [];
-    const images = [{ id: "banner", imageSource: data?.imageSource }, ...items];
+    const images = [
+      { id: "banner", imageSource: data?.imageSource || "" },
+      ...items,
+    ];
     // Track changed images
     if (images?.length > 0) setStoredImages(images);
   }, [menuData, setStoredImages, menuId]);

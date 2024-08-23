@@ -6,11 +6,13 @@ import placeholder from "../assets/images/placeholder.png";
 import toast from "react-hot-toast";
 import { useAppActions } from "../actions/useAppActions";
 import styles from "./MenuItem.module.scss";
-
 export const MenuItem = ({ item }) => {
   const [currentDetail, setCurrentDetail] = useState("ingredients");
   const generateText = "✨Generate image";
   const { imageAction } = useAppActions();
+  const imgData = useImagesData(item.id);
+  const imageSrc = imgData?.imageSource ? `images/${imgData?.imageSource}` : "";
+
   const isMobile = () => {
     const regex =
       /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
@@ -125,7 +127,7 @@ export const MenuItem = ({ item }) => {
             <img
               title={item.imageDescription}
               className={styles.photo}
-              src={useImagesData(item.id)?.imageSource || placeholder}
+              src={imageSrc || placeholder}
               alt={`${item.category} - ${item.name}`}
             ></img>
           </button>
