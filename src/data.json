@@ -154,7 +154,7 @@
           "category": "Non-alcoholic beverage",
           "ingredients": "N/A",
           "imageDescription": "A regular size beverage in a clear plastic cup.",
-          "imageSource": "sodas.jpg",
+          "imageSource": "hb-regular-beverage.png",
           "health": "N/A",
           "allergy": "N/A"
         },
@@ -168,7 +168,7 @@
           "category": "Non-alcoholic beverage",
           "ingredients": "N/A",
           "imageDescription": "A large size beverage in a clear plastic cup.",
-          "imageSource": "sodas.jpg",
+          "imageSource": "hb-large-beverage.png",
           "health": "N/A",
           "allergy": "N/A"
         },
