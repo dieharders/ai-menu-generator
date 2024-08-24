@@ -20,7 +20,6 @@ const SearchBar = ({ handleSubmit }) => {
 
   const MenuButton = ({ item, id }) => {
     const sourceMenu = item?.[0];
-    const num = id === SAVED_MENU_ID ? "" : `(${id + 1})`;
     return (
       <button
         className={styles.inputButton}
@@ -35,7 +34,7 @@ const SearchBar = ({ handleSubmit }) => {
           SAVED_MENU_ID && setMenuId(`${id}`);
         }}
       >
-        {sourceMenu?.name} {num}
+        {sourceMenu?.name}
       </button>
     );
   };

@@ -1,5 +1,7 @@
 # Oh!😲Menu - Ai Food Menu Builder
 
+<img src="src/assets/images/app-screenshot.jpg" height="300" />
+
 Automatically build accessible food menus from pictures.
 
 Built by OpenBrewAi - https://www.openbrewai.com
@@ -9,6 +11,8 @@ Built by OpenBrewAi - https://www.openbrewai.com
 Snap a pic of a food menu and Ai will turn that into an interactive version complete with images, translations, health info and more. Even talk to the menu as if it were your waiter.
 
 ## Features
+
+<img src="src/assets/images/menu-example.jpg" height="400" />
 
 ### Interactive Menu Chatbot
 

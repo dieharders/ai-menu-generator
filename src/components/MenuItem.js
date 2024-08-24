@@ -6,11 +6,17 @@ import placeholder from "../assets/images/placeholder.png";
 import toast from "react-hot-toast";
 import { useAppActions } from "../actions/useAppActions";
 import styles from "./MenuItem.module.scss";
-
 export const MenuItem = ({ item }) => {
   const [currentDetail, setCurrentDetail] = useState("ingredients");
   const generateText = "✨Generate image";
   const { imageAction } = useAppActions();
+  const imgData = useImagesData(item.id);
+  const imageSrc = imgData?.imageSource?.startsWith("data:image/")
+    ? imgData?.imageSource
+    : imgData?.imageSource
+    ? `images/${imgData?.imageSource}`
+    : "";
+
   const isMobile = () => {
     const regex =
       /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
@@ -31,12 +37,16 @@ export const MenuItem = ({ item }) => {
 
   const onAction = async () => {
     setDisablePhotoButton(true);
+    const descr =
+      item.description && item.imageDescription
+        ? `${item.description}\n${item.imageDescription}`
+        : item.imageDescription || item.description;
     return imageAction({
       id: item.id,
       name: item.name,
-      description: item.description,
+      description: descr,
       ingredients: item.ingredients,
-      category: item.category,
+      category: item.sectionName,
     });
   };
 
@@ -103,7 +113,9 @@ export const MenuItem = ({ item }) => {
             {item.price}
           </strong>
           {/* Description */}
-          <p className={styles.description}>{item.description}</p>
+          <p className={styles.description}>
+            {item.description || item.imageDescription}
+          </p>
         </div>
         {/* Photo */}
         <div className={styles.imageContainer}>
@@ -125,7 +137,7 @@ export const MenuItem = ({ item }) => {
             <img
               title={item.imageDescription}
               className={styles.photo}
-              src={useImagesData(item.id)?.imageSource || placeholder}
+              src={imageSrc || placeholder}
               alt={`${item.category} - ${item.name}`}
             ></img>
           </button>

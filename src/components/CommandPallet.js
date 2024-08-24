@@ -35,6 +35,8 @@ const CommandPallet = ({ data }) => {
       {website && (
         <a
           href={website}
+          rel="noreferrer"
+          target="_blank"
           className={[styles.iconContainer, styles.link].join(" ")}
         >
           <img

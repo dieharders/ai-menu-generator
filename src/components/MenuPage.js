@@ -15,6 +15,12 @@ const queryParameters = new URLSearchParams(window.location.search);
 export const MenuPage = () => {
   const { menuData } = useContext(Context);
   usePage();
+  const imgData = useImagesData();
+  const bannerSrc = imgData?.imageSource?.startsWith?.("data:image/")
+    ? imgData?.imageSource
+    : imgData
+    ? `images/${imgData?.imageSource}`
+    : "";
 
   const Section = ({ data }) => {
     return (
@@ -63,14 +69,16 @@ export const MenuPage = () => {
       <div className={styles.bannerPage}>
         <Banner
           title={menuData?.name}
-          description={menuData?.description}
+          description={`${menuData?.description} ${
+            menuData?.imageDescription ? menuData?.imageDescription : ""
+          }`}
           type={menuData?.type}
           category={menuData?.category}
           contact={menuData?.contact}
           location={menuData?.location}
           cost={menuData?.cost}
-          backgroundURL={useImagesData()?.imageSource || placeholder}
-          menuSourceImage={menuData?.sourceMenuImage}
+          backgroundURL={bannerSrc || placeholder}
+          menuSourceImage={menuData?.menuSourceImage}
         >
           <CommandPallet data={menuData} />
         </Banner>

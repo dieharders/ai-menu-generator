@@ -81,10 +81,10 @@ const Banner = ({
             </button>
           )}
           {/* Original source menu image */}
-          {!menuSourceImage && (
+          {menuSourceImage && (
             <button
               className={styles.sourceMenuButton}
-              onClick={() => (window.location = menuSourceImage)}
+              onClick={() => window.open(`images/${menuSourceImage}`, "_blank")}
             >
               📄 Original menu
             </button>
