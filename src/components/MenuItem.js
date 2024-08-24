@@ -37,12 +37,16 @@ export const MenuItem = ({ item }) => {
 
   const onAction = async () => {
     setDisablePhotoButton(true);
+    const descr =
+      item.description && item.imageDescription
+        ? `${item.description}\n${item.imageDescription}`
+        : item.imageDescription || item.description;
     return imageAction({
       id: item.id,
       name: item.name,
-      description: item.description,
+      description: descr,
       ingredients: item.ingredients,
-      category: item.category,
+      category: item.sectionName,
     });
   };
 
@@ -109,7 +113,9 @@ export const MenuItem = ({ item }) => {
             {item.price}
           </strong>
           {/* Description */}
-          <p className={styles.description}>{item.description}</p>
+          <p className={styles.description}>
+            {item.description || item.imageDescription}
+          </p>
         </div>
         {/* Photo */}
         <div className={styles.imageContainer}>
