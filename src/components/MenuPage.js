@@ -16,7 +16,7 @@ export const MenuPage = () => {
   const { menuData } = useContext(Context);
   usePage();
   const imgData = useImagesData();
-  const imgSrc = imgData?.includes?.("data:image/")
+  const bannerSrc = imgData?.imageSource?.startsWith?.("data:image/")
     ? imgData?.imageSource
     : imgData
     ? `images/${imgData?.imageSource}`
@@ -77,7 +77,7 @@ export const MenuPage = () => {
           contact={menuData?.contact}
           location={menuData?.location}
           cost={menuData?.cost}
-          backgroundURL={imgSrc || placeholder}
+          backgroundURL={bannerSrc || placeholder}
           menuSourceImage={menuData?.menuSourceImage}
         >
           <CommandPallet data={menuData} />

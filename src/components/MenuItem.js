@@ -11,7 +11,7 @@ export const MenuItem = ({ item }) => {
   const generateText = "✨Generate image";
   const { imageAction } = useAppActions();
   const imgData = useImagesData(item.id);
-  const imageSrc = imgData?.imageSource?.includes("data:image/")
+  const imageSrc = imgData?.imageSource?.startsWith("data:image/")
     ? imgData?.imageSource
     : imgData?.imageSource
     ? `images/${imgData?.imageSource}`
