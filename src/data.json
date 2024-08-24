@@ -4411,6 +4411,7 @@
       "imageDescription": "The banner image for Happy Burger is a red and yellow flame with the restaurant name in bold white text. It gives off a classic burger joint vibe that is both welcoming and inviting.",
       "imageSource": "hb-banner.png",
       "documentHash": "",
+      "menuSourceImage": "menu-happy-burger.jpg",
       "sectionNames": ["Hamburgers", "Specialty Burgers", "Beverages"],
       "items": [
         {

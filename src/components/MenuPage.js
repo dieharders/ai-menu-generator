@@ -76,7 +76,7 @@ export const MenuPage = () => {
           location={menuData?.location}
           cost={menuData?.cost}
           backgroundURL={imgSrc || placeholder}
-          menuSourceImage={menuData?.sourceMenuImage}
+          menuSourceImage={menuData?.menuSourceImage}
         >
           <CommandPallet data={menuData} />
         </Banner>
