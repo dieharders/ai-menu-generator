@@ -69,7 +69,9 @@ export const MenuPage = () => {
       <div className={styles.bannerPage}>
         <Banner
           title={menuData?.name}
-          description={menuData?.description}
+          description={`${menuData?.description} ${
+            menuData?.imageDescription ? menuData?.imageDescription : ""
+          }`}
           type={menuData?.type}
           category={menuData?.category}
           contact={menuData?.contact}
