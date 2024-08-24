@@ -359,12 +359,13 @@ export const GenerateMenu = ({
           {/* Instructions */}
           <h2 className={styles.instrText}>
             <CameraIcon
-              fill="black"
+              fill="orange"
               style={{ width: "max-content", height: "5rem" }}
             />
             <p style={{ color: "white" }}>=</p>
             <MenuIcon
-              fill="black"
+              fill="orange"
+              stroke="white"
               style={{ width: "max-content", height: "5rem" }}
             />
           </h2>
