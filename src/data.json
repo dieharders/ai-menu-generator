@@ -4411,8 +4411,8 @@
       "language": "en",
       "imageDescription": "A white menu with a black and white drawing of a shrimp in the top left and top right corners. The restaurant's name, \"GALA,\" is displayed in large, bold letters in the center of the banner image.  Below it, the restaurant's motto, \"del jardin, mar & montaña,\" is displayed in smaller, italicized letters.",
       "imageSource": "gala-banner.png",
-      "menuSourceImage": "menu-gala.jpg",
       "documentHash": "",
+      "menuSourceImage": "menu-gala.jpg",
       "sectionNames": [
         "Olives",
         "Gildas",
@@ -4435,7 +4435,7 @@
           "category": "Vegetable",
           "ingredients": "Kalamata olives, frescatrano olives, castelvetrano olives",
           "imageDescription": "A bowl of olives, Kalamata, frescatrano, and castelvetrano.",
-          "imageSource": "",
+          "imageSource": "gala-olives.png",
           "health": "Olives are a good source of healthy fats, fiber, and antioxidants.",
           "allergy": "None"
         },
@@ -4449,7 +4449,7 @@
           "category": "Other",
           "ingredients": "Pickled anchovies, olives, pickled onion, cornichon, sweet pepper",
           "imageDescription": "A skewer with pickled anchovies, olives, pickled onion, cornichon, sweet pepper",
-          "imageSource": "",
+          "imageSource": "gala-gildas.png",
           "health": "A good source of protein, omega-3 fatty acids, and vitamin C.",
           "allergy": "Contains fish"
         },
@@ -4463,7 +4463,7 @@
           "category": "Seafood",
           "ingredients": "Oysters, apple cucumber mignonette, parmesan cheese, herbs",
           "imageDescription": "A plate of kushi oysters, served chilled with apple cucumber mignonette or hot with parm and herbs",
-          "imageSource": "",
+          "imageSource": "gala-oysters.png",
           "health": "A good source of protein, zinc, and selenium.",
           "allergy": "None"
         },
@@ -4477,7 +4477,7 @@
           "category": "Seafood",
           "ingredients": "Shrimp, breadcrumbs, lemon parsley aioli",
           "imageDescription": "A plate of shrimp croquetas, served with lemon parsley aioli",
-          "imageSource": "",
+          "imageSource": "gala-shrimp-croquetas.png",
           "health": "A good source of protein, omega-3 fatty acids, and vitamin D.",
           "allergy": "None"
         },
@@ -4491,7 +4491,7 @@
           "category": "Grain",
           "ingredients": "Potato, quinoa, herb creme fraiche",
           "imageDescription": "A bowl of potato & quinoa hashbrowns, topped with herb creme fraiche",
-          "imageSource": "",
+          "imageSource": "gala-hashbrowns.png",
           "health": "A good source of fiber, protein, and iron.",
           "allergy": "None"
         },
@@ -4505,7 +4505,7 @@
           "category": "Other",
           "ingredients": "Catalan flatbread, raclette, za'atar, pickled chanterelles, enoki mushrooms, pea tendrils",
           "imageDescription": "A plate of crunchy 'coca', a Catalan flatbread topped with raclette, za'atar, pickled chanterelles, enoki mushrooms, and pea tendrils",
-          "imageSource": "",
+          "imageSource": "gala-coca.png",
           "health": "A good source of fiber, protein, and potassium.",
           "allergy": "None"
         },
@@ -4519,7 +4519,7 @@
           "category": "Seafood",
           "ingredients": "House cured salmon gravlax, creme fraiche, dill, radish, fried capers, pickled onion, salmon roe, GF toast",
           "imageDescription": "A plate of salmon gravlax toasties, served on GF toast and topped with house cured salmon gravlax, creme fraiche, dill, radish, fried capers, pickled onion, and salmon roe",
-          "imageSource": "",
+          "imageSource": "gala-toasties.png",
           "health": "A good source of protein, omega-3 fatty acids, and vitamin B12.",
           "allergy": "Contains fish and dairy"
         },
@@ -4533,7 +4533,7 @@
           "category": "Vegetable",
           "ingredients": "White asparagus, romesco sauce",
           "imageDescription": "A plate of grilled white asparagus, served with romesco sauce",
-          "imageSource": "",
+          "imageSource": "gala-asparagus.png",
           "health": "A good source of fiber, vitamin C, and folate.",
           "allergy": "None"
         },
@@ -4547,7 +4547,7 @@
           "category": "Vegetable",
           "ingredients": "Broccolini, spicy sweet & sour sauce",
           "imageDescription": "A plate of broccolini, served with spicy sweet & sour sauce",
-          "imageSource": "",
+          "imageSource": "gala-broccolini.png",
           "health": "A good source of vitamin C, vitamin K, and fiber.",
           "allergy": "None"
         }
