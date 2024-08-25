@@ -15,12 +15,7 @@ const queryParameters = new URLSearchParams(window.location.search);
 export const MenuPage = () => {
   const { menuData } = useContext(Context);
   usePage();
-  const imgData = useImagesData();
-  const bannerSrc = imgData?.imageSource?.startsWith?.("data:image/")
-    ? imgData?.imageSource
-    : imgData
-    ? `images/${imgData?.imageSource}`
-    : "";
+  const { src } = useImagesData();
 
   const Section = ({ data }) => {
     return (
@@ -77,7 +72,7 @@ export const MenuPage = () => {
           contact={menuData?.contact}
           location={menuData?.location}
           cost={menuData?.cost}
-          backgroundURL={bannerSrc || placeholder}
+          backgroundURL={src || placeholder}
           menuSourceImage={menuData?.menuSourceImage}
         >
           <CommandPallet data={menuData} />
