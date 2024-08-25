@@ -17,7 +17,7 @@ const Banner = ({
   children,
   menuSourceImage = "",
 }) => {
-  const hasImage = useImagesData()?.imageSource;
+  const { src } = useImagesData();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { imageAction } = useAppActions();
 
@@ -71,7 +71,7 @@ const Banner = ({
         />
         <div className={styles.btnsContainer}>
           {/* Gen button */}
-          {!hasImage && (
+          {!src && (
             <button
               disabled={isButtonDisabled}
               className={styles.imageButton}

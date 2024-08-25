@@ -64,7 +64,7 @@ const SearchBar = ({ handleSubmit }) => {
       {/* Examples */}
       <h2 className={styles.examplesHeader}>Examples</h2>
       {cachedMenus?.map((i, index) => (
-        <MenuButton key={i[0]?.id} item={i} id={index} />
+        <MenuButton key={`${i[0]?.name}-${index}`} item={i} id={index} />
       ))}
     </form>
   );

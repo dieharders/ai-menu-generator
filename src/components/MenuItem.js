@@ -10,12 +10,7 @@ export const MenuItem = ({ item }) => {
   const [currentDetail, setCurrentDetail] = useState("ingredients");
   const generateText = "✨Generate image";
   const { imageAction } = useAppActions();
-  const imgData = useImagesData(item.id);
-  const imageSrc = imgData?.imageSource?.startsWith("data:image/")
-    ? imgData?.imageSource
-    : imgData?.imageSource
-    ? `images/${imgData?.imageSource}`
-    : "";
+  const { src } = useImagesData(item.id);
 
   const isMobile = () => {
     const regex =
@@ -137,7 +132,7 @@ export const MenuItem = ({ item }) => {
             <img
               title={item.imageDescription}
               className={styles.photo}
-              src={imageSrc || placeholder}
+              src={src || placeholder}
               alt={`${item.category} - ${item.name}`}
             ></img>
           </button>
