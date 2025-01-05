@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://ohmenu.openbrewai.com/sitemap.xml
