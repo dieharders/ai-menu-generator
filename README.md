@@ -68,6 +68,10 @@ You can find all webpack config inside `node_modules/react-scripts/config`. Webp
 
 ## More Info
 
+### Built with
+
+React
+
 ### Image Search via Google Custom Search JSON API
 
 - [Custom Search Engine](https://developers.google.com/custom-search/v1/overview)
